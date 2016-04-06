@@ -81,7 +81,7 @@ public class ActorFormService {
 				Auditor actTrainer;
 				
 				actTrainer = trainerService.findByPrincipal();
-				result.setPicture(actTrainer.getPicture());
+//				result.setPicture(actTrainer.getPicture());
 			}
 			
 			return result;
@@ -167,7 +167,7 @@ public class ActorFormService {
 				result.setName(input.getName());
 				result.setSurname(input.getSurname());
 				result.setPhone(input.getPhone());
-				result.setPicture(input.getPicture());
+//				result.setPicture(input.getPicture());
 				
 				result.setUserAccount(acount);
 				
