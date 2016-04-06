@@ -16,7 +16,7 @@ import security.UserAccount;
 import security.UserAccountService;
 import utilities.AbstractTest;
 import domain.Actor;
-import domain.Trainer;
+import domain.Auditor;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -155,7 +155,7 @@ public class TrainerServiceTest extends AbstractTest{
 	public void testListTrainers() {
 		// Declare variables
 		Actor customer;
-		Collection<Trainer> trainers;
+		Collection<Auditor> trainers;
 		
 		// Load objects to test
 		authenticate("customer1");
@@ -197,12 +197,12 @@ public class TrainerServiceTest extends AbstractTest{
 	public void testRegisterTrainer() {
 		// Declare variables
 		Actor admin;
-		Trainer trainer;
+		Auditor trainer;
 		UserAccount userAccount;
-		Trainer trainerRegistered;
+		Auditor trainerRegistered;
 		Integer numberOfTrainers;
 		Integer newNumberOfTrainers;
-		Collection<Trainer> trainers;
+		Collection<Auditor> trainers;
 		Actor authenticatedTrainer;
 		
 		// Load objects to test
@@ -264,7 +264,7 @@ public class TrainerServiceTest extends AbstractTest{
 	public void testRegisterTrainerAsUnauthenticated() {
 		// Declare variables
 //		Actor admin;
-		Trainer trainer;
+		Auditor trainer;
 		UserAccount userAccount;
 //		Trainer trainerRegistered;
 //		Integer numberOfTrainers;
@@ -334,7 +334,7 @@ public class TrainerServiceTest extends AbstractTest{
 	public void testRegisterTrainerNullUsername() {
 		// Declare variables
 		Actor admin;
-		Trainer trainer;
+		Auditor trainer;
 		UserAccount userAccount;
 //		Trainer trainerRegistered;
 //		Integer numberOfTrainers;

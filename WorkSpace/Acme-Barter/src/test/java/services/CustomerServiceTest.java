@@ -14,7 +14,7 @@ import security.UserAccount;
 import security.UserAccountService;
 import utilities.AbstractTest;
 import domain.Actor;
-import domain.Customer;
+import domain.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -61,9 +61,9 @@ public class CustomerServiceTest extends AbstractTest {
 	@Test 
 	public void testNewCustomer() {
 		// Declare variables
-		Customer customer;
+		User customer;
 		UserAccount userAccount;
-		Customer customerRegistered;
+		User customerRegistered;
 		Actor authenticatedCustomer;
 		
 		// Load objects to test
@@ -119,7 +119,7 @@ public class CustomerServiceTest extends AbstractTest {
 //	@Test 
 	public void testNewCustomerNullPassword() {
 		// Declare variables
-		Customer customer;
+		User customer;
 		UserAccount userAccount;
 //		Customer customerRegistered;
 //		Actor authenticatedCustomer;
@@ -177,7 +177,7 @@ public class CustomerServiceTest extends AbstractTest {
 //	@Test
 	public void testNewCustomerAsCustomer() {
 		// Declare variables
-		Customer customer;
+		User customer;
 		UserAccount userAccount;
 //		Customer customerRegistered;
 //		Actor authenticatedCustomer;

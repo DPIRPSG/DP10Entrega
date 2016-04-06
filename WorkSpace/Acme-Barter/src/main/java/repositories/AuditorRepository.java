@@ -1,18 +1,16 @@
 package repositories;
 
-import java.util.Collection;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import domain.Trainer;
+import domain.Auditor;
 
 @Repository
-public interface TrainerRepository extends JpaRepository<Trainer, Integer> {
+public interface AuditorRepository extends JpaRepository<Auditor, Integer> {
 
-	@Query("select t from Trainer t where t.userAccount.id = ?1")
-	Trainer findByUserAccountId(int id);
+	@Query("select t from Auditor t where t.userAccount.id = ?1")
+	Auditor findByUserAccountId(int id);
 
 //	@Query("select t from Trainer t where (t.name like concat('%',?1,'%') or t.surname like concat('%',?1,'%') or t.curriculum.statement like concat('%',?1,'%') or t.curriculum.skills like concat('%',?1,'%') or t.curriculum.likes like concat('%',?1,'%') or t.curriculum.dislikes like concat('%',?1,'%'))")
 //	Collection<Trainer> findBySingleKeyword(String keyword);

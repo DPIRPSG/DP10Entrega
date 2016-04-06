@@ -6,13 +6,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 
-import domain.Customer;
+import domain.User;
 
 @Repository
-public interface CustomerRepository extends JpaRepository<Customer, Integer> {
+public interface CustomerRepository extends JpaRepository<User, Integer> {
 	
 	@Query("select c from Customer c where c.userAccount.id = ?1")
-	Customer findByUserAccountId(int userAccountId);
+	User findByUserAccountId(int userAccountId);
 	
 //	@Query("select distinct c from Activity a join a.customers c where a.service.id = ?1")
 //	Collection<Customer> findByServiceBooked(int serviceId);

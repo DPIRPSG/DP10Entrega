@@ -14,7 +14,7 @@ import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.Actor;
-import domain.Customer;
+import domain.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -55,8 +55,8 @@ public class ActorServiceTest extends AbstractTest {
 	public void testEditProfile() {
 		// Declare variables
 		Actor customer;
-		Customer customerUser;
-		Customer customerEdited;
+		User customerUser;
+		User customerEdited;
 		String originalName;
 		String originalSurname;
 		String originalPhone;
@@ -129,7 +129,7 @@ public class ActorServiceTest extends AbstractTest {
 	public void testEditProfileBlankFields() {
 		// Declare variables
 		Actor customer;
-		Customer customerUser;
+		User customerUser;
 //		Customer customerEdited;
 //		String originalName;
 //		String originalSurname;
@@ -203,7 +203,7 @@ public class ActorServiceTest extends AbstractTest {
 	public void testEditProfileShortPassword() {
 		// Declare variables
 		Actor customer;
-		Customer customerUser;
+		User customerUser;
 //		Customer customerEdited;
 		String originalName;
 		String originalSurname;

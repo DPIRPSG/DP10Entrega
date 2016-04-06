@@ -31,120 +31,120 @@
 	</bean>
 
 	<bean id="userAccount2" class="security.UserAccount">
-		<property name="username" value="customer1" />
+		<property name="username" value="user1" />
 		<property name="password" value="ffbc4675f864e0e9aab8bdf7a0437010" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
+					<property name="authority" value="USER" />
 				</bean>
 			</list>
 		</property>
 	</bean>
 	
 	<bean id="userAccount3" class="security.UserAccount">
-		<property name="username" value="customer2" />
+		<property name="username" value="user2" />
 		<property name="password" value="5ce4d191fd14ac85a1469fb8c29b7a7b" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
+					<property name="authority" value="USER" />
 				</bean>
 			</list>
 		</property>
 	</bean>
 	
 	<bean id="userAccount4" class="security.UserAccount">
-		<property name="username" value="customer3" />
+		<property name="username" value="user3" />
 		<property name="password" value="033f7f6121501ae98285ad77f216d5e7" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
+					<property name="authority" value="USER" />
 				</bean>
 			</list>
 		</property>
 	</bean>
 	
 	<bean id="userAccount5" class="security.UserAccount">
-		<property name="username" value="customer4" />
+		<property name="username" value="user4" />
 		<property name="password" value="55feb130be438e686ad6a80d12dd8f44" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
+					<property name="authority" value="USER" />
 				</bean>
 			</list>
 		</property>
 	</bean>
 	
 	<bean id="userAccount6" class="security.UserAccount">
-		<property name="username" value="trainer1" />
+		<property name="username" value="auditor1" />
 		<property name="password" value="4d9a96c8e1650dc161f1adcf5c5082a0" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="TRAINER" />
+					<property name="authority" value="AUDITOR" />
 				</bean>
 			</list>
 		</property>
 	</bean>
 	
 	<bean id="userAccount7" class="security.UserAccount">
-		<property name="username" value="trainer2" />
+		<property name="username" value="auditor2" />
 		<property name="password" value="6662f54a6c5033357408e6839a5c0a05" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="TRAINER" />
+					<property name="authority" value="AUDITOR" />
 				</bean>
 			</list>
 		</property>
 	</bean>
 	
 	<bean id="userAccount8" class="security.UserAccount">
-		<property name="username" value="trainer3" />
+		<property name="username" value="auditor3" />
 		<property name="password" value="72977b63f9bf5a01f30bfe2ca802a3c1" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="TRAINER" />
+					<property name="authority" value="AUDITOR" />
 				</bean>
 			</list>
 		</property>
 	</bean>
 	
 	<bean id="userAccount9" class="security.UserAccount">
-		<property name="username" value="trainer4" />
+		<property name="username" value="auditor4" />
 		<property name="password" value="06de2cced0f700b155d4d04d2ef3245c" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="TRAINER" />
+					<property name="authority" value="AUDITOR" />
 				</bean>
 			</list>
 		</property>
 	</bean>
 	
 	<bean id="userAccount10" class="security.UserAccount">
-		<property name="username" value="trainer5" />
+		<property name="username" value="auditor5" />
 		<property name="password" value="191be98376838b92608915fb8a9e2818" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="TRAINER" />
+					<property name="authority" value="AUDITOR" />
 				</bean>
 			</list>
 		</property>
 	</bean>
 	
 	<bean id="userAccount11" class="security.UserAccount">
-		<property name="username" value="trainer6" />
+		<property name="username" value="auditor6" />
 		<property name="password" value="a3b02d67308e7a6560e9a39f3c69860b" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="TRAINER" />
+					<property name="authority" value="AUDITOR" />
 				</bean>
 			</list>
 		</property>
@@ -152,17 +152,6 @@
 	
 	
 	<!-- Other domain beans come here -->
-	
-
-	<!-- SocialIdentity -->
-	
-	<bean id="socialIdentity1" class="domain.SocialIdentity">
-		<property name="name" value="Manolo"/>
-		<property name="homePage" value="http://Manolo.com"/>
-		<property name="picture" value="http://static.betazeta.com/www.fayerwayer.com/up/2014/04/Bliss-XP-HD1-960x623.jpg"/>
-		<property name="nick" value="@Manolo"/>
-	</bean>
-	
 	
 	<!-- Administradores: -->
 	
@@ -190,13 +179,12 @@
 		</property>
 	</bean>
 	
-	<!-- Trainers -->
+	<!-- Auditor -->
 	
-	<bean id="trainer1" class="domain.Trainer">
+	<bean id="auditor1" class="domain.Auditor">
 		<property name="name" value="Pablo"/>
 		<property name="surname" value="López"/>
 		<property name="phone" value="652148745"/>
-		<property name="picture" value="http://neo-sport.es/fitness/wp-content/uploads/2013/05/pablo-trainer1.jpg"/>
 		<property name="userAccount" ref="userAccount6"/>
 		<property name="messageBoxes">
 			<list>
@@ -214,9 +202,13 @@
 			<list>
 			</list>
 		</property>
+		<property name="matches">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
-	<bean id="trainer2" class="domain.Trainer">
+	<bean id="auditor2" class="domain.Auditor">
 		<property name="name" value="Antonio"/>
 		<property name="surname" value="Serrano"/>
 		<property name="phone" value="630157841"/>
@@ -237,9 +229,13 @@
 			<list>
 			</list>
 		</property>
+		<property name="matches">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
-	<bean id="trainer3" class="domain.Trainer">
+	<bean id="auditor3" class="domain.Auditor">
 		<property name="name" value="Jose"/>
 		<property name="surname" value="Ruiz"/>
 		<property name="phone" value="632112358"/>
@@ -260,9 +256,13 @@
 			<list>
 			</list>
 		</property>
+		<property name="matches">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
-	<bean id="trainer4" class="domain.Trainer">
+	<bean id="auditor4" class="domain.Auditor">
 		<property name="name" value="Rocío"/>
 		<property name="surname" value="Cuesta"/>
 		<property name="phone" value="674185293"/>
@@ -283,9 +283,13 @@
 			<list>
 			</list>
 		</property>
+		<property name="matches">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
-	<bean id="trainer5" class="domain.Trainer">
+	<bean id="auditor5" class="domain.Auditor">
 		<property name="name" value="Verónica"/>
 		<property name="surname" value="Gil"/>
 		<property name="phone" value="693852741"/>
@@ -306,9 +310,13 @@
 			<list>
 			</list>
 		</property>
+		<property name="matches">
+			<list>
+			</list>
+		</property>
 	</bean>	
 	
-	<bean id="trainer6" class="domain.Trainer">
+	<bean id="auditor6" class="domain.Auditor">
 		<property name="name" value="Carlos"/>
 		<property name="surname" value="Mata"/>
 		<property name="phone" value="622852741"/>
@@ -329,17 +337,20 @@
 			<list>
 			</list>
 		</property>
+		<property name="matches">
+			<list>
+			</list>
+		</property>
 	</bean>	
 	
 	
 	<!-- Clientes -->
 	
-	<bean id="customer1" class="domain.Customer">
+	<bean id="user1" class="domain.User">
 		<property name="name" value="Manolo"/>
 		<property name="surname" value="Lopez"/>
 		<property name="phone" value="612345789"/>
 		<property name="userAccount" ref="userAccount2"/>
-		<property name="socialIdentity" ref="socialIdentity1"/>
 		<property name="messageBoxes">
 			<list>
 				<ref bean="folder5" />
@@ -360,9 +371,26 @@
 				<ref bean="message3"/>
 			</list>
 		</property>
+		<property name="createdMatches">
+			<list>
+			</list>
+		</property>
+		<property name="receivedMatches">
+			<list>
+			</list>
+		</property>
+		<property name="socialIdentities">
+			<list>
+				<ref bean="socialIdentity1" />
+			</list>
+		</property>
+		<property name="followed">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
-	<bean id="customer2" class="domain.Customer">
+	<bean id="user2" class="domain.User">
 		<property name="name" value="Ruben"/>
 		<property name="surname" value="Sanchez"/>
 		<property name="phone" value="612342289"/>
@@ -385,9 +413,25 @@
 				<ref bean="message1"/>
 			</list>
 		</property>
+		<property name="createdMatches">
+			<list>
+			</list>
+		</property>
+		<property name="receivedMatches">
+			<list>
+			</list>
+		</property>
+		<property name="socialIdentities">
+			<list>
+			</list>
+		</property>
+		<property name="followed">
+			<list>
+			</list>
+		</property>	
 	</bean>
 	
-	<bean id="customer3" class="domain.Customer">
+	<bean id="user3" class="domain.User">
 		<property name="name" value="Guillermo"/>
 		<property name="surname" value="Alcala"/>
 		<property name="phone" value="633422897"/>
@@ -410,9 +454,25 @@
 				<ref bean="message4"/>
 			</list>
 		</property>
+		<property name="createdMatches">
+			<list>
+			</list>
+		</property>
+		<property name="receivedMatches">
+			<list>
+			</list>
+		</property>
+		<property name="socialIdentities">
+			<list>
+			</list>
+		</property>
+		<property name="followed">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
-	<bean id="customer4" class="domain.Customer">
+	<bean id="user4" class="domain.User">
 		<property name="name" value="Mónica"/>
 		<property name="surname" value="Ordóñez"/>
 		<property name="phone" value="626667791"/>
@@ -436,6 +496,22 @@
 				<ref bean="message1"/>
 			</list>
 		</property>
+		<property name="createdMatches">
+			<list>
+			</list>
+		</property>
+		<property name="receivedMatches">
+			<list>
+			</list>
+		</property>
+		<property name="socialIdentities">
+			<list>
+			</list>
+		</property>
+		<property name="followed">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 	<!-- Mensajes -->
@@ -445,12 +521,13 @@
 		<property name="body" value="Registrado con exito, bienvenido a Acme-Barter"/>
 		<property name="sentMoment" value="2015/10/13 22:15"/>
 		<property name="sender" ref="administrator1"/>
+		<property name="priority" value="0"/>
 		<property name="recipients">
 			<list>
-				<ref bean="customer1"/>
-				<ref bean="customer2"/>
-				<ref bean="customer3"/>
-				<ref bean="customer4"/>
+				<ref bean="user1"/>
+				<ref bean="user2"/>
+				<ref bean="user3"/>
+				<ref bean="user4"/>
 			</list>
 		</property>
 		<property name="folders">
@@ -468,10 +545,11 @@
 		<property name="subject" value="Hola"/>
 		<property name="body" value="Compra viagra"/>
 		<property name="sentMoment" value="2016/02/05 22:15"/>
-		<property name="sender" ref="customer4"/>
+		<property name="sender" ref="user4"/>
+		<property name="priority" value="0"/>
 		<property name="recipients">
 			<list>
-				<ref bean="customer1"/>
+				<ref bean="user1"/>
 			</list>
 		</property>
 		<property name="folders">
@@ -486,10 +564,11 @@
 		<property name="subject" value="Hola"/>
 		<property name="body" value="Esto es spam"/>
 		<property name="sentMoment" value="2016/02/05 22:15"/>
-		<property name="sender" ref="customer4"/>
+		<property name="sender" ref="user4"/>
+		<property name="priority" value="0"/>
 		<property name="recipients">
 			<list>
-				<ref bean="customer1"/>
+				<ref bean="user1"/>
 			</list>
 		</property>
 		<property name="folders">
@@ -504,10 +583,11 @@
 		<property name="subject" value="Hola"/>
 		<property name="body" value="Esto es spam"/>
 		<property name="sentMoment" value="2016/02/05 22:15"/>
-		<property name="sender" ref="customer2"/>
+		<property name="sender" ref="user2"/>
+		<property name="priority" value="0"/>
 		<property name="recipients">
 			<list>
-				<ref bean="customer3"/>
+				<ref bean="user3"/>
 			</list>
 		</property>
 		<property name="folders">
@@ -564,7 +644,7 @@
 	<bean id="folder5" class="domain.Folder">
 		<property name="name" value="InBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="customer1"/>
+		<property name="actor" ref="user1"/>
 		<property name="messages">
 			<list>
 				<ref bean="message1"/>
@@ -575,7 +655,7 @@
 	<bean id="folder6" class="domain.Folder">
 		<property name="name" value="OutBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="customer1"/>
+		<property name="actor" ref="user1"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -585,7 +665,7 @@
 	<bean id="folder7" class="domain.Folder">
 		<property name="name" value="TrashBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="customer1"/>
+		<property name="actor" ref="user1"/>
 		<property name="messages">
 			<list>
 				<ref bean="message1"/>
@@ -596,7 +676,7 @@
 	<bean id="folder8" class="domain.Folder">
 		<property name="name" value="SpamBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="customer1"/>
+		<property name="actor" ref="user1"/>
 		<property name="messages">
 			<list>
 				<ref bean="message2"/>
@@ -608,7 +688,7 @@
 	<bean id="folder9" class="domain.Folder">
 		<property name="name" value="InBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="customer2"/>
+		<property name="actor" ref="user2"/>
 		<property name="messages">
 			<list>
 				<ref bean="message1"/>
@@ -619,7 +699,7 @@
 	<bean id="folder10" class="domain.Folder">
 		<property name="name" value="OutBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="customer2"/>
+		<property name="actor" ref="user2"/>
 		<property name="messages">
 			<list>
 				<ref bean="message4"/>
@@ -630,7 +710,7 @@
 	<bean id="folder11" class="domain.Folder">
 		<property name="name" value="TrashBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="customer2"/>
+		<property name="actor" ref="user2"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -640,7 +720,7 @@
 	<bean id="folder12" class="domain.Folder">
 		<property name="name" value="SpamBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="customer2"/>
+		<property name="actor" ref="user2"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -650,7 +730,7 @@
 	<bean id="folder13" class="domain.Folder">
 		<property name="name" value="InBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="customer3"/>
+		<property name="actor" ref="user3"/>
 		<property name="messages">
 			<list>
 				<ref bean="message1"/>
@@ -661,7 +741,7 @@
 	<bean id="folder14" class="domain.Folder">
 		<property name="name" value="OutBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="customer3"/>
+		<property name="actor" ref="user3"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -671,7 +751,7 @@
 	<bean id="folder15" class="domain.Folder">
 		<property name="name" value="TrashBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="customer3"/>
+		<property name="actor" ref="user3"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -681,7 +761,7 @@
 	<bean id="folder16" class="domain.Folder">
 		<property name="name" value="SpamBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="customer3"/>
+		<property name="actor" ref="user3"/>
 		<property name="messages">
 			<list>
 				<ref bean="message4"/>
@@ -692,7 +772,7 @@
 	<bean id="folder17" class="domain.Folder">
 		<property name="name" value="InBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="customer4"/>
+		<property name="actor" ref="user4"/>
 		<property name="messages">
 			<list>
 				<ref bean="message1"/>
@@ -703,7 +783,7 @@
 	<bean id="folder18" class="domain.Folder">
 		<property name="name" value="OutBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="customer4"/>
+		<property name="actor" ref="user4"/>
 		<property name="messages">
 			<list>
 				<ref bean="message2"/>
@@ -715,7 +795,7 @@
 	<bean id="folder19" class="domain.Folder">
 		<property name="name" value="TrashBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="customer4"/>
+		<property name="actor" ref="user4"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -725,7 +805,7 @@
 	<bean id="folder20" class="domain.Folder">
 		<property name="name" value="SpamBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="customer4"/>
+		<property name="actor" ref="user4"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -735,7 +815,7 @@
 	<bean id="folder21" class="domain.Folder">
 		<property name="name" value="InBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="trainer1"/>
+		<property name="actor" ref="auditor1"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -745,7 +825,7 @@
 	<bean id="folder22" class="domain.Folder">
 		<property name="name" value="OutBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="trainer1"/>
+		<property name="actor" ref="auditor1"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -755,7 +835,7 @@
 	<bean id="folder23" class="domain.Folder">
 		<property name="name" value="TrashBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="trainer1"/>
+		<property name="actor" ref="auditor1"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -765,7 +845,7 @@
 	<bean id="folder24" class="domain.Folder">
 		<property name="name" value="SpamBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="trainer1"/>
+		<property name="actor" ref="auditor1"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -775,7 +855,7 @@
 	<bean id="folder25" class="domain.Folder">
 		<property name="name" value="InBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="trainer2"/>
+		<property name="actor" ref="auditor2"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -785,7 +865,7 @@
 	<bean id="folder26" class="domain.Folder">
 		<property name="name" value="OutBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="trainer2"/>
+		<property name="actor" ref="auditor2"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -795,7 +875,7 @@
 	<bean id="folder27" class="domain.Folder">
 		<property name="name" value="TrashBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="trainer2"/>
+		<property name="actor" ref="auditor2"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -805,7 +885,7 @@
 	<bean id="folder28" class="domain.Folder">
 		<property name="name" value="SpamBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="trainer2"/>
+		<property name="actor" ref="auditor2"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -815,7 +895,7 @@
 	<bean id="folder29" class="domain.Folder">
 		<property name="name" value="InBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="trainer3"/>
+		<property name="actor" ref="auditor3"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -825,7 +905,7 @@
 	<bean id="folder30" class="domain.Folder">
 		<property name="name" value="OutBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="trainer3"/>
+		<property name="actor" ref="auditor3"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -835,7 +915,7 @@
 	<bean id="folder31" class="domain.Folder">
 		<property name="name" value="TrashBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="trainer3"/>
+		<property name="actor" ref="auditor3"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -845,7 +925,7 @@
 	<bean id="folder32" class="domain.Folder">
 		<property name="name" value="SpamBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="trainer3"/>
+		<property name="actor" ref="auditor3"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -855,7 +935,7 @@
 	<bean id="folder33" class="domain.Folder">
 		<property name="name" value="InBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="trainer4"/>
+		<property name="actor" ref="auditor4"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -865,7 +945,7 @@
 	<bean id="folder34" class="domain.Folder">
 		<property name="name" value="OutBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="trainer4"/>
+		<property name="actor" ref="auditor4"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -875,7 +955,7 @@
 	<bean id="folder35" class="domain.Folder">
 		<property name="name" value="TrashBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="trainer4"/>
+		<property name="actor" ref="auditor4"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -885,7 +965,7 @@
 	<bean id="folder36" class="domain.Folder">
 		<property name="name" value="SpamBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="trainer4"/>
+		<property name="actor" ref="auditor4"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -895,7 +975,7 @@
 	<bean id="folder37" class="domain.Folder">
 		<property name="name" value="InBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="trainer5"/>
+		<property name="actor" ref="auditor5"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -905,7 +985,7 @@
 	<bean id="folder38" class="domain.Folder">
 		<property name="name" value="OutBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="trainer5"/>
+		<property name="actor" ref="auditor5"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -915,7 +995,7 @@
 	<bean id="folder39" class="domain.Folder">
 		<property name="name" value="TrashBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="trainer5"/>
+		<property name="actor" ref="auditor5"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -925,7 +1005,7 @@
 	<bean id="folder40" class="domain.Folder">
 		<property name="name" value="SpamBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="trainer5"/>
+		<property name="actor" ref="auditor5"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -935,7 +1015,7 @@
 	<bean id="folder41" class="domain.Folder">
 		<property name="name" value="InBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="trainer6"/>
+		<property name="actor" ref="auditor6"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -945,7 +1025,7 @@
 	<bean id="folder42" class="domain.Folder">
 		<property name="name" value="OutBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="trainer6"/>
+		<property name="actor" ref="auditor6"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -955,7 +1035,7 @@
 	<bean id="folder43" class="domain.Folder">
 		<property name="name" value="TrashBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="trainer6"/>
+		<property name="actor" ref="auditor6"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -965,7 +1045,7 @@
 	<bean id="folder44" class="domain.Folder">
 		<property name="name" value="SpamBox"/>
 		<property name="isSystem" value="true"/>
-		<property name="actor" ref="trainer6"/>
+		<property name="actor" ref="auditor6"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -975,11 +1055,23 @@
 	<bean id="folder45" class="domain.Folder">
 		<property name="name" value="MyBox"/>
 		<property name="isSystem" value="false"/>
-		<property name="actor" ref="customer1"/>
+		<property name="actor" ref="user1"/>
 		<property name="messages">
 			<list>
 			</list>
 		</property>
 	</bean>
+
+
+	<!-- SocialIdentity -->
+	
+	<bean id="socialIdentity1" class="domain.SocialIdentity">
+		<property name="name" value="Manolo"/>
+		<property name="homePage" value="http://Manolo.com"/>
+		<property name="picture" value="http://static.betazeta.com/www.fayerwayer.com/up/2014/04/Bliss-XP-HD1-960x623.jpg"/>
+		<property name="nick" value="@Manolo"/>
+		<property name="user" ref="user1"/>
+	</bean>
+
 	
 </beans>

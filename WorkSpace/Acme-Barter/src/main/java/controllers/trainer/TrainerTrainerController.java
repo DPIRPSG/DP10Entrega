@@ -14,7 +14,7 @@ import services.TrainerService;
 import services.form.ActorFormService;
 
 import controllers.AbstractController;
-import domain.Trainer;
+import domain.Auditor;
 import domain.form.ActorForm;
 
 @Controller
@@ -43,7 +43,7 @@ public class TrainerTrainerController extends AbstractController {
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display(){
 		ModelAndView result;
-		Trainer trainer;
+		Auditor trainer;
 		
 		trainer = trainerService.findByPrincipal();
 		

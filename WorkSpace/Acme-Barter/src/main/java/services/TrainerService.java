@@ -10,10 +10,10 @@ import org.springframework.util.Assert;
 
 import domain.Folder;
 import domain.Message;
-import domain.Trainer;
+import domain.Auditor;
 
 
-import repositories.TrainerRepository;
+import repositories.AuditorRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
@@ -25,7 +25,7 @@ public class TrainerService {
 	//Managed repository -----------------------------------------------------
 	
 	@Autowired
-	private TrainerRepository trainerRepository;
+	private AuditorRepository trainerRepository;
 	
 	//Supporting services ----------------------------------------------------
 
@@ -53,11 +53,11 @@ public class TrainerService {
 	 * 
 	 */
 	// req: 10.1
-	public Trainer create(){
-		Trainer result;
+	public Auditor create(){
+		Auditor result;
 		UserAccount userAccount;
 
-		result = new Trainer();
+		result = new Auditor();
 		
 		userAccount = userAccountService.create("TRAINER");
 		result.setUserAccount(userAccount);
@@ -69,12 +69,12 @@ public class TrainerService {
 	 * Almacena en la base de datos el cambio
 	 */
 	// req: 10.1
-	public Trainer save(Trainer trainer){
+	public Auditor save(Auditor trainer){
 		Assert.notNull(trainer);
 		Assert.notNull(trainer.getUserAccount().getUsername());
 		Assert.notNull(trainer.getUserAccount().getPassword());
 		
-		Trainer modify;
+		Auditor modify;
 		
 		boolean result = true;
 		for(Authority a: trainer.getUserAccount().getAuthorities()){
@@ -134,16 +134,16 @@ public class TrainerService {
 		return modify;
 	}
 	
-	public Collection<Trainer> findAll(){
-		Collection<Trainer> result;
+	public Collection<Auditor> findAll(){
+		Collection<Auditor> result;
 		
 		result = trainerRepository.findAll();
 		
 		return result;
 	}
 	
-	public Trainer findOne(int id){
-		Trainer result;
+	public Auditor findOne(int id){
+		Auditor result;
 		
 		result = trainerRepository.findOne(id);
 		
@@ -157,8 +157,8 @@ public class TrainerService {
 	 * Devuelve el trainer que está realizando la operación
 	 */
 	//req: x
-	public Trainer findByPrincipal(){
-		Trainer result;
+	public Auditor findByPrincipal(){
+		Auditor result;
 		UserAccount userAccount;
 		
 		userAccount = LoginService.getPrincipal();

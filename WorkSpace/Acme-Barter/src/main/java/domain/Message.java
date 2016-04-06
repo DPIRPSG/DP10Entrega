@@ -15,6 +15,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -27,6 +28,7 @@ public class Message extends DomainEntity{
 	private String subject;
 	private String body;
 	private Date sentMoment;
+	public int priority;
 	
 	@NotBlank
 	@NotNull
@@ -56,6 +58,16 @@ public class Message extends DomainEntity{
 		this.sentMoment = sentMoment;
 	}
 	
+	@Range(min=-1, max=1)	
+	public int getPriority() {
+		return priority;
+	}
+	public void setPriority(int priority) {
+		this.priority = priority;
+	}
+
+
+
 	// Relationships ----------------------------------------------------------	
 	private Actor sender;
 	private Collection<Actor> recipients;

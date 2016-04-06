@@ -4,14 +4,14 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import domain.Trainer;
+import domain.Auditor;
 
 @Component
 @Transactional
-public class TrainerToStringConverter implements Converter<Trainer, String> {
+public class TrainerToStringConverter implements Converter<Auditor, String> {
 	
 	@Override
-	public String convert(Trainer trainer) {
+	public String convert(Auditor trainer) {
 		String result;
 
 		if (trainer == null)

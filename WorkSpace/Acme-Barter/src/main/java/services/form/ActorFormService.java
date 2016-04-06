@@ -7,8 +7,8 @@ import org.springframework.util.Assert;
 
 import domain.Actor;
 import domain.Administrator;
-import domain.Customer;
-import domain.Trainer;
+import domain.User;
+import domain.Auditor;
 import domain.form.ActorForm;
 import domain.form.ActorType;
 
@@ -78,7 +78,7 @@ public class ActorFormService {
 			result.setPhone(actor.getPhone());
 			result.setUsername(actor.getUserAccount().getUsername());
 			if(actorService.checkAuthority("TRAINER")){
-				Trainer actTrainer;
+				Auditor actTrainer;
 				
 				actTrainer = trainerService.findByPrincipal();
 				result.setPicture(actTrainer.getPicture());
@@ -135,7 +135,7 @@ public class ActorFormService {
 			}
 			
 			if(actorType.equals(ActorType.CUSTOMER)){
-				Customer result;
+				User result;
 				
 				result = customerService.findByPrincipal();
 				
@@ -160,7 +160,7 @@ public class ActorFormService {
 				administratorService.save(result);
 				res = result.getId();
 			}else if(actorType.equals(ActorType.TRAINER)){
-				Trainer result;
+				Auditor result;
 				
 				result = trainerService.findByPrincipal();
 				
@@ -184,7 +184,7 @@ public class ActorFormService {
 		private int saveCustomerRegistration(ActorForm input){
 			UserAccount acount;	
 			int res;			
-			Customer result;
+			User result;
 			Assert.isTrue(input.getAcceptTerm(), "actorForm.error.termsDenied");
 			
 			acount = userAccountService.createComplete(input.getUsername(), input.getPassword(), "CUSTOMER");
@@ -203,7 +203,7 @@ public class ActorFormService {
 		private int saveTrainerRegistration(ActorForm input){
 			Assert.isTrue(actorService.checkAuthority("ADMIN"), "actorForm.error.notAdmin");
 			UserAccount acount;			
-			Trainer result;
+			Auditor result;
 			int res;
 			
 			acount = userAccountService.createComplete(input.getUsername(), input.getPassword(), "TRAINER");

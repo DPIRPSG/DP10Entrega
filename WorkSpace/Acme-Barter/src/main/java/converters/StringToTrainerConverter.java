@@ -6,19 +6,19 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import repositories.TrainerRepository;
-import domain.Trainer;
+import repositories.AuditorRepository;
+import domain.Auditor;
 
 @Component
 @Transactional
-public class StringToTrainerConverter implements Converter<String, Trainer> {
+public class StringToTrainerConverter implements Converter<String, Auditor> {
 
 	@Autowired
-	TrainerRepository trainerRepository;
+	AuditorRepository trainerRepository;
 
 	@Override
-	public Trainer convert(String text) {
-		Trainer result;
+	public Auditor convert(String text) {
+		Auditor result;
 		int id;
 
 		try {
