@@ -215,7 +215,7 @@
   		<jstl:otherwise>
 			<jstl:out value="${x.key}" />
 			<jstl:out value="${x.value}" />
-			</br>
+			<br />
 		</jstl:otherwise>
 	</jstl:choose>
 	</jstl:forEach>
@@ -342,7 +342,7 @@
   		<jstl:otherwise>
 			<jstl:out value="${x.key.name}" />
 			<jstl:out value="${x.value}" />
-			</br>
+			<br />
 		</jstl:otherwise>
 	</jstl:choose>
 	</jstl:forEach>
@@ -355,7 +355,7 @@
 		</jstl:when>
   		<jstl:otherwise>
 			<jstl:out value="${ratioOfTrainerWithCurriculumUpToDate}" />
-			</br>
+			<br />
 		</jstl:otherwise>
 	</jstl:choose>
 

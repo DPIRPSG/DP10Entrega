@@ -11,9 +11,7 @@
 package controllers;
 
 import java.text.SimpleDateFormat;
-import java.util.Collection;
 import java.util.Date;
-import java.util.Random;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,11 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.ActivityService;
 import services.ActorService;
-import services.ExchangeRateService;
-import domain.Activity;
-import domain.ExchangeRate;
 
 @Controller
 @RequestMapping("/welcome")
@@ -39,14 +33,14 @@ public class WelcomeController extends AbstractController {
 	@Autowired
 	private ActorService actorService;
 
-	@Autowired
-	private ExchangeRateController exchangeRateController;
-	
-	@Autowired
-	private ExchangeRateService exchangeRateService;
-	
-	@Autowired
-	private ActivityService activityService;
+//	@Autowired
+//	private ExchangeRateController exchangeRateController;
+//	
+//	@Autowired
+//	private ExchangeRateService exchangeRateService;
+//	
+//	@Autowired
+//	private ActivityService activityService;
 	
 	// Constructors -----------------------------------------------------------
 
@@ -68,36 +62,36 @@ public class WelcomeController extends AbstractController {
 		ModelAndView result;
 		SimpleDateFormat formatter;
 		String moment;
-		Collection<Activity> activities;
-		Activity activity;
+//		Collection<Activity> activities;
+//		Activity activity;
 		int actorId;
 		
 		formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		moment = formatter.format(new Date());
-		if(actorService.checkAuthority("CUSTOMER")){
-			try{
-				activities = activityService.findAllPaidAndNotBookedByCustomerId();
-				if(!activities.isEmpty()){
-					Random rnd = new Random();
-					int i = rnd.nextInt(activities.size());
-					activity = (Activity) activities.toArray()[i];
-				}else{
-					activities = null;
-					activity = null;
-				}
-			}catch(org.springframework.dao.DataIntegrityViolationException oops){
-				activities = null;
-				activity = null;
-			}
-		}else{
-			activities = null;
-			activity = null;
-		}
+//		if(actorService.checkAuthority("CUSTOMER")){
+//			try{
+//				activities = activityService.findAllPaidAndNotBookedByCustomerId();
+//				if(!activities.isEmpty()){
+//					Random rnd = new Random();
+//					int i = rnd.nextInt(activities.size());
+//					activity = (Activity) activities.toArray()[i];
+//				}else{
+//					activities = null;
+//					activity = null;
+//				}
+//			}catch(org.springframework.dao.DataIntegrityViolationException oops){
+//				activities = null;
+//				activity = null;
+//			}
+//		}else{
+//			activities = null;
+//			activity = null;
+//		}
 		
 
 		result = new ModelAndView("welcome/index");
 		result.addObject("moment", moment);
-		result.addObject("activity", activity);
+//		result.addObject("activity", activity);
 		
 		if(messageStatus != ""){
 			result.addObject("messageStatus", messageStatus);
@@ -115,13 +109,13 @@ public class WelcomeController extends AbstractController {
 			result = new ModelAndView("redirect:/socialIdentity/customer/edit.do");			
 		}
 		
-		if(exchangeRate_all.equals("null")||exchangeRate_id.equals("null")){
-			ExchangeRate exRate;
-			
-			exRate = exchangeRateService.findByCurrency("EUR");
-			
-			exchangeRateController.loadCookies(exRate, response);
-		}
+//		if(exchangeRate_all.equals("null")||exchangeRate_id.equals("null")){
+//			ExchangeRate exRate;
+//			
+//			exRate = exchangeRateService.findByCurrency("EUR");
+//			
+//			exchangeRateController.loadCookies(exRate, response);
+//		}
 
 		return result;
 	}
