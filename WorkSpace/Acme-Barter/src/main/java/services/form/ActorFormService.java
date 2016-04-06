@@ -7,7 +7,7 @@ import org.springframework.util.Assert;
 
 import domain.Actor;
 import domain.Administrator;
-import domain.Customer;
+import domain.User;
 import domain.Trainer;
 import domain.form.ActorForm;
 import domain.form.ActorType;
@@ -135,7 +135,7 @@ public class ActorFormService {
 			}
 			
 			if(actorType.equals(ActorType.CUSTOMER)){
-				Customer result;
+				User result;
 				
 				result = customerService.findByPrincipal();
 				
@@ -184,7 +184,7 @@ public class ActorFormService {
 		private int saveCustomerRegistration(ActorForm input){
 			UserAccount acount;	
 			int res;			
-			Customer result;
+			User result;
 			Assert.isTrue(input.getAcceptTerm(), "actorForm.error.termsDenied");
 			
 			acount = userAccountService.createComplete(input.getUsername(), input.getPassword(), "CUSTOMER");

@@ -38,33 +38,33 @@ public class SocialIdentityController extends AbstractController {
 
 	// Listing ----------------------------------------------------------
 
-	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public ModelAndView display(){
-		ModelAndView result;
-		SocialIdentity socialIdent;
-		
-		socialIdent = socialIdentityService.findByPrincipalOrCreate();
-		
-		result = new ModelAndView("socialIdentity/display");
-		result.addObject("socialIdentity", socialIdent);
-		
-		return result;
-	}
+//	@RequestMapping(value = "/display", method = RequestMethod.GET)
+//	public ModelAndView display(){
+//		ModelAndView result;
+//		SocialIdentity socialIdent;
+//		
+//		socialIdent = socialIdentityService.findByPrincipalOrCreate();
+//		
+//		result = new ModelAndView("socialIdentity/display");
+//		result.addObject("socialIdentity", socialIdent);
+//		
+//		return result;
+//	}
 
 	// Creation ----------------------------------------------------------
 
-	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView create(){
-		ModelAndView result;
-		SocialIdentity socialIdentity;
-		
-		// Si no la tiene debería crearla
-		socialIdentity = socialIdentityService.findByPrincipalOrCreate();
-		
-		result = createEditModelAndView(socialIdentity);
-		
-		return result;
-	}
+//	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+//	public ModelAndView create(){
+//		ModelAndView result;
+//		SocialIdentity socialIdentity;
+//		
+//		// Si no la tiene debería crearla
+//		socialIdentity = socialIdentityService.findByPrincipalOrCreate();
+//		
+//		result = createEditModelAndView(socialIdentity);
+//		
+//		return result;
+//	}
 
 	// Edition ----------------------------------------------------------
 
@@ -104,19 +104,19 @@ public class SocialIdentityController extends AbstractController {
 		return result;
 	}
 	
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(SocialIdentity socialIdentity, BindingResult binding) {
-		ModelAndView result;
-
-		try {
-			socialIdentityService.delete();
-			result = new ModelAndView("redirect:/");
-		} catch (Throwable oops) {
-			result = createEditModelAndView(socialIdentity, "socialIdentity.commit.error");
-		}
-
-		return result;
-	}
+//	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+//	public ModelAndView delete(SocialIdentity socialIdentity, BindingResult binding) {
+//		ModelAndView result;
+//
+//		try {
+//			socialIdentityService.delete();
+//			result = new ModelAndView("redirect:/");
+//		} catch (Throwable oops) {
+//			result = createEditModelAndView(socialIdentity, "socialIdentity.commit.error");
+//		}
+//
+//		return result;
+//	}
 	
 
 	// Ancillary Methods

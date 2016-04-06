@@ -1,11 +1,13 @@
 package services;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import domain.Customer;
+import domain.User;
 import domain.SocialIdentity;
 
 import repositories.SocialIdentityRepository;
@@ -38,48 +40,52 @@ public class SocialIdentityService {
 	public void save(SocialIdentity socialIdentity){
 		Assert.notNull(socialIdentity);
 		
-		Customer customer;
+		User customer;
+		Collection<SocialIdentity> userSocialIdentities;
 		
 		customer = customerService.findByPrincipal();
+		userSocialIdentities = customer.getSocialIdentities();		
 		socialIdentity = socialIdentityRepository.save(socialIdentity);
 		
-		customer.setSocialIdentity(socialIdentity);
+		userSocialIdentities.add(socialIdentity);
+		
+		customer.setSocialIdentities(userSocialIdentities);
 		customerService.save(customer);
 	}
 	
-	public SocialIdentity findByPrincipal(){
-		SocialIdentity result;
-		Customer custo;
+	public Collection<SocialIdentity> findByPrincipal(){
+		Collection<SocialIdentity> result;
+		User custo;
 		
 		custo = customerService.findByPrincipal();
-		result = custo.getSocialIdentity();
+		result = custo.getSocialIdentities();
 		
 		return result;
 	}
 	
-	public void delete(){
-		Customer customer;
-		SocialIdentity socialIdentity;
-		
-		customer = customerService.findByPrincipal();
-		socialIdentity = customer.getSocialIdentity();
-		customer.setSocialIdentity(null);
-
-		socialIdentityRepository.delete(socialIdentity);
-		customerService.save(customer);
-	}
+//	public void delete(){
+//		User customer;
+//		SocialIdentity socialIdentity;
+//		
+//		customer = customerService.findByPrincipal();
+//		socialIdentity = customer.getSocialIdentity();
+//		customer.setSocialIdentity(null);
+//
+//		socialIdentityRepository.delete(socialIdentity);
+//		customerService.save(customer);
+//	}
 	
 	//Other business methods -------------------------------------------------
 	
-	public SocialIdentity findByPrincipalOrCreate(){
-		SocialIdentity result;
-		
-		result = this.findByPrincipal();
-		if(result == null)
-			result = new SocialIdentity();
-		
-		return result;
-	}
+//	public SocialIdentity findByPrincipalOrCreate(){
+//		SocialIdentity result;
+//		
+//		result = this.findByPrincipal();
+//		if(result == null)
+//			result = new SocialIdentity();
+//		
+//		return result;
+//	}
 
 
 }

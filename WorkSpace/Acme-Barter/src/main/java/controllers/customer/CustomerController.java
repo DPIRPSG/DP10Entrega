@@ -14,7 +14,7 @@ import services.CustomerService;
 import services.form.ActorFormService;
 
 import controllers.AbstractController;
-import domain.Customer;
+import domain.User;
 import domain.form.ActorForm;
 
 @Controller
@@ -43,7 +43,7 @@ public class CustomerController extends AbstractController {
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display(){
 		ModelAndView result;
-		Customer customer;
+		User customer;
 		
 		customer = customerService.findByPrincipal();
 		

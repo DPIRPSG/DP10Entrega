@@ -7,18 +7,18 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import repositories.CustomerRepository;
-import domain.Customer;
+import domain.User;
 
 @Component
 @Transactional
-public class StringToCustomerConverter implements Converter<String, Customer> {
+public class StringToCustomerConverter implements Converter<String, User> {
 
 	@Autowired
 	CustomerRepository customerRepository;
 
 	@Override
-	public Customer convert(String text) {
-		Customer result;
+	public User convert(String text) {
+		User result;
 		int id;
 
 		try {

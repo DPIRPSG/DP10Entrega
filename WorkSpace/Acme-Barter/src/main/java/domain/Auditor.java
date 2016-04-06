@@ -1,30 +1,34 @@
 package domain;
 
+import java.util.Collection;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Customer extends Actor {
+public class Auditor extends Actor{
 
 	// Constructors -----------------------------------------------------------
 
 	// Attributes -------------------------------------------------------------
 	
 	// Relationships ----------------------------------------------------------
-	
-	private SocialIdentity socialIdentity;
-		
+	private Collection<MatchEntity> matches;
+
+	@NotNull
 	@Valid
-	@OneToOne(optional = true)
-	public SocialIdentity getSocialIdentity() {
-		return socialIdentity;
+	@OneToMany(mappedBy = "auditor")
+	public Collection<MatchEntity> getMatches() {
+		return matches;
 	}
-	public void setSocialIdentity(SocialIdentity socialIdentity) {
-		this.socialIdentity = socialIdentity;
+	public void setMatches(Collection<MatchEntity> matches) {
+		this.matches = matches;
 	}
 
 }
