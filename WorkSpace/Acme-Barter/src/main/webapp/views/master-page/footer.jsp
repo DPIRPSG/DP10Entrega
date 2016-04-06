@@ -22,7 +22,7 @@
 <br/>
 
 <a href="about-us/index.do"><spring:message code="master.page.aboutUs" /></a>
-<b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> Acme-Six-Pack Co., Inc.</b>
+<b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> Acme-Barter Co., Inc.</b>
 
 	<script type="text/javascript">
 		function relativeRedir(loc) {	

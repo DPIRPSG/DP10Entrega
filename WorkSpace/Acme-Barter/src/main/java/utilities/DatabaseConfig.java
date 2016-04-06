@@ -2,6 +2,6 @@ package utilities;
 
 public interface DatabaseConfig {
 
-	public final String PersistenceUnit = "Acme-Six-Pack";
+	public final String PersistenceUnit = "Acme-Barter";
 	
 }

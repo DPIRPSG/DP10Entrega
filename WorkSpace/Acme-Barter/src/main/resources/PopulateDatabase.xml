@@ -1468,7 +1468,7 @@
 	
 	<bean id="message1" class="domain.Message">
 		<property name="subject" value="Bienvenido"/>
-		<property name="body" value="Registrado con exito, bienvenido a Acme-Six-Pack"/>
+		<property name="body" value="Registrado con exito, bienvenido a Acme-Barter"/>
 		<property name="sentMoment" value="2015/10/13 22:15"/>
 		<property name="sender" ref="administrator1"/>
 		<property name="recipients">
