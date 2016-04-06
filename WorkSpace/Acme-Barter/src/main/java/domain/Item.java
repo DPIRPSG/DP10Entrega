@@ -14,7 +14,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public abstract class Item extends DomainEntity{
+public class Item extends DomainEntity{
 
 	// Constructors -----------------------------------------------------------
 

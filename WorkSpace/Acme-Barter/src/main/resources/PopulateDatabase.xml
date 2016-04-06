@@ -428,7 +428,7 @@
 		<property name="followed">
 			<list>
 			</list>
-		</property>
+		</property>	
 	</bean>
 	
 	<bean id="user3" class="domain.User">

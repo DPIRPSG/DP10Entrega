@@ -17,7 +17,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public abstract class Barter extends DomainEntity{
+public class Barter extends DomainEntity{
 
 	// Constructors -----------------------------------------------------------
 
@@ -56,7 +56,7 @@ public abstract class Barter extends DomainEntity{
 	private User user;
 	private Item offered;
 	private Item requested;
-	private MatchEntity match;
+	private Match match;
 	private Barter relatedBarter;
 
 	@Valid
@@ -91,10 +91,10 @@ public abstract class Barter extends DomainEntity{
 	
 	@Valid
 	@ManyToOne(optional=true)
-	public MatchEntity getMatch() {
+	public Match getMatch() {
 		return match;
 	}
-	public void setMatch(MatchEntity match) {
+	public void setMatch(Match match) {
 		this.match = match;
 	}
 	

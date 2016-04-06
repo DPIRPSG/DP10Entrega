@@ -24,8 +24,8 @@ public class User extends Actor {
 	private Collection<SocialIdentity> socialIdentities;
 	private Barter barter;
 	private Collection<User> followed;
-	private Collection<MatchEntity> receivedMatches;
-	private Collection<MatchEntity> createdMatches;
+	private Collection<Match> receivedMatches;
+	private Collection<Match> createdMatches;
 	
 	@Valid
 	@NotNull
@@ -59,20 +59,20 @@ public class User extends Actor {
 	@Valid
 	@NotNull
 	@OneToMany(mappedBy="receiver")
-	public Collection<MatchEntity> getReceivedMatches() {
+	public Collection<Match> getReceivedMatches() {
 		return receivedMatches;
 	}
-	public void setReceivedMatches(Collection<MatchEntity> receivedMatch) {
+	public void setReceivedMatches(Collection<Match> receivedMatch) {
 		this.receivedMatches = receivedMatch;
 	}
 	
 	@Valid
 	@NotNull
 	@OneToMany(mappedBy="creator")
-	public Collection<MatchEntity> getCreatedMatches() {
+	public Collection<Match> getCreatedMatches() {
 		return createdMatches;
 	}
-	public void setCreatedMatches(Collection<MatchEntity> createdMatch) {
+	public void setCreatedMatches(Collection<Match> createdMatch) {
 		this.createdMatches = createdMatch;
 	}
 	

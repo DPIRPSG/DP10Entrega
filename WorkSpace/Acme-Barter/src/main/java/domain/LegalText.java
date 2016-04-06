@@ -13,7 +13,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public abstract class LegalText extends DomainEntity{
+public class LegalText extends DomainEntity{
 
 	// Constructors -----------------------------------------------------------
 
@@ -30,15 +30,15 @@ public abstract class LegalText extends DomainEntity{
 	}
 	
 	// Relationships ----------------------------------------------------------
-	private Collection<MatchEntity> matches;
+	private Collection<Match> matches;
 	
 	@NotNull
 	@Valid
 	@OneToMany(mappedBy = "legalText")
-	public Collection<MatchEntity> getMatches() {
+	public Collection<Match> getMatches() {
 		return matches;
 	}
-	public void setMatches(Collection<MatchEntity> matches) {
+	public void setMatches(Collection<Match> matches) {
 		this.matches = matches;
 	}
 
