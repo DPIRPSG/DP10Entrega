@@ -31,9 +31,6 @@ public class MessageService {
 	@Autowired
 	private ActorService actorService;
 	
-	@Autowired
-	private SpamTermService spamTermService;
-	
 	//Constructors -----------------------------------------------------------
 
 	public MessageService(){
@@ -113,9 +110,9 @@ public class MessageService {
 	 * Añade a las respectivas carpetas la primera vez que un mensaje es creado
 	 */
 	private void addMessageToFolderFirst(Message message){
-		boolean isSpam;
+//		boolean isSpam;
 		
-		isSpam = spamTermService.checkSpamTerm(message.getBody() + message.getSubject());
+//		isSpam = spamTermService.checkSpamTerm(message.getBody() + message.getSubject());
 		for (Folder f:message.getSender().getMessageBoxes()){
 			if (f.getName().equals("OutBox") && f.getIsSystem()){
 				folderService.addMessage(f, message);
@@ -124,12 +121,14 @@ public class MessageService {
 		
 		for (Actor recipient: message.getRecipients()){
 			for (Folder f:recipient.getMessageBoxes()){
-				boolean toInBox, toSpamBox;
+				boolean toInBox; //, toSpamBox;
 				
-				toInBox = f.getName().equals("InBox") && !isSpam;
-				toSpamBox = f.getName().equals("SpamBox") && isSpam;
+				toInBox = f.getName().equals("InBox"); //&& !isSpam;
+				// toSpamBox = f.getName().equals("SpamBox") && isSpam;
 				
-				if ((toInBox || toSpamBox) && f.getIsSystem()){
+				if (toInBox
+						// (toInBox|| toSpamBox)
+						&& f.getIsSystem()){
 					folderService.addMessage(f, message);
 				}
 			}

@@ -8,11 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import domain.Activity;
-import domain.Comment;
-import domain.CreditCard;
 import domain.Customer;
-import domain.FeePayment;
 import domain.Folder;
 import domain.Message;
 
@@ -97,9 +93,9 @@ public class CustomerService {
 			Collection<Folder> folders;
 			Collection<Message> sent;
 			Collection<Message> received;
-			Collection<Comment> comments;
-			Collection<FeePayment>feePayments;
-			Collection<Activity> activities;
+//			Collection<Comment> comments;
+//			Collection<FeePayment>feePayments;
+//			Collection<Activity> activities;
 			UserAccount auth;
 			
 			//Encoding password
@@ -118,14 +114,14 @@ public class CustomerService {
 			
 			// Initialize anothers
 			
-			comments = new ArrayList<Comment>();
-			feePayments = new ArrayList<FeePayment>();
-			activities = new ArrayList<Activity>();
-			
-			customer.setMadeComments(comments);
-			customer.setComments(comments);
-			customer.setFeePayments(feePayments);
-			customer.setActivities(activities);
+//			comments = new ArrayList<Comment>();
+//			feePayments = new ArrayList<FeePayment>();
+//			activities = new ArrayList<Activity>();
+//			
+//			customer.setMadeComments(comments);
+//			customer.setComments(comments);
+//			customer.setFeePayments(feePayments);
+//			customer.setActivities(activities);
 
 			
 		}
@@ -173,101 +169,101 @@ public class CustomerService {
 		return result;
 	}
 	
-	public CreditCard getOrCreateCreditCard(){
-		CreditCard result;
-		Customer custo;
-		
-		custo = this.findByPrincipal();
-		
-		result = custo.showCreditCard();
-		if(result == null)
-			result = new CreditCard();
-		return result;		
-	}
+//	public CreditCard getOrCreateCreditCard(){
+//		CreditCard result;
+//		Customer custo;
+//		
+//		custo = this.findByPrincipal();
+//		
+//		result = custo.showCreditCard();
+//		if(result == null)
+//			result = new CreditCard();
+//		return result;		
+//	}
 	
-	public void saveCreditCard(CreditCard creditCard){
-		Customer custo;
-		
-		custo = this.findByPrincipal();
-		custo.modifyCreditCard(creditCard);
-		this.save(custo);
-	}
-	
-	public void deleteCreditCard(){
-		Customer custo;
-		
-		custo = this.findByPrincipal();
-		custo.modifyCreditCard(null);
-		this.save(custo);
-	}
-	
-	
-	public Integer numbersOfCustomersByGym(int gymId) {
-		Integer result;
-		
-		result = customerRepository.findByGymBooked(gymId).size();
-		
-		return result;
-	}
-
-	public Integer numbersOfCustomersByService(int serviceId) {
-		Integer result;
-
-		result = customerRepository.findByServiceBooked(serviceId).size();
-
-		return result;
-	}
-	
-	/* Query 5 */
-	public Collection<Customer> findCustomerWhoHasPaidMoreFees(){
-		Assert.isTrue(actorService.checkAuthority("ADMIN"), "Only an admin can open the dashboard");
-		
-		Collection<Customer> result;
-		
-		result = customerRepository.findCustomerWhoHasPaidMoreFees();
-		
-		return result;
-	}
-	
-	/* Query 6 */
-	public Collection<Customer> findCustomerWhoHasPaidLessFees(){
-		Assert.isTrue(actorService.checkAuthority("ADMIN"), "Only an admin can open the dashboard");
-		
-		Collection<Customer> result;
-		
-		result = customerRepository.findCustomerWhoHasPaidLessFees();
-		
-		return result;
-	}
-	
-	/* Query 14 */
-	public Collection<Customer> findCustomerWhoHaveBeenRemovedMoreComments(){
-		Assert.isTrue(actorService.checkAuthority("ADMIN"), "Only an admin can open the dashboard");
-		
-		Collection<Customer> result;
-		
-		result = customerRepository.findCustomerWhoHaveBeenRemovedMoreComments();
-		
-		return result;
-	}
-	
-	public Collection<Customer> moreInvoicesIssuedCustomer(){
-		Assert.isTrue(actorService.checkAuthority("ADMIN"), "Only an admin can open the dashboard");
-
-		Collection<Customer> result;
-		
-		result = customerRepository.moreInvoicesIssuedCustomer();
-		
-		return result;
-	}
-	
-	public Collection<Customer> noRequestedInvoicesCustomer(){
-		Assert.isTrue(actorService.checkAuthority("ADMIN"), "Only an admin can open the dashboard");
-
-		Collection<Customer> result;
-		
-		result = customerRepository.noRequestedInvoicesCustomer();
-		
-		return result;		
-	}
+//	public void saveCreditCard(CreditCard creditCard){
+//		Customer custo;
+//		
+//		custo = this.findByPrincipal();
+//		custo.modifyCreditCard(creditCard);
+//		this.save(custo);
+//	}
+//	
+//	public void deleteCreditCard(){
+//		Customer custo;
+//		
+//		custo = this.findByPrincipal();
+//		custo.modifyCreditCard(null);
+//		this.save(custo);
+//	}
+//	
+//	
+//	public Integer numbersOfCustomersByGym(int gymId) {
+//		Integer result;
+//		
+//		result = customerRepository.findByGymBooked(gymId).size();
+//		
+//		return result;
+//	}
+//
+//	public Integer numbersOfCustomersByService(int serviceId) {
+//		Integer result;
+//
+//		result = customerRepository.findByServiceBooked(serviceId).size();
+//
+//		return result;
+//	}
+//	
+//	/* Query 5 */
+//	public Collection<Customer> findCustomerWhoHasPaidMoreFees(){
+//		Assert.isTrue(actorService.checkAuthority("ADMIN"), "Only an admin can open the dashboard");
+//		
+//		Collection<Customer> result;
+//		
+//		result = customerRepository.findCustomerWhoHasPaidMoreFees();
+//		
+//		return result;
+//	}
+//	
+//	/* Query 6 */
+//	public Collection<Customer> findCustomerWhoHasPaidLessFees(){
+//		Assert.isTrue(actorService.checkAuthority("ADMIN"), "Only an admin can open the dashboard");
+//		
+//		Collection<Customer> result;
+//		
+//		result = customerRepository.findCustomerWhoHasPaidLessFees();
+//		
+//		return result;
+//	}
+//	
+//	/* Query 14 */
+//	public Collection<Customer> findCustomerWhoHaveBeenRemovedMoreComments(){
+//		Assert.isTrue(actorService.checkAuthority("ADMIN"), "Only an admin can open the dashboard");
+//		
+//		Collection<Customer> result;
+//		
+//		result = customerRepository.findCustomerWhoHaveBeenRemovedMoreComments();
+//		
+//		return result;
+//	}
+//	
+//	public Collection<Customer> moreInvoicesIssuedCustomer(){
+//		Assert.isTrue(actorService.checkAuthority("ADMIN"), "Only an admin can open the dashboard");
+//
+//		Collection<Customer> result;
+//		
+//		result = customerRepository.moreInvoicesIssuedCustomer();
+//		
+//		return result;
+//	}
+//	
+//	public Collection<Customer> noRequestedInvoicesCustomer(){
+//		Assert.isTrue(actorService.checkAuthority("ADMIN"), "Only an admin can open the dashboard");
+//
+//		Collection<Customer> result;
+//		
+//		result = customerRepository.noRequestedInvoicesCustomer();
+//		
+//		return result;		
+//	}
 }
