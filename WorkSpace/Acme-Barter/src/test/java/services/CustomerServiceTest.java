@@ -27,7 +27,7 @@ public class CustomerServiceTest extends AbstractTest {
 	// Service under test -------------------------
 
 	@Autowired
-	private CustomerService customerService;
+	private UserService customerService;
 	
 	// Other services needed -----------------------
 	

@@ -24,7 +24,7 @@
 <div>
 	<ul id="jMenu">
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
-		<security:authorize access="hasRole('CUSTOMER')">
+		<security:authorize access="hasRole('USER')">
 			<li><a class="fNiv"><spring:message	code="master.page.manage.gym" /></a>
 				<ul>
 					<li class="arrow"></li>
@@ -61,7 +61,7 @@
 			<li><a class="fNiv" href="dashboard/administrator/list.do"><spring:message code="master.page.dashboard" /></a></li>
 		</security:authorize>
 		
-		<security:authorize access="hasRole('TRAINER')">
+		<security:authorize access="hasRole('AUDITOR')">
 			<li><a class="fNiv"><spring:message	code="master.page.manage" /></a>
 				<ul>
 					<li class="arrow"></li>

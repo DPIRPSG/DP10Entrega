@@ -6,19 +6,19 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import repositories.AuditorRepository;
-import domain.Auditor;
+import repositories.MatchRepository;
+import domain.Match;
 
 @Component
 @Transactional
-public class StringToTrainerConverter implements Converter<String, Auditor> {
+public class StringToMatchConverter implements Converter<String, Match> {
 
 	@Autowired
-	AuditorRepository trainerRepository;
+	MatchRepository matchRepository;
 
 	@Override
-	public Auditor convert(String text) {
-		Auditor result;
+	public Match convert(String text) {
+		Match result;
 		int id;
 
 		try {
@@ -26,7 +26,7 @@ public class StringToTrainerConverter implements Converter<String, Auditor> {
 				result = null;
 			else {
 				id = Integer.valueOf(text);
-				result = trainerRepository.findOne(id);
+				result = matchRepository.findOne(id);
 			}
 		} catch (Throwable oops) {
 			throw new IllegalArgumentException(oops);

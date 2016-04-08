@@ -21,11 +21,11 @@ import security.UserAccountService;
 
 @Service
 @Transactional
-public class TrainerService {
+public class AuditorService {
 	//Managed repository -----------------------------------------------------
 	
 	@Autowired
-	private AuditorRepository trainerRepository;
+	private AuditorRepository auditorRepository;
 	
 	//Supporting services ----------------------------------------------------
 
@@ -43,7 +43,7 @@ public class TrainerService {
 	
 	//Constructors -----------------------------------------------------------
 
-	public TrainerService(){
+	public AuditorService(){
 		super();
 	}
 	
@@ -123,7 +123,7 @@ public class TrainerService {
 			
 		}
 		//modify = customerRepository.saveAndFlush(customer);
-		modify = trainerRepository.save(trainer);		
+		modify = auditorRepository.save(trainer);		
 		
 		if(trainer.getId() == 0){
 			Collection<Folder> folders;
@@ -137,7 +137,7 @@ public class TrainerService {
 	public Collection<Auditor> findAll(){
 		Collection<Auditor> result;
 		
-		result = trainerRepository.findAll();
+		result = auditorRepository.findAll();
 		
 		return result;
 	}
@@ -145,7 +145,7 @@ public class TrainerService {
 	public Auditor findOne(int id){
 		Auditor result;
 		
-		result = trainerRepository.findOne(id);
+		result = auditorRepository.findOne(id);
 		
 		return result;
 	}
@@ -163,7 +163,7 @@ public class TrainerService {
 		
 		userAccount = LoginService.getPrincipal();
 		Assert.notNull(userAccount);
-		result = trainerRepository.findByUserAccountId(userAccount.getId());
+		result = auditorRepository.findByUserAccountId(userAccount.getId());
 		Assert.notNull(result);
 		
 		return result;
@@ -283,7 +283,7 @@ public class TrainerService {
 //	}
 	
 	public void flush(){
-		trainerRepository.flush();
+		auditorRepository.flush();
 	}
 
 }

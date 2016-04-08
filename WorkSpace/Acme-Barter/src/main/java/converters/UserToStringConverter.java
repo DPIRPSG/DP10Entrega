@@ -8,16 +8,16 @@ import domain.User;
 
 @Component
 @Transactional
-public class CustomerToStringConverter implements Converter<User, String> {
+public class UserToStringConverter implements Converter<User, String> {
 	
 	@Override
-	public String convert(User customer) {
+	public String convert(User user) {
 		String result;
 
-		if (customer == null)
+		if (user == null)
 			result = null;
 		else
-			result = String.valueOf(customer.getId());
+			result = String.valueOf(user.getId());
 
 		return result;
 	}

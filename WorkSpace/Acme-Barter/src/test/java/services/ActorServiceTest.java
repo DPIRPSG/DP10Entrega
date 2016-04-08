@@ -32,7 +32,7 @@ public class ActorServiceTest extends AbstractTest {
 	// Other services needed -----------------------
 	
 	@Autowired
-	private CustomerService customerService;
+	private UserService customerService;
 	
 	// Tests ---------------------------------------
 	
