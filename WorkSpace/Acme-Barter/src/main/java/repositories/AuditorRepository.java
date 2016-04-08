@@ -9,20 +9,6 @@ import domain.Auditor;
 @Repository
 public interface AuditorRepository extends JpaRepository<Auditor, Integer> {
 
-	@Query("select t from Auditor t where t.userAccount.id = ?1")
-	Auditor findByUserAccountId(int id);
-
-//	@Query("select t from Trainer t where (t.name like concat('%',?1,'%') or t.surname like concat('%',?1,'%') or t.curriculum.statement like concat('%',?1,'%') or t.curriculum.skills like concat('%',?1,'%') or t.curriculum.likes like concat('%',?1,'%') or t.curriculum.dislikes like concat('%',?1,'%'))")
-//	Collection<Trainer> findBySingleKeyword(String keyword);
-
-//	@Query("select t from Trainer t left join t.curriculum c where (t.name like concat('%',?1,'%') or t.surname like concat('%',?1,'%') or c.statement like concat('%',?1,'%') or c.skills like concat('%',?1,'%') or c.likes like concat('%',?1,'%') or c.dislikes like concat('%',?1,'%'))")
-//	Collection<Trainer> findBySingleKeyword(String keyword);
-
-
-//	@Query("select t from Trainer t where t.curriculum.id = ?1")
-//	Trainer findByCurriculumId(int curriculumId);
-//
-//	@Query("select t from Trainer t left join t.services s where s.id = ?1")
-//	Collection<Trainer> findAllByServiceId(int serviceId);
-	
+	@Query("select a from Auditor a where a.userAccount.id = ?1")
+	Auditor findByUserAccountId(int id);	
 }

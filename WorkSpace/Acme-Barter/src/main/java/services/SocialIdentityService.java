@@ -23,7 +23,7 @@ public class SocialIdentityService {
 	//Supporting services ----------------------------------------------------
 	
 	@Autowired
-	private CustomerService customerService;
+	private UserService customerService;
 	
 	//Constructors -----------------------------------------------------------
 

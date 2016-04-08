@@ -27,8 +27,8 @@
 		<bean class="converters.AdministratorToStringConverter" />
 		<bean class="converters.StringToAdministratorConverter" />
 		
-		<bean class="converters.CustomerToStringConverter" />
-		<bean class="converters.StringToCustomerConverter" />
+		<bean class="converters.UserToStringConverter" />
+		<bean class="converters.StringToUserConverter" />
 		
 		<bean class="converters.FolderToStringConverter" />
 		<bean class="converters.StringToFolderConverter" />
@@ -36,8 +36,20 @@
 		<bean class="converters.MessageToStringConverter" />
 		<bean class="converters.StringToMessageConverter" />
 		
-		<bean class="converters.TrainerToStringConverter" />
-		<bean class="converters.StringToTrainerConverter" />
+		<bean class="converters.AuditorToStringConverter" />
+		<bean class="converters.StringToAuditorConverter" />
+		
+		<bean class="converters.BarterToStringConverter" />
+		<bean class="converters.StringToBarterConverter" />
+		
+		<bean class="converters.MatchToStringConverter" />
+		<bean class="converters.StringToMatchConverter" />
+		
+		<bean class="converters.ItemToStringConverter" />
+		<bean class="converters.StringToItemConverter" />
+		
+		<bean class="converters.LegalTextToStringConverter" />
+		<bean class="converters.StringToLegalTextConverter" />
 	
 	</util:list>
 	
