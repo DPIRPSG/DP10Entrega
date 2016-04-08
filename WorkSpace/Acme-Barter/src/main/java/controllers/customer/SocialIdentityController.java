@@ -69,40 +69,40 @@ public class SocialIdentityController extends AbstractController {
 	// Edition ----------------------------------------------------------
 
 	
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid SocialIdentity socialIdentity, BindingResult binding
-			,@CookieValue(value = "createCreditCard", required = false, defaultValue = "false") String createCreditCard
-			, HttpServletResponse response			
-			) {
-		ModelAndView result;
-
-		if (binding.hasErrors()) {
-			result = createEditModelAndView(socialIdentity);
-		} else {
-			try {
-				Cookie cook1;
-				int actId;
-				
-				actId = actorService.findByPrincipal().getId();
-				
-				cook1 = new Cookie("createSocialIdentity", "false");
-				cook1.setPath("/");
-			
-				response.addCookie(cook1);
-				
-				if(createCreditCard.equals(String.valueOf(actId) + "true")){
-					result = new ModelAndView("redirect:/creditCard/customer/edit.do");					
-				}else{				
-					socialIdentityService.save(socialIdentity);
-				}
-				result = new ModelAndView("redirect:display.do");
-			} catch (Throwable oops) {
-				result = createEditModelAndView(socialIdentity, "socialIdentity.commit.error");				
-			}
-		}
-
-		return result;
-	}
+//	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+//	public ModelAndView save(@Valid SocialIdentity socialIdentity, BindingResult binding
+//			,@CookieValue(value = "createCreditCard", required = false, defaultValue = "false") String createCreditCard
+//			, HttpServletResponse response			
+//			) {
+//		ModelAndView result;
+//
+//		if (binding.hasErrors()) {
+//			result = createEditModelAndView(socialIdentity);
+//		} else {
+//			try {
+//				Cookie cook1;
+//				int actId;
+//				
+//				actId = actorService.findByPrincipal().getId();
+//				
+//				cook1 = new Cookie("createSocialIdentity", "false");
+//				cook1.setPath("/");
+//			
+//				response.addCookie(cook1);
+//				
+//				if(createCreditCard.equals(String.valueOf(actId) + "true")){
+//					result = new ModelAndView("redirect:/creditCard/customer/edit.do");					
+//				}else{				
+//					socialIdentityService.save(socialIdentity);
+//				}
+//				result = new ModelAndView("redirect:display.do");
+//			} catch (Throwable oops) {
+//				result = createEditModelAndView(socialIdentity, "socialIdentity.commit.error");				
+//			}
+//		}
+//
+//		return result;
+//	}
 	
 //	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
 //	public ModelAndView delete(SocialIdentity socialIdentity, BindingResult binding) {

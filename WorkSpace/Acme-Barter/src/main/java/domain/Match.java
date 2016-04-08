@@ -1,20 +1,16 @@
 package domain;
 
-import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -64,12 +60,11 @@ public class Match extends DomainEntity{
 	public boolean getCancelled() {
 		return cancelled;
 	}
-	public void setCancelled(Boolean cancelled) {
+	public void setCancelled(boolean cancelled) {
 		this.cancelled = cancelled;
 	}
 	
 	@NotBlank
-	@NotNull
 	public String getReport() {
 		return report;
 	}
@@ -80,9 +75,8 @@ public class Match extends DomainEntity{
 	// Relationships ----------------------------------------------------------
 	private LegalText legalText;
 	private Auditor auditor;
-	private Collection<Barter> barters;
-	private User receiver;
-	private User creator;
+	private Barter creatorBarter;
+	private Barter receiverBarter;
 	
 	@Valid
 	@NotNull
@@ -105,32 +99,23 @@ public class Match extends DomainEntity{
 	
 	@Valid
 	@NotNull
-	@Size(min=2, max=2)
-	@OneToMany(mappedBy="match")
-	public Collection<Barter> getBarters() {
-		return barters;
+	@ManyToOne(optional=false)
+	public Barter getCreatorBarter() {
+		return creatorBarter;
 	}
-	public void setBarters(Collection<Barter> barters) {
-		this.barters = barters;
+	public void setCreatorBarter(Barter creatorBarter) {
+		this.creatorBarter = creatorBarter;
 	}
 	
 	@Valid
 	@NotNull
 	@ManyToOne(optional=false)
-	public User getReceiver() {
-		return receiver;
+	public Barter getReceiverBarter() {
+		return receiverBarter;
 	}
-	public void setReceiver(User receiver) {
-		this.receiver = receiver;
+	public void setReceiverBarter(Barter receiverBarter) {
+		this.receiverBarter = receiverBarter;
 	}
 	
-	@Valid
-	@NotNull
-	@ManyToOne(optional=false)
-	public User getCreator() {
-		return creator;
-	}
-	public void setCreator(User creator) {
-		this.creator = creator;
-	}
+	
 }

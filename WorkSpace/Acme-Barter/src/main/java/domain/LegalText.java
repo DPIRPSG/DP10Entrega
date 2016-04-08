@@ -1,12 +1,8 @@
 package domain;
 
-import java.util.Collection;
-
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -30,16 +26,6 @@ public class LegalText extends DomainEntity{
 	}
 	
 	// Relationships ----------------------------------------------------------
-	private Collection<Match> matches;
-	
-	@NotNull
-	@Valid
-	@OneToMany(mappedBy = "legalText")
-	public Collection<Match> getMatches() {
-		return matches;
-	}
-	public void setMatches(Collection<Match> matches) {
-		this.matches = matches;
-	}
+
 
 }
