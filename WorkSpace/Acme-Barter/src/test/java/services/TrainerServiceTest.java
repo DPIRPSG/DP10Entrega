@@ -29,7 +29,7 @@ public class TrainerServiceTest extends AbstractTest{
 	// Service under test -------------------------
 	
 	@Autowired
-	private TrainerService trainerService;
+	private AuditorService trainerService;
 	
 	// Other services needed -----------------------
 	

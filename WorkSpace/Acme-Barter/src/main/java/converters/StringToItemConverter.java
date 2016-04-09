@@ -6,19 +6,19 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import repositories.CustomerRepository;
-import domain.User;
+import repositories.ItemRepository;
+import domain.Item;
 
 @Component
 @Transactional
-public class StringToCustomerConverter implements Converter<String, User> {
+public class StringToItemConverter implements Converter<String, Item> {
 
 	@Autowired
-	CustomerRepository customerRepository;
+	ItemRepository itemRepository;
 
 	@Override
-	public User convert(String text) {
-		User result;
+	public Item convert(String text) {
+		Item result;
 		int id;
 
 		try {
@@ -26,7 +26,7 @@ public class StringToCustomerConverter implements Converter<String, User> {
 				result = null;
 			else {
 				id = Integer.valueOf(text);
-				result = customerRepository.findOne(id);
+				result = itemRepository.findOne(id);
 			}
 		} catch (Throwable oops) {
 			throw new IllegalArgumentException(oops);

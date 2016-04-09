@@ -13,7 +13,7 @@ import domain.Folder;
 import domain.Message;
 
 
-import repositories.CustomerRepository;
+import repositories.UserRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
@@ -21,11 +21,11 @@ import security.UserAccountService;
 
 @Service
 @Transactional
-public class CustomerService {
+public class UserService {
 	//Managed repository -----------------------------------------------------
 	
 	@Autowired
-	private CustomerRepository customerRepository;
+	private UserRepository userRepository;
 	
 	//Supporting services ----------------------------------------------------
 
@@ -43,7 +43,7 @@ public class CustomerService {
 	
 	//Constructors -----------------------------------------------------------
 
-	public CustomerService(){
+	public UserService(){
 		super();
 	}
 	
@@ -126,7 +126,7 @@ public class CustomerService {
 			
 		}
 		//modify = customerRepository.saveAndFlush(customer);
-		modify = customerRepository.save(customer);		
+		modify = userRepository.save(customer);		
 		
 		if(customer.getId() == 0){
 			Collection<Folder> folders;
@@ -146,7 +146,7 @@ public class CustomerService {
 		
 		Collection<User> result;
 		
-		result = customerRepository.findAll();
+		result = userRepository.findAll();
 		
 		return result;
 	}
@@ -163,7 +163,7 @@ public class CustomerService {
 		
 		userAccount = LoginService.getPrincipal();
 		Assert.notNull(userAccount);
-		result = customerRepository.findByUserAccountId(userAccount.getId());
+		result = userRepository.findByUserAccountId(userAccount.getId());
 		Assert.notNull(result);
 		
 		return result;

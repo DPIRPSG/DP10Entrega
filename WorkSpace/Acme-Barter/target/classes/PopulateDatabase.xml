@@ -202,10 +202,6 @@
 			<list>
 			</list>
 		</property>
-		<property name="matches">
-			<list>
-			</list>
-		</property>
 	</bean>
 	
 	<bean id="auditor2" class="domain.Auditor">
@@ -226,10 +222,6 @@
 			</list>
 		</property>
 		<property name="received">
-			<list>
-			</list>
-		</property>
-		<property name="matches">
 			<list>
 			</list>
 		</property>
@@ -256,10 +248,6 @@
 			<list>
 			</list>
 		</property>
-		<property name="matches">
-			<list>
-			</list>
-		</property>
 	</bean>
 	
 	<bean id="auditor4" class="domain.Auditor">
@@ -280,10 +268,6 @@
 			</list>
 		</property>
 		<property name="received">
-			<list>
-			</list>
-		</property>
-		<property name="matches">
 			<list>
 			</list>
 		</property>
@@ -310,10 +294,6 @@
 			<list>
 			</list>
 		</property>
-		<property name="matches">
-			<list>
-			</list>
-		</property>
 	</bean>	
 	
 	<bean id="auditor6" class="domain.Auditor">
@@ -334,10 +314,6 @@
 			</list>
 		</property>
 		<property name="received">
-			<list>
-			</list>
-		</property>
-		<property name="matches">
 			<list>
 			</list>
 		</property>
@@ -371,19 +347,6 @@
 				<ref bean="message3"/>
 			</list>
 		</property>
-		<property name="createdMatches">
-			<list>
-			</list>
-		</property>
-		<property name="receivedMatches">
-			<list>
-			</list>
-		</property>
-		<property name="socialIdentities">
-			<list>
-				<ref bean="socialIdentity1" />
-			</list>
-		</property>
 		<property name="followed">
 			<list>
 			</list>
@@ -411,18 +374,6 @@
 		<property name="received">
 			<list>
 				<ref bean="message1"/>
-			</list>
-		</property>
-		<property name="createdMatches">
-			<list>
-			</list>
-		</property>
-		<property name="receivedMatches">
-			<list>
-			</list>
-		</property>
-		<property name="socialIdentities">
-			<list>
 			</list>
 		</property>
 		<property name="followed">
@@ -454,18 +405,6 @@
 				<ref bean="message4"/>
 			</list>
 		</property>
-		<property name="createdMatches">
-			<list>
-			</list>
-		</property>
-		<property name="receivedMatches">
-			<list>
-			</list>
-		</property>
-		<property name="socialIdentities">
-			<list>
-			</list>
-		</property>
 		<property name="followed">
 			<list>
 			</list>
@@ -494,18 +433,6 @@
 		<property name="received">
 			<list>
 				<ref bean="message1"/>
-			</list>
-		</property>
-		<property name="createdMatches">
-			<list>
-			</list>
-		</property>
-		<property name="receivedMatches">
-			<list>
-			</list>
-		</property>
-		<property name="socialIdentities">
-			<list>
 			</list>
 		</property>
 		<property name="followed">
