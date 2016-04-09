@@ -999,6 +999,345 @@
 		<property name="nick" value="@Manolo"/>
 		<property name="user" ref="user1"/>
 	</bean>
+	
+	<!-- Item -->
+	
+	<bean id="item1" class="domain.Item">
+		<property name="name" value="Portatil HP"/>
+		<property name="description" value="Es normalillo, pero corre bien el Minecraft."/>
+		<property name="pictures">
+			<list>
+				<value></value>
+				<value></value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="item2" class="domain.Item">
+		<property name="name" value="Surface Pro 4"/>
+		<property name="description" value="El PORTÁTIL más versatil del mercado."/>
+		<property name="pictures">
+			<list>
+				<value></value>
+				<value></value>
+			</list>
+		</property>
+	</bean>
 
+	<bean id="item3" class="domain.Item">
+		<property name="name" value="iPhone"/>
+		<property name="description" value="Bueno... es lo que tengo."/>
+		<property name="pictures">
+			<list>
+				<value></value>
+				<value></value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="item4" class="domain.Item">
+		<property name="name" value="Tablet Android"/>
+		<property name="description" value="Cualquier me vale si se pueden ver vídeo de YouTube en 1080p."/>
+		<property name="pictures">
+			<list>
+				<value></value>
+				<value></value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="item5" class="domain.Item">
+		<property name="name" value="Cama plegable"/>
+		<property name="description" value="Para dormir las siestas está de lujo, si te cabe en el coche yo me la llevo hasta al campo."/>
+		<property name="pictures">
+			<list>
+				<value></value>
+				<value></value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="item6" class="domain.Item">
+		<property name="name" value="Litera"/>
+		<property name="description" value="Ahora con los niños necesito una litera, con protector para la cama de arriba a ser posible."/>
+		<property name="pictures">
+			<list>
+				<value></value>
+				<value></value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="item7" class="domain.Item">
+		<property name="name" value="Ford Fiesta"/>
+		<property name="description" value="Del 2001, como nuevo. El maletero no cierra bien, por lo demás perfecto."/>
+		<property name="pictures">
+			<list>
+				<value></value>
+				<value></value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="item8" class="domain.Item">
+		<property name="name" value="Seat León"/>
+		<property name="description" value="A ser posible negro, pago la diferencia en efectivo en el momento del intercambio."/>
+		<property name="pictures">
+			<list>
+				<value></value>
+				<value></value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="item9" class="domain.Item">
+		<property name="name" value="VENDO GATOS"/>
+		<property name="description" value="Rapido! Te he propuesto emparejamiento para que lo veas! Antes de que me pillen los Auditores!!"/>
+		<property name="pictures">
+			<list>
+				<value></value>
+				<value></value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="item10" class="domain.Item">
+		<property name="name" value="VENDO GATOS"/>
+		<property name="description" value="Rapido! Te he propuesto emparejamiento para que lo veas!  Antes de que me pillen los Auditores!!"/>
+		<property name="pictures">
+			<list>
+				<value></value>
+				<value></value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="item11" class="domain.Item">
+		<property name="name" value="Amazing Turbo Cleaner"/>
+		<property name="description" value="Clean your house in only 1 hour!"/>
+		<property name="pictures">
+			<list>
+				<value></value>
+				<value></value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="item12" class="domain.Item">
+		<property name="name" value="Any laptop bought in 2015"/>
+		<property name="description" value="Any laptop bought in 2015 is fine for me."/>
+		<property name="pictures">
+			<list>
+				<value></value>
+				<value></value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Barter -->
+	
+	<bean id="barter1" class="domain.Barter">
+		<property name="title" value="Te lo cambio"/>
+		<property name="cancelled" value="false"/>
+		<property name="registerMoment" value="2016/01/12 12:30"/>
+		<property name="user" ref="user1"/>
+		<property name="offered" ref="item1"/>
+		<property name="requested" ref="item2"/>
+		<property name="createdMatch">
+			<list>
+				<ref bean="match1"/>
+			</list>
+		</property>
+		<property name="receivedMatch">
+			<list>
+				<ref bean="match2"/>
+			</list>
+		</property>
+		<property name="relatedBarter">
+			<list>
+				<ref bean="barter2"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="barter2" class="domain.Barter">
+		<property name="title" value="¡¡Intercambio urgente!!"/>
+		<property name="cancelled" value="false"/>
+		<property name="registerMoment" value="2016/03/10 11:00"/>
+		<property name="user" ref="user2"/>
+		<property name="offered" ref="item3"/>
+		<property name="requested" ref="item4"/>
+		<property name="createdMatch">
+			<list>
+			</list>
+		</property>
+		<property name="receivedMatch">
+			<list>
+				<ref bean="match1"/>
+			</list>
+		</property>
+		<property name="relatedBarter">
+			<list>
+				<ref bean="barter1"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="barter3" class="domain.Barter">
+		<property name="title" value="Acepto ofertas"/>
+		<property name="cancelled" value="false"/>
+		<property name="registerMoment" value="2016/03/01 17:15"/>
+		<property name="user" ref="user3"/>
+		<property name="offered" ref="item5"/>
+		<property name="requested" ref="item6"/>
+		<property name="createdMatch">
+			<list>
+				<ref bean="match2"/>
+			</list>
+		</property>
+		<property name="receivedMatch">
+			<list>
+			</list>
+		</property>
+		<property name="relatedBarter">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="barter4" class="domain.Barter">
+		<property name="title" value="¡Que me lo quitan de las manos!"/>
+		<property name="cancelled" value="true"/>
+		<property name="registerMoment" value="2015/12/03 12:00"/>
+		<property name="user" ref="user1"/>
+		<property name="offered" ref="item7"/>
+		<property name="requested" ref="item8"/>
+		<property name="createdMatch">
+			<list>
+			</list>
+		</property>
+		<property name="receivedMatch">
+			<list>
+			</list>
+		</property>
+		<property name="relatedBarter">
+			<list>
+				<ref bean="barter5"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="barter5" class="domain.Barter">
+		<property name="title" value="Lo cambio por este o cualquier otro portatil de las mismas características"/>
+		<property name="cancelled" value="false"/>
+		<property name="registerMoment" value="2016/02/02 02:00"/>
+		<property name="user" ref="user2"/>
+		<property name="offered" ref="item9"/>
+		<property name="requested" ref="item10"/>
+		<property name="createdMatch">
+			<list>
+				<ref bean="match3"/>
+			</list>
+		</property>
+		<property name="receivedMatch">
+			<list>
+			</list>
+		</property>
+		<property name="relatedBarter">
+			<list>
+				<ref bean="barter4"/>
+				<ref bean="barter6"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="barter6" class="domain.Barter">
+		<property name="title" value="Solo hasta Junio o lo vendo a mi vecino"/>
+		<property name="cancelled" value="false"/>
+		<property name="registerMoment" value="2016/03/11 16:10"/>
+		<property name="user" ref="user3"/>
+		<property name="offered" ref="item11"/>
+		<property name="requested" ref="item12"/>
+		<property name="createdMatch">
+			<list>
+			</list>
+		</property>
+		<property name="receivedMatch">
+			<list>
+				<ref bean="match3"/>
+			</list>
+		</property>
+		<property name="relatedBarter">
+			<list>
+				<ref bean="barter5"/>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Match -->
+	
+	<bean id="match1" class="domain.Match">
+		<property name="creationMoment" value="2016/04/01 12:00"/>
+		<property name="offerSignsDate" value="2016/04/02 13:30"/>
+		<property name="requestSignsDate" value="2016/04/02 18:30"/>
+		<property name="cancelled" value="false"/>
+		<property name="report" value="Me parece apropiado."/>
+		<property name="legalText" ref="legalText1"/>
+		<property name="auditor" ref="auditor1"/>
+		<property name="creatorBarter" ref="barter1"/>
+		<property name="receiverBarter" ref="barter2"/>
+	</bean>
+	
+	<bean id="match2" class="domain.Match">
+		<property name="creationMoment" value="2016/04/02 10:00"/>
+		<property name="offerSignsDate" value="2016/04/03 14:30"/>
+<!-- 		<property name="requestSignsDate" value="2016/04/02 13:30"/> -->
+		<property name="cancelled" value="false"/>
+		<property name="report" value="Vigilarlo de cerca, sospechoso."/>
+		<property name="legalText" ref="legalText2"/>
+		<property name="auditor" ref="auditor2"/>
+		<property name="creatorBarter" ref="barter3"/>
+		<property name="receiverBarter" ref="barter1"/>
+	</bean>
+	
+	<bean id="match3" class="domain.Match">
+		<property name="creationMoment" value="2016/04/03 12:00"/>
+<!-- 		<property name="offerSignsDate" value="2016/04/02 13:30"/> -->
+		<property name="requestSignsDate" value="2016/04/03 16:13"/>
+		<property name="cancelled" value="false"/>
+		<property name="report" value="Posiblemente inadecuado, estar pendiente de sus Matchs."/>
+		<property name="legalText" ref="legalText1"/>
+		<property name="auditor" ref="auditor3"/>
+		<property name="creatorBarter" ref="barter5"/>
+		<property name="receiverBarter" ref="barter6"/>
+	</bean>
+	
+	<bean id="match4" class="domain.Match">
+		<property name="creationMoment" value="2016/04/05 14:00"/>
+		<property name="offerSignsDate" value="2016/04/06 13:30"/>
+		<property name="requestSignsDate" value="2016/04/07 20:00"/>
+		<property name="cancelled" value="true"/>
+		<property name="report" value="Quitar de inmediato."/>
+		<property name="legalText" ref="legalText1"/>
+		<property name="auditor" ref="auditor3"/>
+		<property name="creatorBarter" ref="barter5"/>
+		<property name="receiverBarter" ref="barter6"/>
+	</bean>
+	
+	<!-- LegalText -->
+	
+	<bean id="legalText1" class="domain.LegalText">
+		<property name="text" value="Queda sujeto a las condiciones del creador del Emparejamiento, aunque Acme Barter Inc. (y cualquiera de sus auditores) se reserva el derecho de controlar y/o cancelar cualquier intercambio sin previo aviso."/>
+	</bean>
+	
+	<bean id="legalText2" class="domain.LegalText">
+		<property name="text" value="Queda sujeto a las condiciones del receptor del Emparejamiento, aunque Acme Barter Inc. (y cualquiera de sus auditores) se reserva el derecho de controlar y/o cancelar cualquier intercambio sin previo aviso."/>
+	</bean>
+	
+	<bean id="legalText3" class="domain.LegalText">
+		<property name="text" value="Queda sujeto a las condiciones del auditor del Emparejamiento, Acme Barter Inc. (y cualquiera de sus auditores) se reserva el derecho de controlar y/o cancelar cualquier intercambio sin previo aviso."/>
+	</bean>
+	
+	
 	
 </beans>
