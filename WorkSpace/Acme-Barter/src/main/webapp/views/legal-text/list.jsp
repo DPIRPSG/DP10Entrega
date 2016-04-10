@@ -21,7 +21,7 @@
 	<!-- Attributes -->
 	<display:column>
 		<div>
-			<b><a href="legal-text/administrator/edit.do?legalTextId="${row_LegalText.id}> <spring:message
+			<b><a href="legal-text/administrator/edit.do?legalTextId=${row_LegalText.id}"> <spring:message
 						code="legalText.edit" />
 			</a></b>
 		</div>

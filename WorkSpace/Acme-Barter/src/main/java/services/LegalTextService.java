@@ -1,6 +1,5 @@
 package services;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.util.Assert;
 
 import repositories.LegalTextRepository;
 import domain.LegalText;
-import domain.Match;
 
 @Service
 @Transactional
@@ -38,13 +36,9 @@ public class LegalTextService {
 		Assert.isTrue(actorService.checkAuthority("ADMIN"),
 				"Only an admin can create legal texts");
 		
-		LegalText result;
-		Collection<Match> matches;
-		
-		matches = new ArrayList<Match>();
+		LegalText result;		
 		
 		result = new LegalText();
-		result.setMatches(matches);
 		
 		return result;
 	}
