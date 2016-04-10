@@ -153,7 +153,7 @@
 	
 	<!-- Other domain beans come here -->
 	
-	<!-- Admin -->
+	<!-- Administrator -->
 	
 	<bean id="administrator1" class="domain.Administrator">
 		<property name="name" value="Miguel"/>
