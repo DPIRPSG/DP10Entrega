@@ -19,7 +19,7 @@
 
 	<groupId>Design-and-Testing</groupId>
 	<artifactId>Sample</artifactId>
-	<version>1.4</version>
+	<version>1.5</version>
 	<packaging>war</packaging>
 	
 	<properties>
@@ -28,9 +28,9 @@
 
 	<!-- Indexing information -->
 
-	<name>Sample Project</name>
-	<url>http://www.sample-project.com</url>
-	<description>This is D&amp;T's sample project.</description>
+	<name>Sample Project 1.5</name>
+	<url>http://www.sample-project-1.5.com</url>
+	<description>This is a sample project 1.5.</description>
 	
 	<!-- Build commands -->
 
