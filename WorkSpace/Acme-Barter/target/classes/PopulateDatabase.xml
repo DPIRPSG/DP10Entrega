@@ -153,7 +153,7 @@
 	
 	<!-- Other domain beans come here -->
 	
-	<!-- Admin -->
+	<!-- Administrator -->
 	
 	<bean id="administrator1" class="domain.Administrator">
 		<property name="name" value="Miguel"/>
@@ -994,9 +994,17 @@
 	
 	<bean id="socialIdentity1" class="domain.SocialIdentity">
 		<property name="name" value="Manolo"/>
-		<property name="homePage" value="http://Manolo.com"/>
-		<property name="picture" value="http://static.betazeta.com/www.fayerwayer.com/up/2014/04/Bliss-XP-HD1-960x623.jpg"/>
+		<property name="homePage" value="http://www.twitter.com/Manolo"/>
+		<property name="picture" value="http://1.bp.blogspot.com/-BB4biccPxuM/VquRIDFbBRI/AAAAAAAAJX8/v0sfOPr3R40/s1600-r/yo%2B2.png"/>
 		<property name="nick" value="@Manolo"/>
+		<property name="user" ref="user1"/>
+	</bean>
+	
+	<bean id="socialIdentity2" class="domain.SocialIdentity">
+		<property name="name" value="Manolo López"/>
+		<property name="homePage" value="http://www.facebook.com/ManoloLopez"/>
+		<property name="picture" value="http://www.codigo.pe/wp-content/uploads/2012/11/Minigote.jpg"/>
+		<property name="nick" value="ManoloLopez"/>
 		<property name="user" ref="user1"/>
 	</bean>
 	
@@ -1007,8 +1015,7 @@
 		<property name="description" value="Es normalillo, pero corre bien el Minecraft."/>
 		<property name="pictures">
 			<list>
-				<value></value>
-				<value></value>
+				<value>http://imagenes.pccomponentes.com/hp_g62_b67es_p6100_4gb_500gb_ati_hd5470_15_6__1.jpg</value>
 			</list>
 		</property>
 	</bean>
@@ -1018,8 +1025,8 @@
 		<property name="description" value="El PORTÁTIL más versatil del mercado."/>
 		<property name="pictures">
 			<list>
-				<value></value>
-				<value></value>
+				<value>http://dri1.img.digitalrivercontent.net/Storefront/Company/msintl/images/English/en-INTL-Surface-Pro4-SU3-00001/PDP/en-INTL-PDP0-Surface-Pro4-SU3-00001-P1.jpg</value>
+				<value>http://dri1.img.digitalrivercontent.net/Storefront/Company/msintl/images/English/en-INTL-Surface-Pro4-SU3-00001/en-INTL-L-Surface-Pro4-SU3-00001-RM3-mnco.jpg</value>
 			</list>
 		</property>
 	</bean>
@@ -1029,8 +1036,7 @@
 		<property name="description" value="Bueno... es lo que tengo."/>
 		<property name="pictures">
 			<list>
-				<value></value>
-				<value></value>
+				<value>http://laseptimaentrevista.com/wp-content/uploads/2014/09/pantalla-completa-iphone-5-blanca-lcd-digitalizador-home-cam-8764-MLM20007595312_112013-O.jpg</value>
 			</list>
 		</property>
 	</bean>
@@ -1040,8 +1046,6 @@
 		<property name="description" value="Cualquier me vale si se pueden ver vídeo de YouTube en 1080p."/>
 		<property name="pictures">
 			<list>
-				<value></value>
-				<value></value>
 			</list>
 		</property>
 	</bean>
@@ -1051,8 +1055,8 @@
 		<property name="description" value="Para dormir las siestas está de lujo, si te cabe en el coche yo me la llevo hasta al campo."/>
 		<property name="pictures">
 			<list>
-				<value></value>
-				<value></value>
+				<value>http://www.practiletto.com/33-thickbox_default/cama-plegable.jpg</value>
+				<value>http://www.decoestilo.com/wp-content/uploads/2013/09/camas_invitados_3.jpg</value>
 			</list>
 		</property>
 	</bean>
@@ -1062,8 +1066,6 @@
 		<property name="description" value="Ahora con los niños necesito una litera, con protector para la cama de arriba a ser posible."/>
 		<property name="pictures">
 			<list>
-				<value></value>
-				<value></value>
 			</list>
 		</property>
 	</bean>
@@ -1073,8 +1075,6 @@
 		<property name="description" value="Del 2001, como nuevo. El maletero no cierra bien, por lo demás perfecto."/>
 		<property name="pictures">
 			<list>
-				<value></value>
-				<value></value>
 			</list>
 		</property>
 	</bean>
@@ -1084,8 +1084,6 @@
 		<property name="description" value="A ser posible negro, pago la diferencia en efectivo en el momento del intercambio."/>
 		<property name="pictures">
 			<list>
-				<value></value>
-				<value></value>
 			</list>
 		</property>
 	</bean>
@@ -1095,8 +1093,6 @@
 		<property name="description" value="Rapido! Te he propuesto emparejamiento para que lo veas! Antes de que me pillen los Auditores!!"/>
 		<property name="pictures">
 			<list>
-				<value></value>
-				<value></value>
 			</list>
 		</property>
 	</bean>
@@ -1106,8 +1102,6 @@
 		<property name="description" value="Rapido! Te he propuesto emparejamiento para que lo veas!  Antes de que me pillen los Auditores!!"/>
 		<property name="pictures">
 			<list>
-				<value></value>
-				<value></value>
 			</list>
 		</property>
 	</bean>
@@ -1117,8 +1111,6 @@
 		<property name="description" value="Clean your house in only 1 hour!"/>
 		<property name="pictures">
 			<list>
-				<value></value>
-				<value></value>
 			</list>
 		</property>
 	</bean>
@@ -1128,8 +1120,6 @@
 		<property name="description" value="Any laptop bought in 2015 is fine for me."/>
 		<property name="pictures">
 			<list>
-				<value></value>
-				<value></value>
 			</list>
 		</property>
 	</bean>
