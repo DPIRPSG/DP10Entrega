@@ -1008,6 +1008,14 @@
 		<property name="user" ref="user1"/>
 	</bean>
 	
+	<bean id="socialIdentity3" class="domain.SocialIdentity">
+		<property name="name" value="Ruben"/>
+		<property name="homePage" value="http://www.instagram.com/RubenSanchez"/>
+		<property name="picture" value="https://pbs.twimg.com/profile_images/1361012701/monigote_400x400.jpg"/>
+		<property name="nick" value="RubenSanchez"/>
+		<property name="user" ref="user2"/>
+	</bean>
+	
 	<!-- Item -->
 	
 	<bean id="item1" class="domain.Item">
