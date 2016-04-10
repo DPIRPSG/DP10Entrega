@@ -27,7 +27,6 @@
 		<value>/views/message/tiles.xml</value>
 		<value>/views/socialIdentity/tiles.xml</value>
 		
-		<value>/views/trainer/tiles.xml</value>
 		<value>/views/legal-text/tiles.xml</value>
 		
 		<value>/views/forms/tiles.xml</value>
