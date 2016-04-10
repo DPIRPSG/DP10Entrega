@@ -1,11 +1,14 @@
 package domain;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -56,8 +59,9 @@ public class Barter extends DomainEntity{
 	private User user;
 	private Item offered;
 	private Item requested;
-	private Match match;
-	private Barter relatedBarter;
+	private Collection<Match> createdMatch;
+	private Collection<Match> receivedMatch;
+	private Collection<Barter> relatedBarter;
 
 	@Valid
 	@NotNull
@@ -71,7 +75,7 @@ public class Barter extends DomainEntity{
 	
 	@Valid
 	@NotNull
-	@ManyToOne(optional=false)
+	@OneToOne(optional=false)
 	public Item getOffered() {
 		return offered;
 	}
@@ -81,7 +85,7 @@ public class Barter extends DomainEntity{
 	
 	@Valid
 	@NotNull
-	@ManyToOne(optional=false)	
+	@OneToOne(optional=false)	
 	public Item getRequested() {
 		return requested;
 	}
@@ -90,21 +94,35 @@ public class Barter extends DomainEntity{
 	}
 	
 	@Valid
-	@ManyToOne(optional=true)
-	public Match getMatch() {
-		return match;
+	@NotNull
+	@OneToMany(mappedBy="creatorBarter")
+	public Collection<Match> getCreatedMatch() {
+		return createdMatch;
 	}
-	public void setMatch(Match match) {
-		this.match = match;
+	public void setCreatedMatch(Collection<Match> createdMatch) {
+		this.createdMatch = createdMatch;
 	}
 	
 	@Valid
-	@OneToOne(optional=true)
-	public Barter getRelatedBarter() {
+	@NotNull
+	@OneToMany(mappedBy="receiverBarter")
+	public Collection<Match> getReceivedMatch() {
+		return receivedMatch;
+	}
+	public void setReceivedMatch(Collection<Match> receivedMatch) {
+		this.receivedMatch = receivedMatch;
+	}
+	
+	@Valid
+	@NotNull
+	@ManyToMany
+	public Collection<Barter> getRelatedBarter() {
 		return relatedBarter;
 	}
-	public void setRelatedBarter(Barter relatedBarter) {
+	public void setRelatedBarter(Collection<Barter> relatedBarter) {
 		this.relatedBarter = relatedBarter;
 	}
+	
+	
 
 }

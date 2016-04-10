@@ -33,36 +33,36 @@ public class SocialIdentityService {
 	
 	//Simple CRUD methods ----------------------------------------------------
 	
-	/**
-	 * Almacena en la base de datos el cambio
-	 */
-	// req: 10.1
-	public void save(SocialIdentity socialIdentity){
-		Assert.notNull(socialIdentity);
-		
-		User customer;
-		Collection<SocialIdentity> userSocialIdentities;
-		
-		customer = customerService.findByPrincipal();
-		userSocialIdentities = customer.getSocialIdentities();		
-		socialIdentity = socialIdentityRepository.save(socialIdentity);
-		
-		userSocialIdentities.add(socialIdentity);
-		
-		customer.setSocialIdentities(userSocialIdentities);
-		customerService.save(customer);
-	}
-	
-	public Collection<SocialIdentity> findByPrincipal(){
-		Collection<SocialIdentity> result;
-		User custo;
-		
-		custo = customerService.findByPrincipal();
-		result = custo.getSocialIdentities();
-		
-		return result;
-	}
-	
+//	/**
+//	 * Almacena en la base de datos el cambio
+//	 */
+//	// req: 10.1
+//	public void save(SocialIdentity socialIdentity){
+//		Assert.notNull(socialIdentity);
+//		
+//		User customer;
+//		Collection<SocialIdentity> userSocialIdentities;
+//		
+//		customer = customerService.findByPrincipal();
+//		userSocialIdentities = customer.getSocialIdentities();		
+//		socialIdentity = socialIdentityRepository.save(socialIdentity);
+//		
+//		userSocialIdentities.add(socialIdentity);
+//		
+//		customer.setSocialIdentities(userSocialIdentities);
+//		customerService.save(customer);
+//	}
+//	
+//	public Collection<SocialIdentity> findByPrincipal(){
+//		Collection<SocialIdentity> result;
+//		User custo;
+//		
+//		custo = customerService.findByPrincipal();
+//		result = custo.getSocialIdentities();
+//		
+//		return result;
+//	}
+//	
 //	public void delete(){
 //		User customer;
 //		SocialIdentity socialIdentity;
