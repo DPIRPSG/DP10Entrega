@@ -25,59 +25,31 @@
 	<ul id="jMenu">
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
 		<security:authorize access="hasRole('USER')">
-			<li><a class="fNiv"><spring:message	code="master.page.manage.gym" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="gym/customer/list-feepayments-not-active.do"><spring:message code="master.page.manage.gym.not-pay" /></a></li>
-					<li><a href="gym/customer/list-feepayments-active.do"><spring:message code="master.page.manage.gym.pay" /></a></li>
-				</ul>
-			</li>
-			<li><a class="fNiv" href="service/customer/list.do"><spring:message code="master.page.service" /></a></li>
-			<li><a class="fNiv" href="trainer/list.do"><spring:message code="master.page.trainer" /></a></li>
-			<li><a class="fNiv" href="feePayment/customer/list.do"><spring:message code="master.page.feePayments" /></a></li>
-			<li><a class="fNiv" href="invoice/customer/list.do"><spring:message code="master.page.invoice" /></a></li>
-			<li><a class="fNiv" href="activity/customer/list.do"><spring:message code="master.page.activity" /></a>	</li>	
+			
 		</security:authorize>
 		
 		<security:authorize access="hasRole('ADMIN')">
 			<li><a class="fNiv"><spring:message	code="master.page.manage" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="feePayment/administrator/list.do"><spring:message code="master.page.list.feePayments" /></a></li>
-					<li><a href="gym/administrator/list.do"><spring:message code="master.page.manage.gym" /></a></li>
-					<li><a href="service/administrator/list.do"><spring:message code="master.page.manage.service" /></a></li>
-					<li><a href="activity/administrator/list.do"><spring:message code="master.page.manage.activity" /></a></li>
-					<li><a href="spamTerm/administrator/list.do"><spring:message code="master.page.manage.spamTerms" /></a></li>
-					<li><a href="exchangeRate/administrator/list.do"><spring:message code="master.page.exchangeRate" /></a></li>
-					<li><a href="trainer/administrator/register.do"><spring:message code="master.page.register.trainer" /></a></li>
+					<li><a href="legal-text/administrator/list.do"><spring:message code="master.page.list.legalTexts" /></a></li>
+					<li><a href="trainer/administrator/register.do"><spring:message code="master.page.register.auditor" /></a></li>
 				</ul>
 			</li>
 			<li><a class="fNiv"><spring:message	code="master.page.list" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="trainer/list.do"><spring:message code="master.page.trainer" /></a></li>
+					<li><a href="trainer/list.do"><spring:message code="master.page.auditor" /></a></li>
 				</ul>
 			</li>
 			<li><a class="fNiv" href="dashboard/administrator/list.do"><spring:message code="master.page.dashboard" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('AUDITOR')">
-			<li><a class="fNiv"><spring:message	code="master.page.manage" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="service/trainer/specialised.do"><spring:message code="master.page.manage.service" /></a></li>
-					<li><a href="curriculum/trainer/list.do"><spring:message code="master.page.manage.curriculum" /></a></li>
-				</ul>
-			</li>
-			<li><a class="fNiv" href="trainer/list.do"><spring:message code="master.page.trainer" /></a></li>
-			<li><a class="fNiv" href="gym/list.do"><spring:message code="master.page.gym" /></a></li>
 			
 		</security:authorize>
 				
 		<security:authorize access="isAnonymous()">
-			<li><a class="fNiv" href="gym/list.do"><spring:message code="master.page.gym" /></a></li>
-			<li><a class="fNiv" href="service/list.do"><spring:message code="master.page.service" /></a></li>
-			<li><a class="fNiv" href="trainer/list.do"><spring:message code="master.page.trainer" /></a></li>
 			<li><a class="fNiv" href="customer/create.do"><spring:message code="master.page.register" /></a></li>
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
 		</security:authorize>
@@ -95,7 +67,7 @@
 					<security:authorize access="hasRole('ADMIN')">
 						<li><a href="admin/administrator/display.do"><spring:message code="master.page.customer.info" /></a></li>
 					</security:authorize>	
-					<security:authorize access="hasRole('TRAINER')">
+					<security:authorize access="hasRole('AUDITOR')">
 						<li><a href="trainer/trainer/display.do"><spring:message code="master.page.customer.info" /></a></li>
 					</security:authorize>					
 					<li><b><a href="j_spring_security_logout"><spring:message code="master.page.logout" /></a></b></li>
