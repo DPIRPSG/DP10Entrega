@@ -1134,6 +1134,20 @@
 		</property>
 	</bean>
 	
+	<!-- LegalText -->
+	
+	<bean id="legalText1" class="domain.LegalText">
+		<property name="text" value="Queda sujeto a las condiciones del creador del Emparejamiento, aunque Acme Barter Inc. (y cualquiera de sus auditores) se reserva el derecho de controlar y/o cancelar cualquier intercambio sin previo aviso."/>
+	</bean>
+	
+	<bean id="legalText2" class="domain.LegalText">
+		<property name="text" value="Queda sujeto a las condiciones del receptor del Emparejamiento, aunque Acme Barter Inc. (y cualquiera de sus auditores) se reserva el derecho de controlar y/o cancelar cualquier intercambio sin previo aviso."/>
+	</bean>
+	
+	<bean id="legalText3" class="domain.LegalText">
+		<property name="text" value="Queda sujeto a las condiciones del auditor del Emparejamiento, Acme Barter Inc. (y cualquiera de sus auditores) se reserva el derecho de controlar y/o cancelar cualquier intercambio sin previo aviso."/>
+	</bean>
+	
 	<!-- Barter -->
 	
 	<bean id="barter1" class="domain.Barter">
@@ -1155,7 +1169,7 @@
 		</property>
 		<property name="relatedBarter">
 			<list>
-				<ref bean="barter2"/>
+<!-- 				<ref bean="barter2"/> -->
 			</list>
 		</property>
 	</bean>
@@ -1222,7 +1236,7 @@
 		</property>
 		<property name="relatedBarter">
 			<list>
-				<ref bean="barter5"/>
+<!-- 				<ref bean="barter5"/> -->
 			</list>
 		</property>
 	</bean>
@@ -1246,7 +1260,7 @@
 		<property name="relatedBarter">
 			<list>
 				<ref bean="barter4"/>
-				<ref bean="barter6"/>
+<!-- 				<ref bean="barter6"/> -->
 			</list>
 		</property>
 	</bean>
@@ -1324,19 +1338,7 @@
 		<property name="receiverBarter" ref="barter6"/>
 	</bean>
 	
-	<!-- LegalText -->
 	
-	<bean id="legalText1" class="domain.LegalText">
-		<property name="text" value="Queda sujeto a las condiciones del creador del Emparejamiento, aunque Acme Barter Inc. (y cualquiera de sus auditores) se reserva el derecho de controlar y/o cancelar cualquier intercambio sin previo aviso."/>
-	</bean>
-	
-	<bean id="legalText2" class="domain.LegalText">
-		<property name="text" value="Queda sujeto a las condiciones del receptor del Emparejamiento, aunque Acme Barter Inc. (y cualquiera de sus auditores) se reserva el derecho de controlar y/o cancelar cualquier intercambio sin previo aviso."/>
-	</bean>
-	
-	<bean id="legalText3" class="domain.LegalText">
-		<property name="text" value="Queda sujeto a las condiciones del auditor del Emparejamiento, Acme Barter Inc. (y cualquiera de sus auditores) se reserva el derecho de controlar y/o cancelar cualquier intercambio sin previo aviso."/>
-	</bean>
 	
 	
 	
