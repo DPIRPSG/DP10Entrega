@@ -48,6 +48,8 @@
 		<value>/views/activity/messages</value>	
 		<value>/views/exchangeRate/messages</value>
 		
+		<value>/views/legal-text/messages</value>
+		
 		<value>/views/forms/messages</value>
 			
 	</util:list>
