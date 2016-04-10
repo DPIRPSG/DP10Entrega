@@ -16,7 +16,7 @@
 <div class="noPrint">
 <div>
 	<a href=""> 
-		<img src="images/logo.png" style="height:128px;" alt="ACME, Inc.  Your gym Company" /></a>
+		<img src="images/logo.png" style="height:128px;" alt="ACME, Inc.  Your Barter Company" /></a>
 	<br/>
 
 </div>
