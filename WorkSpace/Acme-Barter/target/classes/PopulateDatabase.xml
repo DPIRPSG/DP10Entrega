@@ -322,37 +322,6 @@
 	
 	<!-- User -->
 	
-	<bean id="user1" class="domain.User">
-		<property name="name" value="Manolo"/>
-		<property name="surname" value="Lopez"/>
-		<property name="phone" value="612345789"/>
-		<property name="userAccount" ref="userAccount2"/>
-		<property name="messageBoxes">
-			<list>
-				<ref bean="folder5" />
-				<ref bean="folder6" />
-				<ref bean="folder7" />
-				<ref bean="folder8" />
-				<ref bean="folder45" />
-			</list>
-		</property>
-		<property name="sent">
-			<list>
-			</list>
-		</property>
-		<property name="received">
-			<list>
-				<ref bean="message1"/>
-				<ref bean="message2"/>
-				<ref bean="message3"/>
-			</list>
-		</property>
-		<property name="followed">
-			<list>
-			</list>
-		</property>
-	</bean>
-	
 	<bean id="user2" class="domain.User">
 		<property name="name" value="Ruben"/>
 		<property name="surname" value="Sanchez"/>
@@ -378,6 +347,7 @@
 		</property>
 		<property name="followed">
 			<list>
+<!-- 				<ref bean="user1"/> -->
 			</list>
 		</property>	
 	</bean>
@@ -411,6 +381,39 @@
 		</property>
 	</bean>
 	
+	<bean id="user1" class="domain.User">
+		<property name="name" value="Manolo"/>
+		<property name="surname" value="Lopez"/>
+		<property name="phone" value="612345789"/>
+		<property name="userAccount" ref="userAccount2"/>
+		<property name="messageBoxes">
+			<list>
+				<ref bean="folder5" />
+				<ref bean="folder6" />
+				<ref bean="folder7" />
+				<ref bean="folder8" />
+				<ref bean="folder45" />
+			</list>
+		</property>
+		<property name="sent">
+			<list>
+			</list>
+		</property>
+		<property name="received">
+			<list>
+				<ref bean="message1"/>
+				<ref bean="message2"/>
+				<ref bean="message3"/>
+			</list>
+		</property>
+		<property name="followed">
+			<list>
+				<ref bean="user2"/>
+				<ref bean="user3"/>
+			</list>
+		</property>
+	</bean>
+	
 	<bean id="user4" class="domain.User">
 		<property name="name" value="Mónica"/>
 		<property name="surname" value="Ordóñez"/>
@@ -437,6 +440,9 @@
 		</property>
 		<property name="followed">
 			<list>
+				<ref bean="user2"/>
+				<ref bean="user1"/>
+				<ref bean="user3"/>
 			</list>
 		</property>
 	</bean>
