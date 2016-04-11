@@ -5,6 +5,8 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
+
 import repositories.BarterRepository;
 import domain.Barter;
 
@@ -54,6 +56,28 @@ public class BarterService {
 
 		result = barterRepository.findAllNotCancelled();
 
+		return result;
+	}
+
+	public Collection<Barter> findBySingleKeywordNotCancelled(String keyword) {
+		Assert.notNull(keyword);
+		Assert.isTrue(!keyword.isEmpty());
+		
+		Collection<Barter> result;
+
+		result = barterRepository.findBySingleKeywordNotCancelled(keyword);
+		
+		return result;
+	}
+	
+	public Collection<Barter> findBySingleKeyword(String keyword) {
+		Assert.notNull(keyword);
+		Assert.isTrue(!keyword.isEmpty());
+		
+		Collection<Barter> result;
+
+		result = barterRepository.findBySingleKeyword(keyword);
+		
 		return result;
 	}
 }
