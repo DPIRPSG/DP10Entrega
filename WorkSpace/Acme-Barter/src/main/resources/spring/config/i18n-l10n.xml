@@ -36,6 +36,7 @@
 		
 		<value>/views/legal-text/messages</value>
 		<value>/views/barter/messages</value>
+		<value>/views/item/messages</value>
 		
 		<value>/views/forms/messages</value>
 			

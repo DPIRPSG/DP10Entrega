@@ -38,7 +38,21 @@
 		sortable="true">
 		<jstl:out value="${row_Barter.registerMoment}"/>
 	</display:column>
+
+	<spring:message code="barter.offered" var="offeredHeader" />
+	<display:column title="${offeredHeader}" sortable="true">
+		<a href="item/display.do?itemId=${row_Barter.offered.id}">
+			<jstl:out value="${row_Barter.offered.name}"/>
+		</a>
+	</display:column>
 	
+	<spring:message code="barter.requested" var="requestedHeader" />
+	<display:column title="${requestedHeader}" sortable="true">
+		<a href="item/display.do?itemId=${row_Barter.requested.id}">
+			<jstl:out value="${row_Barter.requested.name}"/>
+		</a>
+	</display:column>
+
 </display:table>
 
 <br/>
