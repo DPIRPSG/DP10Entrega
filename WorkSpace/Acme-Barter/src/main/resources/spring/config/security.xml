@@ -44,15 +44,18 @@
 		<security:intercept-url pattern="/dashboard/administrator/list.do" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/admin/administrator/**" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/legal-text/administrator/**" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/barter/administrator/**" access="hasRole('ADMIN')" />
 
 		<security:intercept-url pattern="/customer/customer/**" access="hasRole('CUSTOMER')" />
-		<security:intercept-url pattern="/socialIdentity/customer/**" access="hasRole('CUSTOMER')" />		
+		<security:intercept-url pattern="/socialIdentity/customer/**" access="hasRole('CUSTOMER')" />
+		<security:intercept-url pattern="/barter/user/**" access="hasRole('USER')" />			
 			
 		<security:intercept-url pattern="/folder/actor/**" access="hasAnyRole('CUSTOMER', 'ADMIN', 'TRAINER')"/>
 		<security:intercept-url pattern="/message/actor/**" access="hasAnyRole('CUSTOMER', 'ADMIN', 'TRAINER')"/>
 		
 	
 		<security:intercept-url pattern="/barter/list.do" access="permitAll" />
+		<security:intercept-url pattern="/item/display.do" access="permitAll" />
 		
 		<security:intercept-url pattern="/customer/create.do" access="!hasAnyRole('CUSTOMER', 'ADMIN')" />
 
