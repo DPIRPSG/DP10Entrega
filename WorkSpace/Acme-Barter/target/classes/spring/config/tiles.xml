@@ -28,6 +28,7 @@
 		<value>/views/socialIdentity/tiles.xml</value>
 		
 		<value>/views/legal-text/tiles.xml</value>
+		<value>/views/barter/tiles.xml</value>
 		
 		<value>/views/forms/tiles.xml</value>
 		

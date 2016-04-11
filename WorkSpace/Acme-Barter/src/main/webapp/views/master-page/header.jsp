@@ -34,11 +34,13 @@
 					<li class="arrow"></li>
 					<li><a href="legal-text/administrator/list.do"><spring:message code="master.page.list.legalTexts" /></a></li>
 					<li><a href="trainer/administrator/register.do"><spring:message code="master.page.register.auditor" /></a></li>
+					<li><a href="barter/administrator/list.do"><spring:message code="master.page.barter" /></a></li>
 				</ul>
 			</li>
 			<li><a class="fNiv"><spring:message	code="master.page.list" /></a>
 				<ul>
 					<li class="arrow"></li>
+					<li><a href="barter/list.do"><spring:message code="master.page.barter" /></a></li>
 					<li><a href="trainer/list.do"><spring:message code="master.page.auditor" /></a></li>
 				</ul>
 			</li>
@@ -50,6 +52,7 @@
 		</security:authorize>
 				
 		<security:authorize access="isAnonymous()">
+			<li><a class="fNiv" href="barter/list.do"><spring:message code="master.page.barter" /></a></li>
 			<li><a class="fNiv" href="customer/create.do"><spring:message code="master.page.register" /></a></li>
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
 		</security:authorize>
