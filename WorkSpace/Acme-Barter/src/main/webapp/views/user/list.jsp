@@ -17,6 +17,28 @@
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="users" requestURI="${requestURI}" id="row_User">
 	<!-- Action links -->
+	
+	<security:authorize access="hasRole('USER')">
+		<jstl:set var="contains" value="false" />
+		<jstl:forEach var="user" items="${IfollowTo}">
+			<jstl:if test="${user.id == row_User.id}">
+				<jstl:set var="contains" value="true" />
+			</jstl:if>
+		</jstl:forEach>	
+		
+		<display:column sortable="true">
+			<a href="user/user/followOrUnfollow.do?userIdOtherUser=${row_User.id}&redirectUri=${requestURI}">
+				<jstl:if test="${contains == false }">
+					<spring:message code="user.follow" />
+				</jstl:if>
+				<jstl:if test="${contains == true }">
+					<spring:message code="user.unfollow" />
+				</jstl:if>
+			</a>
+		</display:column>
+	
+	</security:authorize>
+	
 
 	<!-- Attributes -->
 	<spring:message code="user.name" var="nameHeader" />

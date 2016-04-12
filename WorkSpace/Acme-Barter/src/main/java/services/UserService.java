@@ -156,6 +156,14 @@ public class UserService {
 		
 		return result;
 	}
+	
+	private User findOne(int id){
+		User res;
+		
+		res = userRepository.findOne(id);
+		
+		return res;		
+	}
 
 	//Other business methods -------------------------------------------------
 
@@ -174,4 +182,52 @@ public class UserService {
 		
 		return result;
 	}
+	
+	public void followOrUnfollowById(int userIdOtherUser){
+		Assert.isTrue(actorService.checkAuthority("USER"));
+		User user, friend;
+		
+		user = this.findByPrincipal();
+		friend = this.findOne(userIdOtherUser);
+		Assert.notNull(friend);
+		Assert.notNull(user);
+		Assert.isTrue(friend.getId()!= user.getId(), "user.followOrUnfollowById.yourself");
+		
+		if(user.getFollowed().contains(friend))
+			user.removeFollowed(friend);
+		else
+			user.addFollowed(friend);
+	}
+	
+	/**A los que sigo
+	 * 
+	 * @return
+	 */
+	public Collection<User> getFollowed(){
+		Assert.isTrue(actorService.checkAuthority("USER"));
+		
+		Collection<User> res;
+		
+		res = this.findByPrincipal().getFollowed();
+		
+		return res;
+	}
+	
+	/**Los que me siguen
+	 * 
+	 * @return
+	 */
+	public Collection<User> getFollowers(){
+		Assert.isTrue(actorService.checkAuthority("USER"));
+		
+		Collection<User> res;
+		User actUser;
+		
+		actUser = this.findByPrincipal();
+		
+		res = userRepository.getFollowers(actUser.getId());
+		
+		return res;
+	}
+	
 }

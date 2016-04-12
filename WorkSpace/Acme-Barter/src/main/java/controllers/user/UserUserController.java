@@ -1,5 +1,7 @@
 package controllers.user;
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.UserService;
@@ -89,6 +92,66 @@ public class UserUserController extends AbstractController {
 
 		return result;
 	}
+	
+	@RequestMapping(value = "/followOrUnfollow", method = RequestMethod.GET)
+	public ModelAndView follow(@RequestParam(required=true) int userIdOtherUser
+			,@RequestParam(required=false, defaultValue="user/list.do") String redirectUri
+			){
+		ModelAndView result;
+
+		result = new ModelAndView("redirect:../../" + redirectUri);
+		try {
+			userService.followOrUnfollowById(userIdOtherUser);
+			result.addObject("messageStatus", "user.followOrUnfollow.ok");				
+		} catch (Throwable oops) {
+			result.addObject("messageStatus", "user.commit.error");				
+		}
+		
+		return result;
+	}
+	
+	/** A los que sigo
+	 * 
+	 * @param userIdOtherUser
+	 * @return
+	 */
+	@RequestMapping(value = "/followed", method = RequestMethod.GET)
+	public ModelAndView followed(){
+		ModelAndView result;
+
+		Collection<User> followed;
+		
+		followed = userService.getFollowed();
+		
+		result = new ModelAndView("user/list");
+		result.addObject("users", followed);
+		result.addObject("requestURI", "user/user/followed.do");
+		result.addObject("IfollowTo", userService.getFollowed());
+		
+		return result;
+	}
+	
+	/** Los que me siguen
+	 * 
+	 * @param userIdOtherUser
+	 * @return
+	 */
+	@RequestMapping(value = "/followers", method = RequestMethod.GET)
+	public ModelAndView followers(){
+		ModelAndView result;
+
+		Collection<User> followers;
+		
+		followers = userService.getFollowers();
+		
+		result = new ModelAndView("user/list");
+		result.addObject("users", followers);
+		result.addObject("requestURI", "user/user/followers.do");
+		result.addObject("IfollowTo", userService.getFollowed());
+		
+		return result;
+	}
+	
 	
 	// Ancillary Methods
 	// ----------------------------------------------------------

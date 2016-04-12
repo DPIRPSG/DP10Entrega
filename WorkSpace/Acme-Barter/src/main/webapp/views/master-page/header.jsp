@@ -26,6 +26,8 @@
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
 		<security:authorize access="hasRole('USER')">
 			<li><a class="fNiv" href="user/list.do"><spring:message code="master.page.users" /></a></li>			
+			<li><a class="fNiv" href="user/user/followed.do"><spring:message code="master.page.followed" /></a></li>			
+			<li><a class="fNiv" href="user/user/followers.do"><spring:message code="master.page.followers" /></a></li>			
 		</security:authorize>
 		
 		<security:authorize access="hasRole('ADMIN')">

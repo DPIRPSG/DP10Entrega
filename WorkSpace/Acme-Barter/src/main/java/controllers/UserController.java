@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import domain.User;
 import domain.form.ActorForm;
 
+import services.ActorService;
 import services.UserService;
 import services.form.ActorFormService;
 
@@ -34,6 +35,9 @@ public class UserController extends AbstractController{
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private ActorService actorService;
 	
 	//Constructors ----------------------------------------------------------
 	
@@ -53,6 +57,10 @@ public class UserController extends AbstractController{
 		result = new ModelAndView("user/list");
 		result.addObject("users", users);
 		result.addObject("requestURI", "user/list.do");
+		
+		if(actorService.checkAuthority("USER")){
+			result.addObject("IfollowTo", userService.getFollowed());
+		}
 		
 		return result;
 	}
