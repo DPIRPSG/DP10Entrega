@@ -22,7 +22,10 @@
 		<acme:textbox code="socialIdentity.name" path="name" />
 		<acme:textbox code="socialIdentity.homePage" path="homePage" />
 		<acme:textbox code="socialIdentity.picture" path="picture" />
+		
 		<br />
+		
+		
 		
 		<!-- Action buttons -->
 		<acme:submit name="save" code="socialIdentity.save"/>

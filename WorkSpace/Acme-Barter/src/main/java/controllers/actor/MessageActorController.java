@@ -187,7 +187,7 @@ public class MessageActorController extends AbstractController{
 						Assert.isTrue(a.getActor().getUserAccount().getId() == actId);
 						
 						a.addMessage(message);
-						folderService.saveToEdit(a);
+						folderService.saveFromCreateOrEdit(a);
 					}
 				}
 				result = new ModelAndView("redirect:/message/actor/display.do?messageId=" + message.getId());

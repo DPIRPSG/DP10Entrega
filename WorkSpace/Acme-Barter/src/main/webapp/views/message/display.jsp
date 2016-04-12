@@ -20,6 +20,10 @@
 		<td><jstl:out value="${messa.sentMoment}" /></td>
 	</tr>
 	<tr>
+		<th><spring:message code="message.priority" /> :</th>
+		<td><acme:messagePriority priority="${messa.priority}" /></td>
+	</tr>
+	<tr>
 		<th><spring:message code="message.folders" /> :</th>
 		<td><jstl:forEach var="temp" items="${folders}">
 			<a href="message/actor/list.do?folderId=${temp.id}">
