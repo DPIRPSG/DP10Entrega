@@ -15,14 +15,10 @@
 	<div>
 	<table>
 
-	<acme:display code="trainer.name" value="${trainer.name}"/>
-	<acme:display code="trainer.surname" value="${trainer.surname}"/>
-	<acme:display code="trainer.phone" value="${trainer.phone}"/>
-	<acme:display code="trainer.username" value="${trainer.userAccount.username}"/>
-	<tr>
-		<th><spring:message code="trainer.picture" /> :</th>
-		<td><img src="${trainer.picture}" style="width:204px;"/></td>
-	</tr>
+	<acme:display code="auditor.name" value="${auditor.name}"/>
+	<acme:display code="auditor.surname" value="${auditor.surname}"/>
+	<acme:display code="auditor.phone" value="${auditor.phone}"/>
+	<acme:display code="auditor.username" value="${auditor.userAccount.username}"/>
 	
 	</table>
 	</div>
@@ -30,8 +26,8 @@
 	
 	<!-- Action links -->
 	<div>
-		<b><a href="trainer/trainer/edit.do"> 
-			<spring:message code="trainer.edit" />
+		<b><a href="auditor/auditor/edit.do"> 
+			<spring:message code="auditor.edit" />
 		</a></b>
 	</div>
 	<br/>

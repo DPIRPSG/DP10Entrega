@@ -50,6 +50,9 @@
 		<security:intercept-url pattern="/socialIdentity/user/**" access="hasRole('USER')" />
 		<security:intercept-url pattern="/barter/user/**" access="hasRole('USER')" />			
 			
+			
+		<security:intercept-url pattern="/auditor/auditor/**" access="hasRole('AUDITOR')" />			
+		
 		<security:intercept-url pattern="/folder/actor/**" access="hasAnyRole('USER', 'ADMIN', 'AUDITOR')"/>
 		<security:intercept-url pattern="/message/actor/**" access="hasAnyRole('USER', 'ADMIN', 'AUDITOR')"/>
 		
@@ -61,7 +64,6 @@
 		<security:intercept-url pattern="/user/list.do" access="permitAll" />
 		<security:intercept-url pattern="/socialIdentity/list.do" access="permitAll" />
 		<security:intercept-url pattern="/barter/listByUser.do" access="permitAll" />
-<!-- 		<security:intercept-url pattern="/user/create.do" access="!hasAnyRole('USER', 'ADMIN', 'AUDITOR')" /> -->
 
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
