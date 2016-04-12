@@ -81,15 +81,15 @@ public class SocialIdentityService {
 		User custo;
 		
 		custo = customerService.findByPrincipal();
-		result = this.findByUser(custo);
+		result = this.findByUserId(custo.getId());
 		
 		return result;
 	}
 	
-	public Collection<SocialIdentity> findByUser(User user){
+	public Collection<SocialIdentity> findByUserId(int userId){
 		Collection<SocialIdentity> result;
 		
-		result = socialIdentityRepository.findByUserId(user.getId());
+		result = socialIdentityRepository.findByUserId(userId);
 		
 		return result;
 	}

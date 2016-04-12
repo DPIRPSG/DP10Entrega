@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.Collection;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -12,13 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import domain.User;
 import domain.form.ActorForm;
 
+import services.UserService;
 import services.form.ActorFormService;
 
 @Controller
-@RequestMapping(value = "/customer")
-public class RegisterController extends AbstractController{
+@RequestMapping(value = "/user")
+public class UserController extends AbstractController{
 
 	//Services ----------------------------------------------------------
 	
@@ -28,14 +32,30 @@ public class RegisterController extends AbstractController{
 	@Autowired
 	private Validator actorFormValidator;
 	
+	@Autowired
+	private UserService userService;
+	
 	//Constructors ----------------------------------------------------------
 	
-	public RegisterController(){
+	public UserController(){
 		super();
 	}
 
 	//Listing ----------------------------------------------------------
 
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list(){
+		ModelAndView result;
+		Collection<User> users;
+		
+		users = userService.findAll();
+				
+		result = new ModelAndView("user/list");
+		result.addObject("users", users);
+		result.addObject("requestURI", "user/list.do");
+		
+		return result;
+	}
 	//Creation ----------------------------------------------------------
 	
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -70,7 +90,7 @@ public class RegisterController extends AbstractController{
 				idConsu = actorFormService.saveForm(consu);
 
 				result = new ModelAndView("redirect:../security/login.do");
-				result.addObject("messageStatus", "customer.commit.ok");
+				result.addObject("messageStatus", "user.commit.ok");
 				
 				cook2 = new Cookie("createSocialIdentity", String.valueOf(idConsu) + consu.getCreateSocialIdentity().toString());
 				
@@ -79,7 +99,7 @@ public class RegisterController extends AbstractController{
 				response.addCookie(cook2);
 			
 			} catch (Throwable oops){
-				result = createEditModelAndView(consu, "customer.commit.error");
+				result = createEditModelAndView(consu, "user.commit.error");
 			}
 		}
 		
@@ -102,7 +122,7 @@ public class RegisterController extends AbstractController{
 		result = new ModelAndView("actorForm/create");
 		result.addObject("actorForm", customer);
 		result.addObject("message", message);
-		result.addObject("urlAction", "customer/create.do");
+		result.addObject("urlAction", "user/create.do");
 		
 		return result;
 	}

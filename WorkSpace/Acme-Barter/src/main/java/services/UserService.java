@@ -144,7 +144,7 @@ public class UserService {
 	 */
 	// req: 12.5
 	public Collection<User> findAll(){
-		Assert.isTrue(actorService.checkAuthority("ADMIN"), "Only an admin can list customers");
+//		Assert.isTrue(actorService.checkAuthority("ADMIN"), "Only an admin can list customers");
 		
 		Collection<User> result;
 		

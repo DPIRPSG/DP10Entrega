@@ -25,7 +25,7 @@
 	<ul id="jMenu">
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
 		<security:authorize access="hasRole('USER')">
-			
+			<li><a class="fNiv" href="user/list.do"><spring:message code="master.page.users" /></a></li>			
 		</security:authorize>
 		
 		<security:authorize access="hasRole('ADMIN')">
@@ -41,6 +41,7 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="barter/list.do"><spring:message code="master.page.barter" /></a></li>
+					<li><a href="user/list.do"><spring:message code="master.page.users" /></a></li>
 					<li><a href="trainer/list.do"><spring:message code="master.page.auditor" /></a></li>
 				</ul>
 			</li>
@@ -48,11 +49,12 @@
 		</security:authorize>
 		
 		<security:authorize access="hasRole('AUDITOR')">
-			
+			<li><a class="fNiv" href="user/list.do"><spring:message code="master.page.users" /></a></li>			
 		</security:authorize>
 				
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="barter/list.do"><spring:message code="master.page.barter" /></a></li>
+			<li><a class="fNiv" href="user/list.do"><spring:message code="master.page.users" /></a></li>
 			<li><a class="fNiv" href="customer/create.do"><spring:message code="master.page.register" /></a></li>
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
 		</security:authorize>
@@ -65,13 +67,13 @@
 				<ul>
 					<li class="arrow"></li>
 					<security:authorize access="hasRole('USER')">
-						<li><a href="user/user/display.do"><spring:message code="master.page.customer.info" /></a></li>
+						<li><a href="user/user/display.do"><spring:message code="master.page.user.info" /></a></li>
 					</security:authorize>
 					<security:authorize access="hasRole('ADMIN')">
-						<li><a href="admin/administrator/display.do"><spring:message code="master.page.customer.info" /></a></li>
+						<li><a href="admin/administrator/display.do"><spring:message code="master.page.user.info" /></a></li>
 					</security:authorize>	
 					<security:authorize access="hasRole('AUDITOR')">
-						<li><a href="trainer/trainer/display.do"><spring:message code="master.page.customer.info" /></a></li>
+						<li><a href="trainer/trainer/display.do"><spring:message code="master.page.user.info" /></a></li>
 					</security:authorize>					
 					<li><b><a href="j_spring_security_logout"><spring:message code="master.page.logout" /></a></b></li>
 				</ul>

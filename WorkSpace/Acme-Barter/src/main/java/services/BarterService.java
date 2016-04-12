@@ -80,4 +80,12 @@ public class BarterService {
 		
 		return result;
 	}
+	
+	public Collection<Barter> findByUserNotCancelled(int userId){
+		Collection<Barter> result;
+		
+		result = barterRepository.findByUserIdNotCancelled(userId);
+		
+		return result;
+	}
 }
