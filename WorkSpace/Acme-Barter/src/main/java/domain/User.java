@@ -30,5 +30,11 @@ public class User extends Actor {
 	public void setFollowed(Collection<User> followed) {
 		this.followed = followed;
 	}
+	public void addFollowed(User user){
+		followed.add(user);
+	}
+	public void removeFollowed(User user){
+		followed.remove(user);
+	}
 	
 }

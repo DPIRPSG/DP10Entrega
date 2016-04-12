@@ -98,7 +98,7 @@ public class ActorServiceTest extends AbstractTest {
 		newPassword = "EditedPassword";
 		customerUser.getUserAccount().setPassword(newPassword);
 		
-		customerEdited = customerService.save(customerUser);
+		customerEdited = customerService.saveFromOtherService(customerUser);
 		
 		// Checks results
 		Assert.isTrue(customerEdited.getName().equals(originalName + "Edited"), "El nombre no se ha editado correctamente.");
@@ -172,7 +172,7 @@ public class ActorServiceTest extends AbstractTest {
 		newPassword = "EditedPassword";
 		customerUser.getUserAccount().setPassword(newPassword);
 		
-		customerService.save(customerUser);
+		customerService.saveFromOtherService(customerUser);
 		
 		// Checks results
 //		Assert.isTrue(customerEdited.getName().equals(originalName + "Edited"), "El nombre no se ha editado correctamente.");
@@ -246,7 +246,7 @@ public class ActorServiceTest extends AbstractTest {
 		newPassword = "pass";
 		customerUser.getUserAccount().setPassword(newPassword);
 		
-		customerService.save(customerUser);
+		customerService.saveFromOtherService(customerUser);
 		
 		// Checks results
 //		Assert.isTrue(customerEdited.getName().equals(originalName + "Edited"), "El nombre no se ha editado correctamente.");

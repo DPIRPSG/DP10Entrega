@@ -54,4 +54,21 @@ public class BarterController extends AbstractController {
 
 		return result;
 	}
+	
+	@RequestMapping(value = "/listByUser", method = RequestMethod.GET)
+	public ModelAndView listByUser(@RequestParam(required=true) String userId) {
+		ModelAndView result;
+		Collection<Barter> barters;
+		int user_id;
+		
+		user_id = Integer.valueOf(userId).intValue();
+
+		barters = barterService.findByUserNotCancelled(user_id);
+		
+		result = new ModelAndView("barter/list");
+		result.addObject("requestURI", "barter/listByUser.do?userId" + userId);
+		result.addObject("barters", barters);
+
+		return result;
+	}
 }

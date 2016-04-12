@@ -33,15 +33,6 @@ public class WelcomeController extends AbstractController {
 	@Autowired
 	private ActorService actorService;
 
-//	@Autowired
-//	private ExchangeRateController exchangeRateController;
-//	
-//	@Autowired
-//	private ExchangeRateService exchangeRateService;
-//	
-//	@Autowired
-//	private ActivityService activityService;
-	
 	// Constructors -----------------------------------------------------------
 
 	public WelcomeController() {
@@ -53,10 +44,7 @@ public class WelcomeController extends AbstractController {
 	@RequestMapping(value = "/index")
 	public ModelAndView index(
 			@RequestParam(required = false, defaultValue = "") String messageStatus
-			,@CookieValue(value = "createCreditCard", required = false, defaultValue = "false") String createCreditCard
 			,@CookieValue(value = "createSocialIdentity", required = false, defaultValue = "false") String createSocialIdentity
-			,@CookieValue(value = "exchangeRate_id", required = false, defaultValue = "null") String exchangeRate_id
-			,@CookieValue(value = "exchangeRate_all", required = false, defaultValue = "null") String exchangeRate_all
 			, HttpServletResponse response
 			) {
 		ModelAndView result;
@@ -103,19 +91,9 @@ public class WelcomeController extends AbstractController {
 			actorId = 0;
 		}
 		
-		if(createCreditCard.equals(String.valueOf(actorId) + "true") && actorService.checkAuthority("CUSTOMER")){
-			result = new ModelAndView("redirect:/creditCard/customer/edit.do");
-		}else if(createSocialIdentity.equals(String.valueOf(actorId) + "true") && actorService.checkAuthority("CUSTOMER")){
-			result = new ModelAndView("redirect:/socialIdentity/customer/edit.do");			
+		if(createSocialIdentity.equals(String.valueOf(actorId) + "true") && actorService.checkAuthority("USER")){
+			result = new ModelAndView("redirect:/socialIdentity/user/edit.do");			
 		}
-		
-//		if(exchangeRate_all.equals("null")||exchangeRate_id.equals("null")){
-//			ExchangeRate exRate;
-//			
-//			exRate = exchangeRateService.findByCurrency("EUR");
-//			
-//			exchangeRateController.loadCookies(exRate, response);
-//		}
 
 		return result;
 	}
