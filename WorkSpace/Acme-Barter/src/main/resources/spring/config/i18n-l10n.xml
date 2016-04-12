@@ -27,7 +27,7 @@
 		<value>/views/legal-terms/messages</value>
 		
 		<value>/views/administrator/messages</value>
-		<value>/views/customer/messages</value>
+		<value>/views/user/messages</value>
 		
 		<value>/views/socialIdentity/messages</value>
 		

@@ -77,12 +77,6 @@ public class ActorFormService {
 			result.setSurname(actor.getSurname());
 			result.setPhone(actor.getPhone());
 			result.setUsername(actor.getUserAccount().getUsername());
-			if(actorService.checkAuthority("TRAINER")){
-				Auditor actTrainer;
-				
-				actTrainer = trainerService.findByPrincipal();
-//				result.setPicture(actTrainer.getPicture());
-			}
 			
 			return result;
 		}
@@ -91,7 +85,7 @@ public class ActorFormService {
 			return this.saveForm(input, false);
 		}
 		
-		public int saveForm(ActorForm input, boolean newTrainer){
+		public int saveForm(ActorForm input, boolean newAuditor){
 			boolean unregister;
 			int result;
 			
@@ -99,18 +93,18 @@ public class ActorFormService {
 				Assert.isTrue(input.getPassword().equals(input.getRepeatedPassword()), "actorForm.error.passwordMismatch");
 			}
 			try{
-				unregister = ! (actorService.checkAuthority("CUSTOMER")
+				unregister = ! (actorService.checkAuthority("USER")
 						|| actorService.checkAuthority("ADMIN")
-						|| actorService.checkAuthority("TRAINER"));
+						|| actorService.checkAuthority("AUDITOR"));
 			}catch (Exception e) {
 				unregister = true;
 			}
-			unregister = unregister || newTrainer;
+			unregister = unregister || newAuditor;
 			
 			if(!unregister){
 				result = this.saveActor(input, actorService.discoverActorType());
-			}else if(newTrainer){
-				result = this.saveTrainerRegistration(input);
+			}else if(newAuditor){
+				result = this.saveAuditorRegistration(input);
 			}
 			else{ //Usuario registrandose
 				result = this.saveCustomerRegistration(input);
@@ -134,7 +128,7 @@ public class ActorFormService {
 				}
 			}
 			
-			if(actorType.equals(ActorType.CUSTOMER)){
+			if(actorType.equals(ActorType.USER)){
 				User result;
 				
 				result = customerService.findByPrincipal();
@@ -144,7 +138,7 @@ public class ActorFormService {
 				result.setPhone(input.getPhone());
 				result.setUserAccount(acount);
 				
-				customerService.save(result);
+				customerService.saveFromEdit(result);
 				res = result.getId();
 				
 			}else if(actorType.equals(ActorType.ADMIN)){
@@ -159,7 +153,7 @@ public class ActorFormService {
 				
 				administratorService.save(result);
 				res = result.getId();
-			}else if(actorType.equals(ActorType.TRAINER)){
+			}else if(actorType.equals(ActorType.AUDITOR)){
 				Auditor result;
 				
 				result = trainerService.findByPrincipal();
@@ -167,7 +161,6 @@ public class ActorFormService {
 				result.setName(input.getName());
 				result.setSurname(input.getSurname());
 				result.setPhone(input.getPhone());
-//				result.setPicture(input.getPicture());
 				
 				result.setUserAccount(acount);
 				
@@ -187,7 +180,7 @@ public class ActorFormService {
 			User result;
 			Assert.isTrue(input.getAcceptTerm(), "actorForm.error.termsDenied");
 			
-			acount = userAccountService.createComplete(input.getUsername(), input.getPassword(), "CUSTOMER");
+			acount = userAccountService.createComplete(input.getUsername(), input.getPassword(), "USER");
 			result = customerService.create();
 			
 			result.setName(input.getName());
@@ -195,18 +188,18 @@ public class ActorFormService {
 			result.setPhone(input.getUsername());
 			result.setUserAccount(acount);
 			
-			result = customerService.save(result);
+			result = customerService.saveFromEdit(result);
 			res = result.getId();
 			return res;
 		}	
 		
-		private int saveTrainerRegistration(ActorForm input){
+		private int saveAuditorRegistration(ActorForm input){
 			Assert.isTrue(actorService.checkAuthority("ADMIN"), "actorForm.error.notAdmin");
 			UserAccount acount;			
 			Auditor result;
 			int res;
 			
-			acount = userAccountService.createComplete(input.getUsername(), input.getPassword(), "TRAINER");
+			acount = userAccountService.createComplete(input.getUsername(), input.getPassword(), "AUDITOR");
 			result = trainerService.create();
 			
 			result.setName(input.getName());

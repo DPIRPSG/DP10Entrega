@@ -15,22 +15,15 @@
 	<div>
 	<table>
 
-	<acme:display code="customer.name" value="${customer.name}"/>
-	<acme:display code="customer.surname" value="${customer.surname}"/>
-	<acme:display code="customer.phone" value="${customer.phone}"/>
-	<acme:display code="customer.username" value="${customer.userAccount.username}"/>
+	<acme:display code="user.name" value="${user.name}"/>
+	<acme:display code="user.surname" value="${user.surname}"/>
+	<acme:display code="user.phone" value="${user.phone}"/>
+	<acme:display code="user.username" value="${user.userAccount.username}"/>
 	
 	<tr>
-		<th><spring:message code="customer.creditCard" /> :</th>
-		<td><a href="creditCard/customer/display.do"> 
-				<spring:message code="customer.display" />
-			</a>
-		</td>
-	</tr>
-	<tr>
-		<th><spring:message code="customer.socialIdentity" /> :</th>
-		<td><a href="socialIdentity/customer/display.do"> 
-				<spring:message code="customer.display" />
+		<th><spring:message code="user.socialIdentity" /> :</th>
+		<td><a href="socialIdentity/user/list.do"> 
+				<spring:message code="user.display" />
 			</a>
 		</td>
 	</tr>
@@ -40,9 +33,9 @@
 	
 	<!-- Action links -->
 	<div>
-		<b><a href="customer/customer/edit.do"> 
-			<spring:message code="customer.edit" />
+		<b><a href="user/user/edit.do"> 
+			<spring:message code="user.edit" />
 		</a></b>
 	</div>
 	<br/>
-	<spring:message code="customer.delete"/>
+	<spring:message code="user.delete"/>

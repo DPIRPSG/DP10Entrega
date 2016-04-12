@@ -1,4 +1,4 @@
-package controllers.administrator;
+package controllers.user;
 
 import javax.validation.Valid;
 
@@ -10,17 +10,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.UserService;
 import services.form.ActorFormService;
 
 import controllers.AbstractController;
+import domain.User;
 import domain.form.ActorForm;
 
 @Controller
-@RequestMapping(value = "/trainer/administrator")
-public class TrainerAdministratorController extends AbstractController {
+@RequestMapping(value = "/user/user")
+public class UserUserController extends AbstractController {
 
 	// Services ----------------------------------------------------------
 
+	@Autowired
+	private UserService userService;
+	
 	@Autowired
 	private ActorFormService actorFormService;
 	
@@ -29,23 +34,35 @@ public class TrainerAdministratorController extends AbstractController {
 
 	// Constructors ----------------------------------------------------------
 
-	public TrainerAdministratorController() {
+	public UserUserController() {
 		super();
 	}
 
 	// Listing ----------------------------------------------------------
 
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display(){
+		ModelAndView result;
+		User customer;
+		
+		customer = userService.findByPrincipal();
+		
+		result = new ModelAndView("user/display");
+		result.addObject("user", customer);
+		
+		return result;
+	}
 
 	// Creation ----------------------------------------------------------
 
-	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(){
 		ModelAndView result;
-		ActorForm trainer;
+		ActorForm actorForm;
 		
-		trainer = actorFormService.createForm(null);
+		actorForm = actorFormService.createForm();
 		
-		result = createEditModelAndView(trainer);
+		result = createEditModelAndView(actorForm);
 		
 		return result;
 	}
@@ -53,22 +70,20 @@ public class TrainerAdministratorController extends AbstractController {
 	// Edition ----------------------------------------------------------
 
 	
-	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid ActorForm actorForm, BindingResult binding) {
-		actorFormValidator.validate(actorForm, binding);
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid ActorForm customer, BindingResult binding) {
+		actorFormValidator.validate(customer, binding);
 		
 		ModelAndView result;
-
-		if (binding.hasErrors()) {
-			result = createEditModelAndView(actorForm);
+		
+		if(binding.hasErrors()) {
+			result = createEditModelAndView(customer);
 		} else {
 			try {
-				actorFormService.saveForm(actorForm, true);
-				result = new ModelAndView("redirect:/");
+				actorFormService.saveForm(customer);
+				result = new ModelAndView("redirect:display.do");
 			} catch (Throwable oops) {
-				String errorCode;
-				errorCode = "actorForm.commit.error";
-				result = createEditModelAndView(actorForm, errorCode);
+				result = createEditModelAndView(customer, "user.commit.error");				
 			}
 		}
 
@@ -78,21 +93,21 @@ public class TrainerAdministratorController extends AbstractController {
 	// Ancillary Methods
 	// ----------------------------------------------------------
 
-	protected ModelAndView createEditModelAndView(ActorForm administrator) {
+	protected ModelAndView createEditModelAndView(ActorForm customer) {
 		ModelAndView result;
 
-		result = createEditModelAndView(administrator, null);
+		result = createEditModelAndView(customer, null);
 
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(ActorForm administrator, String message) {
+	protected ModelAndView createEditModelAndView(ActorForm customer, String message) {
 		ModelAndView result;
 
 		result = new ModelAndView("actorForm/edit");
-		result.addObject("actorForm", administrator);
+		result.addObject("actorForm", customer);
 		result.addObject("message", message);
-		result.addObject("urlAction", "trainer/administrator/register.do");
+		result.addObject("urlAction", "user/user/edit.do");
 
 		return result;
 	}

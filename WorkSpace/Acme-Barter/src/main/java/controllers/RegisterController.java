@@ -64,7 +64,6 @@ public class RegisterController extends AbstractController{
 			result = createEditModelAndView(consu);
 		} else {
 			try {
-				Cookie cook1;
 				Cookie cook2;
 				int idConsu;
 				
@@ -73,13 +72,10 @@ public class RegisterController extends AbstractController{
 				result = new ModelAndView("redirect:../security/login.do");
 				result.addObject("messageStatus", "customer.commit.ok");
 				
-				cook1 = new Cookie("createCreditCard", String.valueOf(idConsu) + consu.getCreateCreditCard().toString());
 				cook2 = new Cookie("createSocialIdentity", String.valueOf(idConsu) + consu.getCreateSocialIdentity().toString());
 				
-				cook1.setPath("/");
 				cook2.setPath("/");
 				
-				response.addCookie(cook1);
 				response.addCookie(cook2);
 			
 			} catch (Throwable oops){

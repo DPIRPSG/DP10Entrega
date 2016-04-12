@@ -21,9 +21,9 @@
 		<put-attribute name="body" value="/views/socialIdentity/edit.jsp" />
 	</definition>
         
-	<definition name="socialIdentity/display" extends="master.page">	
-		<put-attribute name="title" value="Identidad social: mostrar" />
-		<put-attribute name="body" value="/views/socialIdentity/display.jsp" />
+	<definition name="socialIdentity/list" extends="master.page">	
+		<put-attribute name="title" value="Identidad social: listar" />
+		<put-attribute name="body" value="/views/socialIdentity/list.jsp" />
 	</definition>
 	
 </tiles-definitions>

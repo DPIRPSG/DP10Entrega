@@ -38,9 +38,6 @@ public class UserService {
 	@Autowired
 	private UserAccountService userAccountService;
 	
-	/*@Autowired
-	private ShoppingCartService shoppingCartService;*/
-	
 	//Constructors -----------------------------------------------------------
 
 	public UserService(){
@@ -69,7 +66,7 @@ public class UserService {
 	 * Almacena en la base de datos el cambio
 	 */
 	// req: 10.1
-	public User save(User customer){
+	private User save(User customer){
 		Assert.notNull(customer);
 		Assert.notNull(customer.getUserAccount().getUsername());
 		Assert.notNull(customer.getUserAccount().getPassword());
@@ -78,24 +75,21 @@ public class UserService {
 		
 		boolean result = true;
 		for(Authority a: customer.getUserAccount().getAuthorities()){
-			if(!a.getAuthority().equals("CUSTOMER")){
+			if(!a.getAuthority().equals("USER")){
 				result = false;
 				break;
 			}
 		}
-		Assert.isTrue(result, "A customer can only be a authority.customer");
+		Assert.isTrue(result, "A user can only be a authority.user");
 		
 		if(customer.getId() == 0){
 			result = true && !actorService.checkAuthority("ADMIN");
-			result = result && !actorService.checkAuthority("CUSTOMER");
-			Assert.isTrue(result, "customer.create.permissionDenied");
+			result = result && !actorService.checkAuthority("USER");
+			Assert.isTrue(result, "user.create.permissionDenied");
 			
 			Collection<Folder> folders;
 			Collection<Message> sent;
 			Collection<Message> received;
-//			Collection<Comment> comments;
-//			Collection<FeePayment>feePayments;
-//			Collection<Activity> activities;
 			UserAccount auth;
 			
 			//Encoding password
@@ -114,16 +108,6 @@ public class UserService {
 			
 			// Initialize anothers
 			
-//			comments = new ArrayList<Comment>();
-//			feePayments = new ArrayList<FeePayment>();
-//			activities = new ArrayList<Activity>();
-//			
-//			customer.setMadeComments(comments);
-//			customer.setComments(comments);
-//			customer.setFeePayments(feePayments);
-//			customer.setActivities(activities);
-
-			
 		}
 		//modify = customerRepository.saveAndFlush(customer);
 		modify = userRepository.save(customer);		
@@ -135,6 +119,24 @@ public class UserService {
 			folderService.save(folders);
 		}
 		return modify;
+	}
+	
+	/** Only for create or edit personal data
+	 * 
+	 * @param user
+	 * @return
+	 */
+	public User saveFromEdit(User user){
+		user = this.save(user);
+		
+		return user;
+	}
+	
+	public User saveFromOtherService(User user){
+
+		user = this.save(user);
+		
+		return user;
 	}
 	
 	/**
@@ -168,102 +170,4 @@ public class UserService {
 		
 		return result;
 	}
-	
-//	public CreditCard getOrCreateCreditCard(){
-//		CreditCard result;
-//		Customer custo;
-//		
-//		custo = this.findByPrincipal();
-//		
-//		result = custo.showCreditCard();
-//		if(result == null)
-//			result = new CreditCard();
-//		return result;		
-//	}
-	
-//	public void saveCreditCard(CreditCard creditCard){
-//		Customer custo;
-//		
-//		custo = this.findByPrincipal();
-//		custo.modifyCreditCard(creditCard);
-//		this.save(custo);
-//	}
-//	
-//	public void deleteCreditCard(){
-//		Customer custo;
-//		
-//		custo = this.findByPrincipal();
-//		custo.modifyCreditCard(null);
-//		this.save(custo);
-//	}
-//	
-//	
-//	public Integer numbersOfCustomersByGym(int gymId) {
-//		Integer result;
-//		
-//		result = customerRepository.findByGymBooked(gymId).size();
-//		
-//		return result;
-//	}
-//
-//	public Integer numbersOfCustomersByService(int serviceId) {
-//		Integer result;
-//
-//		result = customerRepository.findByServiceBooked(serviceId).size();
-//
-//		return result;
-//	}
-//	
-//	/* Query 5 */
-//	public Collection<Customer> findCustomerWhoHasPaidMoreFees(){
-//		Assert.isTrue(actorService.checkAuthority("ADMIN"), "Only an admin can open the dashboard");
-//		
-//		Collection<Customer> result;
-//		
-//		result = customerRepository.findCustomerWhoHasPaidMoreFees();
-//		
-//		return result;
-//	}
-//	
-//	/* Query 6 */
-//	public Collection<Customer> findCustomerWhoHasPaidLessFees(){
-//		Assert.isTrue(actorService.checkAuthority("ADMIN"), "Only an admin can open the dashboard");
-//		
-//		Collection<Customer> result;
-//		
-//		result = customerRepository.findCustomerWhoHasPaidLessFees();
-//		
-//		return result;
-//	}
-//	
-//	/* Query 14 */
-//	public Collection<Customer> findCustomerWhoHaveBeenRemovedMoreComments(){
-//		Assert.isTrue(actorService.checkAuthority("ADMIN"), "Only an admin can open the dashboard");
-//		
-//		Collection<Customer> result;
-//		
-//		result = customerRepository.findCustomerWhoHaveBeenRemovedMoreComments();
-//		
-//		return result;
-//	}
-//	
-//	public Collection<Customer> moreInvoicesIssuedCustomer(){
-//		Assert.isTrue(actorService.checkAuthority("ADMIN"), "Only an admin can open the dashboard");
-//
-//		Collection<Customer> result;
-//		
-//		result = customerRepository.moreInvoicesIssuedCustomer();
-//		
-//		return result;
-//	}
-//	
-//	public Collection<Customer> noRequestedInvoicesCustomer(){
-//		Assert.isTrue(actorService.checkAuthority("ADMIN"), "Only an admin can open the dashboard");
-//
-//		Collection<Customer> result;
-//		
-//		result = customerRepository.noRequestedInvoicesCustomer();
-//		
-//		return result;		
-//	}
 }

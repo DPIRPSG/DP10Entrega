@@ -86,7 +86,7 @@ public class CustomerServiceTest extends AbstractTest {
 		
 		customer.setUserAccount(userAccount);
 		
-		customerRegistered = customerService.save(customer);
+		customerRegistered = customerService.saveFromOtherService(customer);
 		
 		// Checks results
 		authenticate("admin");
@@ -144,7 +144,7 @@ public class CustomerServiceTest extends AbstractTest {
 		
 		customer.setUserAccount(userAccount);
 		
-		customerService.save(customer);
+		customerService.saveFromOtherService(customer);
 		
 		// Checks results
 //		authenticate("admin");
@@ -202,7 +202,7 @@ public class CustomerServiceTest extends AbstractTest {
 		
 		customer.setUserAccount(userAccount);
 		
-		customerService.save(customer);
+		customerService.saveFromOtherService(customer);
 		
 		// Checks results
 //		authenticate("admin");

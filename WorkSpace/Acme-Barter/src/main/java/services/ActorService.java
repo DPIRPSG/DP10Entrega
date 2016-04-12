@@ -104,12 +104,12 @@ public class ActorService {
 	public ActorType discoverActorType() {
 		ActorType result;
 		try {
-			if (this.checkAuthority("CUSTOMER")) {
-				result = ActorType.CUSTOMER;
+			if (this.checkAuthority("USER")) {
+				result = ActorType.USER;
 			} else if (this.checkAuthority("ADMIN")) {
 				result = ActorType.ADMIN;
-			} else if (this.checkAuthority("TRAINER")) {
-				result = ActorType.TRAINER;
+			} else if (this.checkAuthority("AUDITOR")) {
+				result = ActorType.AUDITOR;
 			} else {
 				result = null;
 			}

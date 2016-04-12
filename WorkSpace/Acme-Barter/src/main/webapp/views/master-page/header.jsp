@@ -64,8 +64,8 @@
 			<li><a class="fNiv"><security:authentication property="principal.username" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<security:authorize access="hasRole('CUSTOMER')">
-						<li><a href="customer/customer/display.do"><spring:message code="master.page.customer.info" /></a></li>
+					<security:authorize access="hasRole('USER')">
+						<li><a href="user/user/display.do"><spring:message code="master.page.customer.info" /></a></li>
 					</security:authorize>
 					<security:authorize access="hasRole('ADMIN')">
 						<li><a href="admin/administrator/display.do"><spring:message code="master.page.customer.info" /></a></li>
