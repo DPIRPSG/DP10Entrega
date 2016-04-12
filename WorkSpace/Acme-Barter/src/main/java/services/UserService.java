@@ -107,6 +107,10 @@ public class UserService {
 			customer.setReceived(received);
 			
 			// Initialize anothers
+			Collection<User> users;
+			
+			users = new ArrayList<User>();
+			customer.setFollowed(users);
 			
 		}
 		//modify = customerRepository.saveAndFlush(customer);

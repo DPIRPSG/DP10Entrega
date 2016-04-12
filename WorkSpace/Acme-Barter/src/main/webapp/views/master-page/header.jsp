@@ -55,7 +55,7 @@
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="barter/list.do"><spring:message code="master.page.barter" /></a></li>
 			<li><a class="fNiv" href="user/list.do"><spring:message code="master.page.users" /></a></li>
-			<li><a class="fNiv" href="customer/create.do"><spring:message code="master.page.register" /></a></li>
+			<li><a class="fNiv" href="user/create.do"><spring:message code="master.page.register" /></a></li>
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
 		</security:authorize>
 		
