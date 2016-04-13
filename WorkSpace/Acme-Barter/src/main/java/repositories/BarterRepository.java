@@ -22,4 +22,7 @@ public interface BarterRepository extends JpaRepository<Barter, Integer> {
 	
 	@Query("select b from Barter b join b.user u where u.id=?1 and b.cancelled = false order by b.registerMoment desc")
 	Collection<Barter> findByUserIdNotCancelled(int userId);
+
+	@Query("select b from User a join a.followed u, Barter b where a.id=?1 and b.user.id = u.id order by b.registerMoment desc")
+	Collection<Barter> findAllByFollowedUser(int userId);
 }

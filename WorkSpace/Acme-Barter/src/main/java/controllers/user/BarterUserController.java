@@ -1,4 +1,4 @@
-package controllers.customer;
+package controllers.user;
 
 import java.util.Collection;
 
@@ -52,6 +52,20 @@ public class BarterUserController extends AbstractController {
 		
 		result = new ModelAndView("barter/list");
 		result.addObject("requestURI", "barter/user/list.do");
+		result.addObject("barters", barters);
+
+		return result;
+	}
+	
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display() {
+		ModelAndView result;
+		Collection<Barter> barters;
+
+		barters = barterService.findAllByFollowedUser();
+		
+		result = new ModelAndView("barter/display");
+		result.addObject("requestURI", "barter/user/display.do");
 		result.addObject("barters", barters);
 
 		return result;
