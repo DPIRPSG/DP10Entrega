@@ -20,6 +20,15 @@
 
 	<!-- Attributes -->
 
+	<security:authorize access="hasRole('USER')">
+		<spring:message code="barter.edit" var="editHeader" />
+		<display:column title="${editHeader}" sortable="true">
+			<a href="barter/user/edit.do?barterId=${row_Barter.id}"> <spring:message
+					code="barter.edit"/>
+			</a>
+		</display:column>
+	</security:authorize>
+
 	<security:authorize access="hasRole('ADMIN')">
 		<spring:message code="barter.cancelled" var="cancelledHeader" />
 		<display:column title="${cancelledHeader}" sortable="true">

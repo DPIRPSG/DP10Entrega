@@ -1,6 +1,8 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +11,8 @@ import org.springframework.util.Assert;
 
 import repositories.BarterRepository;
 import domain.Barter;
+import domain.Item;
+import domain.Match;
 import domain.User;
 
 @Service
@@ -107,6 +111,69 @@ public class BarterService {
 		return result;
 	}
 	
+	public Barter create(){
+		
+		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can create an barter");
+		
+		Barter barter;
+		Collection<Match> createdMatch;
+		Collection<Match> receivedMatch;
+		Collection<Barter> relatedBarter;
+		
+		barter = new Barter();
+		createdMatch = new ArrayList<>();
+		receivedMatch = new ArrayList<>();
+		relatedBarter = new ArrayList<>();
+		
+		barter.setCreatedMatch(createdMatch);
+		barter.setReceivedMatch(receivedMatch);
+		barter.setRelatedBarter(relatedBarter);
+		
+		return barter;
+		
+	}
+	
+	public Barter save(Barter barter){
+		
+		Assert.notNull(barter);
+		Barter result;
+		
+		result = barterRepository.save(barter);
+		
+		return result;
+	}
+	
+	public void saveToEdit(Barter barter){
+		Assert.notNull(barter);
+		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can save a barter");
+		
+		if(barter.getId() == 0){
+			User user;
+			Item offered = null;
+			Item requested = null;
+			Collection<Match> createdMatch;
+			Collection<Match> receivedMatch;
+			Collection<Barter> relatedBarter;
+			
+			user = userService.findByPrincipal();
+			createdMatch = new ArrayList<>();
+			receivedMatch = new ArrayList<>();
+			relatedBarter = new ArrayList<>();
+			
+			barter.setCancelled(false);
+			barter.setRegisterMoment(new Date());
+			
+			barter.setUser(user);
+			barter.setOffered(offered);
+			barter.setRequested(requested);
+			barter.setCreatedMatch(createdMatch);
+			barter.setReceivedMatch(receivedMatch);
+			barter.setRelatedBarter(relatedBarter);
+		}else{
+			barter = this.save(barter);
+		}
+	}
+	
 	public void cancel(Barter barter){
 		
 		Assert.notNull(barter);
@@ -119,4 +186,5 @@ public class BarterService {
 		barterRepository.save(barter);
 		
 	}
+	
 }
