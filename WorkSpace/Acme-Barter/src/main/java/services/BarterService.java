@@ -25,6 +25,9 @@ public class BarterService {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private ActorService actorService;
+	
 	// Constructors -----------------------------------------------------------
 
 	public BarterService() {
@@ -102,5 +105,18 @@ public class BarterService {
 		result = barterRepository.findAllByFollowedUser(user.getId());
 		
 		return result;
+	}
+	
+	public void cancel(Barter barter){
+		
+		Assert.notNull(barter);
+		Assert.isTrue(barter.getId() != 0);
+		Assert.isTrue(actorService.checkAuthority("ADMIN"), "Only an administrator can cancel an activity.");
+		Assert.isTrue(!barter.isCancelled(), "This barter is already deleted.");
+		
+		barter.setCancelled(true);	
+		
+		barterRepository.save(barter);
+		
 	}
 }
