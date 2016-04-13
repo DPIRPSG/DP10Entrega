@@ -9,6 +9,8 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
+
 
 <h3><spring:message code="message.folder"/>: <jstl:out value="${folder.name}" /></h3>
 	<!-- Listing grid -->
@@ -30,6 +32,12 @@
 		</display:column>
 
 		<!-- Attributes -->
+		<spring:message code="message.priority" var="priorityHeader" />
+		<display:column title="${priorityHeader}"
+			sortable="true">
+			<acme:messagePriority priority="${row_messa.priority}"/>
+		</display:column>
+
 		<spring:message code="message.sentMoment" var="sentMomentHeader" />
 		<display:column title="${sentMomentHeader}"
 			sortable="true" format="{0,date,yyyy/MM/dd }" >

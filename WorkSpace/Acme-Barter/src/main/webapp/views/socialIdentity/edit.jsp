@@ -10,10 +10,11 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 	<!-- Form -->
-	<form:form action="socialIdentity/customer/edit.do" modelAttribute="socialIdentity">
+	<form:form action="socialIdentity/user/edit.do" modelAttribute="socialIdentity">
 		<!-- Hidden Attributes -->
 		<form:hidden path="id"/>
 		<form:hidden path="version"/>
+		<form:hidden path="user"/>
 		
 		
 		<!-- Editable Attributes -->
@@ -21,14 +22,17 @@
 		<acme:textbox code="socialIdentity.name" path="name" />
 		<acme:textbox code="socialIdentity.homePage" path="homePage" />
 		<acme:textbox code="socialIdentity.picture" path="picture" />
+		
 		<br />
+		
+		
 		
 		<!-- Action buttons -->
 		<acme:submit name="save" code="socialIdentity.save"/>
 		&nbsp;
 		<acme:submit name="delete" code="socialIdentity.delete"/>
 		&nbsp;
-		<acme:cancel url="socialIdentity/customer/display.do" code="socialIdentity.cancel"/>
+		<acme:cancel url="socialIdentity/user/list.do" code="socialIdentity.cancel"/>
 		<br />
 		
 	</form:form>

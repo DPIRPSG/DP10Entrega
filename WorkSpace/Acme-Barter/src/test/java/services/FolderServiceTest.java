@@ -81,7 +81,7 @@ public class FolderServiceTest extends AbstractTest {
 		folder.setIsSystem(false);
 		folder.setActor(customer);
 		
-		newFolder = folderService.saveToEdit(folder);
+		newFolder = folderService.saveFromCreateOrEdit(folder);
 		
 		// Checks results
 		folderService.checkActor(newFolder); // First check
@@ -142,7 +142,7 @@ public class FolderServiceTest extends AbstractTest {
 		folder.setIsSystem(false);
 		folder.setActor(otherCustomer);
 		
-		newFolder = folderService.saveToEdit(folder);
+		newFolder = folderService.saveFromCreateOrEdit(folder);
 		
 		// Checks results
 		folderService.checkActor(newFolder); // First check
@@ -201,7 +201,7 @@ public class FolderServiceTest extends AbstractTest {
 		folder.setIsSystem(true);
 		folder.setActor(customer);
 		
-		newFolder = folderService.saveToEdit(folder);
+		newFolder = folderService.saveFromCreateOrEdit(folder);
 		
 		// Checks results
 		Assert.isTrue(newFolder.getIsSystem() == false, "Se ha conseguido crear una carpeta del sistema.");
@@ -247,7 +247,7 @@ public class FolderServiceTest extends AbstractTest {
 		folder.setIsSystem(false);
 		folder.setActor(customer);
 		
-		folderService.saveToEdit(folder);
+		folderService.saveFromCreateOrEdit(folder);
 		
 		// Checks results
 //		folderService.checkActor(newFolder); // First check
@@ -300,7 +300,7 @@ public class FolderServiceTest extends AbstractTest {
 		folder.setIsSystem(false);
 		folder.setActor(customer);
 		
-		folderService.saveToEdit(folder);
+		folderService.saveFromCreateOrEdit(folder);
 		
 		// Checks results
 //		folderService.checkActor(newFolder); // First check
@@ -356,7 +356,7 @@ public class FolderServiceTest extends AbstractTest {
 		
 		folder.setName("Carpeta renombrada");
 		
-		renamedFolder = folderService.saveToEdit(folder);
+		renamedFolder = folderService.saveFromCreateOrEdit(folder);
 		
 		// Checks results
 		folderService.checkActor(renamedFolder); // First check
@@ -416,7 +416,7 @@ public class FolderServiceTest extends AbstractTest {
 		
 		folder.setName("Carpeta renombrada");
 		
-		folderService.saveToEdit(folder);
+		folderService.saveFromCreateOrEdit(folder);
 		
 		// Checks results
 //		folderService.checkActor(renamedFolder); // First check
@@ -478,7 +478,7 @@ public class FolderServiceTest extends AbstractTest {
 		
 		folder.setName("");
 		
-		folderService.saveToEdit(folder);
+		folderService.saveFromCreateOrEdit(folder);
 		
 		// Checks results
 //		folderService.checkActor(renamedFolder); // First check
