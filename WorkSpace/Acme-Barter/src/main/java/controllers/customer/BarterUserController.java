@@ -56,4 +56,18 @@ public class BarterUserController extends AbstractController {
 
 		return result;
 	}
+	
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display() {
+		ModelAndView result;
+		Collection<Barter> barters;
+
+		barters = barterService.findAllNotCancelled();
+		
+		result = new ModelAndView("barter/display");
+		result.addObject("requestURI", "barter/user/display.do");
+		result.addObject("barters", barters);
+
+		return result;
+	}
 }
