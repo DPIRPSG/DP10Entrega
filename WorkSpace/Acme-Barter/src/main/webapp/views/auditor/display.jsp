@@ -12,29 +12,22 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 	<!-- Listing grid -->
-<jstl:if test="${socialIdentity.id != 0}">
 	<div>
 	<table>
-		<acme:display code="socialIdentity.name" value="${socialIdentity.name}"/>
-		<acme:display code="socialIdentity.homePage" value="${socialIdentity.homePage}"/>
-		<acme:display code="socialIdentity.nick" value="${socialIdentity.nick}"/>
-		<tr>
-			<th><spring:message code="socialIdentity.picture" /> :</th>
-			<td><img src="${socialIdentity.picture}" style="width:204px;height:128px;"/></td>
-		</tr>
 
+	<acme:display code="auditor.name" value="${auditor.name}"/>
+	<acme:display code="auditor.surname" value="${auditor.surname}"/>
+	<acme:display code="auditor.phone" value="${auditor.phone}"/>
+	<acme:display code="auditor.username" value="${auditor.userAccount.username}"/>
+	
 	</table>
 	</div>
-</jstl:if>
-<jstl:if test="${socialIdentity.id == 0}">	
-	<b><spring:message code="socialIdentity.null" /></b>
-</jstl:if>
-	<br />
-	<br />
+
+	
 	<!-- Action links -->
 	<div>
-		<b><a href="socialIdentity/customer/edit.do"> 
-			<spring:message code="socialIdentity.edit" />
+		<b><a href="auditor/auditor/edit.do"> 
+			<spring:message code="auditor.edit" />
 		</a></b>
 	</div>
-
+	<br/>

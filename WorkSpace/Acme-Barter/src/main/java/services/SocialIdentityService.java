@@ -33,59 +33,87 @@ public class SocialIdentityService {
 	
 	//Simple CRUD methods ----------------------------------------------------
 	
-//	/**
-//	 * Almacena en la base de datos el cambio
-//	 */
-//	// req: 10.1
-//	public void save(SocialIdentity socialIdentity){
-//		Assert.notNull(socialIdentity);
-//		
-//		User customer;
-//		Collection<SocialIdentity> userSocialIdentities;
-//		
-//		customer = customerService.findByPrincipal();
-//		userSocialIdentities = customer.getSocialIdentities();		
-//		socialIdentity = socialIdentityRepository.save(socialIdentity);
-//		
-//		userSocialIdentities.add(socialIdentity);
-//		
-//		customer.setSocialIdentities(userSocialIdentities);
-//		customerService.save(customer);
-//	}
-//	
-//	public Collection<SocialIdentity> findByPrincipal(){
-//		Collection<SocialIdentity> result;
-//		User custo;
-//		
-//		custo = customerService.findByPrincipal();
-//		result = custo.getSocialIdentities();
-//		
-//		return result;
-//	}
-//	
-//	public void delete(){
-//		User customer;
-//		SocialIdentity socialIdentity;
-//		
-//		customer = customerService.findByPrincipal();
-//		socialIdentity = customer.getSocialIdentity();
-//		customer.setSocialIdentity(null);
-//
-//		socialIdentityRepository.delete(socialIdentity);
-//		customerService.save(customer);
-//	}
+	/**
+	 * Almacena en la base de datos el cambio
+	 */
+	private void save(SocialIdentity socialIdentity){
+		Assert.notNull(socialIdentity);
+				
+		socialIdentity = socialIdentityRepository.save(socialIdentity);
+		
+	}
+	
+	private SocialIdentity create(){
+		SocialIdentity result;
+		User user;
+		
+		user = customerService.findByPrincipal();
+		result = new SocialIdentity();
+		result.setUser(user);
+		
+		return result;
+	}
+	
+	private void delete(SocialIdentity input){
+		Assert.notNull(input);
+		
+		socialIdentityRepository.delete(input);
+	}
 	
 	//Other business methods -------------------------------------------------
+	/**
+	 * Almacena en la base de datos el cambio desde la edición
+	 */
+	public void saveFromEdit(SocialIdentity socialIdentity){
+		checkProperty(socialIdentity);
+		
+		this.save(socialIdentity);
+	}	
 	
-//	public SocialIdentity findByPrincipalOrCreate(){
-//		SocialIdentity result;
-//		
-//		result = this.findByPrincipal();
-//		if(result == null)
-//			result = new SocialIdentity();
-//		
-//		return result;
-//	}
+	public void deleteFromEdit(SocialIdentity input){
+		checkProperty(input);
+		
+		this.delete(input);
+	}
+	
+	public Collection<SocialIdentity> findByPrincipal(){
+		Collection<SocialIdentity> result;
+		User custo;
+		
+		custo = customerService.findByPrincipal();
+		result = this.findByUserId(custo.getId());
+		
+		return result;
+	}
+	
+	public Collection<SocialIdentity> findByUserId(int userId){
+		Collection<SocialIdentity> result;
+		
+		result = socialIdentityRepository.findByUserId(userId);
+		
+		return result;
+	}
+	
+	public SocialIdentity findOrCreateById(String socialIdentityId){
+		SocialIdentity result;
+		
+		result = null;
+		
+		if(! socialIdentityId.equals(""))
+		result = socialIdentityRepository.findOne(Integer.decode(
+				socialIdentityId).intValue());
+		
+		
+		if(result == null)
+			result = this.create();
 
+		checkProperty(result);
+		return result;
+	}
+	
+	private void checkProperty(SocialIdentity input){
+		Assert.isTrue(input.getUser().equals(customerService.findByPrincipal()), "socialIdentity.NotProperty");
+
+	}
 
 }

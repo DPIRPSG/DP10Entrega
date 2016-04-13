@@ -30,8 +30,10 @@
 	<form:errors cssClass="error" path="recipients" />
 	<jstl:if test="${!hayRecipients }">
 		<div class="error"><jstl:out value="${notEmpty }"></jstl:out></div>
-	</jstl:if>
+	</jstl:if>	
 	<br />
+	
+	<acme:textbox code="message.priority" path="priority"/>
 	
 	<form:label path="subject">
 		<spring:message code="message.subject" />:

@@ -18,10 +18,6 @@
 		<acme:textbox code="actorForm.name" path="name"/>
 		<acme:textbox code="actorForm.surname" path="surname"/>
 		<acme:textbox code="actorForm.phone" path="phone"/>
-		<security:authorize access="hasRole('TRAINER')">
-			<acme:textbox code="actorForm.picture" path="picture"/>
-			<br/>			
-		</security:authorize>	
 		
 		<acme:textbox code="actorForm.username" path="username"/>
 		
@@ -39,9 +35,8 @@
 		<form:errors class="error" path="repeatedPassword" />
 		<br />		
 		
-		<security:authorize access="!hasAnyRole('CUSTOMER', 'ADMIN', 'TRAINER')">
+		<security:authorize access="!hasAnyRole('USER', 'ADMIN', 'AUDITOR')">
 			
-			<acme:checkbox code="actorForm.createCreditCard" path="createCreditCard"/>
 			<acme:checkbox code="actorForm.createSocialIdentity" path="createSocialIdentity"/>
 			
 			<br />			

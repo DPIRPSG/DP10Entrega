@@ -97,6 +97,13 @@ public class MessageService {
 	public Message firstSave(Message message){
 		Assert.notNull(message);
 		
+		int sendId, actId;
+		
+		sendId = message.getSender().getUserAccount().getId();
+		actId = actorService.findByPrincipal().getUserAccount().getId();
+		
+		Assert.isTrue(sendId == actId);
+		
 		Message result;
 		
 		result = this.save(message);

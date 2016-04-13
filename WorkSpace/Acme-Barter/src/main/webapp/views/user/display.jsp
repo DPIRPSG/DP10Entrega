@@ -15,23 +15,27 @@
 	<div>
 	<table>
 
-	<acme:display code="trainer.name" value="${trainer.name}"/>
-	<acme:display code="trainer.surname" value="${trainer.surname}"/>
-	<acme:display code="trainer.phone" value="${trainer.phone}"/>
-	<acme:display code="trainer.username" value="${trainer.userAccount.username}"/>
-	<tr>
-		<th><spring:message code="trainer.picture" /> :</th>
-		<td><img src="${trainer.picture}" style="width:204px;"/></td>
-	</tr>
+	<acme:display code="user.name" value="${user.name}"/>
+	<acme:display code="user.surname" value="${user.surname}"/>
+	<acme:display code="user.phone" value="${user.phone}"/>
+	<acme:display code="user.username" value="${user.userAccount.username}"/>
 	
+	<tr>
+		<th><spring:message code="user.socialIdentity" /> :</th>
+		<td><a href="socialIdentity/user/list.do"> 
+				<spring:message code="user.display" />
+			</a>
+		</td>
+	</tr>
 	</table>
 	</div>
 
 	
 	<!-- Action links -->
 	<div>
-		<b><a href="trainer/trainer/edit.do"> 
-			<spring:message code="trainer.edit" />
+		<b><a href="user/user/edit.do"> 
+			<spring:message code="user.edit" />
 		</a></b>
 	</div>
 	<br/>
+	<spring:message code="user.delete"/>
