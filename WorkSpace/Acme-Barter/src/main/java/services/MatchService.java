@@ -46,7 +46,7 @@ public class MatchService {
 			result = new Match();
 			
 			result.setCancelled(false);
-			result.setCreationMoment(new Date()); // Aquí por ser NoNull, pero debe sobreescribirse en el save().
+			result.setCreationMoment(new Date()); // Aquí por ser NotNull, pero debe sobreescribirse en el save().
 			
 			return result;
 			
