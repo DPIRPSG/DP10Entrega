@@ -25,6 +25,13 @@
 	<ul id="jMenu">
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
 		<security:authorize access="hasRole('USER')">
+			<li><a class="fNiv"><spring:message	code="master.page.barter" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="barter/user/list.do"><spring:message code="master.page.list" /></a></li>
+					<li><a href="barter/user/display.do"><spring:message code="barter.novedades" /></a></li>
+				</ul>
+			</li>
 			<li><a class="fNiv" href="user/list.do"><spring:message code="master.page.users" /></a></li>			
 			<li><a class="fNiv" href="user/user/followed.do"><spring:message code="master.page.followed" /></a></li>			
 			<li><a class="fNiv" href="user/user/followers.do"><spring:message code="master.page.followers" /></a></li>			
@@ -34,9 +41,9 @@
 			<li><a class="fNiv"><spring:message	code="master.page.manage" /></a>
 				<ul>
 					<li class="arrow"></li>
+					<li><a href="barter/administrator/list.do"><spring:message code="master.page.barter" /></a></li>
 					<li><a href="legal-text/administrator/list.do"><spring:message code="master.page.list.legalTexts" /></a></li>
 					<li><a href="trainer/administrator/register.do"><spring:message code="master.page.register.auditor" /></a></li>
-					<li><a href="barter/administrator/list.do"><spring:message code="master.page.barter" /></a></li>
 				</ul>
 			</li>
 			<li><a class="fNiv"><spring:message	code="master.page.list" /></a>

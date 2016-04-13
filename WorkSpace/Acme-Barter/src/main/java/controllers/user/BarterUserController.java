@@ -1,4 +1,4 @@
-package controllers.customer;
+package controllers.user;
 
 import java.util.Collection;
 
@@ -62,7 +62,7 @@ public class BarterUserController extends AbstractController {
 		ModelAndView result;
 		Collection<Barter> barters;
 
-		barters = barterService.findAllNotCancelled();
+		barters = barterService.findAllByFollowedUser();
 		
 		result = new ModelAndView("barter/display");
 		result.addObject("requestURI", "barter/user/display.do");

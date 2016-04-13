@@ -9,6 +9,7 @@ import org.springframework.util.Assert;
 
 import repositories.BarterRepository;
 import domain.Barter;
+import domain.User;
 
 @Service
 @Transactional
@@ -21,6 +22,9 @@ public class BarterService {
 
 	// Supporting services ----------------------------------------------------
 
+	@Autowired
+	private UserService userService;
+	
 	// Constructors -----------------------------------------------------------
 
 	public BarterService() {
@@ -85,6 +89,17 @@ public class BarterService {
 		Collection<Barter> result;
 		
 		result = barterRepository.findByUserIdNotCancelled(userId);
+		
+		return result;
+	}
+
+	public Collection<Barter> findAllByFollowedUser() {
+		Collection<Barter> result;
+		User user;
+		
+		user = userService.findByPrincipal();
+		
+		result = barterRepository.findAllByFollowedUser(user.getId());
 		
 		return result;
 	}
