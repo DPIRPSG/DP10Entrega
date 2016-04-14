@@ -226,6 +226,17 @@ public class MatchService {
 			return result;
 			
 		}
+		
+		public Collection<Match> findAllByFollowedUser() {
+			Collection<Match> result;
+			User user;
+			
+			user = userService.findByPrincipal();
+			
+			result = matchRepository.findAllByFollowedUser(user.getId());
+			
+			return result;
+		}
 
 		public void flush() {
 			matchRepository.flush();

@@ -36,8 +36,7 @@ public class MatchUserController extends AbstractController {
 		ModelAndView result;
 		Collection<Match> matches;
 
-		matches = matchService.findAll();
-		//matches = matchService.findAllByFollowedUser();
+		matches = matchService.findAllByFollowedUser();
 		
 		result = new ModelAndView("match/display");
 		result.addObject("requestURI", "match/user/display.do");
