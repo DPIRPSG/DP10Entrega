@@ -2,16 +2,23 @@ package controllers.user;
 
 import java.util.Collection;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import controllers.AbstractController;
-
+import services.BarterService;
 import services.MatchService;
+import services.UserService;
+import controllers.AbstractController;
+import domain.Barter;
 import domain.Match;
+import domain.User;
 
 @Controller
 @RequestMapping("/match/user")
@@ -21,6 +28,12 @@ public class MatchUserController extends AbstractController {
 
 	@Autowired
 	private MatchService matchService;
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private BarterService barterService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -29,7 +42,25 @@ public class MatchUserController extends AbstractController {
 	}
 
 	// Listing ----------------------------------------------------------------
+	
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list() {
+		ModelAndView result;
+		Collection<Match> matches;
+		User user;
+		int userId;
+		
+		user = userService.findByPrincipal();
+		userId = user.getId();
 
+		matches = matchService.findAllUserInvolves(userId);
+		
+		result = new ModelAndView("match/list");
+		result.addObject("requestURI", "match/user/list.do");
+		result.addObject("matches", matches);
+
+		return result;
+	}
 	
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display() {
@@ -41,6 +72,114 @@ public class MatchUserController extends AbstractController {
 		result = new ModelAndView("match/display");
 		result.addObject("requestURI", "match/user/display.do");
 		result.addObject("matches", matches);
+
+		return result;
+	}
+	
+	// Creation ---------------------------------------------------------------
+
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create() {
+		ModelAndView result;
+		Match match;
+		Collection<Barter> creatorBarters;
+		Collection<Barter> receiverBarters;
+		User user;
+		int userId;
+		
+		user = userService.findByPrincipal();
+		userId = user.getId();
+		
+		creatorBarters = barterService.findByUserNotCancelled(userId);
+		receiverBarters = barterService.findAllOfOtherUsersByUserIdNotCancelled(userId);
+
+		match = matchService.create();
+		
+		result = createEditModelAndView(match, creatorBarters, receiverBarters);
+
+		return result;
+	}
+	
+	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid Match match, BindingResult binding) {
+		ModelAndView result;
+		Collection<Barter> creatorBarters;
+		Collection<Barter> receiverBarters;
+		User user;
+		int userId;
+		
+		user = userService.findByPrincipal();
+		userId = user.getId();
+		
+		creatorBarters = barterService.findByUserNotCancelled(userId);
+		receiverBarters = barterService.findAllOfOtherUsersByUserIdNotCancelled(userId);
+
+		if (binding.hasErrors()) {
+			result = createEditModelAndView(match, creatorBarters, receiverBarters);
+		} else {
+			try {
+				matchService.save(match);
+				result = new ModelAndView("redirect:list.do");
+			} catch (Throwable oops) {
+				result = createEditModelAndView(match, creatorBarters, receiverBarters, "match.commit.error");
+			}
+		}
+
+		return result;
+	}
+	
+	// Cancellation ---------------------------------------------------------------
+	
+	@RequestMapping(value = "/cancel", method = RequestMethod.GET)
+	public ModelAndView cancel(@RequestParam Integer matchId) {
+		ModelAndView result;
+		Match match;
+
+		match = matchService.findOne(matchId);
+		
+		matchService.cancel(match);
+		
+		result = new ModelAndView("match/list");
+//		result.addObject("match", match); // Devolver mensaje de error/confirmación
+
+		return result;
+	}
+	
+	// Signing ---------------------------------------------------------------
+	
+	@RequestMapping(value = "/sign", method = RequestMethod.GET)
+	public ModelAndView sign(@RequestParam Integer matchId) {
+		ModelAndView result;
+		Match match;
+
+		match = matchService.findOne(matchId);
+		
+		matchService.sign(match);
+		
+		result = new ModelAndView("match/list");
+//		result.addObject("match", match); // Devolver mensaje de error/confirmación
+
+		return result;
+	}
+	
+	// Ancillary methods ------------------------------------------------------
+	
+	protected ModelAndView createEditModelAndView(Match match, Collection<Barter> creatorBarters, Collection<Barter> receiverBarters) {
+		ModelAndView result;
+
+		result = createEditModelAndView(match, creatorBarters, receiverBarters, null);
+		
+		return result;
+	}
+	
+	protected ModelAndView createEditModelAndView(Match match, Collection<Barter> creatorBarters, Collection<Barter> receiverBarters, String message) {
+		ModelAndView result;
+		
+		result = new ModelAndView("match/create");
+		result.addObject("match", match);
+		result.addObject("creatorBarters", creatorBarters);
+		result.addObject("receiverBarters", receiverBarters);
+		result.addObject("message", message);
 
 		return result;
 	}

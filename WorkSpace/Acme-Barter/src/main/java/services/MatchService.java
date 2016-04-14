@@ -39,7 +39,7 @@ public class MatchService {
 		
 		public Match create(){
 			
-			Assert.isTrue(actorService.checkAuthority("USER"), "Only a User can create a Match.");
+			Assert.isTrue(actorService.checkAuthority("USER"), "Only an User can create a Match.");
 			
 			Match result;
 			

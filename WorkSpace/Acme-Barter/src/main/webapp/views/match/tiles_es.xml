@@ -16,9 +16,19 @@
       
 <tiles-definitions>
 	
-	<definition name="match/display" extends="master.page">	
+	<definition name="match/display" extends="master.page">
 		<put-attribute name="title" value="Lista de Acuerdos" />
 		<put-attribute name="body" value="/views/match/display.jsp" />
+	</definition>
+	
+	<definition name="match/list" extends="master.page">
+		<put-attribute name="title" value="Lista de Acuerdos" />
+		<put-attribute name="body" value="/views/match/list.jsp" />
+	</definition>
+	
+	<definition name="match/create" extends="master.page">
+		<put-attribute name="title" value="Crear un Acuerdo" />
+		<put-attribute name="body" value="/views/match/create.jsp" />
 	</definition>
 	
 </tiles-definitions>

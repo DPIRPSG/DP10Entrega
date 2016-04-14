@@ -95,6 +95,14 @@ public class BarterService {
 		
 		return result;
 	}
+	
+	public Collection<Barter> findAllOfOtherUsersByUserIdNotCancelled(int userId){
+		Collection<Barter> result;
+		
+		result = barterRepository.findAllOfOtherUsersByUserIdNotCancelled(userId);
+		
+		return result;
+	}
 
 	public Collection<Barter> findAllByFollowedUser() {
 		Collection<Barter> result;
