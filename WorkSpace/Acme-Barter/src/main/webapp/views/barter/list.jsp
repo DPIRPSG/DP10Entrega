@@ -23,7 +23,14 @@
 	<security:authorize access="hasRole('ADMIN')">
 		<spring:message code="barter.cancelled" var="cancelledHeader" />
 		<display:column title="${cancelledHeader}" sortable="true">
-			<jstl:out value="${row_Barter.cancelled}" />
+			<jstl:if test="${row_Barter.cancelled == false}">
+				<a href="barter/administrator/cancel.do?barterId=${row_Barter.id}"> <spring:message
+					code="barter.cancel"/>
+				</a>
+			</jstl:if>
+			<jstl:if test="${row_Barter.cancelled == true}">
+				<jstl:out value="${row_Barter.cancelled}" />
+			</jstl:if>
 		</display:column>
 	</security:authorize>
 

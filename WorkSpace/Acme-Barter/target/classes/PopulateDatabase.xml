@@ -1307,7 +1307,7 @@
 	</bean>
 	
 	<bean id="match2" class="domain.Match">
-		<property name="creationMoment" value="2016/04/02 10:00"/>
+		<property name="creationMoment" value="2016/03/02 10:00"/>
 		<property name="offerSignsDate" value="2016/04/03 14:30"/>
 <!-- 		<property name="requestSignsDate" value="2016/04/02 13:30"/> -->
 		<property name="cancelled" value="false"/>
