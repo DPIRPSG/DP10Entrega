@@ -66,7 +66,7 @@ public class BarterUserController extends AbstractController {
 		Barter barter;
 		
 		barter = barterService.create();
-		result = createEditModelAndView(barter);
+		result = createEditModelAndViewCreate(barter);
 		
 		return result;
 	}
@@ -78,7 +78,7 @@ public class BarterUserController extends AbstractController {
 		
 		barter = barterService.findOne(barterId);
 		
-		result = createEditModelAndView(barter);
+		result = createEditModelAndViewEdit(barter);
 
 		return result;
 	}
@@ -88,14 +88,17 @@ public class BarterUserController extends AbstractController {
 
 		ModelAndView result;
 		
+		System.out.println(binding);
+		
 		if (binding.hasErrors()) {
-			result = createEditModelAndView(barter);
+			result = createEditModelAndViewEdit(barter);
 		} else {
 			try {
 				barterService.saveToEdit(barter);
 				result = new ModelAndView("redirect:list.do?");
 			} catch (Throwable oops) {
-				result = createEditModelAndView(barter, "barter.cancel.error");
+				System.out.println(oops);
+				result = createEditModelAndViewEdit(barter, "barter.cancel.error");
 			}
 		}
 
@@ -118,24 +121,37 @@ public class BarterUserController extends AbstractController {
 	
 	// Ancillary Methods
 	// ----------------------------------------------------------
-	protected ModelAndView createEditModelAndView(Barter barter){
+	protected ModelAndView createEditModelAndViewCreate(Barter barter){
 		ModelAndView result;
 		
-		result = createEditModelAndView(barter, null);
+		result = createEditModelAndViewCreate(barter, null);
 		
 		return result;
 	}
 	
-	protected ModelAndView createEditModelAndView(Barter barter, String message){
-		ModelAndView result;
-		Collection<Barter> allBarters;
+	protected ModelAndView createEditModelAndViewCreate(Barter barter, String message){
+		ModelAndView result;		
 		
-		allBarters = barterService.findAll();
+		result = new ModelAndView("barter/create");
+		result.addObject("barter", barter);
+		result.addObject("message", message);
+		
+		return result;
+	}
+	protected ModelAndView createEditModelAndViewEdit(Barter barter){
+		ModelAndView result;
+		
+		result = createEditModelAndViewEdit(barter, null);
+		
+		return result;
+	}
+	
+	protected ModelAndView createEditModelAndViewEdit(Barter barter, String message){
+		ModelAndView result;		
 		
 		result = new ModelAndView("barter/edit");
 		result.addObject("barter", barter);
 		result.addObject("message", message);
-		result.addObject("allBarters", allBarters);
 		
 		return result;
 	}

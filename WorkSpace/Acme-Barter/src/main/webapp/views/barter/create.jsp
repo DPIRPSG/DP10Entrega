@@ -16,23 +16,30 @@
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	
-	<form:hidden path="title"/>
-	<form:hidden path="cancelled"/>
-	<form:hidden path="registerMoment"/>
-	
-	<form:hidden path="user"/>
-	<form:hidden path="offered"/>
-	<form:hidden path="requested"/>
-	<form:hidden path="createdMatch"/>
-	<form:hidden path="receivedMatch"/>
-	<form:hidden path="relatedBarter"/>
-	
 	<!-- Editable Attributes -->
-	<acme:selectMult items="${allBarters}" itemLabel="title" code="barter.relatedBarter" path="relatedBarter"/>
+	<acme:textbox code="barter.title" path="title"/>
+	
+	<fieldset>
+		<legend align="left">
+			<spring:message code = "barter.offered"/>
+		</legend>
+		
+	</fieldset>
+	
+	<fieldset>
+		<legend align="left">
+			<spring:message code = "barter.requested"/>
+		</legend>
+		
+		<acme:textbox code="item.title" path="offered.title"/>
+		<acme:textbox code="item.description" path="offered.description"/>
+		<acme:textarea code="item.pictures" path="offered.pictures"/>
+		
+	</fieldset>
 	
 	<!-- Action buttons -->
 	<acme:submit name="save" code="barter.save"/>
 	
-	<acme:cancel code="barter.cancel" url="barter/administrator/list.do"/>
+	<acme:cancel code="barter.cancel" url="barter/user/list.do"/>
 	
 </form:form>

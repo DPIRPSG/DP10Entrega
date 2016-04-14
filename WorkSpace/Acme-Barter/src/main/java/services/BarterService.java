@@ -111,6 +111,18 @@ public class BarterService {
 		return result;
 	}
 	
+	public Collection<Barter> findAllNotRelated(int barterId){
+		Collection<Barter> result;
+		Barter actualBarter;
+		
+		actualBarter = this.findOne(barterId);
+		result = this.findAll();
+		result.remove(actualBarter);
+		result.removeAll(actualBarter.getRelatedBarter());
+		
+		return result;
+	}
+	
 	public Barter create(){
 		
 		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can create an barter");
@@ -144,8 +156,9 @@ public class BarterService {
 	}
 	
 	public void saveToEdit(Barter barter){
+		
 		Assert.notNull(barter);
-		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can save a barter");
+		Assert.isTrue(actorService.checkAuthority("USER") || actorService.checkAuthority("ADMIN"), "Only a user or an admin can save a barter");
 		
 		if(barter.getId() == 0){
 			User user;
@@ -170,7 +183,10 @@ public class BarterService {
 			barter.setReceivedMatch(receivedMatch);
 			barter.setRelatedBarter(relatedBarter);
 		}else{
-			barter = this.save(barter);
+			Barter barterPreSave;
+			barterPreSave = this.findOne(barter.getId());
+			barterPreSave.setRelatedBarter(barter.getRelatedBarter());
+			this.save(barterPreSave);
 		}
 	}
 	
