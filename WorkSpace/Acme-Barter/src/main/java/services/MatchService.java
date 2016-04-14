@@ -185,6 +185,14 @@ public class MatchService {
 
 			return result;
 		}
+		
+		public Collection<Match> findAll() {
+			Collection<Match> result;
+			
+			result = matchRepository.findAll();
+			
+			return result;
+		}
 
 
 		// Other business methods -------------------------------------------------

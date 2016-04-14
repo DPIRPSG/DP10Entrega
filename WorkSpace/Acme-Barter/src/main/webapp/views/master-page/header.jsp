@@ -32,6 +32,13 @@
 					<li><a href="barter/user/display.do"><spring:message code="barter.novedades" /></a></li>
 				</ul>
 			</li>
+			<li><a class="fNiv"><spring:message	code="master.page.match" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="match/user/list.do"><spring:message code="master.page.list" /></a></li>
+					<li><a href="match/user/display.do"><spring:message code="barter.novedades" /></a></li>
+				</ul>
+			</li>
 			<li><a class="fNiv" href="user/list.do"><spring:message code="master.page.users" /></a></li>			
 			<li><a class="fNiv" href="user/user/followed.do"><spring:message code="master.page.followed" /></a></li>			
 			<li><a class="fNiv" href="user/user/followers.do"><spring:message code="master.page.followers" /></a></li>			
