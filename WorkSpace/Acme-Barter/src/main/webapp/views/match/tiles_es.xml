@@ -20,5 +20,14 @@
 		<put-attribute name="title" value="Lista de Acuerdos" />
 		<put-attribute name="body" value="/views/match/display.jsp" />
 	</definition>
-	
+		
+	<definition name="match/write-report" extends="master.page">	
+		<put-attribute name="title" value="Match: esribir un informe" />
+		<put-attribute name="body" value="/views/match/write-report.jsp" />
+	</definition>
+		
+	<definition name="match/list" extends="master.page">	
+		<put-attribute name="title" value="Lista de Acuerdos" />
+		<put-attribute name="body" value="/views/match/list.jsp" />
+	</definition>
 </tiles-definitions>
