@@ -21,4 +21,6 @@ public interface MatchRepository extends JpaRepository<Match, Integer> {
 	@Query("select m from Match m where m.creatorBarter.id = ?1 or m.receiverBarter.id = ?1")
 	Collection<Match> findAllNotCancelledByBarterId(int barterId);
 	
+	@Query("select distinct m from User a join a.followed u, Match m where a.id=?1 and (m.creatorBarter.user.id = u.id or m.receiverBarter.user.id = u.id) order by m.creationMoment desc")
+	Collection<Match> findAllByFollowedUser(int userId);
 }
