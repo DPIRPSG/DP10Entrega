@@ -31,7 +31,7 @@
 		"<jstl:out value="${row_Barter.title}"/>"
 		<br/>
 		<spring:message code="barter.pide"/>
-		<a href="item/display.do?itemId=${row_Barter.offered.id}"> <jstl:out
+		<a href="item/display.do?itemId=${row_Barter.requested.id}"> <jstl:out
 				value="${row_Barter.requested.name}" />
 		</a>
 		<spring:message code="barter.cambio"/>
