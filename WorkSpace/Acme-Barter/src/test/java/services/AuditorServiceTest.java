@@ -1,6 +1,8 @@
 package services;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,6 +19,8 @@ import security.UserAccountService;
 import utilities.AbstractTest;
 import domain.Actor;
 import domain.Auditor;
+import domain.Match;
+import domain.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -24,7 +28,7 @@ import domain.Auditor;
 	"classpath:spring/config/packages.xml"})
 @Transactional
 @TransactionConfiguration(defaultRollback = false)
-public class TrainerServiceTest extends AbstractTest{
+public class AuditorServiceTest extends AbstractTest{
 	
 	// Service under test -------------------------
 	
@@ -35,6 +39,9 @@ public class TrainerServiceTest extends AbstractTest{
 	
 	@Autowired
 	private ActorService actorService;
+	
+	@Autowired
+	private MatchService matchService;
 	
 	@Autowired
 	private UserAccountService userAccountService;
@@ -708,4 +715,56 @@ public class TrainerServiceTest extends AbstractTest{
 //
 //	}
 //	
+	
+	
+	
+	/**
+	 * Acme-Barter - Level A - 3.2.1
+	 * The auditors who have audited more matches.
+	 */
+	@Test 
+	public void testAuditorMoreMatches() {
+		// Declare variables
+		Collection<Auditor> inTest;
+		Collection<Auditor> result;
+		Map<Auditor, Integer> auditorBarters;
+		int maxBarters;
+		
+		// Load objects to test
+		authenticate("admin");
+		
+		inTest = trainerService.findAll();
+		
+		auditorBarters = new HashMap<Auditor, Integer>();
+		maxBarters = 0;
+		
+		for (Match b : matchService.findAll()) {
+			if (b.getAuditor() != null) {
+				// createMatch
+				int value = 1;
+				if (auditorBarters.containsKey(b.getAuditor()))
+					value = auditorBarters.get(b.getAuditor()) + 1;
+
+				auditorBarters.put(b.getAuditor(), value);
+
+				if (value > maxBarters) {
+					inTest.clear();
+					maxBarters = value;
+				}
+				if (value >= maxBarters)
+					inTest.add(b.getAuditor());
+				
+			}
+		}
+		
+		// Checks basic requirements
+
+		// Execution of test
+		Assert.notNull(null, "Test inacabado ya que no se sabe como se implementará");
+		
+				// En la variable inTest están los usuarios que debería devolver la query
+		
+		
+		// Checks results	
+	}
 }
