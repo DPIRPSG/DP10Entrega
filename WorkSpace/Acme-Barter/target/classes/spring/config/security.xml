@@ -65,7 +65,7 @@
 		
 		<security:intercept-url pattern="/user/create.do" access="!hasAnyRole('USER', 'ADMIN', 'AUDITOR')" />
 		<security:intercept-url pattern="/user/list.do" access="permitAll" />
-		<security:intercept-url pattern="/socialIdentity/list.do" access="permitAll" />
+		<security:intercept-url pattern="/social-identity/list.do" access="permitAll" />
 		<security:intercept-url pattern="/barter/listByUser.do" access="permitAll" />
 
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
