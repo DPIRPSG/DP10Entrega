@@ -60,3 +60,30 @@
 	<a href="match/administrator/cancel.do"><spring:message code="match.cancelNotSigned"/></a>
 
 </security:authorize>
+
+	<!-- Listing grid -->
+	<display:table pagesize="5" class="displaytag" keepStatus="true"
+		name="matches" requestURI="${requestURI}" id="row_match">
+
+		<display:column>
+			<a href="match/auditor/write-report.do?matchId=${row_match.id}"> 
+				<spring:message code="match.edit" />
+			</a>
+		</display:column>
+
+		<!-- Attributes -->
+		<spring:message code="match.report" var="reportHeader" />
+		<display:column title="${reportHeader}"
+			sortable="true" >
+			<jstl:out value="${row_match.report}"/>
+		</display:column>
+		
+		<spring:message code="match.creationMoment" var="creationMomentHeader" />
+		<display:column title="${creationMomentHeader}"
+			sortable="true" format="{0,date,yyyy/MM/dd }" >
+			<jstl:out value="${row_match.creationMoment}"/>
+		</display:column>
+
+	</display:table>
+	
+	<!-- Action links -->

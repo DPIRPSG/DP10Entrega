@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.MatchRepository;
+import domain.Auditor;
 import domain.Match;
 import domain.User;
 
@@ -29,6 +30,10 @@ public class MatchService {
 		@Autowired
 		private ActorService actorService;
 
+		@Autowired
+		private AuditorService auditorService;
+		
+		
 		// Constructors -----------------------------------------------------------
 
 		public MatchService() {
@@ -87,25 +92,25 @@ public class MatchService {
 					
 				}else{ // Si no está cancelado se comprueba que no hayan variados los cambios que no se deben poder modificar una vez establecidos.
 					
-					Assert.isTrue(match.getCreationMoment() != originalMatch.getCreationMoment(), "You can't edit the creationMoment of a Match.");
+					Assert.isTrue(match.getCreationMoment().equals(originalMatch.getCreationMoment()), "You can't edit the creationMoment of a Match.");
 					
 					if(originalMatch.getOfferSignsDate() != null){
-						Assert.isTrue(match.getOfferSignsDate() != originalMatch.getOfferSignsDate(), "This Match has already been signed.");
+						Assert.isTrue(match.getOfferSignsDate().equals(originalMatch.getOfferSignsDate()), "This Match has already been signed.");
 					}
 					
 					if(originalMatch.getRequestSignsDate() != null){
-						Assert.isTrue(match.getRequestSignsDate() != originalMatch.getRequestSignsDate(), "This Match has already been signed.");
+						Assert.isTrue(match.getRequestSignsDate().equals(originalMatch.getRequestSignsDate()), "This Match has already been signed.");
 					}
 					
 					Assert.isTrue(match.getLegalText().equals(originalMatch.getLegalText()), "You can't edit the legal text of a Match.");
 					
 					if(originalMatch.getAuditor() != null){
-						Assert.isTrue(match.getAuditor() != originalMatch.getAuditor(), "You can't change the auditor of a Match.");
+						Assert.isTrue(match.getAuditor().equals(originalMatch.getAuditor()), "You can't change the auditor of a Match.");
 					}
 					
-					Assert.isTrue(match.getCreatorBarter() != originalMatch.getCreatorBarter(), "You can't edit the barters involved in a Match.");
+					Assert.isTrue(match.getCreatorBarter().equals(originalMatch.getCreatorBarter()), "You can't edit the barters involved in a Match.");
 					
-					Assert.isTrue(match.getReceiverBarter() != originalMatch.getReceiverBarter(), "You can't edit the barters involved in a Match.");
+					Assert.isTrue(match.getReceiverBarter().equals(originalMatch.getReceiverBarter()), "You can't edit the barters involved in a Match.");
 					
 				}
 				
@@ -237,6 +242,50 @@ public class MatchService {
 			
 			return result;
 		}
+		
+		public void selfAssignByAuditor(int matchId){
+			Assert.isTrue(actorService.checkAuthority("AUDITOR"), "match.selfAssignByAuditor.noAuditor");
+
+			Auditor auditor;
+			Match match;
+			
+			auditor = auditorService.findByPrincipal();
+			match = this.findOne(matchId);
+			
+			Assert.isTrue(match.getAuditor() == null, "match.selfAssignByAuditor.yetAssigned");
+			
+			match.setAuditor(auditor);
+			
+			this.save(match);
+		}
+		
+		public Collection<Match> findAllByAuditor(){
+			Assert.isTrue(actorService.checkAuthority("AUDITOR"), "match.findAllByAuditor.noAuditor");
+			Collection<Match> result;
+			int auditor;
+			
+			auditor = auditorService.findByPrincipal().getId();
+			result = matchRepository.findAllByAuditorId(auditor);
+			
+			return result;
+		}
+		
+		public void addReport(Match match){
+			Assert.isTrue(actorService.checkAuthority("AUDITOR"), "match.selfAssignByAuditor.noAuditor");
+
+			Auditor auditor;
+			Match match_orig;
+			
+			auditor = auditorService.findByPrincipal();
+			match_orig = this.findOne(match.getId());
+			
+			Assert.isTrue(match_orig.getAuditor().equals(auditor), "match.selfAssignByAuditor.notSelfAssigned");
+			
+			match_orig.setReport(match.getReport());
+			
+			this.save(match_orig);
+		}
+		
 
 		public void flush() {
 			matchRepository.flush();
