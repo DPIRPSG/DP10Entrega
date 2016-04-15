@@ -44,7 +44,7 @@ public class MatchService {
 		
 		public Match create(){
 			
-			Assert.isTrue(actorService.checkAuthority("USER"), "Only a User can create a Match.");
+			Assert.isTrue(actorService.checkAuthority("USER"), "Only an User can create a Match.");
 			
 			Match result;
 			
@@ -52,6 +52,7 @@ public class MatchService {
 			
 			result.setCancelled(false);
 			result.setCreationMoment(new Date()); // Aquí por ser NotNull, pero debe sobreescribirse en el save().
+			result.setReport(null);
 			
 			return result;
 			
@@ -79,40 +80,42 @@ public class MatchService {
 				
 				match.setCancelled(false);
 				match.setCreationMoment(new Date());
+				match.setReport(null);
 				
 			}else{ // Está siendo editado
 				
-				Match originalMatch;
-				
-				originalMatch = matchRepository.findOne(match.getId());
-				
-				if(originalMatch.getCancelled() == true){ // Si está cancelado, en el save no debe haber cambiado nada del mismo.
-					
-					Assert.isTrue(match.equals(originalMatch), "You can't edit, sign or manage a cancelled Match.");
-					
-				}else{ // Si no está cancelado se comprueba que no hayan variados los cambios que no se deben poder modificar una vez establecidos.
-					
-					Assert.isTrue(match.getCreationMoment().equals(originalMatch.getCreationMoment()), "You can't edit the creationMoment of a Match.");
-					
-					if(originalMatch.getOfferSignsDate() != null){
-						Assert.isTrue(match.getOfferSignsDate().equals(originalMatch.getOfferSignsDate()), "This Match has already been signed.");
-					}
-					
-					if(originalMatch.getRequestSignsDate() != null){
-						Assert.isTrue(match.getRequestSignsDate().equals(originalMatch.getRequestSignsDate()), "This Match has already been signed.");
-					}
-					
-					Assert.isTrue(match.getLegalText().equals(originalMatch.getLegalText()), "You can't edit the legal text of a Match.");
-					
-					if(originalMatch.getAuditor() != null){
-						Assert.isTrue(match.getAuditor().equals(originalMatch.getAuditor()), "You can't change the auditor of a Match.");
-					}
-					
-					Assert.isTrue(match.getCreatorBarter().equals(originalMatch.getCreatorBarter()), "You can't edit the barters involved in a Match.");
-					
-					Assert.isTrue(match.getReceiverBarter().equals(originalMatch.getReceiverBarter()), "You can't edit the barters involved in a Match.");
-					
-				}
+				// No sirve de nada, puesto que al hacer el set ya el findOne te trae el objeto modificado (antes del save)
+//				Match originalMatch;
+//				
+//				originalMatch = matchRepository.findOne(match.getId());
+//				
+//				if(originalMatch.getCancelled() == true){ // Si está cancelado, en el save no debe haber cambiado nada del mismo.
+//					
+//					Assert.isTrue(match.equals(originalMatch), "You can't edit, sign or manage a cancelled Match.");
+//					
+//				}else{ // Si no está cancelado se comprueba que no hayan variados los cambios que no se deben poder modificar una vez establecidos.
+//					
+//					Assert.isTrue(match.getCreationMoment().equals(originalMatch.getCreationMoment()), "You can't edit the creationMoment of a Match.");
+//					
+//					if(originalMatch.getOfferSignsDate() != null){
+//						Assert.isTrue(match.getOfferSignsDate().equals(originalMatch.getOfferSignsDate()), "This Match has already been signed.");
+//					}
+//					
+//					if(originalMatch.getRequestSignsDate() != null){
+//						Assert.isTrue(match.getRequestSignsDate().equals(originalMatch.getRequestSignsDate()), "This Match has already been signed.");
+//					}
+//					
+//					Assert.isTrue(match.getLegalText().equals(originalMatch.getLegalText()), "You can't edit the legal text of a Match.");
+//					
+//					if(originalMatch.getAuditor() != null){
+//						Assert.isTrue(match.getAuditor().equals(originalMatch.getAuditor()), "You can't change the auditor of a Match.");
+//					}
+//					
+//					Assert.isTrue(match.getCreatorBarter().equals(originalMatch.getCreatorBarter()), "You can't edit the barters involved in a Match.");
+//					
+//					Assert.isTrue(match.getReceiverBarter().equals(originalMatch.getReceiverBarter()), "You can't edit the barters involved in a Match.");
+//					
+//				}
 				
 			}
 			
@@ -123,6 +126,8 @@ public class MatchService {
 		public void cancel(Match match) { // Método usado para que un User cancele un match en el que esté involucrado.
 			
 			Assert.isTrue(actorService.checkAuthority("USER"), "Only an User loged in into the system can cancel a Match.");
+			
+			Assert.isTrue(match.getCancelled() == false, "You can't edit, sign or manage a cancelled Match.");
 			
 			User user;
 			int userId;
@@ -143,8 +148,10 @@ public class MatchService {
 			Assert.isTrue(actorService.checkAuthority("ADMIN"), "Only an Administrator loged in into the system can cancel several matchs at the same time.");
 			
 			for(Match m: matchs){
-				m.setCancelled(true);
-				this.save(m);
+				if(m.getCancelled() == false){
+					m.setCancelled(true);
+					this.save(m);
+				}
 			}
 			
 		}
@@ -152,6 +159,8 @@ public class MatchService {
 		public void sign(Match match) {
 			
 			Assert.isTrue(actorService.checkAuthority("USER"), "Only an User loged in into the system can sign a Match.");
+			
+			Assert.isTrue(match.getCancelled() == false, "You can't edit, sign or manage a cancelled Match.");
 			
 			User user;
 			int userId;
@@ -174,8 +183,10 @@ public class MatchService {
 			}
 			
 			if(matchToSign.getCreatorBarter().getUser() == user){
+				Assert.isTrue(matchToSign.getOfferSignsDate() == null, "You have already signed this Match.");
 				matchToSign.setOfferSignsDate(new Date());
 			}else if(matchToSign.getReceiverBarter().getUser() == user){
+				Assert.isTrue(matchToSign.getRequestSignsDate() == null, "You have already signed this Match.");
 				matchToSign.setRequestSignsDate(new Date());
 			}
 			
