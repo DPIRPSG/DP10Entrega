@@ -12,8 +12,6 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<security:authorize access="isAuthenticated()">
-
 	<security:authorize access="hasRole('USER')">
 		<h3><spring:message code="match.userList" /></h3>
 	</security:authorize>
@@ -71,24 +69,33 @@
 			</display:column>
 			
 		</security:authorize>
-		
-		<security:authorize access="hasRole('AUDITOR')">
+
+	<security:authorize access="hasRole('AUDITOR')">
 		<spring:message code="match.edit" var="editHeader" />
-			<display:column title="${editHeader}" sortable="false">
-				<a href="match/auditor/write-report.do?matchId=${row_Match.id}">
-					<spring:message code="match.edit" />
+		<display:column title="${editHeader}" sortable="true">
+			<jstl:if test="${row_Match.auditor == null}">
+				<a
+					href="match/auditor/self-assign.do?matchId=${row_Match.id}&redirectUri=${requestURI}">
+					<spring:message code="match.self.assign" />
 				</a>
-			</display:column>
-		</security:authorize>
-		
-	</display:table>
+			</jstl:if>
+			<jstl:if test="${row_Match.auditor != null}">
+				<jstl:if test="${row_Match.auditor.id == auditor_id}">
+					<a href="match/auditor/write-report.do?matchId=${row_Match.id}">
+						<spring:message code="match.edit" />
+					</a>
+				</jstl:if>
+			</jstl:if>
+
+		</display:column>
+	</security:authorize>
+
+</display:table>
 	
 	<security:authorize access="hasRole('USER')">
 		<a href="match/user/create.do"><spring:message code="match.create"/></a>
 	</security:authorize>
 	
-</security:authorize>
-
 <security:authorize access="hasRole('ADMIN')">
 
 	<a href="match/administrator/cancel.do"><spring:message code="match.cancelNotSigned"/></a>
