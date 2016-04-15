@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.BarterService;
+import services.LegalTextService;
 import services.MatchService;
 import services.UserService;
 import controllers.AbstractController;
 import domain.Barter;
+import domain.LegalText;
 import domain.Match;
 import domain.User;
 
@@ -34,6 +36,9 @@ public class MatchUserController extends AbstractController {
 	
 	@Autowired
 	private BarterService barterService;
+	
+	@Autowired
+	private LegalTextService legalTextService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -58,6 +63,7 @@ public class MatchUserController extends AbstractController {
 		result = new ModelAndView("match/list");
 		result.addObject("requestURI", "match/user/list.do");
 		result.addObject("matches", matches);
+		result.addObject("userId", userId);
 
 		return result;
 	}
@@ -84,18 +90,20 @@ public class MatchUserController extends AbstractController {
 		Match match;
 		Collection<Barter> creatorBarters;
 		Collection<Barter> receiverBarters;
+		Collection<LegalText> legalTexts;
 		User user;
 		int userId;
 		
 		user = userService.findByPrincipal();
 		userId = user.getId();
 		
-		creatorBarters = barterService.findByUserNotCancelled(userId);
-		receiverBarters = barterService.findAllOfOtherUsersByUserIdNotCancelled(userId);
+		creatorBarters = barterService.findByUserIdNotCancelledNotInMatchNotCancelled(userId);
+		receiverBarters = barterService.findAllOfOtherUsersByUserIdNotCancelledNotInMatchNotCancelled(userId);
+		legalTexts = legalTextService.findAll();
 
 		match = matchService.create();
 		
-		result = createEditModelAndView(match, creatorBarters, receiverBarters);
+		result = createEditModelAndView(match, creatorBarters, receiverBarters, legalTexts);
 
 		return result;
 	}
@@ -105,23 +113,25 @@ public class MatchUserController extends AbstractController {
 		ModelAndView result;
 		Collection<Barter> creatorBarters;
 		Collection<Barter> receiverBarters;
+		Collection<LegalText> legalTexts;
 		User user;
 		int userId;
 		
 		user = userService.findByPrincipal();
 		userId = user.getId();
 		
-		creatorBarters = barterService.findByUserNotCancelled(userId);
-		receiverBarters = barterService.findAllOfOtherUsersByUserIdNotCancelled(userId);
+		creatorBarters = barterService.findByUserIdNotCancelledNotInMatchNotCancelled(userId);
+		receiverBarters = barterService.findAllOfOtherUsersByUserIdNotCancelledNotInMatchNotCancelled(userId);
+		legalTexts = legalTextService.findAll();
 
 		if (binding.hasErrors()) {
-			result = createEditModelAndView(match, creatorBarters, receiverBarters);
+			result = createEditModelAndView(match, creatorBarters, receiverBarters, legalTexts);
 		} else {
 			try {
 				matchService.save(match);
 				result = new ModelAndView("redirect:list.do");
 			} catch (Throwable oops) {
-				result = createEditModelAndView(match, creatorBarters, receiverBarters, "match.commit.error");
+				result = createEditModelAndView(match, creatorBarters, receiverBarters, legalTexts, "match.commit.error");
 			}
 		}
 
@@ -139,7 +149,7 @@ public class MatchUserController extends AbstractController {
 		
 		matchService.cancel(match);
 		
-		result = new ModelAndView("match/list");
+		result = this.list();
 //		result.addObject("match", match); // Devolver mensaje de error/confirmación
 
 		return result;
@@ -156,7 +166,7 @@ public class MatchUserController extends AbstractController {
 		
 		matchService.sign(match);
 		
-		result = new ModelAndView("match/list");
+		result = this.list();
 //		result.addObject("match", match); // Devolver mensaje de error/confirmación
 
 		return result;
@@ -164,21 +174,22 @@ public class MatchUserController extends AbstractController {
 	
 	// Ancillary methods ------------------------------------------------------
 	
-	protected ModelAndView createEditModelAndView(Match match, Collection<Barter> creatorBarters, Collection<Barter> receiverBarters) {
+	protected ModelAndView createEditModelAndView(Match match, Collection<Barter> creatorBarters, Collection<Barter> receiverBarters, Collection<LegalText> legalTexts) {
 		ModelAndView result;
 
-		result = createEditModelAndView(match, creatorBarters, receiverBarters, null);
+		result = createEditModelAndView(match, creatorBarters, receiverBarters, legalTexts, null);
 		
 		return result;
 	}
 	
-	protected ModelAndView createEditModelAndView(Match match, Collection<Barter> creatorBarters, Collection<Barter> receiverBarters, String message) {
+	protected ModelAndView createEditModelAndView(Match match, Collection<Barter> creatorBarters, Collection<Barter> receiverBarters, Collection<LegalText> legalTexts, String message) {
 		ModelAndView result;
 		
 		result = new ModelAndView("match/create");
 		result.addObject("match", match);
 		result.addObject("creatorBarters", creatorBarters);
 		result.addObject("receiverBarters", receiverBarters);
+		result.addObject("legalTexts", legalTexts);
 		result.addObject("message", message);
 
 		return result;

@@ -96,10 +96,18 @@ public class BarterService {
 		return result;
 	}
 	
-	public Collection<Barter> findAllOfOtherUsersByUserIdNotCancelled(int userId){
+	public Collection<Barter> findByUserIdNotCancelledNotInMatchNotCancelled(int userId){
 		Collection<Barter> result;
 		
-		result = barterRepository.findAllOfOtherUsersByUserIdNotCancelled(userId);
+		result = barterRepository.findByUserIdNotCancelledNotInMatchNotCancelled(userId);
+		
+		return result;
+	}
+	
+	public Collection<Barter> findAllOfOtherUsersByUserIdNotCancelledNotInMatchNotCancelled(int userId){
+		Collection<Barter> result;
+		
+		result = barterRepository.findAllOfOtherUsersByUserIdNotCancelledNotInMatchNotCancelled(userId);
 		
 		return result;
 	}

@@ -46,6 +46,7 @@
 		<security:intercept-url pattern="/legal-text/administrator/**" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/barter/administrator/**" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/auditor/administrator/**" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/match/administrator/**" access="hasRole('ADMIN')" />
 
 		<security:intercept-url pattern="/user/user/**" access="hasRole('USER')" />
 		<security:intercept-url pattern="/socialIdentity/user/**" access="hasRole('USER')" />
@@ -53,7 +54,7 @@
 		<security:intercept-url pattern="/match/user/**" access="hasRole('USER')" />			
 			
 			
-		<security:intercept-url pattern="/auditor/auditor/**" access="hasRole('AUDITOR')" />			
+		<security:intercept-url pattern="/auditor/auditor/**" access="hasRole('AUDITOR')" />
 		<security:intercept-url pattern="/match/auditor/**" access="hasRole('AUDITOR')" />			
 		
 		<security:intercept-url pattern="/folder/actor/**" access="hasAnyRole('USER', 'ADMIN', 'AUDITOR')"/>

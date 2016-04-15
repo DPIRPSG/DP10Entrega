@@ -12,7 +12,18 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<security:authorize access="hasRole('USER')">
+<security:authorize access="isAuthenticated()">
+
+	<security:authorize access="hasRole('USER')">
+		<h3><spring:message code="match.userList" /></h3>
+	</security:authorize>
+	<security:authorize access="hasRole('ADMIN')">
+		<h3><spring:message code="match.adminList" /></h3>
+	</security:authorize>
+	<security:authorize access="hasRole('AUDITOR')">
+		<h3><spring:message code="match.auditorList" /></h3>
+	</security:authorize>
+	
 
 	<!-- Listing grid -->
 	<display:table pagesize="5" class="displaytag" keepStatus="false"
@@ -27,9 +38,6 @@
 		
 		<spring:message code="match.requestSignsDate" var="requestSignsDateHeader" />
 		<acme:displayColumn title="${requestSignsDateHeader}" sorteable="true" value="${row_Match.requestSignsDate}" format="{0,date,yyyy/MM/dd}"/>
-			
-		<spring:message code="match.report" var="reportHeader" />
-		<acme:displayColumn title="${reportHeader}" sorteable="false" value="${row_Match.report}"/>
 		
 		<spring:message code="match.legalText" var="legalTextHeader" />
 		<acme:displayColumn title="${legalTextHeader}" sorteable="true" value="${row_Match.legalText.text}"/>
@@ -40,18 +48,44 @@
 		<spring:message code="match.receiverBarter" var="receiverBarterHeader" />
 		<acme:displayColumn title="${receiverBarterHeader}" sorteable="true" value="${row_Match.receiverBarter.title}"/>
 		
-		<!-- Action links -->
-		<display:column>
-			<a href="match/user/cancel.do?matchId=${row_Match.id}"><spring:message code="match.cancel" /></a>
-		</display:column>
+		<spring:message code="match.report" var="reportHeader" />
+		<acme:displayColumn title="${reportHeader}" sorteable="false" value="${row_Match.report}"/>
 		
-		<display:column>
-			<a href="match/user/sign.do?matchId=${row_Match.id}"><spring:message code="match.sign" /></a>
-		</display:column>
+		<security:authorize access="hasRole('ADMIN')">
+			<spring:message code="match.cancelled" var="cancelledHeader" />
+			<acme:displayColumn title="${cancelledHeader}" sorteable="true" value="${row_Match.cancelled}"/>
+		</security:authorize>
+		
+		<security:authorize access="hasRole('USER')">
+			<!-- Action links -->
+			<spring:message code="match.cancel" var="cancelHeader" />
+			<display:column title="${cancelHeader}" sortable="true">
+				<a href="match/user/cancel.do?matchId=${row_Match.id}"><spring:message code="match.cancel" /></a>
+			</display:column>
+			
+			<spring:message code="match.sign" var="signHeader" />
+			<display:column title="${signHeader}" sortable="true">
+				<jstl:if test="${row_Match.creatorBarter.user.id == userId && row_Match.offerSignsDate == null || row_Match.receiverBarter.user.id == userId && row_Match.requestSignsDate == null}">
+					<a href="match/user/sign.do?matchId=${row_Match.id}"><spring:message code="match.sign" /></a>
+				</jstl:if>
+			</display:column>
+			
+		</security:authorize>
+		
+		<security:authorize access="hasRole('AUDITOR')">
+		<spring:message code="match.edit" var="editHeader" />
+			<display:column title="${editHeader}" sortable="false">
+				<a href="match/auditor/write-report.do?matchId=${row_Match.id}">
+					<spring:message code="match.edit" />
+				</a>
+			</display:column>
+		</security:authorize>
 		
 	</display:table>
 	
-	<a href="match/user/create.do"><spring:message code="match.create"/></a>
+	<security:authorize access="hasRole('USER')">
+		<a href="match/user/create.do"><spring:message code="match.create"/></a>
+	</security:authorize>
 	
 </security:authorize>
 
@@ -60,30 +94,3 @@
 	<a href="match/administrator/cancel.do"><spring:message code="match.cancelNotSigned"/></a>
 
 </security:authorize>
-
-	<!-- Listing grid -->
-	<display:table pagesize="5" class="displaytag" keepStatus="true"
-		name="matches" requestURI="${requestURI}" id="row_match">
-
-		<display:column>
-			<a href="match/auditor/write-report.do?matchId=${row_match.id}"> 
-				<spring:message code="match.edit" />
-			</a>
-		</display:column>
-
-		<!-- Attributes -->
-		<spring:message code="match.report" var="reportHeader" />
-		<display:column title="${reportHeader}"
-			sortable="true" >
-			<jstl:out value="${row_match.report}"/>
-		</display:column>
-		
-		<spring:message code="match.creationMoment" var="creationMomentHeader" />
-		<display:column title="${creationMomentHeader}"
-			sortable="true" format="{0,date,yyyy/MM/dd }" >
-			<jstl:out value="${row_match.creationMoment}"/>
-		</display:column>
-
-	</display:table>
-	
-	<!-- Action links -->
