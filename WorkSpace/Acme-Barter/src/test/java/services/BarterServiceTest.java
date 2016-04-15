@@ -467,6 +467,50 @@ are not displayed to users, only to administrators
 		}
 	}
 	
+	/**
+	 * Acme-Barter - Level C - 12.5.2
+	 * The total number of barters that have been registered.
+	 */
+	@Test 
+	public void testTotalBarters() {
+		// Declare variables
+		int totalUsersInTest;
+		int result;
+		
+		// Load objects to test
+		authenticate("admin");
+		totalUsersInTest = barterService.findAll().size();
+		
+		// Checks basic requirements
+
+		// Execution of test
+		Assert.notNull(null, "Test inacabado ya que no se sabe como se implementará");		
+		
+		// Checks results	
+	}
+	
+	/**
+	 * Acme-Barter - Level C - 12.5.3
+	 * The total number of barters that have been cancelled.
+	 */
+	@Test 
+	public void testTotalBartersCancelled() {
+		// Declare variables
+		int totalUsersInTest;
+		int result;
+		
+		// Load objects to test
+		authenticate("admin");
+		totalUsersInTest = barterService.findAll().size() - barterService.findAllNotCancelled().size();
+		
+		// Checks basic requirements
+
+		// Execution of test
+		Assert.notNull(null, "Test inacabado ya que no se sabe como se implementará");		
+		
+		// Checks results	
+	}
+	
 	
 	/**
 	 * Negative test case: Cancelarlo un auditor
