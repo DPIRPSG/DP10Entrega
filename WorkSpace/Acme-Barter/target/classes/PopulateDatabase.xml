@@ -1138,6 +1138,27 @@
 		</property>
 	</bean>
 	
+	<bean id="item13" class="domain.Item">
+		<property name="name" value="Portatil HP"/>
+		<property name="description" value="Es normalillo, pero corre bien el Minecraft."/>
+		<property name="pictures">
+			<list>
+				<value>http://imagenes.pccomponentes.com/hp_g62_b67es_p6100_4gb_500gb_ati_hd5470_15_6__1.jpg</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="item14" class="domain.Item">
+		<property name="name" value="Surface Pro 4"/>
+		<property name="description" value="El PORTÁTIL más versatil del mercado."/>
+		<property name="pictures">
+			<list>
+				<value>http://dri1.img.digitalrivercontent.net/Storefront/Company/msintl/images/English/en-INTL-Surface-Pro4-SU3-00001/PDP/en-INTL-PDP0-Surface-Pro4-SU3-00001-P1.jpg</value>
+				<value>http://dri1.img.digitalrivercontent.net/Storefront/Company/msintl/images/English/en-INTL-Surface-Pro4-SU3-00001/en-INTL-L-Surface-Pro4-SU3-00001-RM3-mnco.jpg</value>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- LegalText -->
 	
 	<bean id="legalText1" class="domain.LegalText">
@@ -1288,6 +1309,27 @@
 		<property name="relatedBarter">
 			<list>
 				<ref bean="barter5"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="barter7" class="domain.Barter">
+		<property name="title" value="No lo cambio"/>
+		<property name="cancelled" value="false"/>
+		<property name="registerMoment" value="2016/01/12 12:30"/>
+		<property name="user" ref="user2"/>
+		<property name="offered" ref="item13"/>
+		<property name="requested" ref="item14"/>
+		<property name="createdMatch">
+			<list>
+			</list>
+		</property>
+		<property name="receivedMatch">
+			<list>
+			</list>
+		</property>
+		<property name="relatedBarter">
+			<list>
 			</list>
 		</property>
 	</bean>
