@@ -125,7 +125,7 @@ public class BarterService {
 	
 	public Barter create(){
 		
-		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can create an barter");
+		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can create a barter");
 		
 		Barter barter;
 		Collection<Match> createdMatch;
