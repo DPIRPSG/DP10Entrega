@@ -38,7 +38,7 @@ public class ActorFormValidator implements Validator{
 			
 		}
 		
-		if(actActor == null){ // Creation moment
+		if(actActor == null || actorService.checkAuthority("ADMIN")){ // Creation moment
 			actUAccount = null;
 			if(actor.getPassword() == null){
 				errors.rejectValue("password", "javax.validation.constraints.NotNull.message");
@@ -46,16 +46,27 @@ public class ActorFormValidator implements Validator{
 			if(actor.getRepeatedPassword() == null){
 				errors.rejectValue("repeatedPassword", "javax.validation.constraints.NotNull.message");
 			}
-			if(actor.getAcceptTerm() != true){
-				errors.rejectValue("acceptTerm", "acme.validation.notSelected");				
+			if (actActor == null) {
+				if (actor.getAcceptTerm() != true) {
+					errors.rejectValue("acceptTerm",
+							"acme.validation.notSelected");
+				}
 			}	
 		}else{
 			actUAccount = actActor.getUserAccount();
+			if(actor.getPassword() == null){
+				errors.rejectValue("password", "javax.validation.constraints.NotNull.message");
+			}
+			if(actor.getRepeatedPassword() == null){
+				errors.rejectValue("repeatedPassword", "javax.validation.constraints.NotNull.message");
+			}
 		}
 		
 		// Match passwords
 		if(actor.getPassword() != null && actor.getRepeatedPassword() != null){
-			if(actor.getPassword().equals("") && actActor != null && actor.getPassword().equals(actor.getRepeatedPassword())){
+			if (actor.getPassword().equals("") && actActor != null
+					&& !actorService.checkAuthority("ADMIN")
+					&& actor.getPassword().equals(actor.getRepeatedPassword())) {
 				// No error
 			}else if (actor.getPassword().length() < 5 || actor.getPassword().length() > 32) {
 				errors.rejectValue("password", "acme.validation.sizeNotMatch.standard");
