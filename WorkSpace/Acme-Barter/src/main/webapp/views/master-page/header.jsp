@@ -48,9 +48,10 @@
 			<li><a class="fNiv"><spring:message	code="master.page.manage" /></a>
 				<ul>
 					<li class="arrow"></li>
+					<li><a href="match/administrator/list.do"><spring:message code="master.page.match" /></a></li>
 					<li><a href="barter/administrator/list.do"><spring:message code="master.page.barter" /></a></li>
 					<li><a href="legal-text/administrator/list.do"><spring:message code="master.page.list.legalTexts" /></a></li>
-					<li><a href="trainer/administrator/register.do"><spring:message code="master.page.register.auditor" /></a></li>
+					<li><a href="auditor/administrator/register.do"><spring:message code="master.page.register.auditor" /></a></li>
 				</ul>
 			</li>
 			<li><a class="fNiv"><spring:message	code="master.page.list" /></a>
@@ -65,7 +66,13 @@
 		</security:authorize>
 		
 		<security:authorize access="hasRole('AUDITOR')">
-			<li><a class="fNiv" href="user/list.do"><spring:message code="master.page.users" /></a></li>			
+			<li><a class="fNiv" href="user/list.do"><spring:message code="master.page.users" /></a></li>
+			<li><a class="fNiv"><spring:message	code="master.page.manage" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="match/auditor/list-assigned.do"><spring:message code="master.page.match.listAssigned" /></a></li>
+				</ul>
+			</li>								
 		</security:authorize>
 				
 		<security:authorize access="isAnonymous()">

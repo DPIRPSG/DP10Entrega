@@ -92,7 +92,7 @@ public class AuditorAdministratorController extends AbstractController {
 		result = new ModelAndView("actorForm/edit");
 		result.addObject("actorForm", administrator);
 		result.addObject("message", message);
-		result.addObject("urlAction", "trainer/administrator/register.do");
+		result.addObject("urlAction", "auditor/administrator/register.do");
 
 		return result;
 	}

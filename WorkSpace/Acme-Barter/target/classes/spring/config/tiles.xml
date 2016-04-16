@@ -26,7 +26,7 @@
 		
 		<value>/views/folder/tiles.xml</value>
 		<value>/views/message/tiles.xml</value>
-		<value>/views/socialIdentity/tiles.xml</value>
+		<value>/views/social-identity/tiles.xml</value>
 		
 		<value>/views/legal-text/tiles.xml</value>
 		<value>/views/barter/tiles.xml</value>

@@ -60,6 +60,7 @@ public class UserController extends AbstractController{
 		
 		if(actorService.checkAuthority("USER")){
 			result.addObject("IfollowTo", userService.getFollowed());
+			result.addObject("userId", String.valueOf(userService.findByPrincipal().getId()));
 		}
 		
 		return result;
