@@ -1159,6 +1159,60 @@
 		</property>
 	</bean>
 	
+	<bean id="item15" class="domain.Item">
+		<property name="name" value="PC HP"/>
+		<property name="description" value="Portátil marca HP"/>
+		<property name="pictures">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="item16" class="domain.Item">
+		<property name="name" value="PC Asus"/>
+		<property name="description" value="Portátil marca Asus"/>
+		<property name="pictures">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="item17" class="domain.Item">
+		<property name="name" value="Portátil HP"/>
+		<property name="description" value="Portátil marca HP"/>
+		<property name="pictures">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="item18" class="domain.Item">
+		<property name="name" value="Portátil Asus"/>
+		<property name="description" value="Portátil marca Asus"/>
+		<property name="pictures">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="item19" class="domain.Item">
+		<property name="name" value="iPhone"/>
+		<property name="description" value="Quiero un iPhone"/>
+		<property name="pictures">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="item20" class="domain.Item">
+		<property name="name" value="Nexus"/>
+		<property name="description" value="Ofrezco un nexus"/>
+		<property name="pictures">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- LegalText -->
 	
 	<bean id="legalText1" class="domain.LegalText">
@@ -1320,6 +1374,69 @@
 		<property name="user" ref="user2"/>
 		<property name="offered" ref="item13"/>
 		<property name="requested" ref="item14"/>
+		<property name="createdMatch">
+			<list>
+			</list>
+		</property>
+		<property name="receivedMatch">
+			<list>
+			</list>
+		</property>
+		<property name="relatedBarter">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="barter8" class="domain.Barter">
+		<property name="title" value="Quiero otro PC"/>
+		<property name="cancelled" value="false"/>
+		<property name="registerMoment" value="2016/01/12 12:30"/>
+		<property name="user" ref="user1"/>
+		<property name="offered" ref="item15"/>
+		<property name="requested" ref="item16"/>
+		<property name="createdMatch">
+			<list>
+			</list>
+		</property>
+		<property name="receivedMatch">
+			<list>
+			</list>
+		</property>
+		<property name="relatedBarter">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="barter9" class="domain.Barter">
+		<property name="title" value="Quiero otro Portátil"/>
+		<property name="cancelled" value="false"/>
+		<property name="registerMoment" value="2016/01/12 12:30"/>
+		<property name="user" ref="user2"/>
+		<property name="offered" ref="item18"/>
+		<property name="requested" ref="item17"/>
+		<property name="createdMatch">
+			<list>
+			</list>
+		</property>
+		<property name="receivedMatch">
+			<list>
+			</list>
+		</property>
+		<property name="relatedBarter">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="barter10" class="domain.Barter">
+		<property name="title" value="Quiero otro Móvil"/>
+		<property name="cancelled" value="false"/>
+		<property name="registerMoment" value="2016/01/12 12:30"/>
+		<property name="user" ref="user2"/>
+		<property name="offered" ref="item20"/>
+		<property name="requested" ref="item19"/>
 		<property name="createdMatch">
 			<list>
 			</list>
