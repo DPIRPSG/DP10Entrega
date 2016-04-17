@@ -58,7 +58,7 @@ public class MatchService {
 			
 		}
 		
-		public void save(Match match){
+		public Match save(Match match){
 			
 			Assert.isTrue(actorService.checkAuthority("ADMIN") || actorService.checkAuthority("USER") || actorService.checkAuthority("AUDITOR"), "Only an Actor loged in into the system can create a Match.");
 			
@@ -119,8 +119,9 @@ public class MatchService {
 				
 			}
 			
-			matchRepository.save(match);
+			match = matchRepository.save(match);
 			
+			return match;
 		}
 		
 		public void cancel(Match match) { // Método usado para que un User cancele un match en el que esté involucrado.

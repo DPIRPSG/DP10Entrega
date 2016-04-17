@@ -34,10 +34,11 @@ public class MatchAuditorController extends AbstractController {
 	// Listing ----------------------------------------------------------
 
 	@RequestMapping(value = "/self-assign", method = RequestMethod.GET)
-	public ModelAndView selfAssign(@RequestParam(required=true) int matchId){
+	public ModelAndView selfAssign(@RequestParam(required=true) int matchId,
+			@RequestParam(required=true) String redirectUri){
 		ModelAndView result;
 		
-		result = new ModelAndView("redirect:list.do");
+		result = new ModelAndView("redirect:../../" + redirectUri);
 
 		try {
 			matchService.selfAssignByAuditor(matchId);
