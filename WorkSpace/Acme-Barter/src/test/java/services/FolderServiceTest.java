@@ -18,6 +18,7 @@ import utilities.AbstractTest;
 import domain.Actor;
 import domain.Folder;
 import domain.Message;
+import domain.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -37,10 +38,16 @@ public class FolderServiceTest extends AbstractTest {
 	@Autowired
 	private ActorService actorService;
 	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private MessageService messageService;
+	
 	// Tests ---------------------------------------
 	
 	/**
-	 * Acme-Six-Pack - Level B - 17.2
+	 * Acme-Barter - Level C - 10.3
 	 * Actors can create additional folders, rename, or delete them.
 	 */
 	
@@ -60,18 +67,18 @@ public class FolderServiceTest extends AbstractTest {
 	@Test 
 	public void testNewFolder() {
 		// Declare variables
-		Actor customer;
+		Actor user;
 		Folder folder;
 		Folder newFolder;
 		Collection<Folder> actorFolders;
 		Integer numberOfFolders;
 		
 		// Load objects to test
-		authenticate("customer1");
-		customer = actorService.findByPrincipal();
+		authenticate("user1");
+		user = actorService.findByPrincipal();
 		
 		// Checks basic requirements
-		Assert.notNull(customer, "El usuario no se ha logueado correctamente.");
+		Assert.notNull(user, "El usuario no se ha logueado correctamente.");
 		
 		// Execution of test
 		numberOfFolders = folderService.findAllByActor().size();
@@ -79,7 +86,7 @@ public class FolderServiceTest extends AbstractTest {
 		folder = folderService.create();
 		folder.setName("Nueva carpeta");
 		folder.setIsSystem(false);
-		folder.setActor(customer);
+		folder.setActor(user);
 		
 		newFolder = folderService.saveFromCreateOrEdit(folder);
 		
@@ -114,8 +121,8 @@ public class FolderServiceTest extends AbstractTest {
 	@Test 
 	public void testNewFolderForAnotherUser() {
 		// Declare variables
-		Actor customer;
-		Actor otherCustomer;
+		Actor user;
+		Actor otherUser;
 		Folder folder;
 		Folder newFolder;
 		Collection<Folder> actorFolders;
@@ -123,15 +130,28 @@ public class FolderServiceTest extends AbstractTest {
 		Integer numberOfFolders;
 		Integer numberOfFoldersOtherActor;
 		Integer actorId;
+		Collection<User> users;
 		
 		// Load objects to test
-		authenticate("customer1");
-		customer = actorService.findByPrincipal();
-		otherCustomer = actorService.findOne(72); // Id del customer2
-		actorId = otherCustomer.getId();
+		authenticate("user1");
+		user = actorService.findByPrincipal();
+		
+		users = userService.findAll();
+		
+		otherUser = null;
+		
+		for(User u: users){
+			if(u.getUserAccount().getUsername().equals("user2")){
+				otherUser = u;
+			}
+		}
+		
+		Assert.notNull(otherUser, "No existe el otro usuario con el que se pretende testar.");
+		
+		actorId = otherUser.getId();
 		
 		// Checks basic requirements
-		Assert.notNull(customer, "El usuario no se ha logueado correctamente.");
+		Assert.notNull(user, "El usuario no se ha logueado correctamente.");
 		
 		// Execution of test
 		numberOfFolders = folderService.findAllByActor().size();
@@ -140,7 +160,7 @@ public class FolderServiceTest extends AbstractTest {
 		folder = folderService.create();
 		folder.setName("Nueva carpeta");
 		folder.setIsSystem(false);
-		folder.setActor(otherCustomer);
+		folder.setActor(otherUser);
 		
 		newFolder = folderService.saveFromCreateOrEdit(folder);
 		
@@ -180,18 +200,18 @@ public class FolderServiceTest extends AbstractTest {
 	@Test 
 	public void testNewFolderIsSystem() {
 		// Declare variables
-		Actor customer;
+		Actor user;
 		Folder folder;
 		Folder newFolder;
 //		Collection<Folder> actorFolders;
 //		Integer numberOfFolders;
 		
 		// Load objects to test
-		authenticate("customer1");
-		customer = actorService.findByPrincipal();
+		authenticate("user1");
+		user = actorService.findByPrincipal();
 		
 		// Checks basic requirements
-		Assert.notNull(customer, "El usuario no se ha logueado correctamente.");
+		Assert.notNull(user, "El usuario no se ha logueado correctamente.");
 		
 		// Execution of test
 //		numberOfFolders = folderService.findAllByActor().size();
@@ -199,7 +219,7 @@ public class FolderServiceTest extends AbstractTest {
 		folder = folderService.create();
 		folder.setName("Nueva carpeta");
 		folder.setIsSystem(true);
-		folder.setActor(customer);
+		folder.setActor(user);
 		
 		newFolder = folderService.saveFromCreateOrEdit(folder);
 		
@@ -226,18 +246,18 @@ public class FolderServiceTest extends AbstractTest {
 //	@Test 
 	public void testNewBlankNameFolder() {
 		// Declare variables
-		Actor customer;
+		Actor user;
 		Folder folder;
 //		Folder newFolder;
 //		Collection<Folder> actorFolders;
 //		Integer numberOfFolders;
 		
 		// Load objects to test
-		authenticate("customer1");
-		customer = actorService.findByPrincipal();
+		authenticate("user1");
+		user = actorService.findByPrincipal();
 		
 		// Checks basic requirements
-		Assert.notNull(customer, "El usuario no se ha logueado correctamente.");
+		Assert.notNull(user, "El usuario no se ha logueado correctamente.");
 		
 		// Execution of test
 //		numberOfFolders = folderService.findAllByActor().size();
@@ -245,7 +265,7 @@ public class FolderServiceTest extends AbstractTest {
 		folder = folderService.create();
 		folder.setName("");
 		folder.setIsSystem(false);
-		folder.setActor(customer);
+		folder.setActor(user);
 		
 		folderService.saveFromCreateOrEdit(folder);
 		
@@ -279,18 +299,18 @@ public class FolderServiceTest extends AbstractTest {
 //	@Test 
 	public void testNewNullNameFolder() {
 		// Declare variables
-		Actor customer;
+		Actor user;
 		Folder folder;
 //		Folder newFolder;
 //		Collection<Folder> actorFolders;
 //		Integer numberOfFolders;
 		
 		// Load objects to test
-		authenticate("customer1");
-		customer = actorService.findByPrincipal();
+		authenticate("user1");
+		user = actorService.findByPrincipal();
 		
 		// Checks basic requirements
-		Assert.notNull(customer, "El usuario no se ha logueado correctamente.");
+		Assert.notNull(user, "El usuario no se ha logueado correctamente.");
 		
 		// Execution of test
 //		numberOfFolders = folderService.findAllByActor().size();
@@ -298,7 +318,7 @@ public class FolderServiceTest extends AbstractTest {
 		folder = folderService.create();
 		folder.setName(null);
 		folder.setIsSystem(false);
-		folder.setActor(customer);
+		folder.setActor(user);
 		
 		folderService.saveFromCreateOrEdit(folder);
 		
@@ -333,7 +353,7 @@ public class FolderServiceTest extends AbstractTest {
 	@Test 
 	public void testRenameFolder() {
 		// Declare variables
-		Actor customer;
+		Actor user;
 		Folder folder;
 		Folder renamedFolder;
 		Collection<Folder> actorFolders;
@@ -342,12 +362,12 @@ public class FolderServiceTest extends AbstractTest {
 		Boolean existNewFolderName;
 		
 		// Load objects to test
-		authenticate("customer1");
-		customer = actorService.findByPrincipal();
+		authenticate("user1");
+		user = actorService.findByPrincipal();
 		existNewFolderName = false;
 		
 		// Checks basic requirements
-		Assert.notNull(customer, "El usuario no se ha logueado correctamente.");
+		Assert.notNull(user, "El usuario no se ha logueado correctamente.");
 		
 		// Execution of test
 		actorFolders = folderService.findAllByActor();
@@ -394,7 +414,7 @@ public class FolderServiceTest extends AbstractTest {
 //	@Test
 	public void testRenameFolderOfOther() {
 		// Declare variables
-		Actor customer;
+		Actor user;
 		Folder folder;
 //		Folder renamedFolder;
 //		Collection<Folder> actorFolders;
@@ -403,15 +423,15 @@ public class FolderServiceTest extends AbstractTest {
 //		Boolean existNewFolderName;
 		
 		// Load objects to test
-		authenticate("customer1");
-		customer = actorService.findByPrincipal();
+		authenticate("user1");
+		user = actorService.findByPrincipal();
 //		existNewFolderName = false;
 		
 		// Checks basic requirements
-		Assert.notNull(customer, "El usuario no se ha logueado correctamente.");
+		Assert.notNull(user, "El usuario no se ha logueado correctamente.");
 		
 		// Execution of test
-		folder = folderService.findOne(87); // Id de la carpeta InBox del customer2
+		folder = folderService.findOne(87); // Id de la carpeta InBox del user2
 //		oldFolderName = folder.getName();
 		
 		folder.setName("Carpeta renombrada");
@@ -455,7 +475,7 @@ public class FolderServiceTest extends AbstractTest {
 //	@Test
 	public void testRenameFolderToBlank() {
 		// Declare variables
-		Actor customer;
+		Actor user;
 		Folder folder;
 //		Folder renamedFolder;
 		Collection<Folder> actorFolders;
@@ -464,12 +484,12 @@ public class FolderServiceTest extends AbstractTest {
 //		Boolean existNewFolderName;
 		
 		// Load objects to test
-		authenticate("customer1");
-		customer = actorService.findByPrincipal();
+		authenticate("user1");
+		user = actorService.findByPrincipal();
 //		existNewFolderName = false;
 		
 		// Checks basic requirements
-		Assert.notNull(customer, "El usuario no se ha logueado correctamente.");
+		Assert.notNull(user, "El usuario no se ha logueado correctamente.");
 		
 		// Execution of test
 		actorFolders = folderService.findAllByActor();
@@ -519,7 +539,7 @@ public class FolderServiceTest extends AbstractTest {
 	@Test 
 	public void testDeleteFolder() {
 		// Declare variables
-		Actor customer;
+		Actor user;
 		Folder folder;
 		Collection<Folder> actorFolders;
 		Collection<Folder> newActorFolders;
@@ -528,11 +548,11 @@ public class FolderServiceTest extends AbstractTest {
 		Integer newNumberOfFolders;
 		
 		// Load objects to test
-		authenticate("customer1");
-		customer = actorService.findByPrincipal();
+		authenticate("user1");
+		user = actorService.findByPrincipal();
 		
 		// Checks basic requirements
-		Assert.notNull(customer, "El usuario no se ha logueado correctamente.");
+		Assert.notNull(user, "El usuario no se ha logueado correctamente.");
 		
 		// Execution of test
 		actorFolders = folderService.findAllByActor();
@@ -581,7 +601,7 @@ public class FolderServiceTest extends AbstractTest {
 //	@Test 
 	public void testDeleteSystemFolder() {
 		// Declare variables
-		Actor customer;
+		Actor user;
 		Folder folder;
 		Collection<Folder> actorFolders;
 //		Collection<Folder> newActorFolders;
@@ -590,11 +610,11 @@ public class FolderServiceTest extends AbstractTest {
 //		Integer newNumberOfFolders;
 		
 		// Load objects to test
-		authenticate("customer1");
-		customer = actorService.findByPrincipal();
+		authenticate("user1");
+		user = actorService.findByPrincipal();
 		
 		// Checks basic requirements
-		Assert.notNull(customer, "El usuario no se ha logueado correctamente.");
+		Assert.notNull(user, "El usuario no se ha logueado correctamente.");
 		
 		// Execution of test
 		actorFolders = folderService.findAllByActor();
@@ -641,7 +661,7 @@ public class FolderServiceTest extends AbstractTest {
 //	@Test
 	public void testDeleteSystemFolderOfOtherUser() {
 		// Declare variables
-		Actor customer;
+		Actor user;
 		Folder folder;
 //		Collection<Folder> actorFolders;
 //		Collection<Folder> newActorFolders;
@@ -650,17 +670,17 @@ public class FolderServiceTest extends AbstractTest {
 //		Integer newNumberOfFolders;
 		
 		// Load objects to test
-		authenticate("customer2");
-		customer = actorService.findByPrincipal();
+		authenticate("user2");
+		user = actorService.findByPrincipal();
 		
 		// Checks basic requirements
-		Assert.notNull(customer, "El usuario no se ha logueado correctamente.");
+		Assert.notNull(user, "El usuario no se ha logueado correctamente.");
 		
 		// Execution of test
 //		actorFolders = folderService.findAllByActor();
 //		numberOfFolders = actorFolders.size();
 		
-		folder = folderService.findOne(122); // Carpeta "MyBox", no del sistema, del customer1
+		folder = folderService.findOne(122); // Carpeta "MyBox", no del sistema, del user1
 //		folderName = folder.getName();
 //		while(folder.getIsSystem() == false){
 //			folder = actorFolders.iterator().next();
@@ -687,7 +707,7 @@ public class FolderServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Six-Pack - Level B - 17.2
+	 * Acme-Barter - Level C - 10.3
 	 * When a message is deleted from a folder other than "trash box", it is moved to "trash box"
 	 */
 	
@@ -707,18 +727,18 @@ public class FolderServiceTest extends AbstractTest {
 	@Test 
 	public void testDeleteMessage() {
 		// Declare variables
-		Actor customer;
+		Actor user;
 		Folder folder;
 		Collection<Folder> actorFolders;
 		Message message;
 		Collection<Folder> newActorFolders;
 		
 		// Load objects to test
-		authenticate("customer1");
-		customer = actorService.findByPrincipal();
+		authenticate("user1");
+		user = actorService.findByPrincipal();
 		
 		// Checks basic requirements
-		Assert.notNull(customer, "El usuario no se ha logueado correctamente.");
+		Assert.notNull(user, "El usuario no se ha logueado correctamente.");
 		
 		// Execution of test
 		actorFolders = folderService.findAllByActor();
@@ -765,6 +785,11 @@ public class FolderServiceTest extends AbstractTest {
 	}
 	
 	/**
+	 * Acme-Barter - Level C - 10.3
+	 * when it is deleted from "trash box", it is actually removed from the system.
+	 */
+	
+	/**
 	 * Positive test case: Borrar un mensaje de la carpeta TrashBox
 	 * 		- Acción
 	 * 		+ Autenticarse en el sistema
@@ -779,18 +804,18 @@ public class FolderServiceTest extends AbstractTest {
 	@Test 
 	public void testDeleteMessageFromTrashBox() {
 		// Declare variables
-		Actor customer;
+		Actor user;
 		Folder folder;
 		Collection<Folder> actorFolders;
 		Message message;
 		Collection<Folder> newActorFolders;
 		
 		// Load objects to test
-		authenticate("customer1");
-		customer = actorService.findByPrincipal();
+		authenticate("user1");
+		user = actorService.findByPrincipal();
 		
 		// Checks basic requirements
-		Assert.notNull(customer, "El usuario no se ha logueado correctamente.");
+		Assert.notNull(user, "El usuario no se ha logueado correctamente.");
 		
 		// Execution of test
 		actorFolders = folderService.findAllByActor();
@@ -842,23 +867,23 @@ public class FolderServiceTest extends AbstractTest {
 //	@Test
 	public void testDeleteMessageOfOther() {
 		// Declare variables
-		Actor customer;
+		Actor user;
 		Folder folder;
 //		Collection<Folder> actorFolders;
 		Message message;
 //		Collection<Folder> newActorFolders;
 		
 		// Load objects to test
-		authenticate("customer1");
-		customer = actorService.findByPrincipal();
+		authenticate("user1");
+		user = actorService.findByPrincipal();
 		
 		// Checks basic requirements
-		Assert.notNull(customer, "El usuario no se ha logueado correctamente.");
+		Assert.notNull(user, "El usuario no se ha logueado correctamente.");
 		
 		// Execution of test
 //		actorFolders = folderService.findAllByActor();
 		
-		folder = folderService.findOne(87); // Carpeta InBox del customer2
+		folder = folderService.findOne(87); // Carpeta InBox del user2
 		Assert.notNull(folder, "No está el folder necesario para realizar el test.");
 		
 		message = null;
@@ -910,7 +935,7 @@ public class FolderServiceTest extends AbstractTest {
 //	@Test
 	public void testDeleteNullMessageFromNullFolder() {
 		// Declare variables
-		Actor customer;
+		Actor user;
 //		Folder folder;
 //		Folder otherFolder;
 //		Collection<Folder> actorFolders;
@@ -918,11 +943,11 @@ public class FolderServiceTest extends AbstractTest {
 //		Collection<Folder> newActorFolders;
 		
 		// Load objects to test
-		authenticate("customer1");
-		customer = actorService.findByPrincipal();
+		authenticate("user1");
+		user = actorService.findByPrincipal();
 		
 		// Checks basic requirements
-		Assert.notNull(customer, "El usuario no se ha logueado correctamente.");
+		Assert.notNull(user, "El usuario no se ha logueado correctamente.");
 		
 		// Execution of test
 //		actorFolders = folderService.findAllByActor();
@@ -976,5 +1001,317 @@ public class FolderServiceTest extends AbstractTest {
 
 	}
 	
+	/**
+	 * Acme-Barter - Level C - 10.3
+	 * Actors can flag their messages as spam, in which case they are moved automatically to the "spam box" folder.
+	 */
+	
+	/**
+	 * Positive test case: Marcar un mensaje como Spam
+	 * 		- Acción
+	 * 		+ Autenticarse en el sistema
+	 * 		+ Acceder a una de sus carpetas
+	 * 		+ Marcar uno de sus mensajes como Spam
+	 * 		- Comprobación
+	 * 		+ Comprobar que el mensaje ya no está en la carpeta original
+	 * 		+ Comprobar que la carpeta original tiene el mismo numero de mensajes que antes menos 1
+	 * 		+ Comprobar que el mensaje ahora aparece en SpamBox
+	 * 		+ Comprobar que SpamBox ahora tiene el mismo numero de mensajes que antes más 1
+	 * 		+ Cerrar su sesión
+	 */
+	
+	// CORREGIR : Falta que se implemente la funcionalidad y comprobar que funcione el test
+	@Test 
+	public void testFlagMessageAsSpam() {
+		// Declare variables
+		Actor user;
+		Collection<Folder> actorFolders;
+		Folder folder;
+		Folder actorSpamFolder;
+		Collection<Message> folderMessages;
+		Message message;
+		Integer folderMessagesSize;
+		Integer spamMessagesSize;
+		
+		Collection<Folder> newActorFolders;
+		Folder originalFolder;
+		Collection<Message> originalFolderMessages;
+		Folder spamFolder;
+		Collection<Message> spamFolderMessages;
+		
+		// Load objects to test
+		authenticate("user1");
+		user = actorService.findByPrincipal();
+		
+		// Checks basic requirements
+		Assert.notNull(user, "El usuario no se ha logueado correctamente.");
+		
+		// Execution of test
+		actorFolders = folderService.findAllByActor();
+		
+		folder = null;
+		
+		for(Folder f: actorFolders){
+			if(f.getName().equals("InBox")){
+				folder = f;
+			}
+			if(f.getName().equals("SpamBox")){
+				actorSpamFolder = f;
+			}
+		}
+		
+		Assert.notNull(folder, "No hay ninguna carpeta con la que se pretender testear.");
+		
+		folderMessages = messageService.findAllByFolder(folder);
+		spamFolderMessages = messageService.findAllByFolder(spamFolder);
+		
+		folderMessagesSize = folderMessages.size();
+		spamMessagesSize = spamFolderMessages.size();
+		
+		message = null;
+		
+		for(Message m: folderMessages){
+			message = m;
+			break;
+		}
+		
+		Assert.notNull(message, "No hay ningun mensaje con el que se pretender testear.");
+		
+		messageService.flagAsSpam(message);
+		
+		// Checks results
+		newActorFolders = folderService.findAllByActor();
+		
+		folder = null;
+		
+		for(Folder f: newActorFolders){
+			if(f.getName().equals("InBox")){
+				originalFolder = f;
+			}
+			if(f.getName().equals("SpamBox")){
+				spamFolder = f;
+			}
+		}
+		
+		Assert.notNull(spamFolder, "No hay ninguna carpeta de Spam con la que se pretender testear.");
+		
+		originalFolderMessages = messageService.findAllByFolder(originalFolder);
+		
+		spamFolderMessages = messageService.findAllByFolder(spamFolder);
+		
+		Assert.isTrue(!originalFolderMessages.contains(message), "El mensaje todavía está en la carpeta original.");
+		
+		Assert.isTrue(originalFolderMessages.size() == folderMessagesSize - 1, "El numero de mensajes de la carpeta original no es el mismo que había antes menos 1.");
+		
+		Assert.isTrue(spamFolderMessages.contains(message), "El mensaje no está en la carpeta de spam.");
+		
+		Assert.isTrue(spamFolderMessages.size() == spamMessagesSize + 1, "El numero de mensajes de la carpeta de spam no es el mismo que había antes mas 1.");
+		
+		unauthenticate();
+
+	}
+	
+	/**
+	 * Negative test case: Marcar un mensaje como Spam que está en Spam
+	 * 		- Acción
+	 * 		+ Autenticarse en el sistema
+	 * 		+ Acceder a su carpeta de Spam
+	 * 		+ Marcar uno de sus mensajes como Spam
+	 * 		- Comprobación
+	 * 		+ Comprobar que ...
+	 * 		+ Cerrar su sesión
+	 */
+	
+	// CORREGIR : Falta que se implemente la funcionalidad y comprobar que funcione el test
+	@Test 
+	public void testFlagSpamMessageAsSpam() {
+		// Declare variables
+		Actor user;
+		Collection<Folder> actorFolders;
+		Folder folder;
+		Folder actorSpamFolder;
+		Collection<Message> folderMessages;
+		Message message;
+		Integer folderMessagesSize;
+		Integer spamMessagesSize;
+		
+		Collection<Folder> newActorFolders;
+		Folder originalFolder;
+		Collection<Message> originalFolderMessages;
+		Folder spamFolder;
+		Collection<Message> spamFolderMessages;
+		
+		// Load objects to test
+		authenticate("user1");
+		user = actorService.findByPrincipal();
+		
+		// Checks basic requirements
+		Assert.notNull(user, "El usuario no se ha logueado correctamente.");
+		
+		// Execution of test
+		actorFolders = folderService.findAllByActor();
+		
+		folder = null;
+		
+		for(Folder f: actorFolders){
+			if(f.getName().equals("InBox")){
+				folder = f;
+			}
+			if(f.getName().equals("SpamBox")){
+				actorSpamFolder = f;
+			}
+		}
+		
+		Assert.notNull(folder, "No hay ninguna carpeta con la que se pretender testear.");
+		
+		folderMessages = messageService.findAllByFolder(folder);
+		spamFolderMessages = messageService.findAllByFolder(spamFolder);
+		
+		folderMessagesSize = folderMessages.size();
+		spamMessagesSize = spamFolderMessages.size();
+		
+		message = null;
+		
+		for(Message m: folderMessages){
+			message = m;
+			break;
+		}
+		
+		Assert.notNull(message, "No hay ningun mensaje con el que se pretender testear.");
+		
+		messageService.flagAsSpam(message);
+		
+		// Checks results
+		newActorFolders = folderService.findAllByActor();
+		
+		folder = null;
+		
+		for(Folder f: newActorFolders){
+			if(f.getName().equals("InBox")){
+				originalFolder = f;
+			}
+			if(f.getName().equals("SpamBox")){
+				spamFolder = f;
+			}
+		}
+		
+		Assert.notNull(spamFolder, "No hay ninguna carpeta de Spam con la que se pretender testear.");
+		
+		originalFolderMessages = messageService.findAllByFolder(originalFolder);
+		
+		spamFolderMessages = messageService.findAllByFolder(spamFolder);
+		
+		Assert.isTrue(!originalFolderMessages.contains(message), "El mensaje todavía está en la carpeta original.");
+		
+		Assert.isTrue(originalFolderMessages.size() == folderMessagesSize - 1, "El numero de mensajes de la carpeta original no es el mismo que había antes menos 1.");
+		
+		Assert.isTrue(spamFolderMessages.contains(message), "El mensaje no está en la carpeta de spam.");
+		
+		Assert.isTrue(spamFolderMessages.size() == spamMessagesSize + 1, "El numero de mensajes de la carpeta de spam no es el mismo que había antes mas 1.");
+		
+		unauthenticate();
+
+	}
+	
+	/**
+	 * Negative test case: Marcar un mensaje de otro User como Spam
+	 * 		- Acción
+	 * 		+ Autenticarse en el sistema
+	 * 		+ Marcar un mensajes de otro User como Spam
+	 * 		- Comprobación
+	 * 		+ Comprobar que ...
+	 * 		+ Cerrar su sesión
+	 */
+	
+	// CORREGIR : Falta que se implemente la funcionalidad y comprobar que funcione el test
+	@Test 
+	public void testFlagOtherUserMessageAsSpam() {
+		// Declare variables
+		Actor user;
+		Collection<Folder> actorFolders;
+		Folder folder;
+		Folder actorSpamFolder;
+		Collection<Message> folderMessages;
+		Message message;
+		Integer folderMessagesSize;
+		Integer spamMessagesSize;
+		
+		Collection<Folder> newActorFolders;
+		Folder originalFolder;
+		Collection<Message> originalFolderMessages;
+		Folder spamFolder;
+		Collection<Message> spamFolderMessages;
+		
+		// Load objects to test
+		authenticate("user1");
+		user = actorService.findByPrincipal();
+		
+		// Checks basic requirements
+		Assert.notNull(user, "El usuario no se ha logueado correctamente.");
+		
+		// Execution of test
+		actorFolders = folderService.findAllByActor();
+		
+		folder = null;
+		
+		for(Folder f: actorFolders){
+			if(f.getName().equals("InBox")){
+				folder = f;
+			}
+			if(f.getName().equals("SpamBox")){
+				actorSpamFolder = f;
+			}
+		}
+		
+		Assert.notNull(folder, "No hay ninguna carpeta con la que se pretender testear.");
+		
+		folderMessages = messageService.findAllByFolder(folder);
+		spamFolderMessages = messageService.findAllByFolder(spamFolder);
+		
+		folderMessagesSize = folderMessages.size();
+		spamMessagesSize = spamFolderMessages.size();
+		
+		message = null;
+		
+		for(Message m: folderMessages){
+			message = m;
+			break;
+		}
+		
+		Assert.notNull(message, "No hay ningun mensaje con el que se pretender testear.");
+		
+		messageService.flagAsSpam(message);
+		
+		// Checks results
+		newActorFolders = folderService.findAllByActor();
+		
+		folder = null;
+		
+		for(Folder f: newActorFolders){
+			if(f.getName().equals("InBox")){
+				originalFolder = f;
+			}
+			if(f.getName().equals("SpamBox")){
+				spamFolder = f;
+			}
+		}
+		
+		Assert.notNull(spamFolder, "No hay ninguna carpeta de Spam con la que se pretender testear.");
+		
+		originalFolderMessages = messageService.findAllByFolder(originalFolder);
+		
+		spamFolderMessages = messageService.findAllByFolder(spamFolder);
+		
+		Assert.isTrue(!originalFolderMessages.contains(message), "El mensaje todavía está en la carpeta original.");
+		
+		Assert.isTrue(originalFolderMessages.size() == folderMessagesSize - 1, "El numero de mensajes de la carpeta original no es el mismo que había antes menos 1.");
+		
+		Assert.isTrue(spamFolderMessages.contains(message), "El mensaje no está en la carpeta de spam.");
+		
+		Assert.isTrue(spamFolderMessages.size() == spamMessagesSize + 1, "El numero de mensajes de la carpeta de spam no es el mismo que había antes mas 1.");
+		
+		unauthenticate();
+
+	}
 	
 }
