@@ -31,14 +31,6 @@ public class ItemService {
 	}
 
 	// Simple CRUD methods ----------------------------------------------------
-
-	public Collection<Item> findAll(){
-		Collection<Item> result;
-		
-		result = itemRepository.findAll();
-		
-		return result;
-	}
 	
 	public Item findOne(int itemId) {
 		Item result;
