@@ -33,7 +33,7 @@ public class AuditorServiceTest extends AbstractTest{
 	// Service under test -------------------------
 	
 	@Autowired
-	private AuditorService trainerService;
+	private AuditorService auditorService;
 	
 	// Other services needed -----------------------
 	
@@ -52,165 +52,126 @@ public class AuditorServiceTest extends AbstractTest{
 	// Test ---------------------------------------
 	
 //	/**
-//	 * Description: A user who is not authenticated must be able to search for a trainer using a single keyword that must appear in his or name, surname, or curriculum.
+//	 * Description: A user who is not authenticated must be able to search for a auditor using a single keyword that must appear in his or name, surname, or curriculum.
 //	 * Precondition: The given key word is found in a name.
 //	 * Return: TRUE
-//	 * Postcondition: All trainer that contains the given key word in its name, surname or curriculum are shown.
+//	 * Postcondition: All auditor that contains the given key word in its name, surname or curriculum are shown.
 //	 */
 //	@Test
-//	public void findAllTrainersByGivenKeyword1(){
+//	public void findAllAuditorsByGivenKeyword1(){
 //		
-//		Collection<Trainer> all;
+//		Collection<Auditor> all;
 //		
-//		all = trainerService.findBySingleKeyword("Pablo");
+//		all = auditorService.findBySingleKeyword("Pablo");
 //		
 //		Assert.isTrue(all.size() == 1);
 //		
-//		trainerService.flush();
+//		auditorService.flush();
 //		
 //	}
 //	
 //	/**
-//	 * Description: A user who is not authenticated must be able to search for a trainer using a single keyword that must appear in his or name, surname, or curriculum.
+//	 * Description: A user who is not authenticated must be able to search for a auditor using a single keyword that must appear in his or name, surname, or curriculum.
 //	 * Precondition: The given key word is found in a surname
 //	 * Return: TRUE
-//	 * Postcondition: All trainer that contains the given key word in its name, surname or curriculum are shown.
+//	 * Postcondition: All auditor that contains the given key word in its name, surname or curriculum are shown.
 //	 */
 //	@Test
-//	public void findAllTrainersByGivenKeyword2(){
+//	public void findAllAuditorsByGivenKeyword2(){
 //		
-//		Collection<Trainer> all;
+//		Collection<Auditor> all;
 //		
-//		all = trainerService.findBySingleKeyword("Gil");
+//		all = auditorService.findBySingleKeyword("Gil");
 //		
 //		Assert.isTrue(all.size() == 1);
 //		
-//		trainerService.flush();
+//		auditorService.flush();
 //	}
 //	
 //	/**
-//	 * Description: A user who is not authenticated must be able to search for a trainer using a single keyword that must appear in his or name, surname, or curriculum.
+//	 * Description: A user who is not authenticated must be able to search for a auditor using a single keyword that must appear in his or name, surname, or curriculum.
 //	 * Precondition: The given key word is found in a surname
 //	 * Return: TRUE
-//	 * Postcondition: All trainer that contains the given key word in its name, surname or curriculum are shown.
+//	 * Postcondition: All auditor that contains the given key word in its name, surname or curriculum are shown.
 //	 */
 //	@Test
-//	public void findAllTrainersByGivenKeyword3(){
+//	public void findAllAuditorsByGivenKeyword3(){
 //		
-//		Collection<Trainer> all;
+//		Collection<Auditor> all;
 //		
-//		all = trainerService.findBySingleKeyword("Mata");
+//		all = auditorService.findBySingleKeyword("Mata");
 //				
 //		Assert.isTrue(all.size() == 1);
 //		
-//		trainerService.flush();
+//		auditorService.flush();
 //	}
 //	
 //	/**
-//	 * Description: A user who is not authenticated must be able to search for a trainer using a single keyword that must appear in his or name, surname, or curriculum.
+//	 * Description: A user who is not authenticated must be able to search for a auditor using a single keyword that must appear in his or name, surname, or curriculum.
 //	 * Precondition: The given key word is found in a curriculum.
 //	 * Return: TRUE
-//	 * Postcondition: All trainer that contains the given key word in its name, surname or curriculum are shown.
+//	 * Postcondition: All auditor that contains the given key word in its name, surname or curriculum are shown.
 //	 */
 //	@Test
-//	public void findAllTrainersByGivenKeyword4(){
+//	public void findAllAuditorsByGivenKeyword4(){
 //		
-//		Collection<Trainer> all;
+//		Collection<Auditor> all;
 //		
-//		all = trainerService.findBySingleKeyword("Hola");
+//		all = auditorService.findBySingleKeyword("Hola");
 //				
 //		Assert.isTrue(all.size() == 5);
 //		
-//		trainerService.flush();
+//		auditorService.flush();
 //	}
 //	
 //	/**
-//	 * Description: A user who is not authenticated must be able to search for a trainer using a single keyword that must appear in his or name, surname, or curriculum.
+//	 * Description: A user who is not authenticated must be able to search for a auditor using a single keyword that must appear in his or name, surname, or curriculum.
 //	 * Precondition: The given key word is found in a curriculum.
 //	 * Return: TRUE
-//	 * Postcondition: All trainer that contains the given key word in its name, surname or curriculum are shown.
+//	 * Postcondition: All auditor that contains the given key word in its name, surname or curriculum are shown.
 //	 */
 //	@Test
-//	public void findAllTrainersByGivenKeyword5(){
+//	public void findAllAuditorsByGivenKeyword5(){
 //		
-//		Collection<Trainer> all;
+//		Collection<Auditor> all;
 //		
-//		all = trainerService.findBySingleKeyword("Hololens");
+//		all = auditorService.findBySingleKeyword("Hololens");
 //				
 //		Assert.isTrue(all.size() == 0);
 //		
-//		trainerService.flush();
+//		auditorService.flush();
 //	}
 	
 	/**
-	 * Acme-Six-Pack-2.0 - Level B - 7.2
-	 * Navigate through the trainers.
+	 * Acme-Barter - Level A - 3.1
+	 * Register an auditor to the system.
 	 */
 	
 	/**
-	 * Positive test case: Listar los trainers
-	 * 		- Acción
-	 * 		+ Autenticarse en el sistema
-	 * 		+ Listar los trainers del sistema
-	 * 		- Comprobación
-	 * 		+ Listar sus carpetas
-	 * 		+ Comprobar que el numero de trainers obtenido es 6
-	 * 		+ Cerrar su sesión
-	 */
-	
-	@Test 
-	public void testListTrainers() {
-		// Declare variables
-		Actor customer;
-		Collection<Auditor> trainers;
-		
-		// Load objects to test
-		authenticate("customer1");
-		customer = actorService.findByPrincipal();
-		
-		// Checks basic requirements
-		Assert.notNull(customer, "El usuario no se ha logueado correctamente.");
-		
-		// Execution of test
-		trainers = trainerService.findAll();
-		
-		// Checks results
-		Assert.isTrue(trainers.size() == 6, "No se han listado los 6 trainers del sistema.");
-		
-		unauthenticate();
-
-	}
-	
-	/**
-	 * Acme-Six-Pack-2.0 - Level B - 10.1
-	 * Register a new trainer to the system.
-	 */
-	
-	/**
-	 * Positive test case: Registrar un nuevo Trainer
+	 * Positive test case: Registrar un nuevo Auditor
 	 * 		- Acción
 	 * 		+ Autenticarse en el sistema como administrador
-	 * 		+ Registrar un nuevo Trainer
+	 * 		+ Registrar un nuevo Auditor
 	 * 		- Comprobación
-	 * 		+ Listar los trainers
+	 * 		+ Listar los auditors
 	 * 		+ Comprobar que hay 1 más de los que había
-	 * 		+ Comprobar que el nuevo trainer se encuentra entre ellos
+	 * 		+ Comprobar que el nuevo auditor se encuentra entre ellos
 	 * 		+ Cerrar su sesión
-	 * 		+ Comprobar que puedes loguearte con el nuevo Trainer
+	 * 		+ Comprobar que puedes loguearte con el nuevo Auditor
 	 * 		+ Cerrar su sesión
 	 */
 	
 	@Test 
-	public void testRegisterTrainer() {
+	public void testRegisterAuditor() {
 		// Declare variables
 		Actor admin;
-		Auditor trainer;
+		Auditor auditor;
 		UserAccount userAccount;
-		Auditor trainerRegistered;
-		Integer numberOfTrainers;
-		Integer newNumberOfTrainers;
-		Collection<Auditor> trainers;
-		Actor authenticatedTrainer;
+		Auditor auditorRegistered;
+		Integer numberOfAuditors;
+		Integer newNumberOfAuditors;
+		Collection<Auditor> auditors;
+		Actor authenticatedAuditor;
 		
 		// Load objects to test
 		authenticate("admin");
@@ -220,47 +181,47 @@ public class AuditorServiceTest extends AbstractTest{
 		Assert.notNull(admin, "El usuario no se ha logueado correctamente.");
 		
 		// Execution of test
-		numberOfTrainers = trainerService.findAll().size();
+		numberOfAuditors = auditorService.findAll().size();
 		
-		trainer = trainerService.create();
+		auditor = auditorService.create();
 		
-		trainer.setName("Nuevo");
-		trainer.setSurname("Trainer");
-		trainer.setPhone("123456789");
+		auditor.setName("Nuevo");
+		auditor.setSurname("Auditor");
+		auditor.setPhone("123456789");
 
-		userAccount = userAccountService.create("TRAINER");
+		userAccount = userAccountService.create("AUDITOR");
 		
-		userAccount.setUsername("nuevoTrainer");
-		userAccount.setPassword("nuevoTrainer");
+		userAccount.setUsername("nuevoAuditor");
+		userAccount.setPassword("nuevoAuditor");
 		
-		trainer.setUserAccount(userAccount);
+		auditor.setUserAccount(userAccount);
 		
-		trainerRegistered = trainerService.save(trainer);
+		auditorRegistered = auditorService.save(auditor);
 		
 		// Checks results
-		trainers = trainerService.findAll();
-		newNumberOfTrainers = trainers.size();
+		auditors = auditorService.findAll();
+		newNumberOfAuditors = auditors.size();
 		
-		Assert.isTrue(numberOfTrainers + 1 == newNumberOfTrainers, "El numero de trainers tras el registro no es el mismo que antes + 1"); // First check
+		Assert.isTrue(numberOfAuditors + 1 == newNumberOfAuditors, "El numero de auditors tras el registro no es el mismo que antes + 1"); // First check
 		
-		Assert.isTrue(trainers.contains(trainerRegistered), "El Trainer registrado no se encuentra entre los trainers del sistema."); // Second check
+		Assert.isTrue(auditors.contains(auditorRegistered), "El Auditor registrado no se encuentra entre los auditors del sistema."); // Second check
 		
 		unauthenticate();
 		
-		authenticate("nuevoTrainer");
+		authenticate("nuevoAuditor");
 		
-		authenticatedTrainer = actorService.findByPrincipal();
+		authenticatedAuditor = actorService.findByPrincipal();
 		
-		Assert.notNull(authenticatedTrainer, "No se ha podido loguear al trainer que se acaba de registrar."); // Third check
+		Assert.notNull(authenticatedAuditor, "No se ha podido loguear al auditor que se acaba de registrar."); // Third check
 		
 		unauthenticate();
 
 	}
 	
 	/**
-	 * Negative test case: Registrar un nuevo Trainer sin estar autenticado
+	 * Negative test case: Registrar un nuevo Auditor sin estar autenticado
 	 * 		- Acción
-	 * 		+ Registrar un nuevo Trainer
+	 * 		+ Registrar un nuevo Auditor
 	 * 		- Comprobación
 	 * 		+ Comprobar que salta una excepción del tipo: IllegalArgumentException
 	 */
@@ -268,16 +229,16 @@ public class AuditorServiceTest extends AbstractTest{
 	@Test(expected=IllegalArgumentException.class)
 	@Rollback(value = true)
 //	@Test
-	public void testRegisterTrainerAsUnauthenticated() {
+	public void testRegisterAuditorAsUnauthenticated() {
 		// Declare variables
 //		Actor admin;
-		Auditor trainer;
+		Auditor auditor;
 		UserAccount userAccount;
-//		Trainer trainerRegistered;
-//		Integer numberOfTrainers;
-//		Integer newNumberOfTrainers;
-//		Collection<Trainer> trainers;
-//		Actor authenticatedTrainer;
+//		Auditor auditorRegistered;
+//		Integer numberOfAuditors;
+//		Integer newNumberOfAuditors;
+//		Collection<Auditor> auditors;
+//		Actor authenticatedAuditor;
 		
 		// Load objects to test
 //		authenticate("admin");
@@ -287,50 +248,50 @@ public class AuditorServiceTest extends AbstractTest{
 //		Assert.notNull(admin, "El usuario no se ha logueado correctamente.");
 		
 		// Execution of test
-//		numberOfTrainers = trainerService.findAll().size();
+//		numberOfAuditors = auditorService.findAll().size();
 		
-		trainer = trainerService.create();
+		auditor = auditorService.create();
 		
-		trainer.setName("Nuevo");
-		trainer.setSurname("Trainer");
-		trainer.setPhone("123456789");
+		auditor.setName("Nuevo");
+		auditor.setSurname("Auditor");
+		auditor.setPhone("123456789");
 
-		userAccount = userAccountService.create("TRAINER");
+		userAccount = userAccountService.create("AUDITOR");
 		
-		userAccount.setUsername("nuevoTrainer");
-		userAccount.setPassword("nuevoTrainer");
+		userAccount.setUsername("nuevoAuditor");
+		userAccount.setPassword("nuevoAuditor");
 		
-		trainer.setUserAccount(userAccount);
+		auditor.setUserAccount(userAccount);
 		
-		trainerService.save(trainer);
+		auditorService.save(auditor);
 		
 		// Checks results
-//		trainers = trainerService.findAll();
-//		newNumberOfTrainers = trainers.size();
+//		auditors = auditorService.findAll();
+//		newNumberOfAuditors = auditors.size();
 //		
-//		Assert.isTrue(numberOfTrainers + 1 == newNumberOfTrainers, "El numero de trainers tras el registro no es el mismo que antes + 1"); // First check
+//		Assert.isTrue(numberOfAuditors + 1 == newNumberOfAuditors, "El numero de auditors tras el registro no es el mismo que antes + 1"); // First check
 //		
-//		Assert.isTrue(trainers.contains(trainerRegistered), "El Trainer registrado no se encuentra entre los trainers del sistema."); // Second check
+//		Assert.isTrue(auditors.contains(auditorRegistered), "El Auditor registrado no se encuentra entre los auditors del sistema."); // Second check
 //		
 //		unauthenticate();
 //		
-//		authenticate("nuevoTrainer");
+//		authenticate("nuevoAuditor");
 //		
-//		authenticatedTrainer = actorService.findByPrincipal();
+//		authenticatedAuditor = actorService.findByPrincipal();
 //		
-//		Assert.notNull(authenticatedTrainer, "No se ha podido loguear al trainer que se acaba de registrar."); // Third check
+//		Assert.notNull(authenticatedAuditor, "No se ha podido loguear al auditor que se acaba de registrar."); // Third check
 //		
 //		unauthenticate();
 
 	}
 	
 	/**
-	 * Negative test case: Registrar un nuevo Trainer con username a null
+	 * Negative test case: Registrar un nuevo Auditor con username a null
 	 * 		- Acción
 	 * 		+ Autenticarse en el sistema como administrador
-	 * 		+ Registrar un nuevo Trainer con username nulo
+	 * 		+ Registrar un nuevo Auditor con username nulo
 	 * 		- Comprobación
-	 * 		+ Listar los trainers
+	 * 		+ Listar los auditors
 	 * 		+ Comprobar que salta una excepción del tipo: IllegalArgumentException
 	 * 		+ Cerrar su sesión
 	 */
@@ -338,16 +299,16 @@ public class AuditorServiceTest extends AbstractTest{
 	@Test(expected=IllegalArgumentException.class)
 	@Rollback(value = true)
 //	@Test 
-	public void testRegisterTrainerNullUsername() {
+	public void testRegisterAuditorNullUsername() {
 		// Declare variables
 		Actor admin;
-		Auditor trainer;
+		Auditor auditor;
 		UserAccount userAccount;
-//		Trainer trainerRegistered;
-//		Integer numberOfTrainers;
-//		Integer newNumberOfTrainers;
-//		Collection<Trainer> trainers;
-//		Actor authenticatedTrainer;
+//		Auditor auditorRegistered;
+//		Integer numberOfAuditors;
+//		Integer newNumberOfAuditors;
+//		Collection<Auditor> auditors;
+//		Actor authenticatedAuditor;
 		
 		// Load objects to test
 		authenticate("admin");
@@ -357,365 +318,398 @@ public class AuditorServiceTest extends AbstractTest{
 		Assert.notNull(admin, "El usuario no se ha logueado correctamente.");
 		
 		// Execution of test
-//		numberOfTrainers = trainerService.findAll().size();
+//		numberOfAuditors = auditorService.findAll().size();
 		
-		trainer = trainerService.create();
+		auditor = auditorService.create();
 		
-		trainer.setName("Nuevo");
-		trainer.setSurname("Trainer");
-		trainer.setPhone("123456789");
+		auditor.setName("Nuevo");
+		auditor.setSurname("Auditor");
+		auditor.setPhone("123456789");
 
-		userAccount = userAccountService.create("TRAINER");
+		userAccount = userAccountService.create("AUDITOR");
 		
 		userAccount.setUsername(null);
-		userAccount.setPassword("nuevoTrainer");
+		userAccount.setPassword("nuevoAuditor");
 		
-		trainer.setUserAccount(userAccount);
+		auditor.setUserAccount(userAccount);
 		
-		trainerService.save(trainer);
+		auditorService.save(auditor);
 		
 		
 		// Checks results
-//		trainers = trainerService.findAll();
-//		newNumberOfTrainers = trainers.size();
+//		auditors = auditorService.findAll();
+//		newNumberOfAuditors = auditors.size();
 //		
-//		Assert.isTrue(numberOfTrainers + 1 == newNumberOfTrainers, "El numero de trainers tras el registro no es el mismo que antes + 1"); // First check
+//		Assert.isTrue(numberOfAuditors + 1 == newNumberOfAuditors, "El numero de auditors tras el registro no es el mismo que antes + 1"); // First check
 //		
-//		Assert.isTrue(trainers.contains(trainerRegistered), "El Trainer registrado no se encuentra entre los trainers del sistema."); // Second check
+//		Assert.isTrue(auditors.contains(auditorRegistered), "El Auditor registrado no se encuentra entre los auditors del sistema."); // Second check
 //		
 //		unauthenticate();
 //		
-//		authenticate("nuevoTrainer");
+//		authenticate("nuevoAuditor");
 //		
-//		authenticatedTrainer = actorService.findByPrincipal();
+//		authenticatedAuditor = actorService.findByPrincipal();
 //		
-//		Assert.notNull(authenticatedTrainer, "No se ha podido loguear al trainer que se acaba de registrar."); // Third check
+//		Assert.notNull(authenticatedAuditor, "No se ha podido loguear al auditor que se acaba de registrar."); // Third check
 		
 		unauthenticate();
 
 	}
 	
-//	/**
-//	 * Acme-Six-Pack-2.0 - Level B - 9.1
-//	 * Manage the list of services in which he or she specialises.
-//	 */
-//	
-//	/**
-//	 * Positive test case: Añadir un nuevo servicio especializado
-//	 * 		- Acción
-//	 * 		+ Autenticarse en el sistema como trainer
-//	 * 		+ Añadirse un nuevo servicio especializado
-//	 * 		- Comprobación
-//	 * 		+ Listar sus servicios especializados
-//	 * 		+ Comprobar que hay 1 más de los que había
-//	 * 		+ Comprobar que el nuevo servicio se encuentra entre ellos
-//	 * 		+ Cerrar su sesión
-//	 */
-//	
-//	@Test 
-//	public void testNewServiceSpecialised() {
-//		// Declare variables
-//		Actor trainer;
-//		Trainer trainerUser;
-//		Integer numberOfServices;
-//		Collection<ServiceEntity> newServices;
-//		Integer newnumberOfServices;
-//		Collection<ServiceEntity> services;
-//		ServiceEntity serviceToAdd;
-//		Iterator<ServiceEntity> serviceIterator;
-//		
-//		// Load objects to test
-//		authenticate("trainer1");
-//		trainer = actorService.findByPrincipal();
-//		
-//		// Checks basic requirements
-//		Assert.notNull(trainer, "El usuario no se ha logueado correctamente.");
-//		
-//		// Execution of test
-//		trainerUser = trainerService.findByPrincipal();
-//		numberOfServices = trainerUser.getServices().size();
-//		
-//		services = serviceService.findAll();
-//		
-//		serviceIterator = services.iterator();
-//		serviceToAdd = serviceIterator.next();
-//		
-//		if(services.size() == numberOfServices){
-//			Assert.isTrue(false, "El Trainer ya tiene todos los servicios del sistema asignados como especializados.");
-//		}else{
-//			while(trainerUser.getServices().contains(serviceToAdd)){
-//				serviceToAdd = serviceIterator.next();
-//			}
-//		}
-//		
-//		trainerService.addService(serviceToAdd);
-//		
-//		
-//		// Checks results
-//		newServices = trainerUser.getServices();
-//		newnumberOfServices = newServices.size();
-//		
-//		Assert.isTrue(numberOfServices + 1 == newnumberOfServices, "El numero de servicios especializados del trainer o es el mismo que antes + 1."); // First check
-//		
-//		Assert.isTrue(newServices.contains(serviceToAdd), "El nuevo servicio no se encuentra entre los especializados del trainer."); // Second check
-//		
-//		unauthenticate();
-//
-//	}
-//	
-//	/**
-//	 * Positive test case: Eliminar un servicio especializado
-//	 * 		- Acción
-//	 * 		+ Autenticarse en el sistema como trainer
-//	 * 		+ Eliminarse un servicio especializado
-//	 * 		- Comprobación
-//	 * 		+ Listar sus servicios especializados
-//	 * 		+ Comprobar que hay 1 menos de los que había
-//	 * 		+ Comprobar que el servicio eliminado no se encuentra entre ellos
-//	 * 		+ Cerrar su sesión
-//	 */
-//	
-//	@Test 
-//	public void testDeleteServiceSpecialised() {
-//		// Declare variables
-//		Actor trainer;
-//		Trainer trainerUser;
-//		Integer numberOfServices;
-//		Collection<ServiceEntity> newServices;
-//		Integer newnumberOfServices;
-//		Collection<ServiceEntity> services;
-//		ServiceEntity serviceToRemove;
-//		Iterator<ServiceEntity> serviceIterator;
-//		
-//		// Load objects to test
-//		authenticate("trainer5");
-//		trainer = actorService.findByPrincipal();
-//		
-//		// Checks basic requirements
-//		Assert.notNull(trainer, "El usuario no se ha logueado correctamente.");
-//		
-//		// Execution of test
-//		trainerUser = trainerService.findByPrincipal();
-//		numberOfServices = trainerUser.getServices().size();
-//		
-//		services = serviceService.findAll();
-//		
-//		serviceIterator = services.iterator();
-//		
-//		serviceToRemove = serviceIterator.next();
-//		
-//		if(numberOfServices == 0){
-//			Assert.isTrue(false, "El Trainer no tiene servicios especializados para poder eliminar alguno.");
-//		}else{
-//			while(!trainerUser.getServices().contains(serviceToRemove) && !serviceToRemove.getName().equals("Fitness")){
-//				serviceToRemove = serviceIterator.next();
-//			}
-//		}
-//		
-//		trainerService.removeService(serviceToRemove);
-//		
-//		
-//		// Checks results
-//		newServices = trainerUser.getServices();
-//		newnumberOfServices = newServices.size();
-//		
-//		Assert.isTrue(numberOfServices - 1 == newnumberOfServices, "El numero de servicios especializados del trainer o es el mismo que antes + 1."); // First check
-//		
-//		Assert.isTrue(!newServices.contains(serviceToRemove), "El nuevo servicio se sigue encontrando entre los especializados del trainer."); // Second check
-//		
-//		unauthenticate();
-//
-//	}
-//	
-//	/**
-//	 * Negative test case: Eliminar un servicio especializado con el que ya participes en alguna actividad
-//	 * 		- Acción
-//	 * 		+ Autenticarse en el sistema como trainer
-//	 * 		+ Eliminarse un servicio especializado con el que ya participes en alguna actividad
-//	 * 		- Comprobación
-//	 * 		+ Comprobar que salta una excepción del tipo: IllegalArgumentException
-//	 * 		+ Cerrar su sesión
-//	 */
-//	
-//	@Test(expected=IllegalArgumentException.class)
-//	@Rollback(value = true)
-////	@Test 
-//	public void testDeleteServiceSpecialisedUsedInActivity() {
-//		// Declare variables
-//		Actor trainer;
-//		Trainer trainerUser;
-//		Integer numberOfServices;
-//		Collection<ServiceEntity> newServices;
-//		Integer newnumberOfServices;
-//		Collection<ServiceEntity> services;
-//		ServiceEntity serviceToRemove;
-//		Iterator<ServiceEntity> serviceIterator;
-//		
-//		// Load objects to test
-//		authenticate("trainer1");
-//		trainer = actorService.findByPrincipal();
-//		
-//		// Checks basic requirements
-//		Assert.notNull(trainer, "El usuario no se ha logueado correctamente.");
-//		
-//		// Execution of test
-//		trainerUser = trainerService.findByPrincipal();
-//		numberOfServices = trainerUser.getServices().size();
-//		
-//		services = serviceService.findAll();
-//		
-//		serviceIterator = services.iterator();
-//		
-//		serviceToRemove = serviceIterator.next();
-//		
-//		if(numberOfServices == 0){
-//			Assert.isTrue(false, "El Trainer no tiene servicios especializados para poder eliminar alguno.");
-//		}else{
-//			while(!trainerUser.getServices().contains(serviceToRemove)){
-//				serviceToRemove = serviceIterator.next();
-//			}
-//		}
-//		
-//		trainerService.removeService(serviceToRemove);
-//		
-//		
-//		// Checks results
-//		newServices = trainerUser.getServices();
-//		newnumberOfServices = newServices.size();
-//		
-//		Assert.isTrue(numberOfServices - 1 == newnumberOfServices, "El numero de servicios especializados del trainer o es el mismo que antes + 1."); // First check
-//		
-//		Assert.isTrue(!newServices.contains(serviceToRemove), "El nuevo servicio se sigue encontrando entre los especializados del trainer."); // Second check
-//		
-//		unauthenticate();
-//
-//	}
-//	
-//	/**
-//	 * Negative test case: Añadir un nuevo servicio especializado que ya tengas especializado
-//	 * 		- Acción
-//	 * 		+ Autenticarse en el sistema como trainer
-//	 * 		+ Añadirse un nuevo servicio especializado que ya tengas especializado
-//	 * 		- Comprobación
-//	 * 		+ Comprobar que salta una excepción del tipo: IllegalArgumentException
-//	 * 		+ Cerrar su sesión
-//	 */
-//	
-//	@Test(expected=IllegalArgumentException.class)
-//	@Rollback(value = true)
-////	@Test 
-//	public void testNewServiceSpecialisedStillSpecialised() {
-//		// Declare variables
-//		Actor trainer;
-//		Trainer trainerUser;
-//		Integer numberOfServices;
-////		Collection<ServiceEntity> newServices;
-////		Integer newnumberOfServices;
-//		Collection<ServiceEntity> services;
-//		ServiceEntity serviceToAdd;
-//		Iterator<ServiceEntity> serviceIterator;
-//		
-//		// Load objects to test
-//		authenticate("trainer1");
-//		trainer = actorService.findByPrincipal();
-//		
-//		// Checks basic requirements
-//		Assert.notNull(trainer, "El usuario no se ha logueado correctamente.");
-//		
-//		// Execution of test
-//		trainerUser = trainerService.findByPrincipal();
-//		numberOfServices = trainerUser.getServices().size();
-//		
-//		services = serviceService.findAll();
-//		
-//		serviceIterator = services.iterator();
-//		serviceToAdd = serviceIterator.next();
-//		
-//		if(services.size() == numberOfServices){
-//			Assert.isTrue(false, "El Trainer ya tiene todos los servicios del sistema asignados como especializados.");
-//		}else{
-//			while(!trainerUser.getServices().contains(serviceToAdd)){
-//				serviceToAdd = serviceIterator.next();
-//			}
-//		}
-//		
-//		trainerService.addService(serviceToAdd);
-//		
-//		
-//		// Checks results
-////		newServices = trainerUser.getServices();
-////		newnumberOfServices = newServices.size();
-////		
-////		Assert.isTrue(numberOfServices + 1 == newnumberOfServices, "El numero de servicios especializados del trainer no es el mismo que antes + 1."); // First check
-////		
-////		Assert.isTrue(newServices.contains(serviceToAdd), "El nuevo servicio no se encuentra entre los especializados del trainer."); // Second check
-//		
-//		unauthenticate();
-//
-//	}
-//	
-//	/**
-//	 * Positive test case: Eliminar un servicio especializado que no tengas especializado (Test planteado como negativo, pero resultante como positivo al no saltar excepción alguna, si no ignorarlo en el servicio para que no borre nada, puesto que no tiene sentido borrar lo que se pide)
-//	 * 		- Acción
-//	 * 		+ Autenticarse en el sistema como trainer
-//	 * 		+ Eliminarse un servicio especializado que no tengas especializado todavía
-//	 * 		- Comprobación
-//	 * 		+ Listar sus servicios especializados
-//	 * 		+ Comprobar que tiene especializados el mismo número de servicios que tenía
-//	 * 		+ Cerrar su sesión
-//	 */
-//	
-//	@Test 
-//	public void testDeleteServiceSpecialisedNotSpecialied() {
-//		// Declare variables
-//		Actor trainer;
-//		Trainer trainerUser;
-//		Integer numberOfServices;
-//		Collection<ServiceEntity> newServices;
-//		Integer newnumberOfServices;
-//		Collection<ServiceEntity> services;
-//		ServiceEntity serviceToRemove;
-//		Iterator<ServiceEntity> serviceIterator;
-//		
-//		// Load objects to test
-//		authenticate("trainer1");
-//		trainer = actorService.findByPrincipal();
-//		
-//		// Checks basic requirements
-//		Assert.notNull(trainer, "El usuario no se ha logueado correctamente.");
-//		
-//		// Execution of test
-//		trainerUser = trainerService.findByPrincipal();
-//		numberOfServices = trainerUser.getServices().size();
-//		
-//		services = serviceService.findAll();
-//		
-//		serviceIterator = services.iterator();
-//		
-//		serviceToRemove = serviceIterator.next();
-//		
-//		if(numberOfServices == 0){
-//			Assert.isTrue(false, "El Trainer no tiene servicios especializados para poder eliminar alguno.");
-//		}else{
-//			while(trainerUser.getServices().contains(serviceToRemove)){
-//				serviceToRemove = serviceIterator.next();
-//			}
-//		}
-//		
-//		trainerService.removeService(serviceToRemove);
-//		
-//		
-//		// Checks results
-//		newServices = trainerUser.getServices();
-//		newnumberOfServices = newServices.size();
-//		
-//		Assert.isTrue(numberOfServices == newnumberOfServices, "El numero de servicios especializados del trainer no es el mismo que antes."); // First check
-//		
-//		unauthenticate();
-//
-//	}
-//	
+	/**
+	 * Acme-Barter - Level A - 2.1
+	 * Self-assign an existing match to audit it. Obviously, no match can be self-assigned to two different auditors.
+	 */
 	
+	/**
+	 * Positive test case: Asignarse un Match
+	 * 		- Acción
+	 * 		+ Autenticarse en el sistema como Auditor
+	 * 		+ Listar los Matches
+	 * 		+ Asignarse uno nuevo
+	 * 		- Comprobación
+	 * 		+ Listar sus Matches asignados
+	 * 		+ Comprobar que el Match asignado aparece entre ellos
+	 * 		+ Comprobar que el numero de Matchs que tiene asignados es el mismo que antes mas 1
+	 * 		+ Cerrar su sesión
+	 */
+	
+	@Test 
+	public void testSelfAssignAMatch() {
+		// Declare variables
+		Auditor auditor;
+		Collection<Match> allMatches;
+		Collection<Match> matchesAssigned;
+		Collection<Match> newMatchesAssigned;
+		Match matchToAssign;
+		Integer matchesAssignedSize;
+		Integer newMatchesAssignedSize;
+		
+		// Load objects to test
+		authenticate("auditor1");
+		auditor = auditorService.findByPrincipal();
+		
+		// Checks basic requirements
+		Assert.notNull(auditor, "El usuario no se ha logueado correctamente.");
+		
+		// Execution of test
+		matchesAssigned = matchService.findAllByAuditor();
+		matchesAssignedSize = matchesAssigned.size();
+		
+		allMatches = matchService.findAll();
+		
+		matchToAssign = null;
+		
+		for(Match m: allMatches){
+			if(m.getAuditor() == null){
+				matchToAssign = m;
+				break;
+			}
+		}
+		
+		Assert.notNull(matchToAssign, "No hay ningún Match sin asignar para poder realizar el test.");
+		
+		matchService.selfAssignByAuditor(matchToAssign.getId());
+		
+		// Checks results
+		newMatchesAssigned = matchService.findAllByAuditor();
+		newMatchesAssignedSize = newMatchesAssigned.size();
+		
+		Assert.isTrue(newMatchesAssigned.contains(matchToAssign), "El auditor no contiene al Match entre sus Match asignados");
+		
+		Assert.isTrue(matchesAssignedSize + 1 == newMatchesAssignedSize, "El numero de Match asignados al Auditor no es el mismo que antes mas 1");
+		
+		unauthenticate();
+
+	}
+	
+	/**
+	 * Negative test case: Asignarse un Match que esté asignado a otro
+	 * 		- Acción
+	 * 		+ Autenticarse en el sistema como Auditor
+	 * 		+ Listar sus Matches asignados
+	 * 		+ Asignarse uno nuevo que tenga asignado otro auditor
+	 * 		- Comprobación
+	 * 		+ Comrpobar que salta una excepción del tipo: IllegalArgumentException
+	 * 		+ Cerrar su sesión
+	 */
+	
+	@Test(expected=IllegalArgumentException.class)
+	@Rollback(value = true)
+//	@Test 
+	public void testSelfAssignAMatchOfOtherAuditor() {
+		// Declare variables
+		Auditor auditor;
+		Collection<Match> allMatches;
+//		Collection<Match> matchesAssigned;
+//		Collection<Match> newMatchesAssigned;
+		Match matchToAssign;
+//		Integer matchesAssignedSize;
+//		Integer newMatchesAssignedSize;
+		
+		// Load objects to test
+		authenticate("auditor1");
+		auditor = auditorService.findByPrincipal();
+		
+		// Checks basic requirements
+		Assert.notNull(auditor, "El usuario no se ha logueado correctamente.");
+		
+		// Execution of test
+//		matchesAssigned = matchService.findAllByAuditor();
+//		matchesAssignedSize = matchesAssigned.size();
+		
+		allMatches = matchService.findAll();
+		
+		matchToAssign = null;
+		
+		for(Match m: allMatches){
+			if(m.getAuditor() != null && m.getAuditor() != auditor){
+				matchToAssign = m;
+				break;
+			}
+		}
+		
+		Assert.notNull(matchToAssign, "No hay ningún Match asignado a otro Auditor para poder realizar el test.");
+		
+		matchService.selfAssignByAuditor(matchToAssign.getId());
+		
+		// Checks results
+//		newMatchesAssigned = matchService.findAllByAuditor();
+//		newMatchesAssignedSize = newMatchesAssigned.size();
+//		
+//		Assert.isTrue(newMatchesAssigned.contains(matchToAssign), "El auditor no contiene al Match entre sus Match asignados");
+//		
+//		Assert.isTrue(matchesAssignedSize + 1 == newMatchesAssignedSize, "El numero de Match asignados al Auditor no es el mismo que antes mas 1");
+//		
+		unauthenticate();
+
+	}
+
+	/**
+	 * Negative test case: Asignarse un Match que ya tengas asignado
+	 * 		- Acción
+	 * 		+ Autenticarse en el sistema como Auditor
+	 * 		+ Asignarse uno nuevo que ya tenga asignado
+	 * 		- Comprobación
+	 * 		+ Comrpobar que salta una excepción del tipo: IllegalArgumentException
+	 * 		+ Cerrar su sesión
+	 */
+	
+	@Test(expected=IllegalArgumentException.class)
+	@Rollback(value = true)
+//	@Test 
+	public void testSelfAssignAMatchAlreadyAssigned() {
+		// Declare variables
+		Auditor auditor;
+		Collection<Match> allMatches;
+//		Collection<Match> matchesAssigned;
+//		Collection<Match> newMatchesAssigned;
+		Match matchToAssign;
+//		Integer matchesAssignedSize;
+//		Integer newMatchesAssignedSize;
+		
+		// Load objects to test
+		authenticate("auditor1");
+		auditor = auditorService.findByPrincipal();
+		
+		// Checks basic requirements
+		Assert.notNull(auditor, "El usuario no se ha logueado correctamente.");
+		
+		// Execution of test
+//		matchesAssigned = matchService.findAllByAuditor();
+//		matchesAssignedSize = matchesAssigned.size();
+		
+		allMatches = matchService.findAll();
+		
+		matchToAssign = null;
+		
+		for(Match m: allMatches){
+			if(m.getAuditor() != null && m.getAuditor() == auditor){
+				matchToAssign = m;
+				break;
+			}
+		}
+		
+		Assert.notNull(matchToAssign, "No hay ningún Match asignado al Auditor para poder realizar el test.");
+		
+		matchService.selfAssignByAuditor(matchToAssign.getId());
+		
+		// Checks results
+//		newMatchesAssigned = matchService.findAllByAuditor();
+//		newMatchesAssignedSize = newMatchesAssigned.size();
+//		
+//		Assert.isTrue(newMatchesAssigned.contains(matchToAssign), "El auditor no contiene al Match entre sus Match asignados");
+//		
+//		Assert.isTrue(matchesAssignedSize + 1 == newMatchesAssignedSize, "El numero de Match asignados al Auditor no es el mismo que antes mas 1");
+//		
+		unauthenticate();
+
+	}
+	
+	/**
+	 * Acme-Barter - Level A - 2.2
+	 * Write an auditing report regarding the matches that he or she's self-assigned.
+	 */
+	
+	/**
+	 * Positive test case: Escribir un report a un Match
+	 * 		- Acción
+	 * 		+ Autenticarse en el sistema como Auditor
+	 * 		+ Listar sus Matches asignados
+	 * 		+ Escribir un report para uno de ellos
+	 * 		- Comprobación
+	 * 		+ Listar el Match
+	 * 		+ Comprobar que ahora tiene el report que ha escrito
+	 * 		+ Cerrar su sesión
+	 */
+	
+	@Test 
+	public void testWriteAReport() {
+		// Declare variables
+		Auditor auditor;
+		Collection<Match> matchesAssigned;
+		Match matchToReport;
+		Match matchReported;
+		
+		// Load objects to test
+		authenticate("auditor1");
+		auditor = auditorService.findByPrincipal();
+		
+		// Checks basic requirements
+		Assert.notNull(auditor, "El usuario no se ha logueado correctamente.");
+		
+		// Execution of test
+		matchesAssigned = matchService.findAllByAuditor();
+		
+		matchToReport = matchesAssigned.iterator().next();
+		
+		matchToReport.setReport("Nuevo Report");
+		
+		matchService.addReport(matchToReport);
+		
+		// Checks results
+		matchReported = matchService.findOne(matchToReport.getId());
+		
+		Assert.isTrue(matchReported.getReport() == "Nuevo Report", "El Match no tiene escrito el report que ha intentado escribirle el Auditor.");
+		
+		unauthenticate();
+
+	}
+	
+	/**
+	 * Negative test case: Escribir un report a un Match que no tengas asignado
+	 * 		- Acción
+	 * 		+ Autenticarse en el sistema como Auditor
+	 * 		+ Escribir un report para un Match que no tenga asignado
+	 * 		- Comprobación
+	 * 		+ Comprobar que salta una excepción del tipo: IllegalArgumentException
+	 * 		+ Cerrar su sesión
+	 */
+	
+	// CORREGIR : Salta un NullPointerException porque no se controla bien, debería salir un IllegalArgumentException
+	@Test(expected=IllegalArgumentException.class)
+	@Rollback(value = true)
+//	@Test 
+	public void testWriteAReportToMatchNotAssigned() {
+		// Declare variables
+		Auditor auditor;
+		Collection<Match> allMatches;
+		Match matchToReport;
+//		Match matchReported;
+		
+		// Load objects to test
+		authenticate("auditor1");
+		auditor = auditorService.findByPrincipal();
+		
+		// Checks basic requirements
+		Assert.notNull(auditor, "El usuario no se ha logueado correctamente.");
+		
+		// Execution of test
+//		matchesAssigned = matchService.findAllByAuditor();
+		
+		allMatches = matchService.findAll();
+		
+		matchToReport = null;
+		
+		for(Match m: allMatches){
+			if(m.getAuditor() == null){
+				matchToReport = m;
+			}
+		}
+		
+		Assert.notNull(matchToReport, "No existe ningún match no asignado a un Auditor para poder realizar el test.");
+		
+//		matchToReport = matchesAssigned.iterator().next();
+		
+		matchToReport.setReport("Nuevo Report");
+		
+		matchService.addReport(matchToReport);
+		
+		// Checks results
+//		matchReported = matchService.findOne(matchToReport.getId());
+//		
+//		Assert.isTrue(matchReported.getReport() == "Nuevo Report", "El Match no tiene escrito el report que ha intentado escribirle el Auditor.");
+//		
+		unauthenticate();
+
+	}
+	
+	/**
+	 * Positive test case: Escribir un report a un Match que tenga asignado otro Auditor
+	 * 		- Acción
+	 * 		+ Autenticarse en el sistema como Auditor
+	 * 		+ Escribir un report para un Match que tenga asignado otro Auditor
+	 * 		- Comprobación
+	 * 		+ Comprobar que salta una excepción del tipo: IllegalArgumentException
+	 * 		+ Cerrar su sesión
+	 */
+	
+	@Test(expected=IllegalArgumentException.class)
+	@Rollback(value = true)
+//	@Test 
+	public void testWriteAReportToMatchAssignedToOtherAuditor() {
+		// Declare variables
+		Auditor auditor;
+		Collection<Match> allMatches;
+		Match matchToReport;
+//		Match matchReported;
+		
+		// Load objects to test
+		authenticate("auditor1");
+		auditor = auditorService.findByPrincipal();
+		
+		// Checks basic requirements
+		Assert.notNull(auditor, "El usuario no se ha logueado correctamente.");
+		
+		// Execution of test
+//		matchesAssigned = matchService.findAllByAuditor();
+		
+		allMatches = matchService.findAll();
+		
+		matchToReport = null;
+		
+		for(Match m: allMatches){
+			if(m.getAuditor() != null && m.getAuditor() != auditor){
+				matchToReport = m;
+			}
+		}
+		
+		Assert.notNull(matchToReport, "No existe ningún match asignado a otro Auditor para poder realizar el test.");
+		
+//		matchToReport = matchesAssigned.iterator().next();
+		
+		matchToReport.setReport("Nuevo Report");
+		
+		matchService.addReport(matchToReport);
+		
+		// Checks results
+//		matchReported = matchService.findOne(matchToReport.getId());
+//		
+//		Assert.isTrue(matchReported.getReport() == "Nuevo Report", "El Match no tiene escrito el report que ha intentado escribirle el Auditor.");
+//		
+		unauthenticate();
+
+	}
 	
 	
 	/**
@@ -733,7 +727,7 @@ public class AuditorServiceTest extends AbstractTest{
 		// Load objects to test
 		authenticate("admin");
 		
-		inTest = trainerService.findAll();
+		inTest = auditorService.findAll();
 		
 		auditorBarters = new HashMap<Auditor, Integer>();
 		maxBarters = 0;

@@ -52,7 +52,6 @@ public class MatchService {
 			
 			result.setCancelled(false);
 			result.setCreationMoment(new Date()); // Aquí por ser NotNull, pero debe sobreescribirse en el save().
-			result.setReport(null);
 			
 			return result;
 			
@@ -60,11 +59,13 @@ public class MatchService {
 		
 		public Match save(Match match){
 			
-			Assert.isTrue(actorService.checkAuthority("ADMIN") || actorService.checkAuthority("USER") || actorService.checkAuthority("AUDITOR"), "Only an Actor loged in into the system can create a Match.");
+			Assert.isTrue(actorService.checkAuthority("ADMIN") || actorService.checkAuthority("USER") || actorService.checkAuthority("AUDITOR"), "Only an Actor loged in into the system can manage a Match.");
 			
 			Assert.notNull(match);
 			
 			if(match.getId() == 0){ // Está siendo creado
+				
+				Assert.isTrue(actorService.checkAuthority("USER"), "Only an User can create a Match.");
 				
 				User user;
 				
@@ -78,11 +79,18 @@ public class MatchService {
 				
 				Assert.isTrue(matchRepository.findAllNotCancelledByBarterId(match.getReceiverBarter().getId()).isEmpty() == true, "The Other Barter is involved in other Match that are not cancelled.");
 				
+				Assert.isTrue(match.getAuditor() == null, "You can't assign an Auditor to a Match.");
+				
+				Assert.isTrue(match.getReport() == null || match.getReport() == "", "You can't set de Report of a Match.");
+				
+				Assert.isTrue(match.getOfferSignsDate() == null, "You can't set the sign of a Match in its creation.");
+				
+				Assert.isTrue(match.getRequestSignsDate() == null, "You can't set the sign of a Match in its creation.");
+				
 				match.setCancelled(false);
 				match.setCreationMoment(new Date());
-				match.setReport(null);
 				
-			}else{ // Está siendo editado
+			}else{ // Está siendo firmado, cancelado, asignándose un Auditor o un report.
 				
 				// No sirve de nada, puesto que al hacer el set ya el findOne te trae el objeto modificado (antes del save)
 //				Match originalMatch;
