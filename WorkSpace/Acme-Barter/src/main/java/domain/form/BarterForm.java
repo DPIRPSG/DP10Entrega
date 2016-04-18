@@ -76,6 +76,4 @@ public class BarterForm {
 	public void setRequestedPictures(String requestedPictures) {
 		this.requestedPictures = requestedPictures;
 	}
-	
-	
 }
