@@ -30,7 +30,7 @@
 		<value>/views/auditor/messages</value>
 		<value>/views/user/messages</value>
 		
-		<value>/views/socialIdentity/messages</value>
+		<value>/views/social-identity/messages</value>
 		
 		<value>/views/folder/messages</value>
 		<value>/views/message/messages</value>

@@ -28,10 +28,10 @@
 		
 		<display:column sortable="true">
 			<a href="user/user/followOrUnfollow.do?userIdOtherUser=${row_User.id}&redirectUri=${requestURI}">
-				<jstl:if test="${contains == false }">
+				<jstl:if test="${contains == false && row_User.id != userId}">
 					<spring:message code="user.follow" />
 				</jstl:if>
-				<jstl:if test="${contains == true }">
+				<jstl:if test="${contains == true && row_User.id != userId}">
 					<spring:message code="user.unfollow" />
 				</jstl:if>
 			</a>

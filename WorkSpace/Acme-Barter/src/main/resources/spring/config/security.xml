@@ -46,6 +46,7 @@
 		<security:intercept-url pattern="/legal-text/administrator/**" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/barter/administrator/**" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/auditor/administrator/**" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/match/administrator/**" access="hasRole('ADMIN')" />
 
 		<security:intercept-url pattern="/user/user/**" access="hasRole('USER')" />
 		<security:intercept-url pattern="/socialIdentity/user/**" access="hasRole('USER')" />
@@ -54,7 +55,7 @@
 		<security:intercept-url pattern="/item/user/**" access="hasRole('USER')"/>			
 			
 			
-		<security:intercept-url pattern="/auditor/auditor/**" access="hasRole('AUDITOR')" />			
+		<security:intercept-url pattern="/auditor/auditor/**" access="hasRole('AUDITOR')" />
 		<security:intercept-url pattern="/match/auditor/**" access="hasRole('AUDITOR')" />			
 		
 		<security:intercept-url pattern="/folder/actor/**" access="hasAnyRole('USER', 'ADMIN', 'AUDITOR')"/>
@@ -62,11 +63,12 @@
 		
 	
 		<security:intercept-url pattern="/barter/list.do" access="permitAll" />
+		<security:intercept-url pattern="/match/list.do" access="permitAll" />
 		<security:intercept-url pattern="/item/display.do" access="permitAll" />
 		
 		<security:intercept-url pattern="/user/create.do" access="!hasAnyRole('USER', 'ADMIN', 'AUDITOR')" />
 		<security:intercept-url pattern="/user/list.do" access="permitAll" />
-		<security:intercept-url pattern="/socialIdentity/list.do" access="permitAll" />
+		<security:intercept-url pattern="/social-identity/list.do" access="permitAll" />
 		<security:intercept-url pattern="/barter/listByUser.do" access="permitAll" />
 
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
