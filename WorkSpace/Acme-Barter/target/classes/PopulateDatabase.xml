@@ -1213,6 +1213,42 @@
 		</property>
 	</bean>
 	
+	<bean id="item21" class="domain.Item">
+		<property name="name" value="Guitarra"/>
+		<property name="description" value="Guitarra eléctrica"/>
+		<property name="pictures">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="item22" class="domain.Item">
+		<property name="name" value="Bajo"/>
+		<property name="description" value="Bajo en buenas condiciones"/>
+		<property name="pictures">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="item23" class="domain.Item">
+		<property name="name" value="Guitarra"/>
+		<property name="description" value="Guitarra eléctrica bastante buena"/>
+		<property name="pictures">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="item24" class="domain.Item">
+		<property name="name" value="Bajo"/>
+		<property name="description" value="Quiero un bajo que vaya bien"/>
+		<property name="pictures">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- LegalText -->
 	
 	<bean id="legalText1" class="domain.LegalText">
@@ -1451,6 +1487,52 @@
 		</property>
 	</bean>
 	
+	<bean id="barter11" class="domain.Barter">
+		<property name="title" value="Busco guitarra"/>
+		<property name="cancelled" value="false"/>
+		<property name="registerMoment" value="2016/01/12 12:30"/>
+		<property name="user" ref="user1"/>
+		<property name="offered" ref="item22"/>
+		<property name="requested" ref="item21"/>
+		<property name="createdMatch">
+			<list>
+				<ref bean="match5"/>
+				<ref bean="match6"/>
+			</list>
+		</property>
+		<property name="receivedMatch">
+			<list>
+			</list>
+		</property>
+		<property name="relatedBarter">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="barter12" class="domain.Barter">
+		<property name="title" value="Busco otro bajo"/>
+		<property name="cancelled" value="false"/>
+		<property name="registerMoment" value="2016/01/12 12:30"/>
+		<property name="user" ref="user2"/>
+		<property name="offered" ref="item23"/>
+		<property name="requested" ref="item24"/>
+		<property name="createdMatch">
+			<list>
+			</list>
+		</property>
+		<property name="receivedMatch">
+			<list>
+				<ref bean="match5"/>
+				<ref bean="match6"/>
+			</list>
+		</property>
+		<property name="relatedBarter">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Match -->
 	
 	<bean id="match1" class="domain.Match">
@@ -1499,6 +1581,21 @@
 		<property name="auditor" ref="auditor3"/>
 		<property name="creatorBarter" ref="barter5"/>
 		<property name="receiverBarter" ref="barter6"/>
+	</bean>
+	
+	<bean id="match5" class="domain.Match">
+		<property name="creationMoment" value="2016/04/05 14:00"/>
+		<property name="legalText" ref="legalText1"/>
+		<property name="cancelled" value="true"/>
+		<property name="creatorBarter" ref="barter11"/>
+		<property name="receiverBarter" ref="barter12"/>
+	</bean>
+	
+	<bean id="match6" class="domain.Match">
+		<property name="creationMoment" value="2016/04/05 14:00"/>
+		<property name="legalText" ref="legalText1"/>
+		<property name="creatorBarter" ref="barter11"/>
+		<property name="receiverBarter" ref="barter12"/>
 	</bean>
 	
 	
