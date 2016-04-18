@@ -33,6 +33,17 @@
 			</jstl:if>
 		</display:column>
 	</security:authorize>
+	
+	<security:authorize access="hasRole('ADMIN')">
+		<spring:message code="barter.edit" var="editHeader" />
+		<display:column title="${editHeader}" sortable="true">
+			<jstl:if test="${row_Barter.cancelled == false}">
+				<a href="barter/administrator/edit.do?barterId=${row_Barter.id}"> <spring:message
+						code="barter.edit"/>
+				</a>
+			</jstl:if>
+		</display:column>
+	</security:authorize>
 
 	<spring:message code="barter.title" var="titleHeader" />
 	<display:column title="${titleHeader}"
@@ -59,6 +70,15 @@
 			<jstl:out value="${row_Barter.requested.name}"/>
 		</a>
 	</display:column>
+	
+	<security:authorize access="hasRole('ADMIN')">
+		<spring:message code="barter.relatedBarter" var="relatedBarterHeader" />
+		<display:column title="${relatedBarterHeader}" sortable="false">
+			<a href="barter/administrator/list2.do?barterId=${row_Barter.id}"> <spring:message
+					code="barter.relatedBarter"/>
+			</a>
+		</display:column>
+	</security:authorize>
 
 </display:table>
 
@@ -71,3 +91,13 @@
 </form>
 
 <!-- Action links -->
+<security:authorize access="hasRole('USER')">
+	<br/>
+	<div>
+		<a href="barter/user/create.do"> <spring:message
+				code="barter.create" />
+		</a>
+	</div>
+</security:authorize>
+
+

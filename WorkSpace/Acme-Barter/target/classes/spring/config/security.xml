@@ -51,7 +51,8 @@
 		<security:intercept-url pattern="/user/user/**" access="hasRole('USER')" />
 		<security:intercept-url pattern="/socialIdentity/user/**" access="hasRole('USER')" />
 		<security:intercept-url pattern="/barter/user/**" access="hasRole('USER')" />
-		<security:intercept-url pattern="/match/user/**" access="hasRole('USER')" />			
+		<security:intercept-url pattern="/match/user/**" access="hasRole('USER')" />
+		<security:intercept-url pattern="/item/user/**" access="hasRole('USER')"/>			
 			
 			
 		<security:intercept-url pattern="/auditor/auditor/**" access="hasRole('AUDITOR')" />
