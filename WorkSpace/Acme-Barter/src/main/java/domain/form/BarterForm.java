@@ -1,5 +1,7 @@
 package domain.form;
 
+import java.util.Collection;
+
 import javax.persistence.ElementCollection;
 import javax.validation.constraints.NotNull;
 
@@ -9,10 +11,10 @@ public class BarterForm {
 	private String title;
 	private String offeredName;
 	private String offeredDescription;
-	private String offeredPictures;
+	private Collection<String> offeredPictures;
 	private String requestedName;
 	private String requestedDescription;
-	private String requestedPictures;
+	private Collection<String> requestedPictures;
 	
 	@NotBlank
 	@NotNull
@@ -43,10 +45,10 @@ public class BarterForm {
 	
 	@NotNull
 	@ElementCollection
-	public String getOfferedPictures() {
+	public Collection<String> getOfferedPictures() {
 		return offeredPictures;
 	}
-	public void setOfferedPictures(String offeredPictures) {
+	public void setOfferedPictures(Collection<String> offeredPictures) {
 		this.offeredPictures = offeredPictures;
 	}
 	
@@ -70,10 +72,10 @@ public class BarterForm {
 	
 	@NotNull
 	@ElementCollection
-	public String getRequestedPictures() {
+	public Collection<String> getRequestedPictures() {
 		return requestedPictures;
 	}
-	public void setRequestedPictures(String requestedPictures) {
+	public void setRequestedPictures(Collection<String> requestedPictures) {
 		this.requestedPictures = requestedPictures;
 	}
 }

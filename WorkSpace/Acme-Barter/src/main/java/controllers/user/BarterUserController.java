@@ -15,7 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 import controllers.AbstractController;
 
 import services.BarterService;
+import services.form.BarterFormService;
 import domain.Barter;
+import domain.form.BarterForm;
 
 @Controller
 @RequestMapping("/barter/user")
@@ -25,6 +27,9 @@ public class BarterUserController extends AbstractController {
 
 	@Autowired
 	private BarterService barterService;
+	
+	@Autowired
+	private BarterFormService barterFormService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -63,42 +68,29 @@ public class BarterUserController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create(){
 		ModelAndView result;
-		Barter barter;
+		BarterForm barterForm;
 		
-		barter = barterService.create();
-		result = createEditModelAndViewCreate(barter);
+		barterForm = barterFormService.create();
+		result = createEditModelAndView(barterForm);
 		
 		return result;
 	}
 	
-	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam int barterId) {
+	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid BarterForm barterForm, BindingResult binding){
 		ModelAndView result;
 		Barter barter;
-		
-		barter = barterService.findOne(barterId);
-		
-		result = createEditModelAndViewEdit(barter);
-
-		return result;
-	}
-	
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid Barter barter, BindingResult binding){
-
-		ModelAndView result;
-		
-		System.out.println(binding);
-		
+				
 		if (binding.hasErrors()) {
-			result = createEditModelAndViewEdit(barter);
+			result = createEditModelAndView(barterForm);
 		} else {
 			try {
+				barter = barterFormService.reconstruct(barterForm);
 				barterService.saveToEdit(barter);
 				result = new ModelAndView("redirect:list.do?");
 			} catch (Throwable oops) {
 				System.out.println(oops);
-				result = createEditModelAndViewEdit(barter, "barter.cancel.error");
+				result = createEditModelAndView(barterForm, "barter.cancel.error");
 			}
 		}
 
@@ -121,36 +113,19 @@ public class BarterUserController extends AbstractController {
 	
 	// Ancillary Methods
 	// ----------------------------------------------------------
-	protected ModelAndView createEditModelAndViewCreate(Barter barter){
+	protected ModelAndView createEditModelAndView(BarterForm barterForm){
 		ModelAndView result;
 		
-		result = createEditModelAndViewCreate(barter, null);
+		result = createEditModelAndView(barterForm, null);
 		
 		return result;
 	}
 	
-	protected ModelAndView createEditModelAndViewCreate(Barter barter, String message){
+	protected ModelAndView createEditModelAndView(BarterForm barterForm, String message){
 		ModelAndView result;		
 		
 		result = new ModelAndView("barter/create");
-		result.addObject("barter", barter);
-		result.addObject("message", message);
-		
-		return result;
-	}
-	protected ModelAndView createEditModelAndViewEdit(Barter barter){
-		ModelAndView result;
-		
-		result = createEditModelAndViewEdit(barter, null);
-		
-		return result;
-	}
-	
-	protected ModelAndView createEditModelAndViewEdit(Barter barter, String message){
-		ModelAndView result;		
-		
-		result = new ModelAndView("barter/edit");
-		result.addObject("barter", barter);
+		result.addObject("barterForm", barterForm);
 		result.addObject("message", message);
 		
 		return result;
