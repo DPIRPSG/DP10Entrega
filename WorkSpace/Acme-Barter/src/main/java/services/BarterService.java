@@ -204,6 +204,33 @@ public class BarterService {
 		return barter;
 	}
 	
+	public Barter saveToRelate(Barter input){
+		Assert.notNull(input);
+		Assert.isTrue(input.getId() > 0);
+		Assert.isTrue(actorService.checkAuthority("ADMIN"), "Only an admin can relate a barter");
+
+		Barter result;
+		
+		result = this.findOne(input.getId());
+		Assert.notNull(result);
+				
+		for(Barter related:input.getRelatedBarter()){
+			if(!result.getRelatedBarter().contains(related) && related != null){
+				Collection<Barter> temp;
+				
+				related = this.findOne(related.getId());
+				temp = related.getRelatedBarter();
+				temp.add(input);
+				this.save(input);
+			}
+		}
+		result.setRelatedBarter(input.getRelatedBarter());
+		
+		result = this.save(result);
+		
+		return result;
+	}
+	
 	public void cancel(Barter barter){
 		
 		Assert.notNull(barter);
