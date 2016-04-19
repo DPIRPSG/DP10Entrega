@@ -218,7 +218,6 @@ public class BarterService {
 			if(!result.getRelatedBarter().contains(related) && related != null){
 				Collection<Barter> temp;
 				
-				related = this.findOne(related.getId());
 				temp = related.getRelatedBarter();
 				temp.add(input);
 				this.save(input);
