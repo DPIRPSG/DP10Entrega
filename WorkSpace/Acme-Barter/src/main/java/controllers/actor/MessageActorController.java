@@ -60,7 +60,8 @@ public class MessageActorController extends AbstractController{
         result = new ModelAndView("message/list");
         result.addObject("messa", messages);
         result.addObject("folder", folder);
-        result.addObject("requestURI", "message/actor/list.do");
+		result.addObject("requestURI", "message/actor/list.do?folderId="
+				+ String.valueOf(folderId));
         
         return result;
 	}
@@ -199,6 +200,23 @@ public class MessageActorController extends AbstractController{
 	}
 	
 	
+	@RequestMapping(value = "/flag-as-spam", method = RequestMethod.GET)
+	public ModelAndView flagAsSpam(@RequestParam(required=true) int messageId
+			,@RequestParam(required=false, defaultValue="folder/actor/list.do") String redirectUri
+			) {
+	
+		ModelAndView result;
+		result = new ModelAndView("redirect:../../" + redirectUri);
+		
+		try {
+			messageService.flagAsSpam(messageId);
+			result.addObject("messageStatus", "message.flagspam.ok");				
+		} catch (Throwable oops) {
+			result.addObject("messageStatus", "message.flagspam.error");				
+		}
+		
+		return result;
+	}
 
 	// Ancillary Methods ----------------------------------------------------------
 	

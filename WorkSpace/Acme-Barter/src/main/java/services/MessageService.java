@@ -173,6 +173,36 @@ public class MessageService {
 		folderService.removeMessage(folder, message);
 	}
 	
+	/**
+	 *  Marca un mensaje como Spam para el usuario actual
+	 * @param input
+	 */
+	public void flagAsSpam(int messaId){
+		Message actMessage;
+		Actor actActor;
+		
+		actMessage = this.findOne(messaId);
+		actActor = actorService.findByPrincipal();
+		
+		Assert.notNull(actMessage);
+		checkActor(actMessage);
+		
+		// Add to SpamBox
+		for (Folder b:actActor.getMessageBoxes()){
+			if(b.getIsSystem()==true && b.getName().equals("SpamBox")){
+				folderService.addMessage(b, actMessage);
+				break;
+			}
+		}
+		
+		// Remove from folders
+		for (Folder a : actMessage.getFolders()) {
+			if (a.getActor().equals(actActor)
+					&& !(a.getIsSystem() == true && a.getName().equals(
+							"SpamBox")))
+				folderService.removeMessage(a, actMessage);
+		}
+	}
 	
 	
 	public void checkActor(Message input){
