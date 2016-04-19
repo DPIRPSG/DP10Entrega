@@ -208,7 +208,7 @@ public class BarterService {
 		
 		Assert.notNull(barter);
 		Assert.isTrue(barter.getId() != 0);
-		Assert.isTrue(actorService.checkAuthority("ADMIN"), "Only an administrator can cancel an activity.");
+		Assert.isTrue(actorService.checkAuthority("ADMIN"), "Only an administrator can cancel a barter.");
 		Assert.isTrue(!barter.isCancelled(), "This barter is already deleted.");
 		
 		barter.setCancelled(true);	
@@ -217,4 +217,27 @@ public class BarterService {
 		
 	}
 	
+	public Integer getTotalNumberOfBarterRegistered(){
+		Integer result;
+		
+		result = barterRepository.getTotalNumberOfBarterRegistered();
+		
+		return result;
+	}
+	
+	public Integer getTotalNumberOfBarterCancelled(){
+		Integer result;
+		
+		result = barterRepository.getTotalNumberOfBarterCancelled();
+		
+		return result;
+	}
+	
+	public Double ratioOfBarterNotRelatedToAnyBarter(){
+		Double result;
+		
+		result = barterRepository.ratioOfBarterNotRelatedToAnyBarter();
+		
+		return result;
+	}
 }

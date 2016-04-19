@@ -1,0 +1,44 @@
+DP10Entrega Queries:
+
+Level C:
+
+1 - The total number of users who have registered to the system.
+ --> select count(u) from User u;
+
+2 - The total number of barters that have been registered.
+ --> select count(b) from Barter b;
+
+3 - The total number of barters that have been cancelled.
+ --> select count(b) from Barter b where b.cancelled IS TRUE;
+ --> AÑADIR EFICACIA EN cancelled de Barter.
+
+4 - The users who have created at least 90% the maximum number of barters that a user has created.
+ --> Por Servicios
+
+5 - The users who have not created any barter during the last month.
+ --> Por Servicios
+
+Level B:
+
+6 - The minimum, the maximum, and the average number of barters per customer.
+ --> POR Servicios
+
+7 - The ratio of barters that are not related to any other barter.
+ --> select avg(b.relatedBarter.size) from Barter b;
+
+8 - The users who have registered more barters.
+ --> POR Servicios
+
+9 - The users who have more cancelled barters.
+ --> Por Servicios
+
+10 - The users who have more matches.
+ --> Por Servicios
+
+Level A:
+
+11 - The auditors who have audited more matches.
+ --> Por Servicios
+
+12 - The users who have got more matches audited.
+ --> Por Servicios
