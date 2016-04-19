@@ -26,8 +26,8 @@
 	ITEM PEDIDO
 	
 	<acme:textbox code="item.name" path="requestedName"/>
-	<acme:textarea code="item.name" path="requestedDescription"/>
-	<acme:textarea code="item.name" path="requestedPictures"/>
+	<acme:textarea code="item.description" path="requestedDescription"/>
+	<acme:textarea code="item.pictures" path="requestedPictures"/>
 	
 	<!-- Action buttons -->
 	<acme:submit name="save" code="barter.save"/>
