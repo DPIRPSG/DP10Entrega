@@ -103,11 +103,12 @@ public class MessageActorController extends AbstractController{
 	public ModelAndView save(@Valid Message message, BindingResult binding) {
 		ModelAndView result;
 		int sendId, actId;
-		boolean haySubject, hayBody, hayRecipients;
+		boolean haySubject, hayBody, hayRecipients, checkPriority;
 		
 		hayBody = true;
 		hayRecipients = true;
 		haySubject = true;
+		checkPriority = true;
 		
 		
 		sendId = message.getSender().getUserAccount().getId();
@@ -126,13 +127,16 @@ public class MessageActorController extends AbstractController{
 			if(message.getSubject() == "") {
 				haySubject = false;
 			}
-			result = createSendModelAndView(message,null, hayBody, hayRecipients, haySubject);
+			if(!(message.getPriority() >= -1 && message.getPriority() <= 1)) {
+				checkPriority = false;
+			}
+			result = createSendModelAndView(message,null, hayBody, hayRecipients, haySubject, checkPriority);
 		} else {
 			try {
 				messageService.firstSave(message);
 				result = new ModelAndView("redirect:../../folder/actor/list.do");
 			} catch (Throwable oops) {
-				result = createSendModelAndView(message, "message.commit.error", true, true, true);				
+				result = createSendModelAndView(message, "message.commit.error", true, true, true, true);				
 			}
 		}
 
@@ -223,12 +227,12 @@ public class MessageActorController extends AbstractController{
 	protected ModelAndView createSendModelAndView(Message input) {
 		ModelAndView result;
 		
-		result = createSendModelAndView(input, null, true, true, true);
+		result = createSendModelAndView(input, null, true, true, true, true);
 		
 		return result;
 	}
 	
-	protected ModelAndView createSendModelAndView(Message input, String message, boolean hayBody, boolean hayRecipients, boolean haySubject){
+	protected ModelAndView createSendModelAndView(Message input, String message, boolean hayBody, boolean hayRecipients, boolean haySubject, boolean checkPriority){
 		ModelAndView result;
 		Collection<Actor> actors;
 		
@@ -241,6 +245,7 @@ public class MessageActorController extends AbstractController{
 		result.addObject("hayBody", hayBody);
 		result.addObject("hayRecipients", hayRecipients);
 		result.addObject("haySubject", haySubject);
+		result.addObject("correctPriority", checkPriority);
 		
 		return result;
 	}

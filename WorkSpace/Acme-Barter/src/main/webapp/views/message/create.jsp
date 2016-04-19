@@ -29,11 +29,14 @@
 		itemLabel="userAccount.username" itemValue="id" multiple="multiple" />
 	<form:errors cssClass="error" path="recipients" />
 	<jstl:if test="${!hayRecipients }">
-		<div class="error"><jstl:out value="${notEmpty }"></jstl:out></div>
+		<div class="error"><jstl:out value="${notEmpty }" /></div>
 	</jstl:if>	
 	<br />
 	
 	<acme:textbox code="message.priority" path="priority"/>
+	<jstl:if test="${!correctPriority }">
+		<div class="error"><spring:message code="message.priority.error" /></div>
+	</jstl:if>
 	
 	<form:label path="subject">
 		<spring:message code="message.subject" />:
@@ -41,7 +44,7 @@
 	<form:input path="subject"/>
 	<form:errors cssClass="error" path="subject" />
 	<jstl:if test="${!haySubject }">
-		<div class="error"><jstl:out value="${notBlank }"></jstl:out></div>
+		<div class="error"><jstl:out value="${notBlank }"/></div>
 	</jstl:if>
 	<br />
 	
@@ -51,7 +54,7 @@
 	<form:textarea path="body"/>
 	<form:errors cssClass="error" path="body" />
 	<jstl:if test="${!hayBody }">
-		<div class="error"><jstl:out value="${notBlank }"></jstl:out></div>
+		<div class="error"><jstl:out value="${notBlank }"/></div>
 	</jstl:if>
 	<br />
 	
