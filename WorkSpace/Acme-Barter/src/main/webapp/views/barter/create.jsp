@@ -11,13 +11,23 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <!-- Form -->
-<form:form action="barter/administrator/edit.do" modelAttribute="barter">
+<form:form action="barter/user/create.do" modelAttribute="barterForm">
 	<!-- Hidden Attributes -->
-	<form:hidden path="id" />
-	<form:hidden path="version" />
 	
 	<!-- Editable Attributes -->
 	<acme:textbox code="barter.title" path="title"/>
+	
+	ITEM A OFRECER
+	
+	<acme:textbox code="item.name" path="offeredName"/>
+	<acme:textarea code="item.description" path="offeredDescription"/>
+	<acme:textarea code="item.pictures" path="offeredPictures"/>
+	
+	ITEM PEDIDO
+	
+	<acme:textbox code="item.name" path="requestedName"/>
+	<acme:textarea code="item.name" path="requestedDescription"/>
+	<acme:textarea code="item.name" path="requestedPictures"/>
 	
 	<!-- Action buttons -->
 	<acme:submit name="save" code="barter.save"/>

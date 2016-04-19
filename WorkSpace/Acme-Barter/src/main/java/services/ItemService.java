@@ -31,14 +31,6 @@ public class ItemService {
 	}
 
 	// Simple CRUD methods ----------------------------------------------------
-
-	public Collection<Item> findAll(){
-		Collection<Item> result;
-		
-		result = itemRepository.findAll();
-		
-		return result;
-	}
 	
 	public Item findOne(int itemId) {
 		Item result;
@@ -48,6 +40,7 @@ public class ItemService {
 		return result;
 	}
 	
+
 	public Item create(){
 		
 		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can create an item.");
@@ -69,6 +62,19 @@ public class ItemService {
 		
 		return result;
 		
+	}
+
+	/**
+	 * Needed by BarterServiceTest
+	 * @return
+	 */
+	public Collection<Item> findAll(){
+		Assert.isTrue(actorService.checkAuthority("ADMIN"));
+		Collection<Item> result;
+		
+		result = itemRepository.findAll();
+		
+		return result;
 	}
 
 

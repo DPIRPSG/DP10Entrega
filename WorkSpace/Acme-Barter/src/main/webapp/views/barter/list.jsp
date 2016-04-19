@@ -94,7 +94,7 @@
 <security:authorize access="hasRole('USER')">
 	<br/>
 	<div>
-		<a href="item/user/create.do"> <spring:message
+		<a href="barter/user/create.do"> <spring:message
 				code="barter.create" />
 		</a>
 	</div>

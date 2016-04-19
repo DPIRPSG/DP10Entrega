@@ -11,7 +11,6 @@ import org.springframework.util.Assert;
 
 import repositories.BarterRepository;
 import domain.Barter;
-import domain.Item;
 import domain.Match;
 import domain.User;
 
@@ -99,6 +98,22 @@ public class BarterService {
 		
 		return result;
 	}
+	
+	public Collection<Barter> findByUserIdNotCancelledNotInMatchNotCancelled(int userId){
+		Collection<Barter> result;
+		
+		result = barterRepository.findByUserIdNotCancelledNotInMatchNotCancelled(userId);
+		
+		return result;
+	}
+	
+	public Collection<Barter> findAllOfOtherUsersByUserIdNotCancelledNotInMatchNotCancelled(int userId){
+		Collection<Barter> result;
+		
+		result = barterRepository.findAllOfOtherUsersByUserIdNotCancelledNotInMatchNotCancelled(userId);
+		
+		return result;
+	}
 
 	public Collection<Barter> findAllByFollowedUser() {
 		Collection<Barter> result;
@@ -155,15 +170,13 @@ public class BarterService {
 		return result;
 	}
 	
-	public void saveToEdit(Barter barter){
+	public Barter saveToEdit(Barter barter){
 		
 		Assert.notNull(barter);
 		Assert.isTrue(actorService.checkAuthority("USER") || actorService.checkAuthority("ADMIN"), "Only a user or an admin can save a barter");
 		
 		if(barter.getId() == 0){
 			User user;
-			Item offered = null;
-			Item requested = null;
 			Collection<Match> createdMatch;
 			Collection<Match> receivedMatch;
 			Collection<Barter> relatedBarter;
@@ -177,17 +190,18 @@ public class BarterService {
 			barter.setRegisterMoment(new Date());
 			
 			barter.setUser(user);
-			barter.setOffered(offered);
-			barter.setRequested(requested);
 			barter.setCreatedMatch(createdMatch);
 			barter.setReceivedMatch(receivedMatch);
 			barter.setRelatedBarter(relatedBarter);
+			barter = this.save(barter);
 		}else{
 			Barter barterPreSave;
 			barterPreSave = this.findOne(barter.getId());
 			barterPreSave.setRelatedBarter(barter.getRelatedBarter());
-			this.save(barterPreSave);
+			barter = this.save(barterPreSave);
 		}
+		
+		return barter;
 	}
 	
 	public void cancel(Barter barter){

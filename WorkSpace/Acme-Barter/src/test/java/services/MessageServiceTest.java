@@ -42,7 +42,7 @@ public class MessageServiceTest extends AbstractTest {
 	// Tests ---------------------------------------
 	
 	/**
-	 * Acme-Six-Pack - Level B - 17.1
+	 * Acme-Barter - Level C - 10.2
 	 * Exchange messages with other users.
 	 */
 	
@@ -64,7 +64,7 @@ public class MessageServiceTest extends AbstractTest {
 	@Test 
 	public void testExchangeMessage() {
 		// Declare variables
-		Actor customer;
+		Actor user;
 		Message message;
 		Message sentMessage;
 		Date sentMoment;
@@ -72,11 +72,11 @@ public class MessageServiceTest extends AbstractTest {
 		Collection<Actor> recipients;
 		
 		// Load objects to test
-		authenticate("customer1");
-		customer = actorService.findByPrincipal();
+		authenticate("user1");
+		user = actorService.findByPrincipal();
 		
 		// Checks basic requirements
-		Assert.notNull(customer, "El usuario no se ha logueado correctamente.");
+		Assert.notNull(user, "El usuario no se ha logueado correctamente.");
 		
 		// Execution of test
 		message = messageService.create();
@@ -85,7 +85,7 @@ public class MessageServiceTest extends AbstractTest {
 		sentMoment = new Date();
 		message.setSentMoment(sentMoment);
 		
-		message.setSender(customer);
+		message.setSender(user);
 		
 		allActors = actorService.findAll();
 		
@@ -98,7 +98,7 @@ public class MessageServiceTest extends AbstractTest {
 		sentMessage = messageService.firstSave(message);
 		
 		// Checks results
-		for(Folder f: customer.getMessageBoxes()){
+		for(Folder f: user.getMessageBoxes()){
 			if(f.getName().equals("OutBox")){
 				Assert.isTrue(f.getMessages().contains(sentMessage), "El mensaje no ha sido añadido a la carpeta OutBox del emisor");
 			}
@@ -135,7 +135,7 @@ public class MessageServiceTest extends AbstractTest {
 //	@Test
 	public void testExchangeMessageToAnyone() {
 		// Declare variables
-		Actor customer;
+		Actor user;
 		Message message;
 //		Message sentMessage;
 		Date sentMoment;
@@ -143,11 +143,11 @@ public class MessageServiceTest extends AbstractTest {
 //		Collection<Actor> recipients;
 		
 		// Load objects to test
-		authenticate("customer1");
-		customer = actorService.findByPrincipal();
+		authenticate("user1");
+		user = actorService.findByPrincipal();
 		
 		// Checks basic requirements
-		Assert.notNull(customer, "El usuario no se ha logueado correctamente.");
+		Assert.notNull(user, "El usuario no se ha logueado correctamente.");
 		
 		// Execution of test
 		message = messageService.create();
@@ -156,7 +156,7 @@ public class MessageServiceTest extends AbstractTest {
 		sentMoment = new Date();
 		message.setSentMoment(sentMoment);
 		
-		message.setSender(customer);
+		message.setSender(user);
 		
 //		allActors = actorService.findAll();
 //		
@@ -169,7 +169,7 @@ public class MessageServiceTest extends AbstractTest {
 		messageService.firstSave(message);
 		
 		// Checks results
-//		for(Folder f: customer.getMessageBoxes()){
+//		for(Folder f: user.getMessageBoxes()){
 //			if(f.getName().equals("OutBox")){
 //				Assert.isTrue(!f.getMessages().contains(sentMessage), "El mensaje ha sido añadido a la carpeta OutBox del emisor a pesar de que ha fallado");
 //			}
@@ -208,7 +208,7 @@ public class MessageServiceTest extends AbstractTest {
 //	@Test
 	public void testExchangeMessageAnonymous() {
 		// Declare variables
-		Actor customer;
+		Actor user;
 		Message message;
 		Message sentMessage;
 		Date sentMoment;
@@ -216,11 +216,11 @@ public class MessageServiceTest extends AbstractTest {
 		Collection<Actor> recipients;
 		
 		// Load objects to test
-		authenticate("customer1");
-		customer = actorService.findByPrincipal();
+		authenticate("user1");
+		user = actorService.findByPrincipal();
 		
 		// Checks basic requirements
-		Assert.notNull(customer, "El usuario no se ha logueado correctamente.");
+		Assert.notNull(user, "El usuario no se ha logueado correctamente.");
 		
 		// Execution of test
 		message = messageService.create();
@@ -242,7 +242,7 @@ public class MessageServiceTest extends AbstractTest {
 		sentMessage = messageService.firstSave(message);
 		
 		// Checks results
-		for(Folder f: customer.getMessageBoxes()){
+		for(Folder f: user.getMessageBoxes()){
 			if(f.getName().equals("OutBox")){
 				Assert.isTrue(f.getMessages().contains(sentMessage), "El mensaje no ha sido añadido a la carpeta OutBox del emisor");
 			}
