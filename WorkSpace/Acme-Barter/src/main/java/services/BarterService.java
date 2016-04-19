@@ -203,4 +203,27 @@ public class BarterService {
 		
 	}
 	
+	public Integer getTotalNumberOfBarterRegistered(){
+		Integer result;
+		
+		result = barterRepository.getTotalNumberOfBarterRegistered();
+		
+		return result;
+	}
+	
+	public Integer getTotalNumberOfBarterCancelled(){
+		Integer result;
+		
+		result = barterRepository.getTotalNumberOfBarterCancelled();
+		
+		return result;
+	}
+	
+	public Double ratioOfBarterNotRelatedToAnyBarter(){
+		Double result;
+		
+		result = barterRepository.ratioOfBarterNotRelatedToAnyBarter();
+		
+		return result;
+	}
 }

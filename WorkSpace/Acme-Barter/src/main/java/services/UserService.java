@@ -230,4 +230,12 @@ public class UserService {
 		return res;
 	}
 	
+	public Integer getTotalNumberOfUsersRegistered(){
+		Integer result;
+		
+		result = userRepository.getTotalNumberOfUsersRegistered();
+		
+		return result;
+	}
+	
 }
