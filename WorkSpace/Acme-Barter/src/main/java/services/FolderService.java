@@ -150,8 +150,10 @@ public class FolderService {
 		Assert.notNull(f);
 		Assert.notNull(m);
 		
-		f.addMessage(m);
-		this.save(f);
+		if(!f.getMessages().contains(m)){
+			f.addMessage(m);
+			this.save(f);
+		}
 	}
 	
 	/**

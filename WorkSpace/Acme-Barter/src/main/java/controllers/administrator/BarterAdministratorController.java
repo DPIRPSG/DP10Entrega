@@ -106,16 +106,14 @@ public class BarterAdministratorController extends AbstractController {
 
 		ModelAndView result;
 		
-		System.out.println(binding);
-		
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(barter);
 		} else {
 			try {
-				barterService.saveToEdit(barter);
+				barterService.saveToRelate(barter);
 				result = new ModelAndView("redirect:list.do?");
 			} catch (Throwable oops) {
-				System.out.println(oops);
+				barter = barterService.findOne(barter.getId());
 				result = createEditModelAndView(barter, "barter.cancel.error");
 			}
 		}
@@ -157,9 +155,9 @@ public class BarterAdministratorController extends AbstractController {
 	protected ModelAndView createEditModelAndView(Barter barter, String message){
 		ModelAndView result;
 		Collection<Barter> allBarters;
-		
+
 		allBarters = barterService.findAllNotRelated(barter.getId());
-		
+
 		result = new ModelAndView("barter/edit");
 		result.addObject("barter", barter);
 		result.addObject("message", message);

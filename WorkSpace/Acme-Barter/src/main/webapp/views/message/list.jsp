@@ -30,6 +30,22 @@
 				<spring:message code="message.delete" />
 			</a>
 		</display:column>
+		
+		<!-- flaged As Spam -->
+		<jstl:forEach items="${row_messa.folders}" var="actFolder">
+			<jstl:if test="${actFolder.name=='SpamBox' && actFolder.isSystem==true}">
+				<jstl:set var="isSpam" value="true"/>
+			</jstl:if>
+		</jstl:forEach>
+		
+		<spring:message code="message.flagspam" var="flagspamHeader" />
+		<display:column>
+			<jstl:if test="${isSpam != 'true' }">
+				<a href="message/actor/flag-as-spam.do?messageId=${row_messa.id}&redirectUri=${requestURI}" onclick="return confirm('<spring:message code="message.confirm.flagspam" />')"> 
+				<spring:message code="message.flagspam" />
+				</a>
+			</jstl:if>
+		</display:column>
 
 		<!-- Attributes -->
 		<spring:message code="message.priority" var="priorityHeader" />
