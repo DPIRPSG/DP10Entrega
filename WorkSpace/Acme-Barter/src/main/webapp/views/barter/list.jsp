@@ -71,14 +71,13 @@
 		</a>
 	</display:column>
 	
-	<security:authorize access="hasRole('ADMIN')">
-		<spring:message code="barter.relatedBarter" var="relatedBarterHeader" />
-		<display:column title="${relatedBarterHeader}" sortable="false">
-			<a href="barter/administrator/list2.do?barterId=${row_Barter.id}"> <spring:message
-					code="barter.relatedBarter"/>
-			</a>
-		</display:column>
-	</security:authorize>
+	<spring:message code="barter.relatedBarter" var="relatedBarterHeader" />
+	<display:column title="${relatedBarterHeader}" sortable="false">
+		<a href="barter/list2.do?barterId=${row_Barter.id}"> <spring:message
+				code="barter.relatedBarter"/>
+		</a>
+	</display:column>
+
 
 </display:table>
 
