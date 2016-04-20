@@ -32,4 +32,14 @@ public interface BarterRepository extends JpaRepository<Barter, Integer> {
 	@Query("select b from User a join a.followed u, Barter b where a.id=?1 and b.user.id = u.id order by b.registerMoment desc")
 	Collection<Barter> findAllByFollowedUser(int userId);
 	
+	
+	@Query("select count(b) from Barter b")
+	Integer getTotalNumberOfBarterRegistered();
+	
+	@Query("select count(b) from Barter b where b.cancelled IS TRUE")
+	Integer getTotalNumberOfBarterCancelled();
+	
+	@Query("select avg(b.relatedBarter.size) from Barter b")
+	Double ratioOfBarterNotRelatedToAnyBarter();
+	
 }

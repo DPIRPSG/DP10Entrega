@@ -60,7 +60,8 @@ public class MessageActorController extends AbstractController{
         result = new ModelAndView("message/list");
         result.addObject("messa", messages);
         result.addObject("folder", folder);
-        result.addObject("requestURI", "message/actor/list.do");
+		result.addObject("requestURI", "message/actor/list.do?folderId="
+				+ String.valueOf(folderId));
         
         return result;
 	}
@@ -102,11 +103,12 @@ public class MessageActorController extends AbstractController{
 	public ModelAndView save(@Valid Message message, BindingResult binding) {
 		ModelAndView result;
 		int sendId, actId;
-		boolean haySubject, hayBody, hayRecipients;
+		boolean haySubject, hayBody, hayRecipients, checkPriority;
 		
 		hayBody = true;
 		hayRecipients = true;
 		haySubject = true;
+		checkPriority = true;
 		
 		
 		sendId = message.getSender().getUserAccount().getId();
@@ -125,13 +127,16 @@ public class MessageActorController extends AbstractController{
 			if(message.getSubject() == "") {
 				haySubject = false;
 			}
-			result = createSendModelAndView(message,null, hayBody, hayRecipients, haySubject);
+			if(!(message.getPriority() >= -1 && message.getPriority() <= 1)) {
+				checkPriority = false;
+			}
+			result = createSendModelAndView(message,null, hayBody, hayRecipients, haySubject, checkPriority);
 		} else {
 			try {
 				messageService.firstSave(message);
 				result = new ModelAndView("redirect:../../folder/actor/list.do");
 			} catch (Throwable oops) {
-				result = createSendModelAndView(message, "message.commit.error", true, true, true);				
+				result = createSendModelAndView(message, "message.commit.error", true, true, true, true);				
 			}
 		}
 
@@ -199,18 +204,35 @@ public class MessageActorController extends AbstractController{
 	}
 	
 	
+	@RequestMapping(value = "/flag-as-spam", method = RequestMethod.GET)
+	public ModelAndView flagAsSpam(@RequestParam(required=true) int messageId
+			,@RequestParam(required=false, defaultValue="folder/actor/list.do") String redirectUri
+			) {
+	
+		ModelAndView result;
+		result = new ModelAndView("redirect:../../" + redirectUri);
+		
+		try {
+			messageService.flagAsSpam(messageId);
+			result.addObject("messageStatus", "message.flagspam.ok");				
+		} catch (Throwable oops) {
+			result.addObject("messageStatus", "message.flagspam.error");				
+		}
+		
+		return result;
+	}
 
 	// Ancillary Methods ----------------------------------------------------------
 	
 	protected ModelAndView createSendModelAndView(Message input) {
 		ModelAndView result;
 		
-		result = createSendModelAndView(input, null, true, true, true);
+		result = createSendModelAndView(input, null, true, true, true, true);
 		
 		return result;
 	}
 	
-	protected ModelAndView createSendModelAndView(Message input, String message, boolean hayBody, boolean hayRecipients, boolean haySubject){
+	protected ModelAndView createSendModelAndView(Message input, String message, boolean hayBody, boolean hayRecipients, boolean haySubject, boolean checkPriority){
 		ModelAndView result;
 		Collection<Actor> actors;
 		
@@ -223,6 +245,7 @@ public class MessageActorController extends AbstractController{
 		result.addObject("hayBody", hayBody);
 		result.addObject("hayRecipients", hayRecipients);
 		result.addObject("haySubject", haySubject);
+		result.addObject("correctPriority", checkPriority);
 		
 		return result;
 	}
