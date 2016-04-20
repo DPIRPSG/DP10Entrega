@@ -85,6 +85,7 @@ public class UserService {
 		if(customer.getId() == 0){
 			result = true && !actorService.checkAuthority("ADMIN");
 			result = result && !actorService.checkAuthority("USER");
+			result = result && !actorService.checkAuthority("AUDITOR");
 			Assert.isTrue(result, "user.create.permissionDenied");
 			
 			Collection<Folder> folders;
