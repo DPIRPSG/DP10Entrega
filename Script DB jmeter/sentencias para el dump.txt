@@ -1,0 +1,5 @@
+mysqldump -uroot -pV3rY=$tR0nG=P@$$w0rd$ Acme-Barter > C:\Temp\Create-Acme-Barter.sql
+
+mysql -uroot -pV3rY=$tR0nG=P@$$w0rd$ < c:\temp\create-acme-barter.sql
+
+mysql -uroot -pV3rY=$tR0nG=P@$$w0rd$ < c:\temp\delete-acme-barter.sql
