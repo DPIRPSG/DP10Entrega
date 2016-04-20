@@ -38,8 +38,4 @@ public interface BarterRepository extends JpaRepository<Barter, Integer> {
 	
 	@Query("select count(b) from Barter b where b.cancelled IS TRUE")
 	Integer getTotalNumberOfBarterCancelled();
-	
-	@Query("select avg(b.relatedBarter.size) from Barter b")
-	Double ratioOfBarterNotRelatedToAnyBarter();
-	
 }
