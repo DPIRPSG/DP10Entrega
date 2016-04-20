@@ -284,6 +284,7 @@ public class BarterServiceTest extends AbstractTest {
 		try{
 			authenticate("admin");
 			Assert.isTrue(!barterService.findAll().contains(result), "El nuevo barter se encuentra en el sistema."); // First check
+			Assert.notNull(null, "Cambiar InvalidPostTestException");
 		}catch (Exception e) {
 			// TODO: handle exception
 			throw new InvalidPostTestException(e.toString());
@@ -347,6 +348,7 @@ are not displayed to users, only to administrators
 		// Checks results
 		try{
 			Assert.isTrue(!barterService.findAllNotCancelled().contains(result), "El barter no se ha cancelado correctamente."); // First check
+			Assert.notNull(null, "Cambiar InvalidPostTestException");
 		}catch (Exception e) {
 			// TODO: handle exception
 			throw new InvalidPostTestException(e.toString());
@@ -404,6 +406,7 @@ are not displayed to users, only to administrators
 		// Checks results
 		try{
 			Assert.isTrue(!barterService.findAllNotCancelled().contains(result), "El barter no se ha cancelado correctamente."); // First check
+			Assert.notNull(null, "Cambiar InvalidPostTestException");
 		}catch (Exception e) {
 			// TODO: handle exception
 			throw new InvalidPostTestException(e.toString());
@@ -465,6 +468,7 @@ are not displayed to users, only to administrators
 		// Checks results
 		try{
 			Assert.isTrue(barterService.findAllNotCancelled().contains(result), "El barter se ha cancelado correctamente."); // First check
+			Assert.notNull(null, "Cambiar InvalidPostTestException");
 		}catch (Exception e) {
 			// TODO: handle exception
 			throw new InvalidPostTestException(e.toString());
@@ -568,6 +572,7 @@ are not displayed to users, only to administrators
 		// Checks results
 		try{
 			Assert.isTrue(barterService.findAllNotCancelled().contains(result), "El barter se ha cancelado correctamente."); // First check
+			Assert.notNull(null, "Cambiar InvalidPostTestException");
 		}catch (Exception e) {
 			// TODO: handle exception
 			throw new InvalidPostTestException(e.toString());
@@ -622,6 +627,7 @@ are not displayed to users, only to administrators
 //		// Checks results
 //		try{
 //			Assert.isTrue(!barterService.findAllNotCancelled().contains(result), "El barter no se ha cancelado correctamente."); // First check
+//		Assert.notNull(null, "Cambiar InvalidPostTestException");
 //		}catch (Exception e) {
 //			// TODO: handle exception
 //			throw new InvalidPostTestException(e.toString());
