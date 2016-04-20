@@ -11,6 +11,62 @@
 
 <security:authorize access="hasRole('ADMIN')">
 
+ 	<h3><spring:message code="administrator.getTotalNumberOfUsersRegistered"/></h3>
+	<!-- Result -->
+	<jstl:choose>
+  		<jstl:when test="${getTotalNumberOfUsersRegistered == 0}">
+ 			<spring:message code="administrator.ratio.null"/>
+		</jstl:when>
+  		<jstl:otherwise>
+			<jstl:out value="${getTotalNumberOfUsersRegistered}" />
+		</jstl:otherwise>
+	</jstl:choose>
+	
+	<h3><spring:message code="administrator.getTotalNumberOfBarterRegistered"/></h3>
+	<!-- Result -->
+	<jstl:choose>
+  		<jstl:when test="${getTotalNumberOfBarterRegistered == 0}">
+ 			<spring:message code="administrator.ratio.null"/>
+		</jstl:when>
+  		<jstl:otherwise>
+			<jstl:out value="${getTotalNumberOfBarterRegistered}" />
+		</jstl:otherwise>
+	</jstl:choose>
+	
+	<h3><spring:message code="administrator.getTotalNumberOfBarterCancelled"/></h3>
+	<!-- Result -->
+	<jstl:choose>
+  		<jstl:when test="${getTotalNumberOfBarterCancelled == 0}">
+ 			<spring:message code="administrator.ratio.null"/>
+		</jstl:when>
+  		<jstl:otherwise>
+			<jstl:out value="${getTotalNumberOfBarterCancelled}" />
+		</jstl:otherwise>
+	</jstl:choose>
+	
+	<h3><spring:message code="administrator.getUsersAbovePencentile90"/></h3>
+	<!-- Listing grid -->
+	<display:table pagesize="5" class="displaytag" keepStatus="true"
+  		name="getUsersAbovePencentile90" requestURI="${requestURI}" id="row1">
+		<!-- Attributes -->
+		<spring:message code="user.name" var="nameHeader" />
+		<display:column title="${nameHeader}" 
+  			sortable="false" >
+ 			<jstl:out value="${row1.name}"/>
+  		</display:column>
+  	</display:table>
+  	
+	<h3><spring:message code="administrator.getUsersWithNoBarterThisMonth"/></h3>
+	<!-- Listing grid -->
+	<display:table pagesize="5" class="displaytag" keepStatus="true"
+  		name="getUsersWithNoBarterThisMonth" requestURI="${requestURI}" id="row2">
+		<!-- Attributes -->
+		<spring:message code="user.name" var="nameHeader" />
+		<display:column title="${nameHeader}" 
+  			sortable="false" >
+ 			<jstl:out value="${row1.name}"/>
+  		</display:column>
+  	</display:table>
 	
 <!-- 	<!-- Dashboard 1 --> -->
 <%-- 	<h3><spring:message code="administrator.mostPopularGyms"/></h3> --%>
