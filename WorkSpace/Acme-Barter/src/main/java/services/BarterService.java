@@ -214,18 +214,27 @@ public class BarterService {
 		result = this.findOne(input.getId());
 		Assert.notNull(result);
 				
-		for(Barter related:input.getRelatedBarter()){
-			if(!result.getRelatedBarter().contains(related) && related != null){
-				Collection<Barter> temp;
-				
-				temp = related.getRelatedBarter();
-				temp.add(input);
-				this.save(input);
-			}
-		}
 		result.setRelatedBarter(input.getRelatedBarter());
 		
 		result = this.save(result);
+		
+		for(Barter related:input.getRelatedBarter()){
+			if(!related.getRelatedBarter().contains(result) && related != null){
+				Collection<Barter> temp;
+				
+				temp = related.getRelatedBarter();
+				temp.add(result);
+				related.setRelatedBarter(temp);
+				this.save(related);
+			}
+			if(countRelateBarter(result, related) > 1){
+				Collection<Barter> temp;
+				
+				temp = result.getRelatedBarter();
+				temp.remove(related);
+				result.setRelatedBarter(temp);
+			}
+		}
 		
 		return result;
 	}
@@ -265,5 +274,16 @@ public class BarterService {
 		result = barterRepository.ratioOfBarterNotRelatedToAnyBarter();
 		
 		return result;
+	}
+	
+	private int countRelateBarter(Barter barterOrigin, Barter barterToCount){
+		int res = 0;
+		
+		for(Barter a:barterOrigin.getRelatedBarter()){
+			if(a.equals(barterToCount))
+				res++;
+		}
+		
+		return res;
 	}
 }

@@ -3,7 +3,6 @@ package services;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.Iterator;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,16 +14,11 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import repositories.ItemRepository;
-import security.UserAccount;
-import security.UserAccountService;
 import utilities.AbstractTest;
 import utilities.InvalidPostTestException;
 import utilities.InvalidPreTestException;
-import domain.Actor;
 import domain.Barter;
 import domain.Item;
-import domain.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -57,7 +51,6 @@ public class BarterServiceTest extends AbstractTest {
 	@Test 
 	public void testBarterCreationOk() {
 		// Declare variables
-		User customer;
 		Barter result;
 		Item offered;
 		Item requested;
@@ -95,7 +88,6 @@ public class BarterServiceTest extends AbstractTest {
 	@Test
 	public void testBarterCreationErrorIsCancelled() {
 		// Declare variables
-		User customer;
 		Barter result;
 		Item offered;
 		Item requested;
@@ -140,7 +132,6 @@ public class BarterServiceTest extends AbstractTest {
 	@Test
 	public void testBarterCreationErrorRegisterMomentChanged() {
 		// Declare variables
-		User customer;
 		Barter result;
 		Item offered;
 		Item requested;
@@ -171,9 +162,6 @@ public class BarterServiceTest extends AbstractTest {
 		// Checks results
 		try{
 			authenticate("admin");
-			System.out.println("Introducida: '" + a.getTime().toString()
-					+ "'_ Devuelta: '" + result.getRegisterMoment().toString()
-					+ "'");
 			Assert.isTrue(! (result.getRegisterMoment().after(a.getTime())
 					|| result.getRegisterMoment().equals(a.getTime())),
 					"El nuevo barter se ha guardado con la fecha introducida."); // First
@@ -193,7 +181,6 @@ public class BarterServiceTest extends AbstractTest {
 	@Test
 	public void testBarterCreationErrorIsRelated() {
 		// Declare variables
-		User customer;
 		Barter result;
 		Barter barter2;
 		Item offered;
@@ -255,7 +242,6 @@ public class BarterServiceTest extends AbstractTest {
 	@Rollback(value = true)
 	public void testBarterCreationErrorAdmin() {
 		// Declare variables
-		User customer;
 		Barter result;
 		Item offered;
 		Item requested;
@@ -348,7 +334,6 @@ are not displayed to users, only to administrators
 		// Checks results
 		try{
 			Assert.isTrue(!barterService.findAllNotCancelled().contains(result), "El barter no se ha cancelado correctamente."); // First check
-			Assert.notNull(null, "Cambiar InvalidPostTestException");
 		}catch (Exception e) {
 			// TODO: handle exception
 			throw new InvalidPostTestException(e.toString());
@@ -406,7 +391,6 @@ are not displayed to users, only to administrators
 		// Checks results
 		try{
 			Assert.isTrue(!barterService.findAllNotCancelled().contains(result), "El barter no se ha cancelado correctamente."); // First check
-			Assert.notNull(null, "Cambiar InvalidPostTestException");
 		}catch (Exception e) {
 			// TODO: handle exception
 			throw new InvalidPostTestException(e.toString());
@@ -468,57 +452,12 @@ are not displayed to users, only to administrators
 		// Checks results
 		try{
 			Assert.isTrue(barterService.findAllNotCancelled().contains(result), "El barter se ha cancelado correctamente."); // First check
-			Assert.notNull(null, "Cambiar InvalidPostTestException");
 		}catch (Exception e) {
 			// TODO: handle exception
 			throw new InvalidPostTestException(e.toString());
 		}
 	}
-	
-	/**
-	 * Acme-Barter - Level C - 12.5.2
-	 * The total number of barters that have been registered.
-	 */
-	@Test 
-	public void testTotalBarters() {
-		// Declare variables
-		int totalUsersInTest;
-		int result;
-		
-		// Load objects to test
-		authenticate("admin");
-		totalUsersInTest = barterService.findAll().size();
-		
-		// Checks basic requirements
 
-		// Execution of test
-		Assert.notNull(null, "Test inacabado ya que no se sabe como se implementará");		
-		
-		// Checks results	
-	}
-	
-	/**
-	 * Acme-Barter - Level C - 12.5.3
-	 * The total number of barters that have been cancelled.
-	 */
-	@Test 
-	public void testTotalBartersCancelled() {
-		// Declare variables
-		int totalUsersInTest;
-		int result;
-		
-		// Load objects to test
-		authenticate("admin");
-		totalUsersInTest = barterService.findAll().size() - barterService.findAllNotCancelled().size();
-		
-		// Checks basic requirements
-
-		// Execution of test
-		Assert.notNull(null, "Test inacabado ya que no se sabe como se implementará");		
-		
-		// Checks results	
-	}
-	
 	
 	/**
 	 * Negative test case: Cancelarlo un auditor
@@ -572,11 +511,55 @@ are not displayed to users, only to administrators
 		// Checks results
 		try{
 			Assert.isTrue(barterService.findAllNotCancelled().contains(result), "El barter se ha cancelado correctamente."); // First check
-			Assert.notNull(null, "Cambiar InvalidPostTestException");
 		}catch (Exception e) {
 			// TODO: handle exception
 			throw new InvalidPostTestException(e.toString());
 		}
+	}
+	
+	
+	/**
+	 * Acme-Barter - Level C - 12.5.2
+	 * The total number of barters that have been registered.
+	 */
+	@Test 
+	public void testTotalBarters() {
+		// Declare variables
+		int totalUsersInTest;
+		int result;
+		
+		// Load objects to test
+		authenticate("admin");
+		totalUsersInTest = barterService.findAll().size();
+		
+		// Checks basic requirements
+
+		// Execution of test
+		Assert.notNull(null, "Test inacabado ya que no se sabe como se implementará");		
+		
+		// Checks results	
+	}
+	
+	/**
+	 * Acme-Barter - Level C - 12.5.3
+	 * The total number of barters that have been cancelled.
+	 */
+	@Test 
+	public void testTotalBartersCancelled() {
+		// Declare variables
+		int totalUsersInTest;
+		int result;
+		
+		// Load objects to test
+		authenticate("admin");
+		totalUsersInTest = barterService.findAll().size() - barterService.findAllNotCancelled().size();
+		
+		// Checks basic requirements
+
+		// Execution of test
+		Assert.notNull(null, "Test inacabado ya que no se sabe como se implementará");		
+		
+		// Checks results	
 	}
 	
 	/**
@@ -591,6 +574,7 @@ are not displayed to users, only to administrators
 		// Declare variables
 		Barter barter1;
 		Barter barter2;
+		Collection<Barter> relatedBarter;
 		
 		// Load objects to test
 		
@@ -620,36 +604,245 @@ are not displayed to users, only to administrators
 		// Execution of test
 		authenticate("admin");
 		
-		Assert.notNull(null, "Test inacabado ya que no se sabe como se implementará");
+		relatedBarter = barter1.getRelatedBarter();
+		relatedBarter.add(barter2);
+		barter1.setRelatedBarter(relatedBarter);
 		
-//		result = barterService.findOne(result.getId());
-//				
-//		// Checks results
-//		try{
-//			Assert.isTrue(!barterService.findAllNotCancelled().contains(result), "El barter no se ha cancelado correctamente."); // First check
-//		Assert.notNull(null, "Cambiar InvalidPostTestException");
-//		}catch (Exception e) {
-//			// TODO: handle exception
-//			throw new InvalidPostTestException(e.toString());
-//		}
+		barter1 = barterService.saveToRelate(barter1);
+				
+		// Checks results
+		try{
+			barter2 = barterService.findOne(barter2.getId());
+			barter1 = barterService.findOne(barter1.getId());
+
+			Assert.isTrue(
+					this.countRelateBarter(barter1, barter2) == 1,
+					"El barter1 contiene el barter2 '"
+							+ this.countRelateBarter(barter1, barter2)
+							+ "' veces."); // First check
+			Assert.isTrue(
+					this.countRelateBarter(barter2, barter1) == 1,
+					"El barter2 no contiene el barter1 '"
+							+ this.countRelateBarter(barter2, barter1)
+							+ "' veces"); // First check
+		}catch (Exception e) {
+			// TODO: handle exception
+			throw new InvalidPostTestException(e.toString());
+		}
 	}
 	
 	/**
 	 * Positive test case: Asociarlo varias veces y comprobar que se muestra una sola vez
 	 *
 	 */
+	@Test 
+	public void testBarterRelateErrorMoreTimes() {
+		// Declare variables
+		Barter barter1;
+		Barter barter2;
+		Collection<Barter> relatedBarter;
+		
+		// Load objects to test
+		
+		authenticate("admin");
+		barter1 = null;
+		barter2 = null;
+		
+		for(Barter b:barterService.findAll()){
+			if (barter1 != null && !b.getRelatedBarter().contains(barter1)
+					&& !barter1.getRelatedBarter().contains(barter2)) {
+				barter2 = b;
+				break;
+			}
+			barter1 = b;
+		}
+		unauthenticate();
+		
+		// Checks basic requirements
+		try{
+			Assert.notNull(barter1);
+			Assert.notNull(barter2);
+		}catch (Exception e) {
+			// TODO: handle exception
+			throw new InvalidPreTestException(e.toString());
+		}
+		
+		// Execution of test
+		authenticate("admin");
+		
+		relatedBarter = barter1.getRelatedBarter();
+		relatedBarter.add(barter2);
+		relatedBarter.add(barter2);
+		barter1.setRelatedBarter(relatedBarter);
+		
+		barter1 = barterService.saveToRelate(barter1);
+				
+		// Checks results
+		try{
+			barter2 = barterService.findOne(barter2.getId());
+			barter1 = barterService.findOne(barter1.getId());
+			Assert.isTrue(
+					this.countRelateBarter(barter1, barter2) == 1,
+					"El barter1 contiene el barter2 '"
+							+ this.countRelateBarter(barter1, barter2)
+							+ "' veces."); // First check
+			Assert.isTrue(
+					this.countRelateBarter(barter2, barter1) == 1,
+					"El barter2 no contiene el barter1 '"
+							+ this.countRelateBarter(barter2, barter1)
+							+ "' veces"); // First check
+		}catch (Exception e) {
+			// TODO: handle exception
+			throw new InvalidPostTestException(e.toString());
+		}
+	}
 	
 	/**
 	 * Negative test case: Relacionarlo un auditor
 	 *
 	 */
+	@Test(expected=IllegalArgumentException.class)
+	@Rollback(value = true)
+	public void testBarterRelatErrorAuditor() {
+		// Declare variables
+		Barter barter1;
+		Barter barter2;
+		Collection<Barter> relatedBarter;
+		
+		// Load objects to test
+		
+		authenticate("admin");
+		barter1 = null;
+		barter2 = null;
+		
+		for(Barter b:barterService.findAll()){
+			if (barter1 != null && !b.getRelatedBarter().contains(barter1)
+					&& !barter1.getRelatedBarter().contains(barter2)) {
+				barter2 = b;
+				break;
+			}
+			barter1 = b;
+		}
+		unauthenticate();
+		
+		// Checks basic requirements
+		try{
+			Assert.notNull(barter1);
+			Assert.notNull(barter2);
+		}catch (Exception e) {
+			// TODO: handle exception
+			throw new InvalidPreTestException(e.toString());
+		}
+		
+		// Execution of test
+		authenticate("auditor1");
+		
+		relatedBarter = barter1.getRelatedBarter();
+		relatedBarter.add(barter2);
+		barter1.setRelatedBarter(relatedBarter);
+		
+		barter1 = barterService.saveToRelate(barter1);
+				
+		// Checks results
+		try{
+			authenticate("admin");
+			barter2 = barterService.findOne(barter2.getId());
+			barter1 = barterService.findOne(barter1.getId());
+
+			Assert.isTrue(
+					this.countRelateBarter(barter1, barter2) == 0,
+					"El barter1 contiene el barter2 '"
+							+ this.countRelateBarter(barter1, barter2)
+							+ "' veces."); // First check
+			Assert.isTrue(
+					this.countRelateBarter(barter2, barter1) == 0,
+					"El barter2 no contiene el barter1 '"
+							+ this.countRelateBarter(barter2, barter1)
+							+ "' veces"); // First check
+		}catch (Exception e) {
+			// TODO: handle exception
+			throw new InvalidPostTestException(e.toString());
+		}
+	}
 	
 	/**
 	 * Negative test case: Relacionarlo un user
 	 *
 	 */
-	
+	@Test(expected=IllegalArgumentException.class)
+	@Rollback(value = true)
+	public void testBarterRelatErrorUser() {
+		// Declare variables
+		Barter barter1;
+		Barter barter2;
+		Collection<Barter> relatedBarter;
+		
+		// Load objects to test
+		
+		authenticate("admin");
+		barter1 = null;
+		barter2 = null;
+		
+		for(Barter b:barterService.findAll()){
+			if (barter1 != null && !b.getRelatedBarter().contains(barter1)
+					&& !barter1.getRelatedBarter().contains(barter2)) {
+				barter2 = b;
+				break;
+			}
+			barter1 = b;
+		}
+		unauthenticate();
+		
+		// Checks basic requirements
+		try{
+			Assert.notNull(barter1);
+			Assert.notNull(barter2);
+		}catch (Exception e) {
+			// TODO: handle exception
+			throw new InvalidPreTestException(e.toString());
+		}
+		
+		// Execution of test
+		authenticate("user1");
+		
+		relatedBarter = barter1.getRelatedBarter();
+		relatedBarter.add(barter2);
+		barter1.setRelatedBarter(relatedBarter);
+		
+		barter1 = barterService.saveToRelate(barter1);
+				
+		// Checks results
+		try{
+			authenticate("admin");
+			barter2 = barterService.findOne(barter2.getId());
+			barter1 = barterService.findOne(barter1.getId());
 
+			Assert.isTrue(
+					this.countRelateBarter(barter1, barter2) == 0,
+					"El barter1 contiene el barter2 '"
+							+ this.countRelateBarter(barter1, barter2)
+							+ "' veces."); // First check
+			Assert.isTrue(
+					this.countRelateBarter(barter2, barter1) == 0,
+					"El barter2 no contiene el barter1 '"
+							+ this.countRelateBarter(barter2, barter1)
+							+ "' veces"); // First check
+		}catch (Exception e) {
+			// TODO: handle exception
+			throw new InvalidPostTestException(e.toString());
+		}
+	}	
+
+	private int countRelateBarter(Barter barterOrigin, Barter barterToCount){
+		int res = 0;
+		
+		for(Barter a:barterOrigin.getRelatedBarter()){
+			if(a.equals(barterToCount))
+				res++;
+		}
+		
+		return res;
+	}
 	
 	private Item createItem(String name){
 		Item result;
