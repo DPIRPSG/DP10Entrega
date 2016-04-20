@@ -13,10 +13,10 @@ Level C:
  --> AÑADIR EFICACIA EN cancelled de Barter.
 
 4 - The users who have created at least 90% the maximum number of barters that a user has created.
- --> Por Servicios
+ --> Por Servicios: Es necesario para calcular el percentil 90
 
 5 - The users who have not created any barter during the last month.
- --> Por Servicios
+ --> select u.name from Barter b left join b.user u where (YEAR(b.registerMoment) <= YEAR(CURRENT_DATE)) and (MONTH(b.registerMoment) - MONTH(CURRENT_DATE) >= 1) and (DAY(b.registerMoment) <= DAY(CURRENT_DATE)) group by u; Esta hace lo contrario.
 
 Level B:
 
@@ -27,18 +27,18 @@ Level B:
  --> select avg(b.relatedBarter.size) from Barter b;
 
 8 - The users who have registered more barters.
- --> POR Servicios
+ --> select u1 from Barter b1 left join b1.user u1 group by u1 having count(u1) >= all(select count(u2) from Barter b2 left join b2.user u2 group by u2);
 
 9 - The users who have more cancelled barters.
- --> Por Servicios
+ --> select u1 from Barter b1 left join b1.user u1 where b1.cancelled IS TRUE group by u1 having count(u1) >= all(select count(u2) from Barter b2 left join b2.user u2 where b2.cancelled IS TRUE group by u2);
 
 10 - The users who have more matches.
- --> Por Servicios
+ --> select u1 from Match m1 left join m1.creatorBarter b1 left join b1.user u1 group by u1 having count(u1) >= all(select count(u2) from Match m2 left join m2.creatorBarter b2 left join b2.user u2 group by u2);
 
 Level A:
 
 11 - The auditors who have audited more matches.
- --> Por Servicios
+ --> select a1 from Match m1 left join m1.auditor a1 group by a1 having count(a1) >= all(select count(a2) from Match m2 left join m2.auditor a2 group by a2);
 
 12 - The users who have got more matches audited.
- --> Por Servicios
+ --> select u1 from Match m1 left join m1.creatorBarter b1 left join b1.user u1 where m1.report IS NULL group by u1 having count(u1) >= all(select count(u2) from Match m2 left join m2.creatorBarter b2 left join b2.user u2 where m2.report IS NULL group by u2);

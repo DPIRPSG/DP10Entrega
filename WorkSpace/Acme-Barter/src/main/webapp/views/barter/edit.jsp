@@ -28,7 +28,7 @@
 	
 	<!-- Editable Attributes -->
 	<acme:selectMult items="${allBarters}" itemLabel="title" code="barter.relatedBarter" path="relatedBarter"/>
-	
+
 	<!-- Action buttons -->
 	<acme:submit name="save" code="barter.save"/>
 	
