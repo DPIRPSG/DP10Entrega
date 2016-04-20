@@ -486,4 +486,45 @@ public class UserService {
 		
 		return result;
 	}
+	
+	public Collection<User> getUsersWithMoreMatchesAudited(){
+		Collection<User> result = new HashSet<>();
+		Collection<Match> allMatch = new HashSet<>();
+		Map<User, Integer> numberOfMatchesPerUser = new HashMap<>();
+		Integer max = 0;
+		
+		allMatch = matchService.findAll();
+		
+		for(Match m:allMatch){
+			if(!(m.getReport().isEmpty())){
+				if(numberOfMatchesPerUser.containsKey(m.getCreatorBarter().getUser())){
+					numberOfMatchesPerUser.put(m.getCreatorBarter().getUser(), numberOfMatchesPerUser.get(m.getCreatorBarter().getUser())+1);
+				}else if(numberOfMatchesPerUser.containsKey(m.getReceiverBarter().getUser())){
+					numberOfMatchesPerUser.put(m.getReceiverBarter().getUser(), numberOfMatchesPerUser.get(m.getReceiverBarter().getUser())+1);	
+				}else if(!numberOfMatchesPerUser.containsKey(m.getCreatorBarter().getUser())){
+					numberOfMatchesPerUser.put(m.getCreatorBarter().getUser(), 1);
+				}else if(!numberOfMatchesPerUser.containsKey(m.getReceiverBarter().getUser())){
+					numberOfMatchesPerUser.put(m.getReceiverBarter().getUser(), 1);	
+				}
+			}
+		}
+		
+		if(!numberOfMatchesPerUser.values().equals(null)){
+			for(Integer i:numberOfMatchesPerUser.values()){
+				if(max < i){
+					max = i;
+				}
+			}
+		}
+		
+		if(!numberOfMatchesPerUser.keySet().isEmpty()){
+			for(User u:numberOfMatchesPerUser.keySet()){
+				if(!numberOfMatchesPerUser.get(u).equals(null) && numberOfMatchesPerUser.get(u) == max){
+					result.add(u);
+				}
+			}
+		}
+		
+		return result;
+	}
 }

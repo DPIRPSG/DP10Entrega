@@ -160,4 +160,11 @@ public class AuditorService {
 		auditorRepository.flush();
 	}
 
+	public Collection<Auditor> getAuditorsWithMoreMatches(){
+		Collection<Auditor> result;
+		
+		result = auditorRepository.getAuditorsWithMoreMatches();
+		
+		return result;
+	}
 }
