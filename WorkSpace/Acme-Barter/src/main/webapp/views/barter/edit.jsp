@@ -25,11 +25,10 @@
 	<form:hidden path="requested"/>
 	<form:hidden path="createdMatch"/>
 	<form:hidden path="receivedMatch"/>
-	<form:hidden path="relatedBarter"/>
 	
 	<!-- Editable Attributes -->
 	<acme:selectMult items="${allBarters}" itemLabel="title" code="barter.relatedBarter" path="relatedBarter"/>
-	
+
 	<!-- Action buttons -->
 	<acme:submit name="save" code="barter.save"/>
 	
