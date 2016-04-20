@@ -22,4 +22,10 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	// DASHBOARD
 	@Query("select count(u) from User u")
 	Integer getTotalNumberOfUsersRegistered();
+	
+	@Query("select u1 from Barter b1 left join b1.user u1 group by u1 having count(u1) >= all(select count(u2) from Barter b2 left join b2.user u2 group by u2)")
+	Collection<User> getUsersWithMoreBarters();
+	
+	@Query("select u1 from Barter b1 left join b1.user u1 where b1.cancelled IS TRUE group by u1 having count(u1) >= all(select count(u2) from Barter b2 left join b2.user u2 where b2.cancelled IS TRUE group by u2)")
+	Collection<User> getUsersWithMoreBartersCancelled();
 }

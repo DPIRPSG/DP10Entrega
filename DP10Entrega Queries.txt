@@ -19,19 +19,17 @@ Level C:
 
 Level B:
 
-6 - The minimum, the maximum, and the average number of barters per customer. -> FALTA
- --> POR Servicios
+6 - The minimum, the maximum, and the average number of barters per customer. -> IMPLEMENTADO POR SERVICIOS
 
-7 - The ratio of barters that are not related to any other barter. -> FALTA
- --> select avg(b.relatedBarter.size) from Barter b; -> MAL
+7 - The ratio of barters that are not related to any other barter. -> IMPLEMENTADO POR SERVICIOS
 
-8 - The users who have registered more barters. -> BIEN
+8 - The users who have registered more barters. -> IMPLEMENTADO
  --> select u1 from Barter b1 left join b1.user u1 group by u1 having count(u1) >= all(select count(u2) from Barter b2 left join b2.user u2 group by u2);
 
-9 - The users who have more cancelled barters. -> BIEN
+9 - The users who have more cancelled barters. -> IMPLEMENTADO
  --> select u1 from Barter b1 left join b1.user u1 where b1.cancelled IS TRUE group by u1 having count(u1) >= all(select count(u2) from Barter b2 left join b2.user u2 where b2.cancelled IS TRUE group by u2);
 
-10 - The users who have more matches. -> FALTA
+10 - The users who have more matches. -> IMPLEMENTADO
  --> select u1 from Match m1 left join m1.creatorBarter b1 left join b1.user u1 group by u1 having count(u1) >= all(select count(u2) from Match m2 left join m2.creatorBarter b2 left join b2.user u2 group by u2); -> MAL (Sólo cuenta los que tienes como creador)
 
 Level A:

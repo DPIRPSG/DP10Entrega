@@ -3,6 +3,7 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -286,5 +287,27 @@ public class BarterService {
 		}
 		
 		return res;
+	}
+	
+	public Double ratioBarterNotRelatedToAnyOtherBarter(){
+		Double result;
+		Collection<Barter> allBarter = new HashSet<>();
+		Integer numerator;
+		Integer denominator;
+		
+		allBarter = this.findAll();
+		denominator = allBarter.size();
+		
+		for(Barter b:allBarter){
+			for(Barter b2:b.getRelatedBarter()){
+				allBarter.remove(b2);
+			}
+		}
+		
+		numerator = allBarter.size();
+
+		result = (double) (numerator / denominator);
+		
+		return result;
 	}
 }

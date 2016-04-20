@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import domain.Barter;
+import domain.Match;
 import domain.User;
 import domain.Folder;
 import domain.Message;
@@ -45,6 +46,9 @@ public class UserService {
 	
 	@Autowired
 	private BarterService barterService;
+	
+	@Autowired
+	private MatchService matchService;
 	
 	//Constructors -----------------------------------------------------------
 
@@ -333,4 +337,153 @@ public class UserService {
 		return result;
 	}
 	
+	public Integer minumumNumberBarterPerUser(){
+		Integer result = Integer.MAX_VALUE;
+		Collection<Barter> allBarter = new HashSet<>();
+		Map<User, Collection<Barter>> barterPerUser = new HashMap<>();
+		
+		allBarter = barterService.findAll();
+		
+		if(!allBarter.isEmpty()){
+			for(Barter b:allBarter){
+				Collection<Barter> one = new HashSet<>();
+				if(barterPerUser.containsKey(b.getUser())){
+					one = barterPerUser.get(b.getUser());
+					one.add(b);
+					barterPerUser.put(b.getUser(), one);
+				}else{
+					one.add(b);
+					barterPerUser.put(b.getUser(), one);				
+				}
+			}
+		}
+		
+		for(User u:barterPerUser.keySet()){
+			if(barterPerUser.get(u).size() < result){
+				result = barterPerUser.get(u).size();
+			}
+		}
+		
+		return result;
+	}
+	
+	public Integer maximumNumberBarterPerUser(){
+		Integer result = 0;
+		Collection<Barter> allBarter = new HashSet<>();
+		Map<User, Collection<Barter>> barterPerUser = new HashMap<>();
+		
+		allBarter = barterService.findAll();
+		
+		if(!allBarter.isEmpty()){
+			for(Barter b:allBarter){
+				Collection<Barter> one = new HashSet<>();
+				if(barterPerUser.containsKey(b.getUser())){
+					one = barterPerUser.get(b.getUser());
+					one.add(b);
+					barterPerUser.put(b.getUser(), one);
+				}else{
+					one.add(b);
+					barterPerUser.put(b.getUser(), one);				
+				}
+			}
+		}
+		
+		for(User u:barterPerUser.keySet()){
+			if(barterPerUser.get(u).size() > result){
+				result = barterPerUser.get(u).size();
+			}
+		}
+		
+		return result;
+	}
+	
+	public Double averageNumberBarterPerUser(){
+		Double result = 0.0;
+		Collection<Barter> allBarter = new HashSet<>();
+		Map<User, Collection<Barter>> barterPerUser = new HashMap<>();
+		Double numerator = 0.0;
+		Double denominator = 1.0;
+		
+		allBarter = barterService.findAll();
+		
+		if(!allBarter.isEmpty()){
+			for(Barter b:allBarter){
+				Collection<Barter> one = new HashSet<>();
+				if(barterPerUser.containsKey(b.getUser())){
+					one = barterPerUser.get(b.getUser());
+					one.add(b);
+					barterPerUser.put(b.getUser(), one);
+				}else{
+					one.add(b);
+					barterPerUser.put(b.getUser(), one);				
+				}
+			}
+		}
+		
+		denominator = (double) barterPerUser.keySet().size();
+		
+		for(User u:barterPerUser.keySet()){
+			numerator += barterPerUser.get(u).size();
+		}
+
+		result = numerator / denominator;
+		
+		return result;
+		
+	}
+	
+	public Collection<User> getUsersWithMoreBarters(){
+		Collection<User> result;
+		
+		result = userRepository.getUsersWithMoreBarters();
+		
+		return result;
+	}
+	
+	public Collection<User> getUsersWithMoreBartersCancelled(){
+		Collection<User> result;
+		
+		result = userRepository.getUsersWithMoreBartersCancelled();
+		
+		return result;
+	}
+	
+	public Collection<User> getUsersWithMoreMatches(){
+		Collection<User> result = new HashSet<>();
+		Collection<Match> allMatch = new HashSet<>();
+		Map<User, Integer> numberOfMatchesPerUser = new HashMap<>();
+		Integer max = 0;
+		
+		allMatch = matchService.findAll();
+		
+		for(Match m:allMatch){
+			if(numberOfMatchesPerUser.containsKey(m.getCreatorBarter().getUser())){
+				numberOfMatchesPerUser.put(m.getCreatorBarter().getUser(), numberOfMatchesPerUser.get(m.getCreatorBarter().getUser())+1);
+			}else if(numberOfMatchesPerUser.containsKey(m.getReceiverBarter().getUser())){
+				numberOfMatchesPerUser.put(m.getReceiverBarter().getUser(), numberOfMatchesPerUser.get(m.getReceiverBarter().getUser())+1);	
+			}else if(!numberOfMatchesPerUser.containsKey(m.getCreatorBarter().getUser())){
+				numberOfMatchesPerUser.put(m.getCreatorBarter().getUser(), 1);
+			}else if(!numberOfMatchesPerUser.containsKey(m.getReceiverBarter().getUser())){
+				numberOfMatchesPerUser.put(m.getReceiverBarter().getUser(), 1);	
+			}
+		}
+		
+		if(!numberOfMatchesPerUser.values().equals(null)){
+			for(Integer i:numberOfMatchesPerUser.values()){
+				if(max < i){
+					max = i;
+				}
+			}
+		}
+		
+		if(!numberOfMatchesPerUser.keySet().isEmpty()){
+			for(User u:numberOfMatchesPerUser.keySet()){
+				if(!numberOfMatchesPerUser.get(u).equals(null) && numberOfMatchesPerUser.get(u) == max){
+					result.add(u);
+				}
+			}
+		}
+		
+		return result;
+	}
 }
