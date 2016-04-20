@@ -270,7 +270,6 @@ public class BarterServiceTest extends AbstractTest {
 		try{
 			authenticate("admin");
 			Assert.isTrue(!barterService.findAll().contains(result), "El nuevo barter se encuentra en el sistema."); // First check
-			Assert.notNull(null, "Cambiar InvalidPostTestException");
 		}catch (Exception e) {
 			// TODO: handle exception
 			throw new InvalidPostTestException(e.toString());
