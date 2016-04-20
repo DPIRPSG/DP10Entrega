@@ -496,7 +496,7 @@ public class UserService {
 		allMatch = matchService.findAll();
 		
 		for(Match m:allMatch){
-			if(!(m.getReport().isEmpty())){
+			if(!(m.getReport() == null)){
 				if(numberOfMatchesPerUser.containsKey(m.getCreatorBarter().getUser())){
 					numberOfMatchesPerUser.put(m.getCreatorBarter().getUser(), numberOfMatchesPerUser.get(m.getCreatorBarter().getUser())+1);
 				}else if(numberOfMatchesPerUser.containsKey(m.getReceiverBarter().getUser())){
