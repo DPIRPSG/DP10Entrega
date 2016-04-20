@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Iterator;
@@ -62,7 +63,8 @@ public class BarterServiceTest extends AbstractTest {
 		Item requested;
 		
 		// Load objects to test
-/*
+		authenticate("user1");
+
 		offered = createItem("Item offered");
 		requested = createItem("Item requested");
 		
@@ -77,13 +79,12 @@ public class BarterServiceTest extends AbstractTest {
 		result.setRequested(requested);
 		result.setTitle("Example barter");
 		
-		result = barterService.save(result);
+		result = barterService.saveToEdit(result);
 				
 		// Checks results
 		authenticate("admin");
 		Assert.isTrue(barterService.findAll().contains(result), "El nuevo barter no se encuentra en el sistema."); // First check
-		unauthenticate();
-*/
+		
 	}
 	
 	/**
@@ -91,8 +92,7 @@ public class BarterServiceTest extends AbstractTest {
 	 *
 	 */
 	
-	@Test(expected=IllegalArgumentException.class)
-	@Rollback(value = true)
+	@Test
 	public void testBarterCreationErrorIsCancelled() {
 		// Declare variables
 		User customer;
@@ -101,7 +101,8 @@ public class BarterServiceTest extends AbstractTest {
 		Item requested;
 		
 		// Load objects to test
-/*
+		authenticate("user1");
+
 		offered = createItem("Item offered");
 		requested = createItem("Item requested");
 		
@@ -117,18 +118,17 @@ public class BarterServiceTest extends AbstractTest {
 		result.setTitle("Example barter");
 		result.setCancelled(true);
 		
-		result = barterService.save(result);
+		result = barterService.saveToEdit(result);
 				
 		// Checks results
 		try{
 			authenticate("admin");
-			Assert.isTrue(!barterService.findAll().contains(result), "El nuevo barter se encuentra en el sistema."); // First check
-			unauthenticate();
+			Assert.isTrue(!result.isCancelled(), "El nuevo barter está cancelado."); // First check
 		}catch (Exception e) {
 			// TODO: handle exception
 			throw new InvalidPostTestException(e.toString());
 		}
-*/
+
 
 	}
 	
@@ -137,8 +137,7 @@ public class BarterServiceTest extends AbstractTest {
 	 *
 	 */
 	
-	@Test(expected=IllegalArgumentException.class)
-	@Rollback(value = true)
+	@Test
 	public void testBarterCreationErrorRegisterMomentChanged() {
 		// Declare variables
 		User customer;
@@ -147,7 +146,8 @@ public class BarterServiceTest extends AbstractTest {
 		Item requested;
 		
 		// Load objects to test
-/*
+		authenticate("user1");
+
 		offered = createItem("Item offered");
 		requested = createItem("Item requested");
 		
@@ -163,21 +163,26 @@ public class BarterServiceTest extends AbstractTest {
 		result.setTitle("Example barter");
 		
 		Calendar a = Calendar.getInstance();
-		a.add(Calendar.DAY_OF_MONTH, -5);
+		a.add(Calendar.DAY_OF_MONTH, +5);
 		result.setRegisterMoment(a.getTime());
 		
-		result = barterService.save(result);
+		result = barterService.saveToEdit(result);
 				
 		// Checks results
 		try{
 			authenticate("admin");
-			Assert.isTrue(!barterService.findAll().contains(result), "El nuevo barter se encuentra en el sistema."); // First check
-			unauthenticate();
+			System.out.println("Introducida: '" + a.getTime().toString()
+					+ "'_ Devuelta: '" + result.getRegisterMoment().toString()
+					+ "'");
+			Assert.isTrue(! (result.getRegisterMoment().after(a.getTime())
+					|| result.getRegisterMoment().equals(a.getTime())),
+					"El nuevo barter se ha guardado con la fecha introducida."); // First
+																	// check
 		}catch (Exception e) {
 			// TODO: handle exception
 			throw new InvalidPostTestException(e.toString());
 		}
-*/
+
 
 	}
 	
@@ -185,8 +190,7 @@ public class BarterServiceTest extends AbstractTest {
 	 * Negative test case: Crear un Barter relacionado con otro 
 	 *
 	 */
-	@Test(expected=IllegalArgumentException.class)
-	@Rollback(value = true)
+	@Test
 	public void testBarterCreationErrorIsRelated() {
 		// Declare variables
 		User customer;
@@ -197,7 +201,8 @@ public class BarterServiceTest extends AbstractTest {
 		Collection<Barter> barters;
 		
 		// Load objects to test
-/*
+		authenticate("user1");
+
 		offered = createItem("Item offered");
 		requested = createItem("Item requested");
 		barter2 = null;
@@ -226,18 +231,18 @@ public class BarterServiceTest extends AbstractTest {
 		barters.add(barter2);
 		result.setRelatedBarter(barters);
 		
-		result = barterService.save(result);
+		result = barterService.saveToEdit(result);
 				
 		// Checks results
 		try{
 			authenticate("admin");
-			Assert.isTrue(!barterService.findAll().contains(result), "El nuevo barter se encuentra en el sistema."); // First check
-			unauthenticate();
+			Assert.isTrue(!result.getRelatedBarter().contains(barter2),
+					"El nuevo barter continua relacionado."); // First
+																	// check
 		}catch (Exception e) {
 			// TODO: handle exception
 			throw new InvalidPostTestException(e.toString());
 		}
-*/
 
 	}
 	
@@ -256,7 +261,8 @@ public class BarterServiceTest extends AbstractTest {
 		Item requested;
 		
 		// Load objects to test
-/*
+		authenticate("user1");
+
 		offered = createItem("Item offered");
 		requested = createItem("Item requested");
 		
@@ -272,18 +278,16 @@ public class BarterServiceTest extends AbstractTest {
 		result.setTitle("Example barter");
 		
 		authenticate("admin");
-		result = barterService.save(result);
+		result = barterService.saveToEdit(result);
 				
 		// Checks results
 		try{
 			authenticate("admin");
 			Assert.isTrue(!barterService.findAll().contains(result), "El nuevo barter se encuentra en el sistema."); // First check
-			unauthenticate();
 		}catch (Exception e) {
 			// TODO: handle exception
 			throw new InvalidPostTestException(e.toString());
 		}
-*/
 
 	}
 	
@@ -641,14 +645,17 @@ are not displayed to users, only to administrators
 	
 
 	
-//	private Item createItem(String name){
-//		Item result;
-//		
-//		result = itemService.create();
-//		
-//		result.setName(name);
-//		result.setDescription("Descripción -- " + name);
-//		
-//		return result;
-//	}
+	private Item createItem(String name){
+		Item result;
+		
+		result = itemService.create();
+		
+		result.setName(name);
+		result.setPictures(new ArrayList<String>());
+		result.setDescription("Descripción -- " + name);
+		
+		result = itemService.save(result);
+		
+		return result;
+	}
 }
