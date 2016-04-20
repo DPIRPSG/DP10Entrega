@@ -606,7 +606,6 @@ public class AuditorServiceTest extends AbstractTest{
 	 * 		+ Cerrar su sesión
 	 */
 	
-	// CORREGIR : Salta un NullPointerException porque no se controla bien, debería salir un IllegalArgumentException
 	@Test(expected=IllegalArgumentException.class)
 	@Rollback(value = true)
 //	@Test 

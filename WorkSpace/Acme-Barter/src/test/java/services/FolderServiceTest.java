@@ -1020,7 +1020,6 @@ public class FolderServiceTest extends AbstractTest {
 	 * 		+ Cerrar su sesión
 	 */
 	
-	// CORREGIR : Falta que se implemente la funcionalidad y comprobar que funcione el test
 	@Test 
 	public void testFlagMessageAsSpam() {
 		// Declare variables
@@ -1050,6 +1049,7 @@ public class FolderServiceTest extends AbstractTest {
 		actorFolders = folderService.findAllByActor();
 		
 		folder = null;
+		actorSpamFolder = null;
 		
 		for(Folder f: actorFolders){
 			if(f.getName().equals("InBox")){
@@ -1063,7 +1063,7 @@ public class FolderServiceTest extends AbstractTest {
 		Assert.notNull(folder, "No hay ninguna carpeta con la que se pretender testear.");
 		
 		folderMessages = messageService.findAllByFolder(folder);
-		spamFolderMessages = messageService.findAllByFolder(spamFolder);
+		spamFolderMessages = messageService.findAllByFolder(actorSpamFolder);
 		
 		folderMessagesSize = folderMessages.size();
 		spamMessagesSize = spamFolderMessages.size();
@@ -1077,12 +1077,13 @@ public class FolderServiceTest extends AbstractTest {
 		
 		Assert.notNull(message, "No hay ningun mensaje con el que se pretender testear.");
 		
-		messageService.flagAsSpam(message);
+		messageService.flagAsSpam(message.getId());
 		
 		// Checks results
 		newActorFolders = folderService.findAllByActor();
 		
-		folder = null;
+		originalFolder = null;
+		spamFolder = null;
 		
 		for(Folder f: newActorFolders){
 			if(f.getName().equals("InBox")){
@@ -1112,32 +1113,31 @@ public class FolderServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Negative test case: Marcar un mensaje como Spam que está en Spam
+	 * Negative test case: Marcar un mensaje como Spam que está en Spam (Test planteado como negativo pero implementado como positivo al no saltar una excepción si no estar controlado de manera natural en el servicio para que no interrumpa la ejecución de la aplicación)
 	 * 		- Acción
 	 * 		+ Autenticarse en el sistema
 	 * 		+ Acceder a su carpeta de Spam
 	 * 		+ Marcar uno de sus mensajes como Spam
 	 * 		- Comprobación
-	 * 		+ Comprobar que ...
+	 * 		+ Comprobar que el mensaje no desparece de la carpeta de Spam ni tiene comportamientos extraños, debe permanecer en Spam como si no hubiera pasado nada.
 	 * 		+ Cerrar su sesión
 	 */
 	
-	// CORREGIR : Falta que se implemente la funcionalidad y comprobar que funcione el test
 	@Test 
 	public void testFlagSpamMessageAsSpam() {
 		// Declare variables
 		Actor user;
 		Collection<Folder> actorFolders;
-		Folder folder;
+//		Folder folder;
 		Folder actorSpamFolder;
-		Collection<Message> folderMessages;
+//		Collection<Message> folderMessages;
 		Message message;
-		Integer folderMessagesSize;
+//		Integer folderMessagesSize;
 		Integer spamMessagesSize;
 		
 		Collection<Folder> newActorFolders;
-		Folder originalFolder;
-		Collection<Message> originalFolderMessages;
+//		Folder originalFolder;
+//		Collection<Message> originalFolderMessages;
 		Folder spamFolder;
 		Collection<Message> spamFolderMessages;
 		
@@ -1151,45 +1151,48 @@ public class FolderServiceTest extends AbstractTest {
 		// Execution of test
 		actorFolders = folderService.findAllByActor();
 		
-		folder = null;
+//		folder = null;
+		actorSpamFolder = null;
 		
 		for(Folder f: actorFolders){
-			if(f.getName().equals("InBox")){
-				folder = f;
-			}
+//			if(f.getName().equals("InBox")){
+//				folder = f;
+//			}
 			if(f.getName().equals("SpamBox")){
 				actorSpamFolder = f;
 			}
 		}
 		
-		Assert.notNull(folder, "No hay ninguna carpeta con la que se pretender testear.");
+//		Assert.notNull(folder, "No hay ninguna carpeta con la que se pretender testear.");
+		Assert.notNull(actorSpamFolder, "No hay ninguna carpeta con la que se pretender testear.");
 		
-		folderMessages = messageService.findAllByFolder(folder);
-		spamFolderMessages = messageService.findAllByFolder(spamFolder);
+//		folderMessages = messageService.findAllByFolder(folder);
+		spamFolderMessages = messageService.findAllByFolder(actorSpamFolder);
 		
-		folderMessagesSize = folderMessages.size();
+//		folderMessagesSize = folderMessages.size();
 		spamMessagesSize = spamFolderMessages.size();
 		
 		message = null;
 		
-		for(Message m: folderMessages){
+		for(Message m: spamFolderMessages){
 			message = m;
 			break;
 		}
 		
-		Assert.notNull(message, "No hay ningun mensaje con el que se pretender testear.");
+		Assert.notNull(message, "No hay ningun mensaje con el que se pretende testear.");
 		
-		messageService.flagAsSpam(message);
+		messageService.flagAsSpam(message.getId());
 		
 		// Checks results
 		newActorFolders = folderService.findAllByActor();
 		
-		folder = null;
+//		originalFolder = null;
+		spamFolder = null;
 		
 		for(Folder f: newActorFolders){
-			if(f.getName().equals("InBox")){
-				originalFolder = f;
-			}
+//			if(f.getName().equals("InBox")){
+//				originalFolder = f;
+//			}
 			if(f.getName().equals("SpamBox")){
 				spamFolder = f;
 			}
@@ -1197,17 +1200,17 @@ public class FolderServiceTest extends AbstractTest {
 		
 		Assert.notNull(spamFolder, "No hay ninguna carpeta de Spam con la que se pretender testear.");
 		
-		originalFolderMessages = messageService.findAllByFolder(originalFolder);
+//		originalFolderMessages = messageService.findAllByFolder(originalFolder);
 		
 		spamFolderMessages = messageService.findAllByFolder(spamFolder);
 		
-		Assert.isTrue(!originalFolderMessages.contains(message), "El mensaje todavía está en la carpeta original.");
+//		Assert.isTrue(!originalFolderMessages.contains(message), "El mensaje todavía está en la carpeta original.");
 		
-		Assert.isTrue(originalFolderMessages.size() == folderMessagesSize - 1, "El numero de mensajes de la carpeta original no es el mismo que había antes menos 1.");
+//		Assert.isTrue(originalFolderMessages.size() == folderMessagesSize - 1, "El numero de mensajes de la carpeta original no es el mismo que había antes menos 1.");
 		
-		Assert.isTrue(spamFolderMessages.contains(message), "El mensaje no está en la carpeta de spam.");
+		Assert.isTrue(spamFolderMessages.contains(message), "El mensaje ha desaparecido de la carpeta de spam.");
 		
-		Assert.isTrue(spamFolderMessages.size() == spamMessagesSize + 1, "El numero de mensajes de la carpeta de spam no es el mismo que había antes mas 1.");
+		Assert.isTrue(spamFolderMessages.size() == spamMessagesSize, "El numero de mensajes de la carpeta de spam no es el mismo que había antes.");
 		
 		unauthenticate();
 
@@ -1219,28 +1222,30 @@ public class FolderServiceTest extends AbstractTest {
 	 * 		+ Autenticarse en el sistema
 	 * 		+ Marcar un mensajes de otro User como Spam
 	 * 		- Comprobación
-	 * 		+ Comprobar que ...
+	 * 		+ Comprobar que salta una excepción del tipo: IllegalArgumentException
 	 * 		+ Cerrar su sesión
 	 */
 	
-	// CORREGIR : Falta que se implemente la funcionalidad y comprobar que funcione el test
-	@Test 
+	@Test(expected=IllegalArgumentException.class)
+	@Rollback(value = true)
+//	@Test 
 	public void testFlagOtherUserMessageAsSpam() {
 		// Declare variables
 		Actor user;
 		Collection<Folder> actorFolders;
-		Folder folder;
-		Folder actorSpamFolder;
-		Collection<Message> folderMessages;
+//		Folder folder;
+//		Folder actorSpamFolder;
+//		Collection<Message> folderMessages;
 		Message message;
-		Integer folderMessagesSize;
-		Integer spamMessagesSize;
-		
-		Collection<Folder> newActorFolders;
-		Folder originalFolder;
-		Collection<Message> originalFolderMessages;
-		Folder spamFolder;
-		Collection<Message> spamFolderMessages;
+		Boolean isMine; // Is the message in any folder of the user1?
+//		Integer folderMessagesSize;
+//		Integer spamMessagesSize;
+//		
+//		Collection<Folder> newActorFolders;
+//		Folder originalFolder;
+//		Collection<Message> originalFolderMessages;
+//		Folder spamFolder;
+//		Collection<Message> spamFolderMessages;
 		
 		// Load objects to test
 		authenticate("user1");
@@ -1250,66 +1255,89 @@ public class FolderServiceTest extends AbstractTest {
 		Assert.notNull(user, "El usuario no se ha logueado correctamente.");
 		
 		// Execution of test
+		unauthenticate();
+		authenticate("user2");
 		actorFolders = folderService.findAllByActor();
 		
-		folder = null;
+//		folder = null;
+////		actorSpamFolder = null;
+//		
+//		for(Folder f: actorFolders){
+//			if(f.getName().equals("InBox")){
+//				folder = f;
+//			}
+////			if(f.getName().equals("SpamBox")){
+////				actorSpamFolder = f;
+////			}
+//		}
 		
-		for(Folder f: actorFolders){
-			if(f.getName().equals("InBox")){
-				folder = f;
-			}
-			if(f.getName().equals("SpamBox")){
-				actorSpamFolder = f;
-			}
-		}
+//		Assert.notNull(folder, "No hay ninguna carpeta con la que se pretender testear.");
 		
-		Assert.notNull(folder, "No hay ninguna carpeta con la que se pretender testear.");
+//		folderMessages = messageService.findAllByFolder(folder);
+//		spamFolderMessages = messageService.findAllByFolder(actorSpamFolder);
 		
-		folderMessages = messageService.findAllByFolder(folder);
-		spamFolderMessages = messageService.findAllByFolder(spamFolder);
-		
-		folderMessagesSize = folderMessages.size();
-		spamMessagesSize = spamFolderMessages.size();
+//		folderMessagesSize = folderMessages.size();
+//		spamMessagesSize = spamFolderMessages.size();
 		
 		message = null;
 		
-		for(Message m: folderMessages){
-			message = m;
-			break;
+		for(Folder f: actorFolders){
+			for(Message m: messageService.findAllByFolder(f)){
+				isMine = false;
+				
+				if(m.getSender() == user){
+					isMine = true;
+				}else{
+					for(Actor a: m.getRecipients()){
+						if(a == user){
+							isMine = true;
+						}
+					}
+				}
+				
+				if(!isMine){
+					message = m;
+					break;
+				}
+			}
 		}
 		
-		Assert.notNull(message, "No hay ningun mensaje con el que se pretender testear.");
+		Assert.notNull(message, "No hay ningun mensaje con las condiciones que se necesitan para testear.");
 		
-		messageService.flagAsSpam(message);
+		unauthenticate();
+		authenticate("user1");
+		
+		messageService.flagAsSpam(message.getId());
 		
 		// Checks results
-		newActorFolders = folderService.findAllByActor();
-		
-		folder = null;
-		
-		for(Folder f: newActorFolders){
-			if(f.getName().equals("InBox")){
-				originalFolder = f;
-			}
-			if(f.getName().equals("SpamBox")){
-				spamFolder = f;
-			}
-		}
-		
-		Assert.notNull(spamFolder, "No hay ninguna carpeta de Spam con la que se pretender testear.");
-		
-		originalFolderMessages = messageService.findAllByFolder(originalFolder);
-		
-		spamFolderMessages = messageService.findAllByFolder(spamFolder);
-		
-		Assert.isTrue(!originalFolderMessages.contains(message), "El mensaje todavía está en la carpeta original.");
-		
-		Assert.isTrue(originalFolderMessages.size() == folderMessagesSize - 1, "El numero de mensajes de la carpeta original no es el mismo que había antes menos 1.");
-		
-		Assert.isTrue(spamFolderMessages.contains(message), "El mensaje no está en la carpeta de spam.");
-		
-		Assert.isTrue(spamFolderMessages.size() == spamMessagesSize + 1, "El numero de mensajes de la carpeta de spam no es el mismo que había antes mas 1.");
-		
+//		newActorFolders = folderService.findAllByActor();
+//		
+//		originalFolder = null;
+//		spamFolder = null;
+//		
+//		for(Folder f: newActorFolders){
+//			if(f.getName().equals("InBox")){
+//				originalFolder = f;
+//			}
+//			if(f.getName().equals("SpamBox")){
+//				spamFolder = f;
+//			}
+//		}
+//		
+//		Assert.notNull(spamFolder, "No hay ninguna carpeta de Spam con la que se pretender testear.");
+//		
+//		originalFolderMessages = messageService.findAllByFolder(originalFolder);
+//		
+//		spamFolderMessages = messageService.findAllByFolder(spamFolder);
+//		
+//		Assert.isTrue(!originalFolderMessages.contains(message), "El mensaje todavía está en la carpeta original.");
+//		
+//		Assert.isTrue(originalFolderMessages.size() == folderMessagesSize - 1, "El numero de mensajes de la carpeta original no es el mismo que había antes menos 1.");
+//		
+//		Assert.isTrue(spamFolderMessages.contains(message), "El mensaje no está en la carpeta de spam.");
+//		
+//		Assert.isTrue(spamFolderMessages.size() == spamMessagesSize + 1, "El numero de mensajes de la carpeta de spam no es el mismo que había antes mas 1.");
+//		
 		unauthenticate();
 
 	}
