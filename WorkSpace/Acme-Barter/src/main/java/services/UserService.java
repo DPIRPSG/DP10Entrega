@@ -2,12 +2,17 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import domain.Barter;
 import domain.User;
 import domain.Folder;
 import domain.Message;
@@ -37,6 +42,9 @@ public class UserService {
 	
 	@Autowired
 	private UserAccountService userAccountService;
+	
+	@Autowired
+	private BarterService barterService;
 	
 	//Constructors -----------------------------------------------------------
 
@@ -231,10 +239,96 @@ public class UserService {
 		return res;
 	}
 	
+	// DASHBOARD
 	public Integer getTotalNumberOfUsersRegistered(){
 		Integer result;
 		
 		result = userRepository.getTotalNumberOfUsersRegistered();
+		
+		return result;
+	}
+	
+	public Collection<User> getUsersAbovePencentile90(){
+		Collection<User> result = new HashSet<>();
+		Collection<Barter> allBarters = new HashSet<>();
+		Map<User,Integer> numberOfBarterPerUser = new HashMap<>();
+		Integer max = 0;
+		Double percentile90 = 0.0;
+		
+		allBarters = barterService.findAll();
+		
+		for(Barter b:allBarters){
+			if(numberOfBarterPerUser.containsKey(b.getUser())){
+				numberOfBarterPerUser.put(b.getUser(), numberOfBarterPerUser.get(b.getUser())+1);
+			}else{
+				numberOfBarterPerUser.put(b.getUser(), 1);			}
+		}
+		
+		if(!numberOfBarterPerUser.values().equals(null)){
+			for(Integer i:numberOfBarterPerUser.values()){
+				if(max < i){
+					max = i;
+				}
+			}
+		}
+
+		if(max != 0){
+			percentile90 = max*0.9;
+		}
+		
+		if(!numberOfBarterPerUser.keySet().isEmpty()){
+			for(User u:numberOfBarterPerUser.keySet()){
+				if(!numberOfBarterPerUser.get(u).equals(null) && numberOfBarterPerUser.get(u) >= percentile90){
+					result.add(u);
+				}
+			}
+		}
+
+		return result;
+	}
+	
+	@SuppressWarnings("deprecation")
+	public Collection<User> getUsersWithNoBarterThisMonth(){
+		Collection<User> result = new HashSet<>();
+		Collection<Barter> allBarter = new HashSet<>();
+		Collection<User> allUser = new HashSet<>();
+		Map<User,Collection<Barter>> bartersPerUser = new HashMap<>();
+		Date aMonthAgo = new Date();
+		
+		allBarter = barterService.findAll();
+		if(aMonthAgo.getMonth() == 1){
+			aMonthAgo.setMonth(11);
+			aMonthAgo.setYear(aMonthAgo.getYear()-1);
+		}else{
+			aMonthAgo.setMonth(aMonthAgo.getMonth()-1);
+
+		}
+		if(!allBarter.isEmpty()){
+			for(Barter b:allBarter){
+				Collection<Barter> one = new HashSet<>();
+				if(bartersPerUser.containsKey(b.getUser())){
+					one = bartersPerUser.get(b.getUser());
+					one.add(b);
+					bartersPerUser.put(b.getUser(), one);
+				}else{
+					one.add(b);
+					bartersPerUser.put(b.getUser(), one);				
+				}
+			}
+		}
+		
+		allUser = bartersPerUser.keySet();
+		result.addAll(allUser);
+		
+		if(!allUser.isEmpty()){
+			for(User u:allUser){
+				for(Barter b:bartersPerUser.get(u)){
+					if(b.getRegisterMoment().after(aMonthAgo)){
+						result.remove(u);
+					}
+				}
+			}
+		}
 		
 		return result;
 	}
