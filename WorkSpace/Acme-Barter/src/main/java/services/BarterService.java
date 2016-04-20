@@ -270,14 +270,6 @@ public class BarterService {
 		return result;
 	}
 	
-	public Double ratioOfBarterNotRelatedToAnyBarter(){
-		Double result;
-		
-		result = barterRepository.ratioOfBarterNotRelatedToAnyBarter();
-		
-		return result;
-	}
-	
 	private int countRelateBarter(Barter barterOrigin, Barter barterToCount){
 		int res = 0;
 		
