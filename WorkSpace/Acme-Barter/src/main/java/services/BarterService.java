@@ -252,6 +252,7 @@ public class BarterService {
 		
 	}
 	
+	//DASHBOARD
 	public Integer getTotalNumberOfBarterRegistered(){
 		Integer result;
 		
