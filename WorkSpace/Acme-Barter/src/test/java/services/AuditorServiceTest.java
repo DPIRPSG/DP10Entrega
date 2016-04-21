@@ -736,7 +736,7 @@ public class AuditorServiceTest extends AbstractTest{
 				// createMatch
 				int value = 1;
 				if (auditorBarters.containsKey(b.getAuditor()))
-					value = auditorBarters.get(b.getAuditor()) + 1;
+					value += auditorBarters.get(b.getAuditor());
 
 				auditorBarters.put(b.getAuditor(), value);
 
@@ -753,8 +753,13 @@ public class AuditorServiceTest extends AbstractTest{
 		// Checks basic requirements
 
 		// Execution of test
-		Assert.notNull(null, "Test inacabado ya que no se sabe como se implementará");
-		
+		result = auditorService.getAuditorsWithMoreMatches();
+		Assert.isTrue(
+				result.containsAll(inTest) && inTest.containsAll(result),
+				"El test devuelve " + result.size() + " " + result.toString()
+						+ " pero debían ser " + inTest.size() + " "
+						+ inTest.toString());
+				
 				// En la variable inTest están los usuarios que debería devolver la query
 		
 		

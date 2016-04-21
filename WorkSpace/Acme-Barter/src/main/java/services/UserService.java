@@ -68,7 +68,7 @@ public class UserService {
 
 		result = new User();
 		
-		userAccount = userAccountService.create("CUSTOMER");
+		userAccount = userAccountService.create("USER");
 		result.setUserAccount(userAccount);
 		
 		return result;
