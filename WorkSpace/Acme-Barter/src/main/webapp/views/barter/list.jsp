@@ -34,6 +34,20 @@
 		</display:column>
 	</security:authorize>
 	
+	<security:authorize access="hasRole('USER')">
+		<spring:message code="barter.cancelled" var="cancelledHeader" />
+		<display:column title="${cancelledHeader}" sortable="true">
+			<jstl:if test="${row_Barter.cancelled == false}">
+				<a href="barter/user/cancel.do?barterId=${row_Barter.id}"> <spring:message
+					code="barter.cancel"/>
+				</a>
+			</jstl:if>
+			<jstl:if test="${row_Barter.cancelled == true}">
+				<jstl:out value="${row_Barter.cancelled}" />
+			</jstl:if>
+		</display:column>
+	</security:authorize>
+	
 	<security:authorize access="hasRole('ADMIN')">
 		<spring:message code="barter.edit" var="editHeader" />
 		<display:column title="${editHeader}" sortable="true">

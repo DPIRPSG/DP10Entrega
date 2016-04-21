@@ -244,8 +244,12 @@ public class BarterService {
 		
 		Assert.notNull(barter);
 		Assert.isTrue(barter.getId() != 0);
-		Assert.isTrue(actorService.checkAuthority("ADMIN"), "Only an administrator can cancel a barter.");
+		Assert.isTrue(actorService.checkAuthority("ADMIN") || actorService.checkAuthority("USER"), "Only an administrator or a user can cancel a barter.");
 		Assert.isTrue(!barter.isCancelled(), "This barter is already deleted.");
+		
+		if(actorService.checkAuthority("USER")){
+			Assert.isTrue(barter.getUser().equals(userService.findByPrincipal()));
+		}
 		
 		barter.setCancelled(true);	
 		
