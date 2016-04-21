@@ -64,7 +64,7 @@
 		<spring:message code="user.name" var="nameHeader" />
 		<display:column title="${nameHeader}" 
   			sortable="false" >
- 			<jstl:out value="${row1.name}"/>
+ 			<jstl:out value="${row2.name}"/>
   		</display:column>
   	</display:table>
 	

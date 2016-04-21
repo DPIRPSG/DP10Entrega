@@ -300,7 +300,7 @@ public class UserService {
 		Date aMonthAgo = new Date();
 		
 		allBarter = barterService.findAll();
-		if(aMonthAgo.getMonth() == 1){
+		if(aMonthAgo.getMonth() == 0){
 			aMonthAgo.setMonth(11);
 			aMonthAgo.setYear(aMonthAgo.getYear()-1);
 		}else{
@@ -323,8 +323,8 @@ public class UserService {
 		
 		allUser = bartersPerUser.keySet();
 		result.addAll(allUser);
-		
-		if(!allUser.isEmpty()){
+				
+		if(!result.isEmpty()){
 			for(User u:allUser){
 				for(Barter b:bartersPerUser.get(u)){
 					if(b.getRegisterMoment().after(aMonthAgo)){
