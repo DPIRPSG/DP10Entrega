@@ -1488,4 +1488,59 @@ public class MatchServiceTest extends AbstractTest {
 		
 		authenticate(null);
 	}
+	
+	/**
+	 * Acme-Six-Pack - Level B - 3.4
+	 * An actor who is authenticated a user must be able to:
+	 * Display a stream of bulletins in which the system provides information about the barters that the users that he or she follows have created.
+	 * 
+	 * Positive test case: Muestra la información pertinente.
+	 * 
+	 */
+	@Test
+	public void testMatchFindAllBulletin1(){
+		// Declare variable
+		Collection<Match> result;
+		
+		// Load objects to test
+		authenticate("user1");
+		
+		// Check basic requirements
+		
+		// Execution of test
+		result = matchService.findAllByFollowedUser();
+		
+		// Check results
+		Assert.isTrue(result.size() == 6);
+		authenticate(null);
+		barterService.flush();
+	}
+	
+	/**
+	 * Acme-Six-Pack - Level B - 3.4
+	 * An actor who is authenticated a user must be able to:
+	 * Display a stream of bulletins in which the system provides information about the barters that the users that he or she follows have created.
+	 * 
+	 * Negative test case: No muestra la información pertinente ya que no eres un user.
+	 * 
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	@Rollback(value = true) 
+	public void testMatchFindAllBulletin2(){
+		// Declare variable
+		Collection<Match> result;
+		
+		// Load objects to test
+		//authenticate("user1");
+		
+		// Check basic requirements
+		
+		// Execution of test
+		result = matchService.findAllByFollowedUser();
+		
+		// Check results
+		Assert.isTrue(result.size() == 6);
+		//authenticate(null);
+		barterService.flush();
+	}
 }
