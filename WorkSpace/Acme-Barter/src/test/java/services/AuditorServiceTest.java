@@ -597,10 +597,10 @@ public class AuditorServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * Negative test case: Escribir un report a un Match que no tengas asignado
+	 * Negative test case: Escribir un report a un Match que no esté asignado a ningún auditor
 	 * 		- Acción
 	 * 		+ Autenticarse en el sistema como Auditor
-	 * 		+ Escribir un report para un Match que no tenga asignado
+	 * 		+ Escribir un report para un Match que no tenga asignado ningún auditor
 	 * 		- Comprobación
 	 * 		+ Comprobar que salta una excepción del tipo: IllegalArgumentException
 	 * 		+ Cerrar su sesión
