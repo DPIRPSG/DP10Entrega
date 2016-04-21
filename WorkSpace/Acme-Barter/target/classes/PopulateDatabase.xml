@@ -150,6 +150,42 @@
 		</property>
 	</bean>
 	
+	<bean id="userAccount12" class="security.UserAccount">
+		<property name="username" value="user5" />
+		<property name="password" value="0a791842f52a0acfbb3a783378c066b8" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount13" class="security.UserAccount">
+		<property name="username" value="user6" />
+		<property name="password" value="affec3b64cf90492377a8114c86fc093" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount14" class="security.UserAccount">
+		<property name="username" value="user7" />
+		<property name="password" value="3e0469fb134991f8f75a2760e409c6ed" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
 	
 	<!-- Other domain beans come here -->
 	
@@ -343,6 +379,11 @@
 		<property name="received">
 			<list>
 				<ref bean="message1"/>
+				<ref bean="message5"/>
+				<ref bean="message6"/>
+				<ref bean="message7"/>
+				<ref bean="message8"/>
+				<ref bean="message9"/>
 			</list>
 		</property>
 		<property name="followed">
@@ -377,39 +418,7 @@
 		</property>
 		<property name="followed">
 			<list>
-			</list>
-		</property>
-	</bean>
-	
-	<bean id="user1" class="domain.User">
-		<property name="name" value="Manolo"/>
-		<property name="surname" value="Lopez"/>
-		<property name="phone" value="612345789"/>
-		<property name="userAccount" ref="userAccount2"/>
-		<property name="messageBoxes">
-			<list>
-				<ref bean="folder5" />
-				<ref bean="folder6" />
-				<ref bean="folder7" />
-				<ref bean="folder8" />
-				<ref bean="folder45" />
-			</list>
-		</property>
-		<property name="sent">
-			<list>
-			</list>
-		</property>
-		<property name="received">
-			<list>
-				<ref bean="message1"/>
-				<ref bean="message2"/>
-				<ref bean="message3"/>
-			</list>
-		</property>
-		<property name="followed">
-			<list>
 				<ref bean="user2"/>
-				<ref bean="user3"/>
 			</list>
 		</property>
 	</bean>
@@ -441,8 +450,134 @@
 		<property name="followed">
 			<list>
 				<ref bean="user2"/>
-				<ref bean="user1"/>
 				<ref bean="user3"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="user5" class="domain.User">
+		<property name="name" value="Carlos"/>
+		<property name="surname" value="Mata"/>
+		<property name="phone" value="662554778"/>
+		<property name="userAccount" ref="userAccount12"/>
+		<property name="messageBoxes">
+			<list>
+				<ref bean="folder46"/>
+				<ref bean="folder47"/>
+				<ref bean="folder48"/>
+				<ref bean="folder49"/>
+			</list>
+		</property>
+		<property name="sent">
+			<list>
+			</list>
+		</property>
+		<property name="received">
+			<list>
+			</list>
+		</property>
+		<property name="followed">
+			<list>
+				<ref bean="user2"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="user6" class="domain.User">
+		<property name="name" value="Miguel"/>
+		<property name="surname" value="Rodríguez"/>
+		<property name="phone" value="699332542"/>
+		<property name="userAccount" ref="userAccount13"/>
+		<property name="messageBoxes">
+			<list>
+				<ref bean="folder50"/>
+				<ref bean="folder51"/>
+				<ref bean="folder52"/>
+				<ref bean="folder53"/>
+			</list>
+		</property>
+		<property name="sent">
+			<list>
+			</list>
+		</property>
+		<property name="received">
+			<list>
+			</list>
+		</property>
+		<property name="followed">
+			<list>
+				<ref bean="user2"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="user7" class="domain.User">
+		<property name="name" value="Pepito"/>
+		<property name="surname" value="Perez"/>
+		<property name="phone" value="612453587"/>
+		<property name="userAccount" ref="userAccount14"/>
+		<property name="messageBoxes">
+			<list>
+				<ref bean="folder55"/>
+				<ref bean="folder56"/>
+				<ref bean="folder57"/>
+				<ref bean="folder58"/>
+			</list>
+		</property>
+		<property name="sent">
+			<list>
+			</list>
+		</property>
+		<property name="received">
+			<list>
+			</list>
+		</property>
+		<property name="followed">
+			<list>
+				<ref bean="user2"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="user1" class="domain.User">
+		<property name="name" value="Manolo"/>
+		<property name="surname" value="Lopez"/>
+		<property name="phone" value="612345789"/>
+		<property name="userAccount" ref="userAccount2"/>
+		<property name="messageBoxes">
+			<list>
+				<ref bean="folder5" />
+				<ref bean="folder6" />
+				<ref bean="folder7" />
+				<ref bean="folder8" />
+				<ref bean="folder45" />
+				<ref bean="folder54" />
+			</list>
+		</property>
+		<property name="sent">
+			<list>
+				<ref bean="message5"/>
+				<ref bean="message6"/>
+				<ref bean="message7"/>
+				<ref bean="message8"/>
+				<ref bean="message9"/>
+			</list>
+		</property>
+		<property name="received">
+			<list>
+				<ref bean="message1"/>
+				<ref bean="message2"/>
+				<ref bean="message3"/>
+			</list>
+		</property>
+		<property name="followed">
+			<list>
+				<ref bean="user2"/>
+				<ref bean="user3"/>
+				<ref bean="user4"/>
+				<ref bean="user5"/>
+				<ref bean="user6"/>
+				<ref bean="user7"/>
 			</list>
 		</property>
 	</bean>
@@ -531,6 +666,101 @@
 		</property>
 	</bean>
 	
+	<bean id="message5" class="domain.Message">
+		<property name="subject" value="Mi mensaje 2"/>
+		<property name="body" value="Este es mi mensaje 2 para ti"/>
+		<property name="sentMoment" value="2016/02/05 22:15"/>
+		<property name="sender" ref="user1"/>
+		<property name="priority" value="-1"/>
+		<property name="recipients">
+			<list>
+				<ref bean="user2"/>
+			</list>
+		</property>
+		<property name="folders">
+			<list>
+				<ref bean="folder5"/>
+				<ref bean="folder10"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="message6" class="domain.Message">
+		<property name="subject" value="Mi mensaje 3"/>
+		<property name="body" value="Este es mi mensaje 3 para ti"/>
+		<property name="sentMoment" value="2016/02/05 22:15"/>
+		<property name="sender" ref="user1"/>
+		<property name="priority" value="0"/>
+		<property name="recipients">
+			<list>
+				<ref bean="user2"/>
+			</list>
+		</property>
+		<property name="folders">
+			<list>
+				<ref bean="folder5"/>
+				<ref bean="folder10"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="message7" class="domain.Message">
+		<property name="subject" value="Mi mensaje 4"/>
+		<property name="body" value="Este es mi mensaje 4 para ti"/>
+		<property name="sentMoment" value="2016/02/05 22:15"/>
+		<property name="sender" ref="user1"/>
+		<property name="priority" value="1"/>
+		<property name="recipients">
+			<list>
+				<ref bean="user2"/>
+			</list>
+		</property>
+		<property name="folders">
+			<list>
+				<ref bean="folder5"/>
+				<ref bean="folder10"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="message8" class="domain.Message">
+		<property name="subject" value="Mi mensaje 5"/>
+		<property name="body" value="Este es mi mensaje 5 para ti"/>
+		<property name="sentMoment" value="2016/02/05 22:15"/>
+		<property name="sender" ref="user2"/>
+		<property name="priority" value="-1"/>
+		<property name="recipients">
+			<list>
+				<ref bean="user1"/>
+			</list>
+		</property>
+		<property name="folders">
+			<list>
+				<ref bean="folder9"/>
+				<ref bean="folder6"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="message9" class="domain.Message">
+		<property name="subject" value="Mi mensaje 6"/>
+		<property name="body" value="Este es mi mensaje 6 para ti"/>
+		<property name="sentMoment" value="2016/02/05 22:15"/>
+		<property name="sender" ref="user2"/>
+		<property name="priority" value="1"/>
+		<property name="recipients">
+			<list>
+				<ref bean="user1"/>
+			</list>
+		</property>
+		<property name="folders">
+			<list>
+				<ref bean="folder9"/>
+				<ref bean="folder6"/>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Folders -->
 	
 	<bean id="folder1" class="domain.Folder">
@@ -581,6 +811,11 @@
 		<property name="messages">
 			<list>
 				<ref bean="message1"/>
+				<ref bean="message5"/>
+				<ref bean="message6"/>
+				<ref bean="message7"/>
+				<ref bean="message8"/>
+				<ref bean="message9"/>
 			</list>
 		</property>
 	</bean>
@@ -636,6 +871,11 @@
 		<property name="messages">
 			<list>
 				<ref bean="message4"/>
+				<ref bean="message5"/>
+				<ref bean="message6"/>
+				<ref bean="message7"/>
+				<ref bean="message8"/>
+				<ref bean="message9"/>
 			</list>
 		</property>
 	</bean>
@@ -994,6 +1234,136 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="folder46" class="domain.Folder">
+		<property name="name" value="InBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="user5"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder47" class="domain.Folder">
+		<property name="name" value="OutBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="user5"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder48" class="domain.Folder">
+		<property name="name" value="TrashBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="user5"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder49" class="domain.Folder">
+		<property name="name" value="SpamBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="user5"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder50" class="domain.Folder">
+		<property name="name" value="InBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="user6"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder51" class="domain.Folder">
+		<property name="name" value="OutBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="user6"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder52" class="domain.Folder">
+		<property name="name" value="TrashBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="user6"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder53" class="domain.Folder">
+		<property name="name" value="SpamBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="user6"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder54" class="domain.Folder">
+		<property name="name" value="MyBox2"/>
+		<property name="isSystem" value="false"/>
+		<property name="actor" ref="user1"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder55" class="domain.Folder">
+		<property name="name" value="InBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="user7"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder56" class="domain.Folder">
+		<property name="name" value="OutBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="user7"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder57" class="domain.Folder">
+		<property name="name" value="TrashBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="user7"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder58" class="domain.Folder">
+		<property name="name" value="SpamBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="user7"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
 
 
 	<!-- SocialIdentity -->
@@ -1015,6 +1385,38 @@
 	</bean>
 	
 	<bean id="socialIdentity3" class="domain.SocialIdentity">
+		<property name="name" value="Manolo"/>
+		<property name="homePage" value="http://plus.google.com/Manolo"/>
+		<property name="picture" value="http://www.codigo.pe/wp-content/uploads/2012/11/Minigote.jpg"/>
+		<property name="nick" value="Manolo+"/>
+		<property name="user" ref="user1"/>
+	</bean>
+	
+	<bean id="socialIdentity4" class="domain.SocialIdentity">
+		<property name="name" value="Manolo"/>
+		<property name="homePage" value="http://www.linkedin.com/Manolo"/>
+		<property name="picture" value="http://www.codigo.pe/wp-content/uploads/2012/11/Minigote.jpg"/>
+		<property name="nick" value="ManoloLopez"/>
+		<property name="user" ref="user1"/>
+	</bean>
+	
+	<bean id="socialIdentity5" class="domain.SocialIdentity">
+		<property name="name" value="Manolo"/>
+		<property name="homePage" value="http://www.instagram.com/Manolo"/>
+		<property name="picture" value="http://www.codigo.pe/wp-content/uploads/2012/11/Minigote.jpg"/>
+		<property name="nick" value="ManoloLopez"/>
+		<property name="user" ref="user1"/>
+	</bean>
+	
+	<bean id="socialIdentity6" class="domain.SocialIdentity">
+		<property name="name" value="Manolo"/>
+		<property name="homePage" value="http://www.weongame.com/Manolo"/>
+		<property name="picture" value="http://www.codigo.pe/wp-content/uploads/2012/11/Minigote.jpg"/>
+		<property name="nick" value="ManoloLopez"/>
+		<property name="user" ref="user1"/>
+	</bean>
+	
+	<bean id="socialIdentity7" class="domain.SocialIdentity">
 		<property name="name" value="Ruben"/>
 		<property name="homePage" value="http://www.instagram.com/RubenSanchez"/>
 		<property name="picture" value="https://pbs.twimg.com/profile_images/1361012701/monigote_400x400.jpg"/>
@@ -1263,6 +1665,18 @@
 		<property name="text" value="Queda sujeto a las condiciones del auditor del Emparejamiento, Acme Barter Inc. (y cualquiera de sus auditores) se reserva el derecho de controlar y/o cancelar cualquier intercambio sin previo aviso."/>
 	</bean>
 	
+	<bean id="legalText4" class="domain.LegalText">
+		<property name="text" value="Una vez firmado por el creador, ninguna de las partes debe cancelarlo o podrá ser denunciado por la otra parte si esta así lo cree conveniente."/>
+	</bean>
+	
+	<bean id="legalText5" class="domain.LegalText">
+		<property name="text" value="Una vez firmado por el receptor, ninguna de las partes debe cancelarlo o podrá ser denunciado por la otra parte si esta así lo cree conveniente."/>
+	</bean>
+	
+	<bean id="legalText6" class="domain.LegalText">
+		<property name="text" value="Una vez reportado por un auditor, ninguna de las partes debe cancelarlo o podrá ser denunciado por la otra parte si esta así lo cree conveniente."/>
+	</bean>
+	
 	<!-- Barter -->
 	
 	<bean id="barter1" class="domain.Barter">
@@ -1462,6 +1876,8 @@
 		</property>
 		<property name="relatedBarter">
 			<list>
+				<ref bean="barter7"/>
+				<ref bean="barter8"/>
 			</list>
 		</property>
 	</bean>
