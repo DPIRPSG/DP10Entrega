@@ -534,7 +534,9 @@ are not displayed to users, only to administrators
 		// Checks basic requirements
 
 		// Execution of test
-		Assert.notNull(null, "Test inacabado ya que no se sabe como se implementará");		
+		
+		result = barterService.getTotalNumberOfBarterRegistered(); 
+		Assert.isTrue(totalUsersInTest == result);
 		
 		// Checks results	
 	}
@@ -556,7 +558,9 @@ are not displayed to users, only to administrators
 		// Checks basic requirements
 
 		// Execution of test
-		Assert.notNull(null, "Test inacabado ya que no se sabe como se implementará");		
+		result = barterService.getTotalNumberOfBarterCancelled();
+		
+		Assert.isTrue(totalUsersInTest == result);		
 		
 		// Checks results	
 	}
@@ -621,7 +625,7 @@ are not displayed to users, only to administrators
 							+ "' veces."); // First check
 			Assert.isTrue(
 					this.countRelateBarter(barter2, barter1) == 1,
-					"El barter2 no contiene el barter1 '"
+					"El barter2 contiene el barter1 '"
 							+ this.countRelateBarter(barter2, barter1)
 							+ "' veces"); // First check
 		}catch (Exception e) {
@@ -687,7 +691,7 @@ are not displayed to users, only to administrators
 							+ "' veces."); // First check
 			Assert.isTrue(
 					this.countRelateBarter(barter2, barter1) == 1,
-					"El barter2 no contiene el barter1 '"
+					"El barter2 contiene el barter1 '"
 							+ this.countRelateBarter(barter2, barter1)
 							+ "' veces"); // First check
 		}catch (Exception e) {
@@ -755,7 +759,7 @@ are not displayed to users, only to administrators
 							+ "' veces."); // First check
 			Assert.isTrue(
 					this.countRelateBarter(barter2, barter1) == 0,
-					"El barter2 no contiene el barter1 '"
+					"El barter2 contiene el barter1 '"
 							+ this.countRelateBarter(barter2, barter1)
 							+ "' veces"); // First check
 		}catch (Exception e) {
@@ -823,7 +827,7 @@ are not displayed to users, only to administrators
 							+ "' veces."); // First check
 			Assert.isTrue(
 					this.countRelateBarter(barter2, barter1) == 0,
-					"El barter2 no contiene el barter1 '"
+					"El barter2 contiene el barter1 '"
 							+ this.countRelateBarter(barter2, barter1)
 							+ "' veces"); // First check
 		}catch (Exception e) {
@@ -831,6 +835,76 @@ are not displayed to users, only to administrators
 			throw new InvalidPostTestException(e.toString());
 		}
 	}	
+	
+	/**
+	 * Negative test case: Relacionarlo con uno ya relacionado
+	 *
+	 */
+	@Test//(expected=IllegalArgumentException.class)
+	//@Rollback(value = true)
+	public void testBarterRelatErrorAlreadyRelated() {
+		// Declare variables
+		Barter barter1;
+		Barter barter2;
+		Collection<Barter> relatedBarter;
+		
+		// Load objects to test
+		
+		authenticate("admin");
+		barter1 = null;
+		barter2 = null;
+		
+		for(Barter b:barterService.findAll()){
+			if (barter1 != null && b.getRelatedBarter().contains(barter1)
+					&& !barter1.getRelatedBarter().contains(barter2)) {
+				barter2 = b;
+				break;
+			}
+			barter1 = b;
+		}
+		unauthenticate();
+		
+		// Checks basic requirements
+		try{
+			Assert.notNull(barter1);
+			Assert.notNull(barter2);
+		}catch (Exception e) {
+			// TODO: handle exception
+			throw new InvalidPreTestException(e.toString());
+		}
+		
+		// Execution of test
+		authenticate("admin");
+		
+		relatedBarter = barter1.getRelatedBarter();
+		relatedBarter.add(barter2);
+		barter1.setRelatedBarter(relatedBarter);
+		
+		barter1 = barterService.saveToRelate(barter1);
+		
+		Assert.notNull(null, "Este test no está finalizado, a espera de solucionar el issue #129");
+				
+		// Checks results
+		try{
+			authenticate("admin");
+			barter2 = barterService.findOne(barter2.getId());
+			barter1 = barterService.findOne(barter1.getId());
+
+			Assert.isTrue(
+					this.countRelateBarter(barter1, barter2) == 1,
+					"El barter1 contiene el barter2 '"
+							+ this.countRelateBarter(barter1, barter2)
+							+ "' veces."); // First check
+			Assert.isTrue(
+					this.countRelateBarter(barter2, barter1) == 1,
+					"El barter2 contiene el barter1 '"
+							+ this.countRelateBarter(barter2, barter1)
+							+ "' veces"); // First check
+		}catch (Exception e) {
+			// TODO: handle exception
+			throw new InvalidPostTestException(e.toString());
+		}
+	}
 
 	private int countRelateBarter(Barter barterOrigin, Barter barterToCount){
 		int res = 0;
