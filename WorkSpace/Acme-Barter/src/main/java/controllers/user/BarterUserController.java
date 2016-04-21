@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -108,6 +109,27 @@ public class BarterUserController extends AbstractController {
 		result.addObject("requestURI", "barter/user/display.do");
 		result.addObject("barters", barters);
 
+		return result;
+	}
+	
+	@RequestMapping(value="/cancel", method = RequestMethod.GET)
+	public ModelAndView cancel(@RequestParam int barterId){
+		
+		ModelAndView result;
+		Barter barter;
+		
+		barter = barterService.findOne(barterId);
+		Assert.notNull(barter);
+		
+		try{
+			barterService.cancel(barter);
+			result = new ModelAndView("redirect:list.do");
+			result.addObject("messageStatus", "barter.cancel.ok");
+		}catch(Throwable oops){
+			result = new ModelAndView("redirect:list.do");
+			result.addObject("messageStatus", "barter.cancel.error");
+		}
+		
 		return result;
 	}
 	
