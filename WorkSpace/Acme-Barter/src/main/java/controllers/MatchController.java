@@ -42,12 +42,15 @@ public class MatchController extends AbstractController {
 	public ModelAndView listByUser(@RequestParam(required=true) int userId) {
 		ModelAndView result;
 		Collection<Match> matches;
-
-		matches = matchService.findAllUserInvolves(userId);
+		if(actorService.checkAuthority("AUDITOR") || actorService.checkAuthority("ADMIN"))
+			matches = matchService.findAllUserInvolvesIncludeCancelled(userId);		
+		else
+			matches = matchService.findAllUserInvolves(userId);
 		
 		result = new ModelAndView("match/list");
 		result.addObject("requestURI", "match/list.do?userId=" + String.valueOf(userId));
 		result.addObject("matches", matches);
+		result.addObject("noDisplayheader", true);
 		if(actorService.checkAuthority("AUDITOR")){
 			Auditor actAuditor = auditorService.findByPrincipal();
 			result.addObject("auditor_id", String.valueOf(actAuditor.getId()));
