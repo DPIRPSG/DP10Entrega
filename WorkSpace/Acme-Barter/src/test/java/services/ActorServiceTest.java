@@ -14,7 +14,7 @@ import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.Actor;
-import domain.Customer;
+import domain.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -32,13 +32,13 @@ public class ActorServiceTest extends AbstractTest {
 	// Other services needed -----------------------
 	
 	@Autowired
-	private CustomerService customerService;
+	private UserService userService;
 	
 	// Tests ---------------------------------------
 	
 	/**
-	 * Acme-Six-Pack - Level C - 9.2
-	 * Change his or her profile data.
+	 * Acme-Barter - Level C - 11.2
+	 * Change his or her personal information.
 	 */
 	
 	/**
@@ -54,9 +54,9 @@ public class ActorServiceTest extends AbstractTest {
 	@Test 
 	public void testEditProfile() {
 		// Declare variables
-		Actor customer;
-		Customer customerUser;
-		Customer customerEdited;
+		Actor user;
+		User userUser;
+		User userEdited;
 		String originalName;
 		String originalSurname;
 		String originalPhone;
@@ -69,43 +69,43 @@ public class ActorServiceTest extends AbstractTest {
 		String newPassword;
 		
 		// Load objects to test
-		authenticate("customer1");
-		customer = actorService.findByPrincipal();
+		authenticate("user1");
+		user = actorService.findByPrincipal();
 		
 		// Checks basic requirements
-		Assert.notNull(customer, "El usuario no se ha logueado correctamente.");
+		Assert.notNull(user, "El usuario no se ha logueado correctamente.");
 		
 		// Execution of test
-		customerUser = customerService.findByPrincipal();
+		userUser = userService.findByPrincipal();
 		
-		originalName = customerUser.getName();
+		originalName = userUser.getName();
 		newName = originalName + "Edited";
-		customerUser.setName(newName);
+		userUser.setName(newName);
 		
-		originalSurname = customerUser.getSurname();
+		originalSurname = userUser.getSurname();
 		newSurname = originalSurname + "Edited";
-		customerUser.setSurname(newSurname);
+		userUser.setSurname(newSurname);
 		
-		originalPhone = customerUser.getPhone();
+		originalPhone = userUser.getPhone();
 		newPhone = originalPhone + "Edited";
-		customerUser.setPhone(newPhone);
+		userUser.setPhone(newPhone);
 		
-		originalUsername = customerUser.getUserAccount().getUsername();
+		originalUsername = userUser.getUserAccount().getUsername();
 		newUsername = originalUsername + "Edited";
-		customerUser.getUserAccount().setUsername(newUsername);
+		userUser.getUserAccount().setUsername(newUsername);
 		
-//		originalPassword = customerUser.getUserAccount().getPassword();
+//		originalPassword = userUser.getUserAccount().getPassword();
 		newPassword = "EditedPassword";
-		customerUser.getUserAccount().setPassword(newPassword);
+		userUser.getUserAccount().setPassword(newPassword);
 		
-		customerEdited = customerService.save(customerUser);
+		userEdited = userService.saveFromOtherService(userUser);
 		
 		// Checks results
-		Assert.isTrue(customerEdited.getName().equals(originalName + "Edited"), "El nombre no se ha editado correctamente.");
-		Assert.isTrue(customerEdited.getSurname().equals(originalSurname + "Edited"), "El apellido no se ha editado correctamente.");
-		Assert.isTrue(customerEdited.getPhone().equals(originalPhone + "Edited"), "El teléfono no se ha editado correctamente.");
-		Assert.isTrue(customerEdited.getUserAccount().getUsername().equals(originalUsername + "Edited"), "El nombre de usuario no se ha editado correctamente.");
-		Assert.isTrue(customerEdited.getUserAccount().getPassword().equals("EditedPassword"), "La contraseña no se ha editado correctamente.");
+		Assert.isTrue(userEdited.getName().equals(originalName + "Edited"), "El nombre no se ha editado correctamente.");
+		Assert.isTrue(userEdited.getSurname().equals(originalSurname + "Edited"), "El apellido no se ha editado correctamente.");
+		Assert.isTrue(userEdited.getPhone().equals(originalPhone + "Edited"), "El teléfono no se ha editado correctamente.");
+		Assert.isTrue(userEdited.getUserAccount().getUsername().equals(originalUsername + "Edited"), "El nombre de usuario no se ha editado correctamente.");
+		Assert.isTrue(userEdited.getUserAccount().getPassword().equals("EditedPassword"), "La contraseña no se ha editado correctamente.");
 		
 		unauthenticate();
 		
@@ -128,9 +128,9 @@ public class ActorServiceTest extends AbstractTest {
 //	@Test
 	public void testEditProfileBlankFields() {
 		// Declare variables
-		Actor customer;
-		Customer customerUser;
-//		Customer customerEdited;
+		Actor user;
+		User userUser;
+//		User userEdited;
 //		String originalName;
 //		String originalSurname;
 //		String originalPhone;
@@ -143,43 +143,43 @@ public class ActorServiceTest extends AbstractTest {
 		String newPassword;
 		
 		// Load objects to test
-		authenticate("customer1");
-		customer = actorService.findByPrincipal();
+		authenticate("user1");
+		user = actorService.findByPrincipal();
 		
 		// Checks basic requirements
-		Assert.notNull(customer, "El usuario no se ha logueado correctamente.");
+		Assert.notNull(user, "El usuario no se ha logueado correctamente.");
 		
 		// Execution of test
-		customerUser = customerService.findByPrincipal();
+		userUser = userService.findByPrincipal();
 		
-//		originalName = customerUser.getName();
+//		originalName = userUser.getName();
 		newName = "";
-		customerUser.setName(newName);
+		userUser.setName(newName);
 		
-//		originalSurname = customerUser.getSurname();
+//		originalSurname = userUser.getSurname();
 		newSurname = "";
-		customerUser.setSurname(newSurname);
+		userUser.setSurname(newSurname);
 		
-//		originalPhone = customerUser.getPhone();
+//		originalPhone = userUser.getPhone();
 		newPhone = "";
-		customerUser.setPhone(newPhone);
+		userUser.setPhone(newPhone);
 		
-		originalUsername = customerUser.getUserAccount().getUsername();
+		originalUsername = userUser.getUserAccount().getUsername();
 		newUsername = originalUsername + "Edited";
-		customerUser.getUserAccount().setUsername(newUsername);
+		userUser.getUserAccount().setUsername(newUsername);
 		
-//		originalPassword = customerUser.getUserAccount().getPassword();
+//		originalPassword = userUser.getUserAccount().getPassword();
 		newPassword = "EditedPassword";
-		customerUser.getUserAccount().setPassword(newPassword);
+		userUser.getUserAccount().setPassword(newPassword);
 		
-		customerService.save(customerUser);
+		userService.saveFromOtherService(userUser);
 		
 		// Checks results
-//		Assert.isTrue(customerEdited.getName().equals(originalName + "Edited"), "El nombre no se ha editado correctamente.");
-//		Assert.isTrue(customerEdited.getSurname().equals(originalSurname + "Edited"), "El apellido no se ha editado correctamente.");
-//		Assert.isTrue(customerEdited.getPhone().equals(originalPhone + "Edited"), "El teléfono no se ha editado correctamente.");
-//		Assert.isTrue(customerEdited.getUserAccount().getUsername().equals(originalUsername + "Edited"), "El nombre de usuario no se ha editado correctamente.");
-//		Assert.isTrue(customerEdited.getUserAccount().getPassword().equals("EditedPassword"), "La contraseña no se ha editado correctamente.");
+//		Assert.isTrue(userEdited.getName().equals(originalName + "Edited"), "El nombre no se ha editado correctamente.");
+//		Assert.isTrue(userEdited.getSurname().equals(originalSurname + "Edited"), "El apellido no se ha editado correctamente.");
+//		Assert.isTrue(userEdited.getPhone().equals(originalPhone + "Edited"), "El teléfono no se ha editado correctamente.");
+//		Assert.isTrue(userEdited.getUserAccount().getUsername().equals(originalUsername + "Edited"), "El nombre de usuario no se ha editado correctamente.");
+//		Assert.isTrue(userEdited.getUserAccount().getPassword().equals("EditedPassword"), "La contraseña no se ha editado correctamente.");
 		
 		unauthenticate();
 		
@@ -202,9 +202,9 @@ public class ActorServiceTest extends AbstractTest {
 //	@Test
 	public void testEditProfileShortPassword() {
 		// Declare variables
-		Actor customer;
-		Customer customerUser;
-//		Customer customerEdited;
+		Actor user;
+		User userUser;
+//		User userEdited;
 		String originalName;
 		String originalSurname;
 		String originalPhone;
@@ -217,43 +217,43 @@ public class ActorServiceTest extends AbstractTest {
 		String newPassword;
 		
 		// Load objects to test
-		authenticate("customer1");
-		customer = actorService.findByPrincipal();
+		authenticate("user1");
+		user = actorService.findByPrincipal();
 		
 		// Checks basic requirements
-		Assert.notNull(customer, "El usuario no se ha logueado correctamente.");
+		Assert.notNull(user, "El usuario no se ha logueado correctamente.");
 		
 		// Execution of test
-		customerUser = customerService.findByPrincipal();
+		userUser = userService.findByPrincipal();
 		
-		originalName = customerUser.getName();
+		originalName = userUser.getName();
 		newName = originalName + "Edited";
-		customerUser.setName(newName);
+		userUser.setName(newName);
 		
-		originalSurname = customerUser.getSurname();
+		originalSurname = userUser.getSurname();
 		newSurname = originalSurname + "Edited";
-		customerUser.setSurname(newSurname);
+		userUser.setSurname(newSurname);
 		
-		originalPhone = customerUser.getPhone();
+		originalPhone = userUser.getPhone();
 		newPhone = originalPhone + "Edited";
-		customerUser.setPhone(newPhone);
+		userUser.setPhone(newPhone);
 		
-		originalUsername = customerUser.getUserAccount().getUsername();
+		originalUsername = userUser.getUserAccount().getUsername();
 		newUsername = originalUsername + "Edited";
-		customerUser.getUserAccount().setUsername(newUsername);
+		userUser.getUserAccount().setUsername(newUsername);
 		
-//		originalPassword = customerUser.getUserAccount().getPassword();
+//		originalPassword = userUser.getUserAccount().getPassword();
 		newPassword = "pass";
-		customerUser.getUserAccount().setPassword(newPassword);
+		userUser.getUserAccount().setPassword(newPassword);
 		
-		customerService.save(customerUser);
+		userService.saveFromOtherService(userUser);
 		
 		// Checks results
-//		Assert.isTrue(customerEdited.getName().equals(originalName + "Edited"), "El nombre no se ha editado correctamente.");
-//		Assert.isTrue(customerEdited.getSurname().equals(originalSurname + "Edited"), "El apellido no se ha editado correctamente.");
-//		Assert.isTrue(customerEdited.getPhone().equals(originalPhone + "Edited"), "El teléfono no se ha editado correctamente.");
-//		Assert.isTrue(customerEdited.getUserAccount().getUsername().equals(originalUsername + "Edited"), "El nombre de usuario no se ha editado correctamente.");
-//		Assert.isTrue(customerEdited.getUserAccount().getPassword().equals("EditedPassword"), "La contraseña no se ha editado correctamente.");
+//		Assert.isTrue(userEdited.getName().equals(originalName + "Edited"), "El nombre no se ha editado correctamente.");
+//		Assert.isTrue(userEdited.getSurname().equals(originalSurname + "Edited"), "El apellido no se ha editado correctamente.");
+//		Assert.isTrue(userEdited.getPhone().equals(originalPhone + "Edited"), "El teléfono no se ha editado correctamente.");
+//		Assert.isTrue(userEdited.getUserAccount().getUsername().equals(originalUsername + "Edited"), "El nombre de usuario no se ha editado correctamente.");
+//		Assert.isTrue(userEdited.getUserAccount().getPassword().equals("EditedPassword"), "La contraseña no se ha editado correctamente.");
 		
 		unauthenticate();
 		

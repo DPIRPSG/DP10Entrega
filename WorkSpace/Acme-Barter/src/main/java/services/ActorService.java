@@ -104,12 +104,12 @@ public class ActorService {
 	public ActorType discoverActorType() {
 		ActorType result;
 		try {
-			if (this.checkAuthority("CUSTOMER")) {
-				result = ActorType.CUSTOMER;
+			if (this.checkAuthority("USER")) {
+				result = ActorType.USER;
 			} else if (this.checkAuthority("ADMIN")) {
 				result = ActorType.ADMIN;
-			} else if (this.checkAuthority("TRAINER")) {
-				result = ActorType.TRAINER;
+			} else if (this.checkAuthority("AUDITOR")) {
+				result = ActorType.AUDITOR;
 			} else {
 				result = null;
 			}
@@ -142,27 +142,27 @@ public class ActorService {
 		return result;
 	}
 	
-	/* Query 11 */
-	public Double findAverageNumberOfCommentWrittenByAnActor(){
-		Assert.isTrue(checkAuthority("ADMIN"), "Only an admin can open the dashboard");
-		
-		Double result;
-		
-		result = actorRepository.findAverageNumberOfCommentWrittenByAnActor();
-		
-		return result;
-	}
-	
-	/* Query 11 */
-	public Double findStandardDeviationNumberOfCommentWrittenByAnActor(){
-		Assert.isTrue(checkAuthority("ADMIN"), "Only an admin can open the dashboard");
-		
-		Double result;
-		
-		result = actorRepository.findStandardDeviationNumberOfCommentWrittenByAnActor();
-		
-		return result;
-	}
+//	/* Query 11 */
+//	public Double findAverageNumberOfCommentWrittenByAnActor(){
+//		Assert.isTrue(checkAuthority("ADMIN"), "Only an admin can open the dashboard");
+//		
+//		Double result;
+//		
+//		result = actorRepository.findAverageNumberOfCommentWrittenByAnActor();
+//		
+//		return result;
+//	}
+//	
+//	/* Query 11 */
+//	public Double findStandardDeviationNumberOfCommentWrittenByAnActor(){
+//		Assert.isTrue(checkAuthority("ADMIN"), "Only an admin can open the dashboard");
+//		
+//		Double result;
+//		
+//		result = actorRepository.findStandardDeviationNumberOfCommentWrittenByAnActor();
+//		
+//		return result;
+//	}
 	
 	public void flush(){
 		actorRepository.flush();

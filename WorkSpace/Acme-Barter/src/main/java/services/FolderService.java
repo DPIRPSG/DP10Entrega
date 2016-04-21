@@ -68,7 +68,7 @@ public class FolderService {
 	 * Guarda un folder creado o modificado
 	 */
 	//req: 24.2
-	public Folder saveToEdit(Folder folder){
+	public Folder saveFromCreateOrEdit(Folder folder){
 		Assert.notNull(folder);
 		boolean isAuthenticated;
 		
@@ -76,8 +76,8 @@ public class FolderService {
 			folder.setIsSystem(false);
 		}
 		
-		isAuthenticated = actorService.checkAuthority("ADMIN") || actorService.checkAuthority("CUSTOMER");
-		isAuthenticated = isAuthenticated || actorService.checkAuthority("TRAINER");
+		isAuthenticated = actorService.checkAuthority("ADMIN") || actorService.checkAuthority("USER");
+		isAuthenticated = isAuthenticated || actorService.checkAuthority("AUDITOR");
 		
 		Assert.isTrue(isAuthenticated, "folder.saveToEdit.Error.NotAuthenticated");
 		
@@ -150,8 +150,10 @@ public class FolderService {
 		Assert.notNull(f);
 		Assert.notNull(m);
 		
-		f.addMessage(m);
-		this.save(f);
+		if(!f.getMessages().contains(m)){
+			f.addMessage(m);
+			this.save(f);
+		}
 	}
 	
 	/**
@@ -279,7 +281,7 @@ public class FolderService {
 		Assert.isTrue(origin.getMessages().contains(m));
 		
 		if(destination.getId()==0){
-			destination = this.saveToEdit(destination);
+			destination = this.saveFromCreateOrEdit(destination);
 		}
 		
 		if(!destination.getMessages().contains(m)){

@@ -9,6 +9,8 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
+
 
 <h3><spring:message code="message.folder"/>: <jstl:out value="${folder.name}" /></h3>
 	<!-- Listing grid -->
@@ -28,8 +30,30 @@
 				<spring:message code="message.delete" />
 			</a>
 		</display:column>
+		
+		<!-- flaged As Spam -->
+		<jstl:forEach items="${row_messa.folders}" var="actFolder">
+			<jstl:if test="${actFolder.name=='SpamBox' && actFolder.isSystem==true}">
+				<jstl:set var="isSpam" value="true"/>
+			</jstl:if>
+		</jstl:forEach>
+		
+		<spring:message code="message.flagspam" var="flagspamHeader" />
+		<display:column>
+			<jstl:if test="${isSpam != 'true' }">
+				<a href="message/actor/flag-as-spam.do?messageId=${row_messa.id}&redirectUri=${requestURI}" onclick="return confirm('<spring:message code="message.confirm.flagspam" />')"> 
+				<spring:message code="message.flagspam" />
+				</a>
+			</jstl:if>
+		</display:column>
 
 		<!-- Attributes -->
+		<spring:message code="message.priority" var="priorityHeader" />
+		<display:column title="${priorityHeader}"
+			sortable="true">
+			<acme:messagePriority priority="${row_messa.priority}"/>
+		</display:column>
+
 		<spring:message code="message.sentMoment" var="sentMomentHeader" />
 		<display:column title="${sentMomentHeader}"
 			sortable="true" format="{0,date,yyyy/MM/dd }" >
