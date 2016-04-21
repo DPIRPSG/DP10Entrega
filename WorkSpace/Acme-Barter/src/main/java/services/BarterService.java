@@ -3,6 +3,7 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -214,18 +215,27 @@ public class BarterService {
 		result = this.findOne(input.getId());
 		Assert.notNull(result);
 				
-		for(Barter related:input.getRelatedBarter()){
-			if(!result.getRelatedBarter().contains(related) && related != null){
-				Collection<Barter> temp;
-				
-				temp = related.getRelatedBarter();
-				temp.add(input);
-				this.save(input);
-			}
-		}
 		result.setRelatedBarter(input.getRelatedBarter());
 		
 		result = this.save(result);
+		
+		for(Barter related:input.getRelatedBarter()){
+			if(!related.getRelatedBarter().contains(result) && related != null){
+				Collection<Barter> temp;
+				
+				temp = related.getRelatedBarter();
+				temp.add(result);
+				related.setRelatedBarter(temp);
+				this.save(related);
+			}
+			if(countRelateBarter(result, related) > 1){
+				Collection<Barter> temp;
+				
+				temp = result.getRelatedBarter();
+				temp.remove(related);
+				result.setRelatedBarter(temp);
+			}
+		}
 		
 		return result;
 	}
@@ -243,6 +253,7 @@ public class BarterService {
 		
 	}
 	
+	//DASHBOARD
 	public Integer getTotalNumberOfBarterRegistered(){
 		Integer result;
 		
@@ -259,10 +270,36 @@ public class BarterService {
 		return result;
 	}
 	
-	public Double ratioOfBarterNotRelatedToAnyBarter(){
-		Double result;
+	private int countRelateBarter(Barter barterOrigin, Barter barterToCount){
+		int res = 0;
 		
-		result = barterRepository.ratioOfBarterNotRelatedToAnyBarter();
+		for(Barter a:barterOrigin.getRelatedBarter()){
+			if(a.equals(barterToCount))
+				res++;
+		}
+		
+		return res;
+	}
+	
+	public Double ratioBarterNotRelatedToAnyOtherBarter(){
+		Double result;
+		Collection<Barter> allBarter = new HashSet<>();
+		Collection<Barter> allBarter2 = new HashSet<>();
+		Integer numerator;
+		Integer denominator;
+		
+		allBarter = findAll();
+		denominator = allBarter.size();
+		
+		for(Barter b:allBarter){
+			for(Barter b2:b.getRelatedBarter()){
+				allBarter2.add(b2);
+			}
+		}
+		allBarter.removeAll(allBarter2);
+		numerator = allBarter.size();
+
+		result = (double) (numerator / denominator);
 		
 		return result;
 	}
