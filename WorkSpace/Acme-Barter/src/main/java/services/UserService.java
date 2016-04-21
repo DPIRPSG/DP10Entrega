@@ -373,6 +373,10 @@ public class UserService {
 			}
 		}
 		
+		if(result == Integer.MAX_VALUE){
+			result = 0;
+		}
+		
 		return result;
 	}
 	
@@ -406,6 +410,7 @@ public class UserService {
 		return result;
 	}
 	
+	@SuppressWarnings("unused")
 	public Double averageNumberBarterPerUser(){
 		Double result = 0.0;
 		Collection<Barter> allBarter = new HashSet<>();
@@ -433,6 +438,14 @@ public class UserService {
 		
 		for(User u:barterPerUser.keySet()){
 			numerator += barterPerUser.get(u).size();
+		}
+		
+		if(denominator == null){
+			denominator = 1.0;
+		}
+		
+		if(numerator == null){
+			numerator = 0.0;
 		}
 
 		result = numerator / denominator;
