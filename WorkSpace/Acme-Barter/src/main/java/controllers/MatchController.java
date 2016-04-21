@@ -48,6 +48,7 @@ public class MatchController extends AbstractController {
 		result = new ModelAndView("match/list");
 		result.addObject("requestURI", "match/list.do?userId=" + String.valueOf(userId));
 		result.addObject("matches", matches);
+		result.addObject("noDisplayheader", true);
 		if(actorService.checkAuthority("AUDITOR")){
 			Auditor actAuditor = auditorService.findByPrincipal();
 			result.addObject("auditor_id", String.valueOf(actAuditor.getId()));
