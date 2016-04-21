@@ -340,9 +340,11 @@ public class UserService {
 	public Integer minumumNumberBarterPerUser(){
 		Integer result = Integer.MAX_VALUE;
 		Collection<Barter> allBarter = new HashSet<>();
+		Collection<User> allUser = new HashSet<>();
 		Map<User, Collection<Barter>> barterPerUser = new HashMap<>();
 		
 		allBarter = barterService.findAll();
+		allUser = findAll();
 		
 		if(!allBarter.isEmpty()){
 			for(Barter b:allBarter){
@@ -361,6 +363,13 @@ public class UserService {
 		for(User u:barterPerUser.keySet()){
 			if(barterPerUser.get(u).size() < result){
 				result = barterPerUser.get(u).size();
+			}
+		}
+		
+		if(!barterPerUser.keySet().isEmpty()){
+			allUser.removeAll(barterPerUser.keySet());
+			if(!allUser.isEmpty()){
+				result = 0;
 			}
 		}
 		
@@ -459,11 +468,14 @@ public class UserService {
 		for(Match m:allMatch){
 			if(numberOfMatchesPerUser.containsKey(m.getCreatorBarter().getUser())){
 				numberOfMatchesPerUser.put(m.getCreatorBarter().getUser(), numberOfMatchesPerUser.get(m.getCreatorBarter().getUser())+1);
-			}else if(numberOfMatchesPerUser.containsKey(m.getReceiverBarter().getUser())){
+			}
+			if(numberOfMatchesPerUser.containsKey(m.getReceiverBarter().getUser())){
 				numberOfMatchesPerUser.put(m.getReceiverBarter().getUser(), numberOfMatchesPerUser.get(m.getReceiverBarter().getUser())+1);	
-			}else if(!numberOfMatchesPerUser.containsKey(m.getCreatorBarter().getUser())){
+			}
+			if(!numberOfMatchesPerUser.containsKey(m.getCreatorBarter().getUser())){
 				numberOfMatchesPerUser.put(m.getCreatorBarter().getUser(), 1);
-			}else if(!numberOfMatchesPerUser.containsKey(m.getReceiverBarter().getUser())){
+			}
+			if(!numberOfMatchesPerUser.containsKey(m.getReceiverBarter().getUser())){
 				numberOfMatchesPerUser.put(m.getReceiverBarter().getUser(), 1);	
 			}
 		}

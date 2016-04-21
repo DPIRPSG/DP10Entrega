@@ -14,7 +14,7 @@
  	<h3><spring:message code="administrator.getTotalNumberOfUsersRegistered"/></h3>
 	<!-- Result -->
 	<jstl:choose>
-  		<jstl:when test="${getTotalNumberOfUsersRegistered == 0}">
+  		<jstl:when test="${getTotalNumberOfUsersRegistered == null}">
  			<spring:message code="administrator.ratio.null"/>
 		</jstl:when>
   		<jstl:otherwise>
@@ -25,7 +25,7 @@
 	<h3><spring:message code="administrator.getTotalNumberOfBarterRegistered"/></h3>
 	<!-- Result -->
 	<jstl:choose>
-  		<jstl:when test="${getTotalNumberOfBarterRegistered == 0}">
+  		<jstl:when test="${getTotalNumberOfBarterRegistered == null}">
  			<spring:message code="administrator.ratio.null"/>
 		</jstl:when>
   		<jstl:otherwise>
@@ -36,7 +36,7 @@
 	<h3><spring:message code="administrator.getTotalNumberOfBarterCancelled"/></h3>
 	<!-- Result -->
 	<jstl:choose>
-  		<jstl:when test="${getTotalNumberOfBarterCancelled == 0}">
+  		<jstl:when test="${getTotalNumberOfBarterCancelled == null}">
  			<spring:message code="administrator.ratio.null"/>
 		</jstl:when>
   		<jstl:otherwise>
@@ -65,6 +65,86 @@
 		<display:column title="${nameHeader}" 
   			sortable="false" >
  			<jstl:out value="${row2.name}"/>
+  		</display:column>
+  	</display:table>
+  	
+  	<h3><spring:message code="administrator.minumumNumberBarterPerUser"/></h3>
+	<!-- Result -->
+	<jstl:choose>
+  		<jstl:when test="${minumumNumberBarterPerUser == null}">
+ 			<spring:message code="administrator.ratio.null"/>
+		</jstl:when>
+  		<jstl:otherwise>
+			<jstl:out value="${minumumNumberBarterPerUser}" />
+		</jstl:otherwise>
+	</jstl:choose>
+	
+	<h3><spring:message code="administrator.maximumNumberBarterPerUser"/></h3>
+	<!-- Result -->
+	<jstl:choose>
+  		<jstl:when test="${maximumNumberBarterPerUser == null}">
+ 			<spring:message code="administrator.ratio.null"/>
+		</jstl:when>
+  		<jstl:otherwise>
+			<jstl:out value="${maximumNumberBarterPerUser}" />
+		</jstl:otherwise>
+	</jstl:choose>
+	
+	<h3><spring:message code="administrator.averageNumberBarterPerUser"/></h3>
+	<!-- Result -->
+	<jstl:choose>
+  		<jstl:when test="${averageNumberBarterPerUser == null}">
+ 			<spring:message code="administrator.ratio.null"/>
+		</jstl:when>
+  		<jstl:otherwise>
+			<jstl:out value="${averageNumberBarterPerUser}" />
+		</jstl:otherwise>
+	</jstl:choose>
+	
+	<h3><spring:message code="administrator.ratioBarterNotRelatedToAnyOtherBarter"/></h3>
+	<!-- Result -->
+	<jstl:choose>
+  		<jstl:when test="${ratioBarterNotRelatedToAnyOtherBarter == null}">
+ 			<spring:message code="administrator.ratio.null"/>
+		</jstl:when>
+  		<jstl:otherwise>
+			<jstl:out value="${ratioBarterNotRelatedToAnyOtherBarter}" />
+		</jstl:otherwise>
+	</jstl:choose>
+	
+	<h3><spring:message code="administrator.getUsersWithMoreBarters"/></h3>
+	<!-- Listing grid -->
+	<display:table pagesize="5" class="displaytag" keepStatus="true"
+  		name="getUsersWithMoreBarters" requestURI="${requestURI}" id="row3">
+		<!-- Attributes -->
+		<spring:message code="user.name" var="nameHeader" />
+		<display:column title="${nameHeader}" 
+  			sortable="false" >
+ 			<jstl:out value="${row3.name}"/>
+  		</display:column>
+  	</display:table>
+  	
+	<h3><spring:message code="administrator.getUsersWithMoreBartersCancelled"/></h3>
+	<!-- Listing grid -->
+	<display:table pagesize="5" class="displaytag" keepStatus="true"
+  		name="getUsersWithMoreBartersCancelled" requestURI="${requestURI}" id="row4">
+		<!-- Attributes -->
+		<spring:message code="user.name" var="nameHeader" />
+		<display:column title="${nameHeader}" 
+  			sortable="false" >
+ 			<jstl:out value="${row4.name}"/>
+  		</display:column>
+  	</display:table>
+  	
+	<h3><spring:message code="administrator.getUsersWithMoreMatches"/></h3>
+	<!-- Listing grid -->
+	<display:table pagesize="5" class="displaytag" keepStatus="true"
+  		name="getUsersWithMoreMatches" requestURI="${requestURI}" id="row5">
+		<!-- Attributes -->
+		<spring:message code="user.name" var="nameHeader" />
+		<display:column title="${nameHeader}" 
+  			sortable="false" >
+ 			<jstl:out value="${row5.name}"/>
   		</display:column>
   	</display:table>
 	
