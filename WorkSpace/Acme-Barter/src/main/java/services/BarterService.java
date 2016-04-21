@@ -290,7 +290,7 @@ public class BarterService {
 		
 		allBarter = findAll();
 		denominator = allBarter.size();
-		
+				
 		for(Barter b:allBarter){
 			for(Barter b2:b.getRelatedBarter()){
 				allBarter2.add(b2);
@@ -298,9 +298,9 @@ public class BarterService {
 		}
 		allBarter.removeAll(allBarter2);
 		numerator = allBarter.size();
-
-		result = (double) (numerator / denominator);
-		
+				
+		result =  (numerator.doubleValue() / denominator.doubleValue());
+				
 		return result;
 	}
 }
