@@ -511,11 +511,14 @@ public class UserService {
 			if(!(m.getReport() == null)){
 				if(numberOfMatchesPerUser.containsKey(m.getCreatorBarter().getUser())){
 					numberOfMatchesPerUser.put(m.getCreatorBarter().getUser(), numberOfMatchesPerUser.get(m.getCreatorBarter().getUser())+1);
-				}else if(numberOfMatchesPerUser.containsKey(m.getReceiverBarter().getUser())){
+				}
+				if(numberOfMatchesPerUser.containsKey(m.getReceiverBarter().getUser())){
 					numberOfMatchesPerUser.put(m.getReceiverBarter().getUser(), numberOfMatchesPerUser.get(m.getReceiverBarter().getUser())+1);	
-				}else if(!numberOfMatchesPerUser.containsKey(m.getCreatorBarter().getUser())){
+				}
+				if(!numberOfMatchesPerUser.containsKey(m.getCreatorBarter().getUser())){
 					numberOfMatchesPerUser.put(m.getCreatorBarter().getUser(), 1);
-				}else if(!numberOfMatchesPerUser.containsKey(m.getReceiverBarter().getUser())){
+				}
+				if(!numberOfMatchesPerUser.containsKey(m.getReceiverBarter().getUser())){
 					numberOfMatchesPerUser.put(m.getReceiverBarter().getUser(), 1);	
 				}
 			}
