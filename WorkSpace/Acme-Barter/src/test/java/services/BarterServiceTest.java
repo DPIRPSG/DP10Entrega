@@ -534,7 +534,9 @@ are not displayed to users, only to administrators
 		// Checks basic requirements
 
 		// Execution of test
-		Assert.notNull(null, "Test inacabado ya que no se sabe como se implementará");		
+		
+		result = barterService.getTotalNumberOfBarterRegistered(); 
+		Assert.isTrue(totalUsersInTest == result);
 		
 		// Checks results	
 	}
@@ -556,7 +558,9 @@ are not displayed to users, only to administrators
 		// Checks basic requirements
 
 		// Execution of test
-		Assert.notNull(null, "Test inacabado ya que no se sabe como se implementará");		
+		result = barterService.getTotalNumberOfBarterCancelled();
+		
+		Assert.isTrue(totalUsersInTest == result);		
 		
 		// Checks results	
 	}
