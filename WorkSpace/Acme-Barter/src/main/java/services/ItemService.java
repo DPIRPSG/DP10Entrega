@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,8 +47,11 @@ public class ItemService {
 		Assert.isTrue(actorService.checkAuthority("USER"), "Only a user can create an item.");
 		
 		Item result;
+		Collection<String> pictures;
 		
 		result = new Item();
+		pictures = new ArrayList<String>();
+		result.setPictures(pictures);
 		
 		return result;
 	}
