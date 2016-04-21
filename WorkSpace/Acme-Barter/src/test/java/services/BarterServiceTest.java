@@ -41,6 +41,257 @@ public class BarterServiceTest extends AbstractTest {
 	// Tests ---------------------------------------
 	
 	/**
+	 * Acme-Six-Pack - Level C - 9.2
+	 * An actor who is not authenticated must be able to:
+	 * Navigate through the catalogue of barters and display their details.
+	 * 
+	 * Positive test case: Se muestran los barters
+	 * 
+	 */
+	@Test
+	public void testBarterFindAll1(){
+		// Declare variable
+		Collection<Barter> result;
+		
+		// Load objects to test
+		
+		// Check basic requirements
+		
+		// Execution of test
+		result = barterService.findAllNotCancelled();
+		
+		// Check results
+		Assert.isTrue(result.size() == 11);
+		barterService.flush();
+	}
+	
+	/**
+	 * Acme-Six-Pack - Level C - 9.2
+	 * An actor who is not authenticated must be able to:
+	 * Navigate through the catalogue of barters and display their details.
+	 * 
+	 * Positive test case: Se muestran los barters
+	 * 
+	 */
+	@Test
+	public void testBarterFindAll2(){
+		// Declare variable
+		Collection<Barter> result;
+		
+		// Load objects to test
+		authenticate("user1");
+		
+		// Check basic requirements
+		
+		// Execution of test
+		result = barterService.findAllNotCancelled();
+		
+		// Check results
+		Assert.isTrue(result.size() == 11);
+		authenticate(null);
+		barterService.flush();
+	}
+	
+	/**
+	 * Acme-Six-Pack - Level C - 9.2
+	 * An actor who is not authenticated must be able to:
+	 * Navigate through the catalogue of barters and display their details.
+	 * 
+	 * Positive test case: Se muestran los barters
+	 * 
+	 */
+	@Test
+	public void testBarterFindAll3(){
+		// Declare variable
+		Collection<Barter> result;
+		
+		// Load objects to test
+		authenticate("admin");
+		
+		// Check basic requirements
+		
+		// Execution of test
+		result = barterService.findAll();
+		
+		// Check results
+		Assert.isTrue(result.size() == 12);
+		authenticate(null);
+		barterService.flush();
+	}
+	
+	/**
+	 * Acme-Six-Pack - Level C - 9.2
+	 * An actor who is not authenticated must be able to:
+	 * Search for a barter using a single key word that must appear in its title, the name, or the description of the corresponding items.
+	 * 
+	 * Positive test case: Encontramos los barters gracias a la keyword. 3 barters son de la descripción y 1 de un item.
+	 * 
+	 */
+	@Test
+	public void testBarterFindByKeyword1(){
+		// Declare variable
+		Collection<Barter> result;
+		String keyword;
+		
+		// Load objects to test
+		keyword = "Quiero";
+		
+		// Check basic requirements
+		
+		// Execution of test
+		result = barterService.findBySingleKeywordNotCancelled(keyword);
+		
+		// Check results
+		Assert.isTrue(result.size() == 4);
+		barterService.flush();
+	}
+	
+	/**
+	 * Acme-Six-Pack - Level C - 9.2
+	 * An actor who is not authenticated must be able to:
+	 * Search for a barter using a single key word that must appear in its title, the name, or the description of the corresponding items.
+	 * 
+	 * Positive test case: No encontramos nada ya que no hay barter con esa keyword.
+	 * 
+	 */
+	@Test
+	public void testBarterFindByKeyword2(){
+		// Declare variable
+		Collection<Barter> result;
+		String keyword;
+		
+		// Load objects to test
+		keyword = "Hololens";
+		
+		// Check basic requirements
+		
+		// Execution of test
+		result = barterService.findBySingleKeywordNotCancelled(keyword);
+		
+		// Check results
+		Assert.isTrue(result.size() == 0);
+		barterService.flush();
+	}
+	
+	/**
+	 * Acme-Six-Pack - Level C - 9.2
+	 * An actor who is not authenticated must be able to:
+	 * Search for a barter using a single key word that must appear in its title, the name, or the description of the corresponding items.
+	 * 
+	 * Positive test case: Encontramos los barters gracias a la keyword. 3 barters son de la descripción y 1 de un item.
+	 * 
+	 */
+	@Test
+	public void testBarterFindByKeyword3(){
+		// Declare variable
+		Collection<Barter> result;
+		String keyword;
+		
+		// Load objects to test
+		authenticate("user1");
+		keyword = "Quiero";
+		
+		// Check basic requirements
+		
+		// Execution of test
+		result = barterService.findBySingleKeywordNotCancelled(keyword);
+		
+		// Check results
+		Assert.isTrue(result.size() == 4);
+		authenticate(null);
+		barterService.flush();
+	}
+	
+	/**
+	 * Acme-Six-Pack - Level C - 9.2
+	 * An actor who is not authenticated must be able to:
+	 * Search for a barter using a single key word that must appear in its title, the name, or the description of the corresponding items.
+	 * 
+	 * Positive test case: No encontramos nada ya que no hay barter con esa keyword.
+	 * 
+	 */
+	@Test
+	public void testBarterFindByKeyword4(){
+		// Declare variable
+		Collection<Barter> result;
+		String keyword;
+		
+		// Load objects to test
+		authenticate("user1");
+		keyword = "Hololens";
+		
+		// Check basic requirements
+		
+		// Execution of test
+		result = barterService.findBySingleKeywordNotCancelled(keyword);
+		
+		// Check results
+		Assert.isTrue(result.size() == 0);
+		authenticate(null);
+		barterService.flush();
+	}
+	
+	/**
+	 * Acme-Six-Pack - Level C - 9.2
+	 * An actor who is not authenticated must be able to:
+	 * Search for a barter using a single key word that must appear in its title, the name, or the description of the corresponding items.
+	 * 
+	 * Positive test case: Encontramos los barters gracias a la keyword. 3 barters son de la descripción y 1 de un item.
+	 * 
+	 */
+	@Test
+	public void testBarterFindByKeyword5(){
+		// Declare variable
+		Collection<Barter> result;
+		String keyword;
+		
+		// Load objects to test
+		authenticate("admin");
+		keyword = "Quiero";
+		
+		// Check basic requirements
+		
+		// Execution of test
+		result = barterService.findBySingleKeyword(keyword);
+		
+		// Check results
+		Assert.isTrue(result.size() == 4);
+		authenticate(null);
+		barterService.flush();
+	}
+	
+	/**
+	 * Acme-Six-Pack - Level C - 9.2
+	 * An actor who is not authenticated must be able to:
+	 * Search for a barter using a single key word that must appear in its title, the name, or the description of the corresponding items.
+	 * 
+	 * Positive test case: No encontramos nada ya que no hay barter con esa keyword.
+	 * 
+	 */
+	@Test
+	public void testBarterFindByKeyword6(){
+		// Declare variable
+		Collection<Barter> result;
+		String keyword;
+		
+		// Load objects to test
+		authenticate("admin");
+		keyword = "Hololens";
+		
+		// Check basic requirements
+		
+		// Execution of test
+		result = barterService.findBySingleKeyword(keyword);
+		
+		// Check results
+		Assert.isTrue(result.size() == 0);
+		authenticate(null);
+		barterService.flush();
+	}
+	
+	
+	
+	/**
 	 * Acme-Six-Pack - Level C - 11.2
 	 * Create a Barter.
 	 * 
