@@ -270,14 +270,6 @@ public class BarterService {
 		return result;
 	}
 	
-	public Double ratioOfBarterNotRelatedToAnyBarter(){
-		Double result;
-		
-		result = barterRepository.ratioOfBarterNotRelatedToAnyBarter();
-		
-		return result;
-	}
-	
 	private int countRelateBarter(Barter barterOrigin, Barter barterToCount){
 		int res = 0;
 		
@@ -292,22 +284,23 @@ public class BarterService {
 	public Double ratioBarterNotRelatedToAnyOtherBarter(){
 		Double result;
 		Collection<Barter> allBarter = new HashSet<>();
+		Collection<Barter> allBarter2 = new HashSet<>();
 		Integer numerator;
 		Integer denominator;
 		
-		allBarter = this.findAll();
+		allBarter = findAll();
 		denominator = allBarter.size();
-		
+				
 		for(Barter b:allBarter){
 			for(Barter b2:b.getRelatedBarter()){
-				allBarter.remove(b2);
+				allBarter2.add(b2);
 			}
 		}
-		
+		allBarter.removeAll(allBarter2);
 		numerator = allBarter.size();
-
-		result = (double) (numerator / denominator);
-		
+				
+		result =  (numerator.doubleValue() / denominator.doubleValue());
+				
 		return result;
 	}
 }
