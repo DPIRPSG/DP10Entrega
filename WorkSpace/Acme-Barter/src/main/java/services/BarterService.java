@@ -303,14 +303,9 @@ public class BarterService {
 		allBarter.removeAll(allBarter2);
 		numerator = allBarter.size();
 		
-		if(denominator == null){
+		if(denominator == 0){
 			denominator = 1;
 		}
-		
-		if(numerator == null){
-			numerator = 0;
-		}
-
 				
 		result =  (numerator.doubleValue() / denominator.doubleValue());
 				

@@ -410,7 +410,6 @@ public class UserService {
 		return result;
 	}
 	
-	@SuppressWarnings("unused")
 	public Double averageNumberBarterPerUser(){
 		Double result = 0.0;
 		Collection<Barter> allBarter = new HashSet<>();
@@ -440,12 +439,8 @@ public class UserService {
 			numerator += barterPerUser.get(u).size();
 		}
 		
-		if(denominator == null){
+		if(denominator == 0.0){
 			denominator = 1.0;
-		}
-		
-		if(numerator == null){
-			numerator = 0.0;
 		}
 
 		result = numerator / denominator;
