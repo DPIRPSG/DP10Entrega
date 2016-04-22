@@ -930,10 +930,14 @@ are not displayed to users, only to administrators
 							+ this.countRelateBarter(barter1, barter2)
 							+ "' veces."); // First check
 			Assert.isTrue(
-					this.countRelateBarter(barter2, barter1) == 1,
+					this.countRelateBarter(barter2, barter1) == 0,
 					"El barter2 contiene el barter1 '"
 							+ this.countRelateBarter(barter2, barter1)
 							+ "' veces"); // First check
+			Assert.isTrue(barterService.getRelatedBarters(barter2.getId()).contains(barter1),
+					"El barter2 no contiene el barter1"); // First check
+			Assert.isTrue(barterService.getRelatedBarters(barter1.getId()).contains(barter2),
+					"El barter1 no contiene el barter2"); // First check
 		}catch (Exception e) {
 			// TODO: handle exception
 			throw new InvalidPostTestException(e.toString());
@@ -980,10 +984,11 @@ are not displayed to users, only to administrators
 		authenticate("admin");
 		
 		relatedBarter = barter1.getRelatedBarter();
+
 		relatedBarter.add(barter2);
 		relatedBarter.add(barter2);
 		barter1.setRelatedBarter(relatedBarter);
-		
+
 		barter1 = barterService.saveToRelate(barter1);
 				
 		// Checks results
@@ -996,10 +1001,14 @@ are not displayed to users, only to administrators
 							+ this.countRelateBarter(barter1, barter2)
 							+ "' veces."); // First check
 			Assert.isTrue(
-					this.countRelateBarter(barter2, barter1) == 1,
+					this.countRelateBarter(barter2, barter1) == 0,
 					"El barter2 contiene el barter1 '"
 							+ this.countRelateBarter(barter2, barter1)
 							+ "' veces"); // First check
+			Assert.isTrue(barterService.getRelatedBarters(barter2.getId()).contains(barter1),
+					"El barter2 no contiene el barter1"); // First check
+			Assert.isTrue(barterService.getRelatedBarters(barter1.getId()).contains(barter2),
+					"El barter1 no contiene el barter2"); // First check
 		}catch (Exception e) {
 			// TODO: handle exception
 			throw new InvalidPostTestException(e.toString());
@@ -1148,7 +1157,7 @@ are not displayed to users, only to administrators
 	 */
 	@Test//(expected=IllegalArgumentException.class)
 	//@Rollback(value = true)
-	public void testBarterRelatErrorAlreadyRelated() {
+	public void testBarterRelateErrorAlreadyRelated() {
 		// Declare variables
 		Barter barter1;
 		Barter barter2;
@@ -1188,7 +1197,7 @@ are not displayed to users, only to administrators
 		
 		barter1 = barterService.saveToRelate(barter1);
 		
-		Assert.notNull(null, "Este test no está finalizado, a espera de solucionar el issue #129");
+		//Assert.notNull(null, "Este test no está finalizado, a espera de solucionar el issue #129");
 				
 		// Checks results
 		try{
@@ -1197,7 +1206,7 @@ are not displayed to users, only to administrators
 			barter1 = barterService.findOne(barter1.getId());
 
 			Assert.isTrue(
-					this.countRelateBarter(barter1, barter2) == 1,
+					this.countRelateBarter(barter1, barter2) == 0,
 					"El barter1 contiene el barter2 '"
 							+ this.countRelateBarter(barter1, barter2)
 							+ "' veces."); // First check
@@ -1206,6 +1215,10 @@ are not displayed to users, only to administrators
 					"El barter2 contiene el barter1 '"
 							+ this.countRelateBarter(barter2, barter1)
 							+ "' veces"); // First check
+			Assert.isTrue(barterService.getRelatedBarters(barter2.getId()).contains(barter1),
+					"El barter2 no contiene el barter1"); // First check
+			Assert.isTrue(barterService.getRelatedBarters(barter1.getId()).contains(barter2),
+					"El barter1 no contiene el barter2"); // First check
 		}catch (Exception e) {
 			// TODO: handle exception
 			throw new InvalidPostTestException(e.toString());
