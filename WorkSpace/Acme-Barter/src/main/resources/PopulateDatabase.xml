@@ -1972,7 +1972,7 @@
 		<property name="legalText" ref="legalText2"/>
 <!-- 		<property name="auditor" ref="auditor2"/> -->
 		<property name="creatorBarter" ref="barter3"/>
-		<property name="receiverBarter" ref="barter1"/>
+		<property name="receiverBarter" ref="barter4"/>
 	</bean>
 	
 	<bean id="match3" class="domain.Match">

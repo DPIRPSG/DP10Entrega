@@ -59,7 +59,9 @@
 			<!-- Action links -->
 			<spring:message code="match.cancel" var="cancelHeader" />
 			<display:column title="${cancelHeader}" sortable="true">
+			<jstl:if test="${row_Match.creatorBarter.user.id == userId || row_Match.receiverBarter.user.id == userId}">
 				<a href="match/user/cancel.do?matchId=${row_Match.id}"><spring:message code="match.cancel" /></a>
+			</jstl:if>
 			</display:column>
 			
 			<spring:message code="match.sign" var="signHeader" />
