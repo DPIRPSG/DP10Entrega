@@ -6,7 +6,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 import controllers.AbstractController;
 
 import services.BarterService;
-import services.UserService;
 import services.form.BarterFormService;
 import domain.Barter;
 import domain.form.BarterForm;
@@ -29,9 +27,6 @@ public class BarterUserController extends AbstractController {
 
 	@Autowired
 	private BarterService barterService;
-	
-	@Autowired
-	private UserService userService;
 	
 	@Autowired
 	private BarterFormService barterFormService;
@@ -66,7 +61,6 @@ public class BarterUserController extends AbstractController {
 		result = new ModelAndView("barter/list");
 		result.addObject("requestURI", "barter/user/list.do");
 		result.addObject("barters", barters);
-		result.addObject("userId", userService.findByPrincipal().getId());
 
 		return result;
 	}
@@ -114,27 +108,6 @@ public class BarterUserController extends AbstractController {
 		result.addObject("requestURI", "barter/user/display.do");
 		result.addObject("barters", barters);
 
-		return result;
-	}
-	
-	@RequestMapping(value="/cancel", method = RequestMethod.GET)
-	public ModelAndView cancel(@RequestParam int barterId){
-		
-		ModelAndView result;
-		Barter barter;
-		
-		barter = barterService.findOne(barterId);
-		Assert.notNull(barter);
-		
-		try{
-			barterService.cancel(barter);
-			result = new ModelAndView("redirect:list.do");
-			result.addObject("messageStatus", "barter.cancel.ok");
-		}catch(Throwable oops){
-			result = new ModelAndView("redirect:list.do");
-			result.addObject("messageStatus", "barter.cancel.error");
-		}
-		
 		return result;
 	}
 	

@@ -54,8 +54,6 @@ public class SocialIdentityUserController extends AbstractController {
 		result = new ModelAndView("socialIdentity/list");
 		result.addObject("socialIdentities", socialIdent);
 		result.addObject("actUserId", userService.findByPrincipal().getId());
-		result.addObject("requestURI", "socialIdentity/user/list.do");
-		result.addObject("isProperty", true);
 		
 		return result;
 	}

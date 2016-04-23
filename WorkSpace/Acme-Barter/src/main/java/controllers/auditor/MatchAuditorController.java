@@ -12,10 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.AuditorService;
 import services.MatchService;
 import controllers.AbstractController;
-import domain.Auditor;
 import domain.Match;
 
 @Controller
@@ -26,9 +24,6 @@ public class MatchAuditorController extends AbstractController {
 
 	@Autowired
 	private MatchService matchService;
-	
-	@Autowired
-	private AuditorService auditorService;
 
 	// Constructors ----------------------------------------------------------
 
@@ -65,8 +60,6 @@ public class MatchAuditorController extends AbstractController {
 		result = new ModelAndView("match/list");
 		result.addObject("matches", matches);
 		result.addObject("requestURI", "match/auditor/list.do");
-		Auditor actAuditor = auditorService.findByPrincipal();
-		result.addObject("auditor_id", String.valueOf(actAuditor.getId()));
 		
 		return result;
 	}

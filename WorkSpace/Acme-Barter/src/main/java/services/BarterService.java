@@ -3,8 +3,6 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -135,7 +133,7 @@ public class BarterService {
 		actualBarter = this.findOne(barterId);
 		result = this.findAll();
 		result.remove(actualBarter);
-		result.removeAll(this.getRelatedBarters(barterId));
+		result.removeAll(actualBarter.getRelatedBarter());
 		
 		return result;
 	}
@@ -211,39 +209,33 @@ public class BarterService {
 		Assert.isTrue(input.getId() > 0);
 		Assert.isTrue(actorService.checkAuthority("ADMIN"), "Only an admin can relate a barter");
 
-		Barter result, result2;
-		Collection<Barter> oldContain, toSave;
+		Barter result;
 		
 		result = this.findOne(input.getId());
 		Assert.notNull(result);
-		
-		toSave = new HashSet<Barter>(result.getRelatedBarter());
-		oldContain = this.getRelatedBarters(input.getId());
-		
-//		Solo los relacionaremos en una dirección
-		
+				
 		for(Barter related:input.getRelatedBarter()){
-			if(!(oldContain.contains(related) || toSave.contains(related)) && related != null){
-				toSave.add(related);
+			if(!result.getRelatedBarter().contains(related) && related != null){
+				Collection<Barter> temp;
+				
+				temp = related.getRelatedBarter();
+				temp.add(input);
+				this.save(input);
 			}
 		}
-		result.setRelatedBarter(toSave);
+		result.setRelatedBarter(input.getRelatedBarter());
 		
-		result2 = this.save(result);
+		result = this.save(result);
 		
-		return result2;
+		return result;
 	}
 	
 	public void cancel(Barter barter){
 		
 		Assert.notNull(barter);
 		Assert.isTrue(barter.getId() != 0);
-		Assert.isTrue(actorService.checkAuthority("ADMIN") || actorService.checkAuthority("USER"), "Only an administrator or a user can cancel a barter.");
+		Assert.isTrue(actorService.checkAuthority("ADMIN"), "Only an administrator can cancel a barter.");
 		Assert.isTrue(!barter.isCancelled(), "This barter is already deleted.");
-		
-		if(actorService.checkAuthority("USER")){
-			Assert.isTrue(barter.getUser().equals(userService.findByPrincipal()));
-		}
 		
 		barter.setCancelled(true);	
 		
@@ -251,7 +243,6 @@ public class BarterService {
 		
 	}
 	
-	//DASHBOARD
 	public Integer getTotalNumberOfBarterRegistered(){
 		Integer result;
 		
@@ -268,57 +259,11 @@ public class BarterService {
 		return result;
 	}
 	
-	private int countRelateBarter(Barter barterOrigin, Barter barterToCount){
-		int res = 0;
-		
-		for(Barter a:barterOrigin.getRelatedBarter()){
-			if(a.equals(barterToCount))
-				res++;
-		}
-		
-		return res;
-	}
-	
-	public Double ratioBarterNotRelatedToAnyOtherBarter(){
+	public Double ratioOfBarterNotRelatedToAnyBarter(){
 		Double result;
-		Collection<Barter> allBarter = new HashSet<>();
-		Collection<Barter> allBarter2 = new HashSet<>();
-		Integer numerator;
-		Integer denominator;
 		
-		allBarter = findAll();
-		denominator = allBarter.size();
-				
-		for(Barter b:allBarter){
-			for(Barter b2:b.getRelatedBarter()){
-				allBarter2.add(b2);
-			}
-		}
-		allBarter.removeAll(allBarter2);
-		numerator = allBarter.size();
+		result = barterRepository.ratioOfBarterNotRelatedToAnyBarter();
 		
-		if(denominator == 0){
-			denominator = 1;
-		}
-				
-		result =  (numerator.doubleValue() / denominator.doubleValue());
-				
-		return result;
-	}
-	
-	public Collection<Barter> getRelatedBarters(int barterId){
-		Collection<Barter> result, toRemove;
-		Barter b;
-		
-		result = new HashSet<Barter>(barterRepository.getOtherRelatedBartersById(barterId));
-		toRemove = new ArrayList<Barter>(result);
-		
-		b = this.findOne(barterId);
-		toRemove.retainAll(b.getRelatedBarter());
-		
-		result.removeAll(toRemove);
-		result.addAll(b.getRelatedBarter());
-
 		return result;
 	}
 }

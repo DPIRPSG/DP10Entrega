@@ -33,12 +33,7 @@
 	</jstl:if>	
 	<br />
 	
-	<div>
-		<form:label path="priority">
-			<spring:message code="message.priority" />: &nbsp;
-		</form:label>	
-		<form:input path="priority" type="number"/>	
-	</div>
+	<acme:textbox code="message.priority" path="priority"/>
 	<jstl:if test="${!correctPriority }">
 		<div class="error"><spring:message code="message.priority.error" /></div>
 	</jstl:if>
