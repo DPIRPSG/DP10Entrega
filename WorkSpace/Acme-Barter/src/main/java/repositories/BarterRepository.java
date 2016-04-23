@@ -31,6 +31,9 @@ public interface BarterRepository extends JpaRepository<Barter, Integer> {
 
 	@Query("select b from User a join a.followed u, Barter b where a.id=?1 and b.user.id = u.id order by b.registerMoment desc")
 	Collection<Barter> findAllByFollowedUser(int userId);
+
+	@Query("select b from Barter b join b.relatedBarter r where r.id=?1")
+	Collection<Barter> getOtherRelatedBartersById(int barterId);
 	
 	// DASHBOARD
 	@Query("select count(b) from Barter b")
