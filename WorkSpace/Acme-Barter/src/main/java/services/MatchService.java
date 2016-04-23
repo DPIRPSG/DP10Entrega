@@ -242,6 +242,16 @@ public class MatchService {
 			
 		}
 		
+		public Collection<Match> findAllUserInvolvesIncludeCancelled(int userId) {
+			
+			Collection<Match> result;
+			
+			result = matchRepository.findAllUserInvolvesIncludeCancelled(userId);
+			
+			return result;
+			
+		}
+		
 		public Collection<Match> findAllNotSignedOneMonthSinceCreation() {
 			
 			Collection<Match> result;

@@ -41,6 +41,257 @@ public class BarterServiceTest extends AbstractTest {
 	// Tests ---------------------------------------
 	
 	/**
+	 * Acme-Six-Pack - Level C - 9.2
+	 * An actor who is not authenticated must be able to:
+	 * Navigate through the catalogue of barters and display their details.
+	 * 
+	 * Positive test case: Se muestran los barters
+	 * 
+	 */
+	@Test
+	public void testBarterFindAll1(){
+		// Declare variable
+		Collection<Barter> result;
+		
+		// Load objects to test
+		
+		// Check basic requirements
+		
+		// Execution of test
+		result = barterService.findAllNotCancelled();
+		
+		// Check results
+		Assert.isTrue(result.size() == 11);
+		barterService.flush();
+	}
+	
+	/**
+	 * Acme-Six-Pack - Level C - 9.2
+	 * An actor who is not authenticated must be able to:
+	 * Navigate through the catalogue of barters and display their details.
+	 * 
+	 * Positive test case: Se muestran los barters
+	 * 
+	 */
+	@Test
+	public void testBarterFindAll2(){
+		// Declare variable
+		Collection<Barter> result;
+		
+		// Load objects to test
+		authenticate("user1");
+		
+		// Check basic requirements
+		
+		// Execution of test
+		result = barterService.findAllNotCancelled();
+		
+		// Check results
+		Assert.isTrue(result.size() == 11);
+		authenticate(null);
+		barterService.flush();
+	}
+	
+	/**
+	 * Acme-Six-Pack - Level C - 9.2
+	 * An actor who is not authenticated must be able to:
+	 * Navigate through the catalogue of barters and display their details.
+	 * 
+	 * Positive test case: Se muestran los barters
+	 * 
+	 */
+	@Test
+	public void testBarterFindAll3(){
+		// Declare variable
+		Collection<Barter> result;
+		
+		// Load objects to test
+		authenticate("admin");
+		
+		// Check basic requirements
+		
+		// Execution of test
+		result = barterService.findAll();
+		
+		// Check results
+		Assert.isTrue(result.size() == 12);
+		authenticate(null);
+		barterService.flush();
+	}
+	
+	/**
+	 * Acme-Six-Pack - Level C - 9.2
+	 * An actor who is not authenticated must be able to:
+	 * Search for a barter using a single key word that must appear in its title, the name, or the description of the corresponding items.
+	 * 
+	 * Positive test case: Encontramos los barters gracias a la keyword. 3 barters son de la descripción y 1 de un item.
+	 * 
+	 */
+	@Test
+	public void testBarterFindByKeyword1(){
+		// Declare variable
+		Collection<Barter> result;
+		String keyword;
+		
+		// Load objects to test
+		keyword = "Quiero";
+		
+		// Check basic requirements
+		
+		// Execution of test
+		result = barterService.findBySingleKeywordNotCancelled(keyword);
+		
+		// Check results
+		Assert.isTrue(result.size() == 4);
+		barterService.flush();
+	}
+	
+	/**
+	 * Acme-Six-Pack - Level C - 9.2
+	 * An actor who is not authenticated must be able to:
+	 * Search for a barter using a single key word that must appear in its title, the name, or the description of the corresponding items.
+	 * 
+	 * Positive test case: No encontramos nada ya que no hay barter con esa keyword.
+	 * 
+	 */
+	@Test
+	public void testBarterFindByKeyword2(){
+		// Declare variable
+		Collection<Barter> result;
+		String keyword;
+		
+		// Load objects to test
+		keyword = "Hololens";
+		
+		// Check basic requirements
+		
+		// Execution of test
+		result = barterService.findBySingleKeywordNotCancelled(keyword);
+		
+		// Check results
+		Assert.isTrue(result.size() == 0);
+		barterService.flush();
+	}
+	
+	/**
+	 * Acme-Six-Pack - Level C - 9.2
+	 * An actor who is not authenticated must be able to:
+	 * Search for a barter using a single key word that must appear in its title, the name, or the description of the corresponding items.
+	 * 
+	 * Positive test case: Encontramos los barters gracias a la keyword. 3 barters son de la descripción y 1 de un item.
+	 * 
+	 */
+	@Test
+	public void testBarterFindByKeyword3(){
+		// Declare variable
+		Collection<Barter> result;
+		String keyword;
+		
+		// Load objects to test
+		authenticate("user1");
+		keyword = "Quiero";
+		
+		// Check basic requirements
+		
+		// Execution of test
+		result = barterService.findBySingleKeywordNotCancelled(keyword);
+		
+		// Check results
+		Assert.isTrue(result.size() == 4);
+		authenticate(null);
+		barterService.flush();
+	}
+	
+	/**
+	 * Acme-Six-Pack - Level C - 9.2
+	 * An actor who is not authenticated must be able to:
+	 * Search for a barter using a single key word that must appear in its title, the name, or the description of the corresponding items.
+	 * 
+	 * Positive test case: No encontramos nada ya que no hay barter con esa keyword.
+	 * 
+	 */
+	@Test
+	public void testBarterFindByKeyword4(){
+		// Declare variable
+		Collection<Barter> result;
+		String keyword;
+		
+		// Load objects to test
+		authenticate("user1");
+		keyword = "Hololens";
+		
+		// Check basic requirements
+		
+		// Execution of test
+		result = barterService.findBySingleKeywordNotCancelled(keyword);
+		
+		// Check results
+		Assert.isTrue(result.size() == 0);
+		authenticate(null);
+		barterService.flush();
+	}
+	
+	/**
+	 * Acme-Six-Pack - Level C - 9.2
+	 * An actor who is not authenticated must be able to:
+	 * Search for a barter using a single key word that must appear in its title, the name, or the description of the corresponding items.
+	 * 
+	 * Positive test case: Encontramos los barters gracias a la keyword. 3 barters son de la descripción y 1 de un item.
+	 * 
+	 */
+	@Test
+	public void testBarterFindByKeyword5(){
+		// Declare variable
+		Collection<Barter> result;
+		String keyword;
+		
+		// Load objects to test
+		authenticate("admin");
+		keyword = "Quiero";
+		
+		// Check basic requirements
+		
+		// Execution of test
+		result = barterService.findBySingleKeyword(keyword);
+		
+		// Check results
+		Assert.isTrue(result.size() == 4);
+		authenticate(null);
+		barterService.flush();
+	}
+	
+	/**
+	 * Acme-Six-Pack - Level C - 9.2
+	 * An actor who is not authenticated must be able to:
+	 * Search for a barter using a single key word that must appear in its title, the name, or the description of the corresponding items.
+	 * 
+	 * Positive test case: No encontramos nada ya que no hay barter con esa keyword.
+	 * 
+	 */
+	@Test
+	public void testBarterFindByKeyword6(){
+		// Declare variable
+		Collection<Barter> result;
+		String keyword;
+		
+		// Load objects to test
+		authenticate("admin");
+		keyword = "Hololens";
+		
+		// Check basic requirements
+		
+		// Execution of test
+		result = barterService.findBySingleKeyword(keyword);
+		
+		// Check results
+		Assert.isTrue(result.size() == 0);
+		authenticate(null);
+		barterService.flush();
+	}
+	
+	
+	
+	/**
 	 * Acme-Six-Pack - Level C - 11.2
 	 * Create a Barter.
 	 * 
@@ -534,7 +785,9 @@ are not displayed to users, only to administrators
 		// Checks basic requirements
 
 		// Execution of test
-		Assert.notNull(null, "Test inacabado ya que no se sabe como se implementará");		
+		
+		result = barterService.getTotalNumberOfBarterRegistered(); 
+		Assert.isTrue(totalUsersInTest == result);
 		
 		// Checks results	
 	}
@@ -556,9 +809,66 @@ are not displayed to users, only to administrators
 		// Checks basic requirements
 
 		// Execution of test
-		Assert.notNull(null, "Test inacabado ya que no se sabe como se implementará");		
+		result = barterService.getTotalNumberOfBarterCancelled();
+		
+		Assert.isTrue(totalUsersInTest == result);		
 		
 		// Checks results	
+	}
+	
+	/**
+	 * Acme-Six-Pack - Level B - 3.4
+	 * An actor who is authenticated a user must be able to:
+	 * Display a stream of bulletins in which the system provides information about the barters that the users that he or she follows have created.
+	 * 
+	 * Positive test case: Muestra la información pertinente.
+	 * 
+	 */
+	@Test
+	public void testBarterFindAllBulletin1(){
+		// Declare variable
+		Collection<Barter> result;
+		
+		// Load objects to test
+		authenticate("user1");
+		
+		// Check basic requirements
+		
+		// Execution of test
+		result = barterService.findAllByFollowedUser();
+		
+		// Check results
+		Assert.isTrue(result.size() == 8);
+		authenticate(null);
+		barterService.flush();
+	}
+	
+	/**
+	 * Acme-Six-Pack - Level B - 3.4
+	 * An actor who is authenticated a user must be able to:
+	 * Display a stream of bulletins in which the system provides information about the barters that the users that he or she follows have created.
+	 * 
+	 * Negative test case: No muestra la información pertinente ya que no eres un user.
+	 * 
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	@Rollback(value = true) 
+	public void testBarterFindAllBulletin2(){
+		// Declare variable
+		Collection<Barter> result;
+		
+		// Load objects to test
+		//authenticate("user1");
+		
+		// Check basic requirements
+		
+		// Execution of test
+		result = barterService.findAllByFollowedUser();
+		
+		// Check results
+		Assert.isTrue(result.size() == 8);
+		//authenticate(null);
+		barterService.flush();
 	}
 	
 	/**
@@ -620,10 +930,14 @@ are not displayed to users, only to administrators
 							+ this.countRelateBarter(barter1, barter2)
 							+ "' veces."); // First check
 			Assert.isTrue(
-					this.countRelateBarter(barter2, barter1) == 1,
-					"El barter2 no contiene el barter1 '"
+					this.countRelateBarter(barter2, barter1) == 0,
+					"El barter2 contiene el barter1 '"
 							+ this.countRelateBarter(barter2, barter1)
 							+ "' veces"); // First check
+			Assert.isTrue(barterService.getRelatedBarters(barter2.getId()).contains(barter1),
+					"El barter2 no contiene el barter1"); // First check
+			Assert.isTrue(barterService.getRelatedBarters(barter1.getId()).contains(barter2),
+					"El barter1 no contiene el barter2"); // First check
 		}catch (Exception e) {
 			// TODO: handle exception
 			throw new InvalidPostTestException(e.toString());
@@ -670,10 +984,11 @@ are not displayed to users, only to administrators
 		authenticate("admin");
 		
 		relatedBarter = barter1.getRelatedBarter();
+
 		relatedBarter.add(barter2);
 		relatedBarter.add(barter2);
 		barter1.setRelatedBarter(relatedBarter);
-		
+
 		barter1 = barterService.saveToRelate(barter1);
 				
 		// Checks results
@@ -686,10 +1001,14 @@ are not displayed to users, only to administrators
 							+ this.countRelateBarter(barter1, barter2)
 							+ "' veces."); // First check
 			Assert.isTrue(
-					this.countRelateBarter(barter2, barter1) == 1,
-					"El barter2 no contiene el barter1 '"
+					this.countRelateBarter(barter2, barter1) == 0,
+					"El barter2 contiene el barter1 '"
 							+ this.countRelateBarter(barter2, barter1)
 							+ "' veces"); // First check
+			Assert.isTrue(barterService.getRelatedBarters(barter2.getId()).contains(barter1),
+					"El barter2 no contiene el barter1"); // First check
+			Assert.isTrue(barterService.getRelatedBarters(barter1.getId()).contains(barter2),
+					"El barter1 no contiene el barter2"); // First check
 		}catch (Exception e) {
 			// TODO: handle exception
 			throw new InvalidPostTestException(e.toString());
@@ -755,7 +1074,7 @@ are not displayed to users, only to administrators
 							+ "' veces."); // First check
 			Assert.isTrue(
 					this.countRelateBarter(barter2, barter1) == 0,
-					"El barter2 no contiene el barter1 '"
+					"El barter2 contiene el barter1 '"
 							+ this.countRelateBarter(barter2, barter1)
 							+ "' veces"); // First check
 		}catch (Exception e) {
@@ -823,7 +1142,7 @@ are not displayed to users, only to administrators
 							+ "' veces."); // First check
 			Assert.isTrue(
 					this.countRelateBarter(barter2, barter1) == 0,
-					"El barter2 no contiene el barter1 '"
+					"El barter2 contiene el barter1 '"
 							+ this.countRelateBarter(barter2, barter1)
 							+ "' veces"); // First check
 		}catch (Exception e) {
@@ -831,6 +1150,80 @@ are not displayed to users, only to administrators
 			throw new InvalidPostTestException(e.toString());
 		}
 	}	
+	
+	/**
+	 * Negative test case: Relacionarlo con uno ya relacionado
+	 *
+	 */
+	@Test//(expected=IllegalArgumentException.class)
+	//@Rollback(value = true)
+	public void testBarterRelateErrorAlreadyRelated() {
+		// Declare variables
+		Barter barter1;
+		Barter barter2;
+		Collection<Barter> relatedBarter;
+		
+		// Load objects to test
+		
+		authenticate("admin");
+		barter1 = null;
+		barter2 = null;
+		
+		for(Barter b:barterService.findAll()){
+			if (barter1 != null && b.getRelatedBarter().contains(barter1)
+					&& !barter1.getRelatedBarter().contains(barter2)) {
+				barter2 = b;
+				break;
+			}
+			barter1 = b;
+		}
+		unauthenticate();
+		
+		// Checks basic requirements
+		try{
+			Assert.notNull(barter1);
+			Assert.notNull(barter2);
+		}catch (Exception e) {
+			// TODO: handle exception
+			throw new InvalidPreTestException(e.toString());
+		}
+		
+		// Execution of test
+		authenticate("admin");
+		
+		relatedBarter = barter1.getRelatedBarter();
+		relatedBarter.add(barter2);
+		barter1.setRelatedBarter(relatedBarter);
+		
+		barter1 = barterService.saveToRelate(barter1);
+		
+		//Assert.notNull(null, "Este test no está finalizado, a espera de solucionar el issue #129");
+				
+		// Checks results
+		try{
+			authenticate("admin");
+			barter2 = barterService.findOne(barter2.getId());
+			barter1 = barterService.findOne(barter1.getId());
+
+			Assert.isTrue(
+					this.countRelateBarter(barter1, barter2) == 0,
+					"El barter1 contiene el barter2 '"
+							+ this.countRelateBarter(barter1, barter2)
+							+ "' veces."); // First check
+			Assert.isTrue(
+					this.countRelateBarter(barter2, barter1) == 1,
+					"El barter2 contiene el barter1 '"
+							+ this.countRelateBarter(barter2, barter1)
+							+ "' veces"); // First check
+			Assert.isTrue(barterService.getRelatedBarters(barter2.getId()).contains(barter1),
+					"El barter2 no contiene el barter1"); // First check
+			Assert.isTrue(barterService.getRelatedBarters(barter1.getId()).contains(barter2),
+					"El barter1 no contiene el barter2"); // First check
+		}catch (Exception e) {
+			// TODO: handle exception
+			throw new InvalidPostTestException(e.toString());
+		}
+	}
 
 	private int countRelateBarter(Barter barterOrigin, Barter barterToCount){
 		int res = 0;

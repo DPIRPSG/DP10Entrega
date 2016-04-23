@@ -68,7 +68,7 @@ public class UserService {
 
 		result = new User();
 		
-		userAccount = userAccountService.create("CUSTOMER");
+		userAccount = userAccountService.create("USER");
 		result.setUserAccount(userAccount);
 		
 		return result;
@@ -373,6 +373,10 @@ public class UserService {
 			}
 		}
 		
+		if(result == Integer.MAX_VALUE){
+			result = 0;
+		}
+		
 		return result;
 	}
 	
@@ -433,6 +437,10 @@ public class UserService {
 		
 		for(User u:barterPerUser.keySet()){
 			numerator += barterPerUser.get(u).size();
+		}
+		
+		if(denominator == 0.0){
+			denominator = 1.0;
 		}
 
 		result = numerator / denominator;

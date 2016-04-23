@@ -12,6 +12,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
+<jstl:if test="${!noDisplayHeader}">
 	<security:authorize access="hasRole('USER')">
 		<h3><spring:message code="match.userList" /></h3>
 	</security:authorize>
@@ -21,7 +22,7 @@
 	<security:authorize access="hasRole('AUDITOR')">
 		<h3><spring:message code="match.auditorList" /></h3>
 	</security:authorize>
-	
+</jstl:if>
 
 	<!-- Listing grid -->
 	<display:table pagesize="5" class="displaytag" keepStatus="false"
@@ -49,7 +50,7 @@
 		<spring:message code="match.report" var="reportHeader" />
 		<acme:displayColumn title="${reportHeader}" sorteable="false" value="${row_Match.report}"/>
 		
-		<security:authorize access="hasRole('ADMIN')">
+		<security:authorize access="hasAnyRole('ADMIN', 'AUDITOR')">
 			<spring:message code="match.cancelled" var="cancelledHeader" />
 			<acme:displayColumn title="${cancelledHeader}" sorteable="true" value="${row_Match.cancelled}"/>
 		</security:authorize>
