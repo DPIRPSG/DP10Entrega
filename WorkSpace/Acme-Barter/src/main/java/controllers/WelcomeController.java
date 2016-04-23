@@ -56,6 +56,26 @@ public class WelcomeController extends AbstractController {
 		
 		formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		moment = formatter.format(new Date());
+//		if(actorService.checkAuthority("CUSTOMER")){
+//			try{
+//				activities = activityService.findAllPaidAndNotBookedByCustomerId();
+//				if(!activities.isEmpty()){
+//					Random rnd = new Random();
+//					int i = rnd.nextInt(activities.size());
+//					activity = (Activity) activities.toArray()[i];
+//				}else{
+//					activities = null;
+//					activity = null;
+//				}
+//			}catch(org.springframework.dao.DataIntegrityViolationException oops){
+//				activities = null;
+//				activity = null;
+//			}
+//		}else{
+//			activities = null;
+//			activity = null;
+//		}
+		
 
 		result = new ModelAndView("welcome/index");
 		result.addObject("moment", moment);

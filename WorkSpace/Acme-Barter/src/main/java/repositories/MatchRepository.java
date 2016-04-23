@@ -14,9 +14,6 @@ public interface MatchRepository extends JpaRepository<Match, Integer> {
 	@Query("select m from Match m join m.creatorBarter cb join m.receiverBarter rb where m.cancelled = false and ( cb.user.id = ?1 or  rb.user.id = ?1)")
 	Collection<Match> findAllUserInvolves(int userId);
 	
-	@Query("select m from Match m join m.creatorBarter cb join m.receiverBarter rb where cb.user.id = ?1 or  rb.user.id = ?1")
-	Collection<Match> findAllUserInvolvesIncludeCancelled(int userId);
-	
 	// Every [barter]match that remains unsigned one month after they were created.
 	@Query("select m from Match m where ( m.offerSignsDate = null or m.requestSignsDate = null ) and ( YEAR(m.creationMoment) <= YEAR(CURRENT_DATE) and ( MONTH(CURRENT_DATE) - MONTH(m.creationMoment) >= 1) and DAY(m.creationMoment) <= DAY(CURRENT_DATE) )")
 	Collection<Match> findAllNotSignedOneMonthSinceCreation();

@@ -66,8 +66,11 @@ public class BarterAdministratorController extends AbstractController {
 		ModelAndView result;
 		Collection<Barter> barters;
 		String keywordToFind;
+		Barter barter;
+		
+		barter = barterService.findOne(barterId);
 
-		barters = barterService.getRelatedBarters(barterId);
+		barters = barter.getRelatedBarter();		
 		if (!keyword.equals("")) {
 			String[] keywordComoArray = keyword.split(" ");
 			for (int i = 0; i < keywordComoArray.length; i++) {

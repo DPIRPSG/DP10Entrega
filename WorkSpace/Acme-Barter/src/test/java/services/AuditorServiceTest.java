@@ -597,10 +597,10 @@ public class AuditorServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * Negative test case: Escribir un report a un Match que no esté asignado a ningún auditor
+	 * Negative test case: Escribir un report a un Match que no tengas asignado
 	 * 		- Acción
 	 * 		+ Autenticarse en el sistema como Auditor
-	 * 		+ Escribir un report para un Match que no tenga asignado ningún auditor
+	 * 		+ Escribir un report para un Match que no tenga asignado
 	 * 		- Comprobación
 	 * 		+ Comprobar que salta una excepción del tipo: IllegalArgumentException
 	 * 		+ Cerrar su sesión
@@ -736,7 +736,7 @@ public class AuditorServiceTest extends AbstractTest{
 				// createMatch
 				int value = 1;
 				if (auditorBarters.containsKey(b.getAuditor()))
-					value += auditorBarters.get(b.getAuditor());
+					value = auditorBarters.get(b.getAuditor()) + 1;
 
 				auditorBarters.put(b.getAuditor(), value);
 
@@ -753,13 +753,8 @@ public class AuditorServiceTest extends AbstractTest{
 		// Checks basic requirements
 
 		// Execution of test
-		result = auditorService.getAuditorsWithMoreMatches();
-		Assert.isTrue(
-				result.containsAll(inTest) && inTest.containsAll(result),
-				"El test devuelve " + result.size() + " " + result.toString()
-						+ " pero debían ser " + inTest.size() + " "
-						+ inTest.toString());
-				
+		Assert.notNull(null, "Test inacabado ya que no se sabe como se implementará");
+		
 				// En la variable inTest están los usuarios que debería devolver la query
 		
 		

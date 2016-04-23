@@ -116,10 +116,6 @@ public class Barter extends DomainEntity{
 		this.receivedMatch = receivedMatch;
 	}
 	
-	/**
-	 * NO USAR ! ! ! usar barterService.getRelatedBarter
-	 * @return
-	 */
 	@Valid
 	@NotNull
 	@ManyToMany
