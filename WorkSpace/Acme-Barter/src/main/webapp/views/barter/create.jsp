@@ -16,14 +16,14 @@
 	
 	<!-- Editable Attributes -->
 	<acme:textbox code="barter.title" path="title"/>
-	
-	ITEM A OFRECER
+	<br/>
+	<spring:message code="barter.offered" />
 	
 	<acme:textbox code="item.name" path="offeredName"/>
 	<acme:textarea code="item.description" path="offeredDescription"/>
 	<acme:textarea code="item.pictures" path="offeredPictures"/>
-	
-	ITEM PEDIDO
+	<br/>
+	<spring:message code="barter.requested" />
 	
 	<acme:textbox code="item.name" path="requestedName"/>
 	<acme:textarea code="item.description" path="requestedDescription"/>

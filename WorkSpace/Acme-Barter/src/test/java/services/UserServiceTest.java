@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
@@ -300,17 +301,17 @@ public class UserServiceTest extends AbstractTest {
 		matches = matchService.findAllUserInvolves(userToList.getId());
 		
 		// Checks results
-		Assert.isTrue(users.size() == 4, "El numero de usuarios del sistema traidos no es el esperado.");
+		Assert.isTrue(users.size() == 7, "El numero de usuarios del sistema traidos no es el esperado.");
 		
 		Assert.isTrue(userToList.getName().equals("Manolo"), "El nombre del usuario no es el esperado.");
 		
 		Assert.isTrue(userToList.getSurname().equals("Lopez"), "El apellido del usuario no es el esperado.");
 		
-		Assert.isTrue(socialIdentities.size() == 2, "El numero de socialIdentities del usuario no es el esperado.");
+		Assert.isTrue(socialIdentities.size() == 6, "El numero de socialIdentities del usuario no es el esperado.");
 		
-		Assert.isTrue(barters.size() == 2, "El numero de barters del usuario no es el esperado.");
+		Assert.isTrue(barters.size() == 3, "El numero de barters del usuario no es el esperado.");
 		
-		Assert.isTrue(matches.size() == 2, "El numero de matches del usuario no es el esperado.");
+		Assert.isTrue(matches.size() == 3, "El numero de matches del usuario no es el esperado.");
 		
 		unauthenticate();
 
@@ -359,7 +360,7 @@ public class UserServiceTest extends AbstractTest {
 		Integer newUserToFollowFollowersSize;
 		
 		// Load objects to test
-		authenticate("user1");
+		authenticate("user2");
 		user = userService.findByPrincipal();
 		
 		// Checks basic requirements
@@ -385,7 +386,7 @@ public class UserServiceTest extends AbstractTest {
 		userToFollowFollowersSize = userService.getFollowers().size();
 		unauthenticate();
 		
-		authenticate("user1");
+		authenticate("user2");
 		Assert.isTrue(!userService.getFollowed().contains(userToFollow), "El usuario ya sigue al otro usuario al que se pretende seguir.");
 		
 		userService.followOrUnfollowById(userToFollow.getId());
@@ -561,8 +562,10 @@ public class UserServiceTest extends AbstractTest {
 		// Checks basic requirements
 				
 		// Execution of test
-		Assert.notNull(null, "Test inacabado ya que no se sabe como se implementará");		
 		
+		result = userService.getTotalNumberOfUsersRegistered();
+		Assert.isTrue(result == totalUsersInTest);
+				
 		// Checks results	
 	}
 	
@@ -599,7 +602,12 @@ public class UserServiceTest extends AbstractTest {
 		// Checks basic requirements
 
 		// Execution of test
-		Assert.notNull(null, "Test inacabado ya que no se sabe como se implementará");
+		result = userService.getUsersWithNoBarterThisMonth();
+		Assert.isTrue(
+				result.containsAll(inTest) && inTest.containsAll(result),
+				"El test devuelve " + result.size() + " " + result.toString()
+						+ " pero debían ser " + inTest.size() + " "
+						+ inTest.toString());
 		
 				// En la variable inTest están los usuarios que debería devolver la query
 		
@@ -630,7 +638,7 @@ public class UserServiceTest extends AbstractTest {
 		for(Barter b:barterService.findAll()){
 			int value = 1;
 			if(userBarters.containsKey(b.getUser()))
-				value = userBarters.get(b.getUser()) + 1;
+				value += userBarters.get(b.getUser());
 
 			userBarters.put(b.getUser(), value);
 			
@@ -645,7 +653,13 @@ public class UserServiceTest extends AbstractTest {
 		// Checks basic requirements
 
 		// Execution of test
-		Assert.notNull(null, "Test inacabado ya que no se sabe como se implementará");
+		result = userService.getUsersWithMoreBarters();
+		
+		Assert.isTrue(
+				result.containsAll(inTest) && inTest.containsAll(result),
+				"El test devuelve " + result.size() + " " + result.toString()
+						+ " pero debían ser " + inTest.size() + " "
+						+ inTest.toString());
 		
 				// En la variable inTest están los usuarios que debería devolver la query
 		
@@ -677,7 +691,7 @@ public class UserServiceTest extends AbstractTest {
 			if (b.isCancelled()) {
 				int value = 1;
 				if (userBarters.containsKey(b.getUser()))
-					value = userBarters.get(b.getUser()) + 1;
+					value += userBarters.get(b.getUser());
 
 				userBarters.put(b.getUser(), value);
 
@@ -693,7 +707,13 @@ public class UserServiceTest extends AbstractTest {
 		// Checks basic requirements
 
 		// Execution of test
-		Assert.notNull(null, "Test inacabado ya que no se sabe como se implementará");
+		result = userService.getUsersWithMoreBartersCancelled();
+		
+		Assert.isTrue(
+				result.containsAll(inTest) && inTest.containsAll(result),
+				"El test devuelve " + result.size() + " " + result.toString()
+						+ " pero debían ser " + inTest.size() + " "
+						+ inTest.toString());
 		
 				// En la variable inTest están los usuarios que debería devolver la query
 		
@@ -722,44 +742,49 @@ public class UserServiceTest extends AbstractTest {
 		maxBarters = 0;
 		
 		for (Match b : matchService.findAll()) {
-			if (!b.getCancelled() && b.getAuditor() != null) {
-				// createMatch
-				int value = 1;
-				if (userBarters.containsKey(b.getCreatorBarter().getUser()))
-					value = userBarters.get(b.getCreatorBarter().getUser()) + 1;
+			// createMatch
+			int value = 1;
+			if (userBarters.containsKey(b.getCreatorBarter().getUser()))
+				value += userBarters.get(b.getCreatorBarter().getUser());
 
-				userBarters.put(b.getCreatorBarter().getUser(), value);
+			userBarters.put(b.getCreatorBarter().getUser(), value);
+
+			if (value > maxBarters) {
+				inTest.clear();
+				maxBarters = value;
+			}
+			if (value >= maxBarters)
+				inTest.add(b.getCreatorBarter().getUser());
+
+			// receivedMatch
+			if (b.getReceiverBarter() != null) {
+				value = 1;
+				if (userBarters.containsKey(b.getReceiverBarter().getUser()))
+					value += userBarters.get(b.getReceiverBarter().getUser());
+
+				userBarters.put(b.getReceiverBarter().getUser(), value);
 
 				if (value > maxBarters) {
 					inTest.clear();
 					maxBarters = value;
 				}
 				if (value >= maxBarters)
-					inTest.add(b.getCreatorBarter().getUser());
-				
-				//receivedMatch
-				if(b.getReceiverBarter() != null){
-					value = 1;
-					if (userBarters.containsKey(b.getReceiverBarter().getUser()))
-						value = userBarters.get(b.getReceiverBarter().getUser()) + 1;
+					inTest.add(b.getReceiverBarter().getUser());
 
-					userBarters.put(b.getReceiverBarter().getUser(), value);
-
-					if (value > maxBarters) {
-						inTest.clear();
-						maxBarters = value;
-					}
-					if (value >= maxBarters)
-						inTest.add(b.getReceiverBarter().getUser());
-									
-				}
 			}
+
 		}
 		
 		// Checks basic requirements
 
 		// Execution of test
-		Assert.notNull(null, "Test inacabado ya que no se sabe como se implementará");
+		result = userService.getUsersWithMoreMatches();
+		
+		Assert.isTrue(
+				result.containsAll(inTest) && inTest.containsAll(result),
+				"El test devuelve " + result.size() + " " + result.toString()
+						+ " pero debían ser " + inTest.size() + " "
+						+ inTest.toString());
 		
 				// En la variable inTest están los usuarios que debería devolver la query
 		
@@ -783,17 +808,17 @@ public class UserServiceTest extends AbstractTest {
 		// Load objects to test
 		authenticate("admin");
 		
-		inTest = userService.findAll();
+		inTest = new ArrayList<User>();
 		
 		userBarters = new HashMap<User, Integer>();
 		maxBarters = 0;
 		
 		for (Match b : matchService.findAll()) {
-			if (!b.getCancelled()) {
+			if (b.getAuditor() != null) {
 				// createMatch
 				int value = 1;
 				if (userBarters.containsKey(b.getCreatorBarter().getUser()))
-					value = userBarters.get(b.getCreatorBarter().getUser()) + 1;
+					value += userBarters.get(b.getCreatorBarter().getUser());
 
 				userBarters.put(b.getCreatorBarter().getUser(), value);
 
@@ -808,7 +833,7 @@ public class UserServiceTest extends AbstractTest {
 				if(b.getReceiverBarter() != null){
 					value = 1;
 					if (userBarters.containsKey(b.getReceiverBarter().getUser()))
-						value = userBarters.get(b.getReceiverBarter().getUser()) + 1;
+						value += userBarters.get(b.getReceiverBarter().getUser());
 
 					userBarters.put(b.getReceiverBarter().getUser(), value);
 
@@ -826,7 +851,14 @@ public class UserServiceTest extends AbstractTest {
 		// Checks basic requirements
 
 		// Execution of test
-		Assert.notNull(null, "Test inacabado ya que no se sabe como se implementará");
+		
+		result = userService.getUsersWithMoreMatchesAudited();
+		
+		Assert.isTrue(
+				result.containsAll(inTest) && inTest.containsAll(result),
+				"El test devuelve " + result.size() + " " + result.toString()
+						+ " pero debían ser " + inTest.size() + " "
+						+ inTest.toString());
 		
 				// En la variable inTest están los usuarios que debería devolver la query
 		

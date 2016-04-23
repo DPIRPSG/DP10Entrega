@@ -12,8 +12,10 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ActorService;
 import services.AuditorService;
 import services.MatchService;
+import services.UserService;
 import domain.Auditor;
 import domain.Match;
+import domain.User;
 
 @Controller
 @RequestMapping("/match")
@@ -30,6 +32,9 @@ public class MatchController extends AbstractController {
 	@Autowired
 	private AuditorService auditorService;
 
+	@Autowired
+	private UserService userService;
+	
 	// Constructors -----------------------------------------------------------
 
 	public MatchController() {
@@ -42,12 +47,27 @@ public class MatchController extends AbstractController {
 	public ModelAndView listByUser(@RequestParam(required=true) int userId) {
 		ModelAndView result;
 		Collection<Match> matches;
-
-		matches = matchService.findAllUserInvolves(userId);
+		User user;
+		int userPrincipalId;
+		
+		try{
+			user = userService.findByPrincipal();
+			userPrincipalId = user.getId();
+		}catch(Exception e){
+			userPrincipalId = 0;
+		}
+		
+		
+		if(actorService.checkAuthority("AUDITOR") || actorService.checkAuthority("ADMIN"))
+			matches = matchService.findAllUserInvolvesIncludeCancelled(userId);
+		else
+			matches = matchService.findAllUserInvolves(userId);
 		
 		result = new ModelAndView("match/list");
 		result.addObject("requestURI", "match/list.do?userId=" + String.valueOf(userId));
 		result.addObject("matches", matches);
+		result.addObject("userId", userPrincipalId);
+		result.addObject("noDisplayHeader", true);
 		if(actorService.checkAuthority("AUDITOR")){
 			Auditor actAuditor = auditorService.findByPrincipal();
 			result.addObject("auditor_id", String.valueOf(actAuditor.getId()));

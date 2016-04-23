@@ -231,7 +231,7 @@ public class FolderService {
 		result = new ArrayList<Folder>();
 		names = new ArrayList<String>();
 		
-		names.add("Inbox");
+		names.add("InBox");
 		names.add("OutBox");
 		names.add("TrashBox");
 		names.add("SpamBox");

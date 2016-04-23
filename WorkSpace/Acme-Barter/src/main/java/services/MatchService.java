@@ -242,6 +242,16 @@ public class MatchService {
 			
 		}
 		
+		public Collection<Match> findAllUserInvolvesIncludeCancelled(int userId) {
+			
+			Collection<Match> result;
+			
+			result = matchRepository.findAllUserInvolvesIncludeCancelled(userId);
+			
+			return result;
+			
+		}
+		
 		public Collection<Match> findAllNotSignedOneMonthSinceCreation() {
 			
 			Collection<Match> result;
@@ -299,6 +309,7 @@ public class MatchService {
 			auditor = auditorService.findByPrincipal();
 			match_orig = this.findOne(match.getId());
 			
+			Assert.notNull(match_orig.getAuditor(), "match.selfAssignByAuditor.notSelfAssigned");
 			Assert.isTrue(match_orig.getAuditor().equals(auditor), "match.selfAssignByAuditor.notSelfAssigned");
 			
 			match_orig.setReport(match.getReport());
