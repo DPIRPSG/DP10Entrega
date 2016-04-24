@@ -301,17 +301,17 @@ public class UserServiceTest extends AbstractTest {
 		matches = matchService.findAllUserInvolves(userToList.getId());
 		
 		// Checks results
-		Assert.isTrue(users.size() == 4, "El numero de usuarios del sistema traidos no es el esperado.");
+		Assert.isTrue(users.size() == 7, "El numero de usuarios del sistema traidos no es el esperado.");
 		
 		Assert.isTrue(userToList.getName().equals("Manolo"), "El nombre del usuario no es el esperado.");
 		
 		Assert.isTrue(userToList.getSurname().equals("Lopez"), "El apellido del usuario no es el esperado.");
 		
-		Assert.isTrue(socialIdentities.size() == 2, "El numero de socialIdentities del usuario no es el esperado.");
+		Assert.isTrue(socialIdentities.size() == 6, "El numero de socialIdentities del usuario no es el esperado.");
 		
-		Assert.isTrue(barters.size() == 2, "El numero de barters del usuario no es el esperado.");
+		Assert.isTrue(barters.size() == 3, "El numero de barters del usuario no es el esperado.");
 		
-		Assert.isTrue(matches.size() == 2, "El numero de matches del usuario no es el esperado.");
+		Assert.isTrue(matches.size() == 3, "El numero de matches del usuario no es el esperado.");
 		
 		unauthenticate();
 
@@ -360,7 +360,7 @@ public class UserServiceTest extends AbstractTest {
 		Integer newUserToFollowFollowersSize;
 		
 		// Load objects to test
-		authenticate("user1");
+		authenticate("user2");
 		user = userService.findByPrincipal();
 		
 		// Checks basic requirements
@@ -386,7 +386,7 @@ public class UserServiceTest extends AbstractTest {
 		userToFollowFollowersSize = userService.getFollowers().size();
 		unauthenticate();
 		
-		authenticate("user1");
+		authenticate("user2");
 		Assert.isTrue(!userService.getFollowed().contains(userToFollow), "El usuario ya sigue al otro usuario al que se pretende seguir.");
 		
 		userService.followOrUnfollowById(userToFollow.getId());
