@@ -1,6 +1,7 @@
 package services;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -49,6 +50,7 @@ public class UserService {
 	
 	@Autowired
 	private MatchService matchService;
+
 	
 	//Constructors -----------------------------------------------------------
 
@@ -291,46 +293,23 @@ public class UserService {
 		return result;
 	}
 	
-	@SuppressWarnings("deprecation")
 	public Collection<User> getUsersWithNoBarterThisMonth(){
 		Collection<User> result = new HashSet<>();
-		Collection<Barter> allBarter = new HashSet<>();
-		Collection<User> allUser = new HashSet<>();
-		Map<User,Collection<Barter>> bartersPerUser = new HashMap<>();
-		Date aMonthAgo = new Date();
+		Calendar limitCalendar;
+		Date limitDate;
 		
-		allBarter = barterService.findAll();
-		if(aMonthAgo.getMonth() == 0){
-			aMonthAgo.setMonth(11);
-			aMonthAgo.setYear(aMonthAgo.getYear()-1);
-		}else{
-			aMonthAgo.setMonth(aMonthAgo.getMonth()-1);
-
-		}
-		if(!allBarter.isEmpty()){
-			for(Barter b:allBarter){
-				Collection<Barter> one = new HashSet<>();
-				if(bartersPerUser.containsKey(b.getUser())){
-					one = bartersPerUser.get(b.getUser());
-					one.add(b);
-					bartersPerUser.put(b.getUser(), one);
-				}else{
-					one.add(b);
-					bartersPerUser.put(b.getUser(), one);				
-				}
-			}
-		}
+		result = this.findAll();
+		limitCalendar = Calendar.getInstance();
+		limitCalendar.add(Calendar.MONTH, -1);
+		limitDate = limitCalendar.getTime();
 		
-		allUser = bartersPerUser.keySet();
-		result.addAll(allUser);
-				
-		if(!result.isEmpty()){
-			for(User u:allUser){
-				for(Barter b:bartersPerUser.get(u)){
-					if(b.getRegisterMoment().after(aMonthAgo)){
-						result.remove(u);
-					}
-				}
+		for(Barter b:barterService.findAll()){
+			boolean isRecent;
+			
+			isRecent = b.getRegisterMoment().after(limitDate);
+			
+			if(result.contains(b.getUser()) && isRecent){
+				result.remove(b.getUser());
 			}
 		}
 		
