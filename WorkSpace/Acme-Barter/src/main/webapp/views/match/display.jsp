@@ -47,6 +47,10 @@
 		<spring:message code="match.and"/>
 		<a href="item/display.do?itemId=${row_Match.receiverBarter.requested.id}"> <jstl:out value="${row_Match.receiverBarter.requested.name}" /></a>
 		<br/>
+		<jstl:if test="${(row_Match.report != null) && (row_Match.report != '')}">
+			<spring:message code="match.report"/>: &nbsp<jstl:out value="${row_Match.report}" />
+			<br/>
+		</jstl:if>
 		<spring:message code="match.date"/>
 		<jstl:out value="${row_Match.creationMoment}"/>
 	</display:column>
