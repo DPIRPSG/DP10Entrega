@@ -1651,6 +1651,24 @@
 		</property>
 	</bean>
 	
+	<bean id="item25" class="domain.Item">
+		<property name="name" value="PS4"/>
+		<property name="description" value="Quiero una PS4 en buenas condiciones"/>
+		<property name="pictures">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="item26" class="domain.Item">
+		<property name="name" value="Xbox One"/>
+		<property name="description" value="Consola en buenas condiciones"/>
+		<property name="pictures">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- LegalText -->
 	
 	<bean id="legalText1" class="domain.LegalText">
@@ -1941,6 +1959,27 @@
 			<list>
 				<ref bean="match5"/>
 				<ref bean="match6"/>
+			</list>
+		</property>
+		<property name="relatedBarter">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="barter13" class="domain.Barter">
+		<property name="title" value="Cambio de consola"/>
+		<property name="cancelled" value="false"/>
+		<property name="registerMoment" value="2016/04/24 12:30"/>
+		<property name="user" ref="user2"/>
+		<property name="offered" ref="item26"/>
+		<property name="requested" ref="item25"/>
+		<property name="createdMatch">
+			<list>
+			</list>
+		</property>
+		<property name="receivedMatch">
+			<list>
 			</list>
 		</property>
 		<property name="relatedBarter">

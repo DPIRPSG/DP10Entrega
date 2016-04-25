@@ -64,6 +64,7 @@
 		</security:authorize>
 		
 		<security:authorize access="hasRole('AUDITOR')">
+			<li><a class="fNiv" href="barter/list.do"><spring:message code="master.page.barter" /></a></li>
 			<li><a class="fNiv" href="user/list.do"><spring:message code="master.page.users" /></a></li>
 			<li><a class="fNiv"><spring:message	code="master.page.manage" /></a>
 				<ul>
