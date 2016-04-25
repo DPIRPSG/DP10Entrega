@@ -61,7 +61,7 @@ public class BarterServiceTest extends AbstractTest {
 		result = barterService.findAllNotCancelled();
 		
 		// Check results
-		Assert.isTrue(result.size() == 11);
+		Assert.isTrue(result.size() == 12);
 		barterService.flush();
 	}
 	
@@ -87,7 +87,7 @@ public class BarterServiceTest extends AbstractTest {
 		result = barterService.findAllNotCancelled();
 		
 		// Check results
-		Assert.isTrue(result.size() == 11);
+		Assert.isTrue(result.size() == 12);
 		authenticate(null);
 		barterService.flush();
 	}
@@ -114,7 +114,7 @@ public class BarterServiceTest extends AbstractTest {
 		result = barterService.findAll();
 		
 		// Check results
-		Assert.isTrue(result.size() == 12);
+		Assert.isTrue(result.size() == 13);
 		authenticate(null);
 		barterService.flush();
 	}
@@ -142,7 +142,7 @@ public class BarterServiceTest extends AbstractTest {
 		result = barterService.findBySingleKeywordNotCancelled(keyword);
 		
 		// Check results
-		Assert.isTrue(result.size() == 4);
+		Assert.isTrue(result.size() == 5);
 		barterService.flush();
 	}
 	
@@ -197,7 +197,7 @@ public class BarterServiceTest extends AbstractTest {
 		result = barterService.findBySingleKeywordNotCancelled(keyword);
 		
 		// Check results
-		Assert.isTrue(result.size() == 4);
+		Assert.isTrue(result.size() == 5);
 		authenticate(null);
 		barterService.flush();
 	}
@@ -255,7 +255,7 @@ public class BarterServiceTest extends AbstractTest {
 		result = barterService.findBySingleKeyword(keyword);
 		
 		// Check results
-		Assert.isTrue(result.size() == 4);
+		Assert.isTrue(result.size() == 5);
 		authenticate(null);
 		barterService.flush();
 	}
@@ -825,7 +825,7 @@ are not displayed to users, only to administrators
 		result = barterService.findAllByFollowedUser();
 		
 		// Check results
-		Assert.isTrue(result.size() == 8);
+		Assert.isTrue(result.size() == 9);
 		authenticate(null);
 		barterService.flush();
 	}

@@ -345,7 +345,7 @@ public class LegalTextServiceTest extends AbstractTest{
 		authenticate("admin");
 		allLegalTexts = legalTextService.findAll();
 		for(LegalText l:allLegalTexts){
-			if(l.getId() == 130){
+			if(l.getId() == 134){
 				result = l;
 			}
 		}
