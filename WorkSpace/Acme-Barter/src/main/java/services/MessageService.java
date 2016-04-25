@@ -194,14 +194,28 @@ public class MessageService {
 				break;
 			}
 		}
+		actMessage = this.findOne(messaId);
+		actActor = actorService.findByPrincipal();
 		
 		// Remove from folders
 		for (Folder a : actMessage.getFolders()) {
 			if (a.getActor().equals(actActor)
-					&& !(a.getIsSystem() == true && a.getName().equals(
-							"SpamBox")))
+					&& !(a.getIsSystem() == true && a.getName().equals("SpamBox"))
+					//&& !(a.getIsSystem() == true && a.getName().equals("TrashBox"))
+					)
 				folderService.removeMessage(a, actMessage);
 		}
+	}
+	
+	public void deleteDefinitely(int messaId){
+		Message messa;
+		
+		messa = this.findOne(messaId);
+		
+		this.checkActor(messa);
+//		Assert.isTrue(messa.getFolders().size()==0, "message.delete.useByOtherFolder");
+		if(messa.getFolders().size() == 0)
+			messageRepository.delete(messaId);
 	}
 	
 	
