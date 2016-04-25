@@ -25,3 +25,6 @@ Respecto al despliegue:
         -XX:MaxPermSize=256m
 
      PermSize refleja la capacidad del PermGen inicial, MaxPermSize refleja la cantidad máxima de PermGen, es decir, cuanto mayor sea, más proyectos vamos a poder cargar y descargar sin necesidad de reiniciar la máquina virtual para vaciar la cache.
+     
+Respecto a las pruebas funcionales:
+- El caso de uso que tiene una buena cobertura y al menos 10 test es el de crear un match y está situado en MatchServiceTest del cual hay 12 test, cuyos nombres comienzan por TestCreateMatch.
