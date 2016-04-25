@@ -3,3 +3,8 @@ mysqldump -uroot -pV3rY=$tR0nG=P@$$w0rd$ Acme-Barter > C:\Temp\Create-Acme-Barte
 mysql -uroot -pV3rY=$tR0nG=P@$$w0rd$ < c:\temp\create-acme-barter.sql
 
 mysql -uroot -pV3rY=$tR0nG=P@$$w0rd$ < c:\temp\delete-acme-barter.sql
+
+
+mysql -uroot -pV3rY=$tR0nG=P@$$w0rd$ < "C:\Documents and Settings\Boss\Desktop\create-acme-barter.sql"
+
+mysql -uroot -pV3rY=$tR0nG=P@$$w0rd$ < "C:\Documents and Settings\Boss\Desktop\delete-acme-barter.sql"
