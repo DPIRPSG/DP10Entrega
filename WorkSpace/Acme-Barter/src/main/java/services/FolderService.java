@@ -146,14 +146,15 @@ public class FolderService {
 	/**
 	 * Añade un mensaje a una carpeta dada
 	 */
-	public void addMessage(Folder f, Message m){
+	public Folder addMessage(Folder f, Message m){		
 		Assert.notNull(f);
 		Assert.notNull(m);
 		
 		if(!f.getMessages().contains(m)){
 			f.addMessage(m);
-			this.save(f);
+			f = this.save(f);
 		}
+		return f;
 	}
 	
 	/**
@@ -165,7 +166,10 @@ public class FolderService {
 		this.checkActor(f);
 		if (f.getName().equals("TrashBox") && f.getIsSystem()){
 			f.removeMessage(m);
-			this.save(f);
+			
+			f = this.save(f);
+			
+			messageService.deleteDefinitely(m.getId());
 		}
 		else{
 			Actor actor = actorService.findByPrincipal();

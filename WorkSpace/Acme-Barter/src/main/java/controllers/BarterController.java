@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,11 +72,8 @@ public class BarterController extends AbstractController {
 		ModelAndView result;
 		Collection<Barter> barters;
 		String keywordToFind;
-		Barter barter;
-		
-		barter = barterService.findOne(barterId);
 
-		barters = barter.getRelatedBarter();		
+		barters = barterService.getRelatedBarters(barterId);		
 		if (!keyword.equals("")) {
 			String[] keywordComoArray = keyword.split(" ");
 			for (int i = 0; i < keywordComoArray.length; i++) {
@@ -86,9 +84,17 @@ public class BarterController extends AbstractController {
 				}
 			}
 		}
-		
+		if(!actorService.checkAuthority("ADMIN")){
+			Collection<Barter> toRemove;
+			toRemove = new ArrayList<Barter>();
+			for(Barter b:barters){
+				if(b.isCancelled())
+					toRemove.add(b);
+			}
+			barters.removeAll(toRemove);
+		}
 		result = new ModelAndView("barter/list");
-		result.addObject("requestURI", "barter/administrator/list.do");
+		result.addObject("requestURI", "barter/list2.do");
 		result.addObject("barters", barters);
 		if(actorService.checkAuthority("USER"))
 			result.addObject("userId", userService.findByPrincipal().getId());
