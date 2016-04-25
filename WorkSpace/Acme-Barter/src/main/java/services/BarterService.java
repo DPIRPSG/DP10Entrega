@@ -310,6 +310,7 @@ public class BarterService {
 		Collection<Barter> result, toRemove;
 		Barter b;
 		
+//		result = barterRepository.getOtherRelatedBartersById(barterId);
 		result = new HashSet<Barter>(barterRepository.getOtherRelatedBartersById(barterId));
 		toRemove = new ArrayList<Barter>(result);
 		
