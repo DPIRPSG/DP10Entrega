@@ -90,42 +90,7 @@ public class MatchService {
 				match.setCancelled(false);
 				match.setCreationMoment(new Date());
 				
-			}else{ // Está siendo firmado, cancelado, asignándose un Auditor o un report.
-				
-				// No sirve de nada, puesto que al hacer el set ya el findOne te trae el objeto modificado (antes del save)
-//				Match originalMatch;
-//				
-//				originalMatch = matchRepository.findOne(match.getId());
-//				
-//				if(originalMatch.getCancelled() == true){ // Si está cancelado, en el save no debe haber cambiado nada del mismo.
-//					
-//					Assert.isTrue(match.equals(originalMatch), "You can't edit, sign or manage a cancelled Match.");
-//					
-//				}else{ // Si no está cancelado se comprueba que no hayan variados los cambios que no se deben poder modificar una vez establecidos.
-//					
-//					Assert.isTrue(match.getCreationMoment().equals(originalMatch.getCreationMoment()), "You can't edit the creationMoment of a Match.");
-//					
-//					if(originalMatch.getOfferSignsDate() != null){
-//						Assert.isTrue(match.getOfferSignsDate().equals(originalMatch.getOfferSignsDate()), "This Match has already been signed.");
-//					}
-//					
-//					if(originalMatch.getRequestSignsDate() != null){
-//						Assert.isTrue(match.getRequestSignsDate().equals(originalMatch.getRequestSignsDate()), "This Match has already been signed.");
-//					}
-//					
-//					Assert.isTrue(match.getLegalText().equals(originalMatch.getLegalText()), "You can't edit the legal text of a Match.");
-//					
-//					if(originalMatch.getAuditor() != null){
-//						Assert.isTrue(match.getAuditor().equals(originalMatch.getAuditor()), "You can't change the auditor of a Match.");
-//					}
-//					
-//					Assert.isTrue(match.getCreatorBarter().equals(originalMatch.getCreatorBarter()), "You can't edit the barters involved in a Match.");
-//					
-//					Assert.isTrue(match.getReceiverBarter().equals(originalMatch.getReceiverBarter()), "You can't edit the barters involved in a Match.");
-//					
-//				}
-				
-			}
+			}	
 			
 			match = matchRepository.save(match);
 			
@@ -152,7 +117,7 @@ public class MatchService {
 			
 		}
 		
-		public void cancel(Collection<Match> matchs) { // Método usado para que un admin cancele varios matchs a la vez
+		private void cancel(Collection<Match> matchs) { // Método usado para que un admin cancele varios matchs a la vez
 			
 			Assert.isTrue(actorService.checkAuthority("ADMIN"), "Only an Administrator loged in into the system can cancel several matchs at the same time.");
 			
