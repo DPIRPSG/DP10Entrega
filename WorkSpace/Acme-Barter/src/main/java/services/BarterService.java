@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -310,6 +309,7 @@ public class BarterService {
 		Collection<Barter> result, toRemove;
 		Barter b;
 		
+//		result = barterRepository.getOtherRelatedBartersById(barterId);
 		result = new HashSet<Barter>(barterRepository.getOtherRelatedBartersById(barterId));
 		toRemove = new ArrayList<Barter>(result);
 		
