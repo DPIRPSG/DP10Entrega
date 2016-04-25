@@ -37,7 +37,6 @@
 <link rel="stylesheet" href="styles/jmenu.css" media="screen"
 	type="text/css" />
 <link rel="stylesheet" href="styles/displaytag.css" type="text/css">
-<link rel="stylesheet" href="styles/print.css" type="text/css"  media="print" />
 
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
 
