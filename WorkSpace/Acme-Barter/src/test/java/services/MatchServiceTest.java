@@ -826,7 +826,7 @@ public class MatchServiceTest extends AbstractTest {
 	 */
 	
 	@Test
-	public void testCancelMatchOk() {
+	public void testCancelMatchOk1() {
 		Match match;
 		Collection<Match> matches;
 		User user;
@@ -973,9 +973,8 @@ public class MatchServiceTest extends AbstractTest {
 	 * Test que comprueba que si se intenta cancelar un Match firmado por los dos usuarios, falla
 	 */
 	
-	@Test(expected=IllegalArgumentException.class)
-	@Rollback(value=true)
-	public void testCancelMatchError3() {
+	@Test
+	public void testCancelMatchOk2() {
 		Match match;
 		Collection<Match> matches;
 		User user;
@@ -998,6 +997,10 @@ public class MatchServiceTest extends AbstractTest {
 		Assert.isTrue(match.getCancelled() == false);
 		
 		matchService.cancel(match);
+		
+		match = matchService.findOne(match.getId());
+		
+		Assert.isTrue(match.getCancelled() == true);
 		
 		authenticate(null);
 	}
@@ -1330,10 +1333,11 @@ public class MatchServiceTest extends AbstractTest {
 	@Test
 	public void testProcedureEveryMatchOk() {
 		Collection<Match> matches;
-		int numCancelledBefore, numCancelledAfter;
+		int numCancelledBefore, numCancelledAfter, numMatchesACancelar;
 		
 		numCancelledAfter = 0;
 		numCancelledBefore = 0;
+		numMatchesACancelar = 0;
 		
 		matches = matchService.findAll();
 		
@@ -1345,6 +1349,13 @@ public class MatchServiceTest extends AbstractTest {
 		
 		authenticate("admin");
 		
+		matches = matchService.findAllNotSignedOneMonthSinceCreation();
+		for(Match m : matches) {
+			if(!m.getCancelled()) {
+				numMatchesACancelar++;
+			}
+		}
+		
 		matchService.cancelEveryMatchNotSignedOneMonthSinceCreation();
 		
 		matches = matchService.findAll();
@@ -1354,8 +1365,8 @@ public class MatchServiceTest extends AbstractTest {
 				numCancelledAfter++;
 			}
 		}
-		
-		Assert.isTrue(numCancelledAfter == (numCancelledBefore + 1));
+
+		Assert.isTrue(numCancelledAfter == (numCancelledBefore + numMatchesACancelar));
 		
 		authenticate(null);
 	}
@@ -1542,5 +1553,48 @@ public class MatchServiceTest extends AbstractTest {
 		Assert.isTrue(result.size() == 6);
 		//authenticate(null);
 		barterService.flush();
+	}
+	
+	@Test
+	public void testFindAllUserInvolves(){
+		Collection<Match> matches;
+		User user;
+		
+		authenticate("user1");
+		user = userService.findByPrincipal();
+		
+		matches = matchService.findAllUserInvolves(user.getId());
+		
+		Assert.isTrue(matches.size() == 3);
+		
+		authenticate(null);
+	}
+	
+	@Test
+	public void testFindAllUserInvolvesIncludeCancelled(){
+		Collection<Match> matches;
+		User user;
+		
+		authenticate("user3");
+		user = userService.findByPrincipal();
+		
+		matches = matchService.findAllUserInvolvesIncludeCancelled(user.getId());
+		
+		Assert.isTrue(matches.size() == 3);
+		
+		authenticate(null);
+	}
+	
+	@Test
+	public void testFindAllNotSignedOneMonthSinceCreation(){
+		Collection<Match> matches;
+		
+		authenticate("admin");
+		
+		matches = matchService.findAllNotSignedOneMonthSinceCreation();
+		System.out.println(matches.size());
+		Assert.isTrue(matches.size() == 4);
+		
+		authenticate(null);
 	}
 }

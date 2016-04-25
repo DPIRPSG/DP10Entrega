@@ -1797,7 +1797,7 @@
 	<bean id="barter6" class="domain.Barter">
 		<property name="title" value="Solo hasta Junio o lo vendo a mi vecino"/>
 		<property name="cancelled" value="false"/>
-		<property name="registerMoment" value="2016/03/11 16:10"/>
+		<property name="registerMoment" value="2016/02/11 16:10"/>
 		<property name="user" ref="user3"/>
 		<property name="offered" ref="item11"/>
 		<property name="requested" ref="item12"/>
@@ -1976,9 +1976,9 @@
 	</bean>
 	
 	<bean id="match3" class="domain.Match">
-		<property name="creationMoment" value="2016/04/03 12:00"/>
+		<property name="creationMoment" value="2016/03/03 12:00"/>
 <!-- 		<property name="offerSignsDate" value="2016/04/02 13:30"/> -->
-		<property name="requestSignsDate" value="2016/04/03 16:13"/>
+		<property name="requestSignsDate" value="2016/03/03 16:13"/>
 		<property name="cancelled" value="false"/>
 		<property name="report" value="Posiblemente inadecuado, estar pendiente de sus Matchs."/>
 		<property name="legalText" ref="legalText1"/>
@@ -2000,7 +2000,7 @@
 	</bean>
 	
 	<bean id="match5" class="domain.Match">
-		<property name="creationMoment" value="2016/04/05 14:00"/>
+		<property name="creationMoment" value="2016/03/05 14:00"/>
 		<property name="legalText" ref="legalText1"/>
 		<property name="cancelled" value="true"/>
 		<property name="creatorBarter" ref="barter11"/>
@@ -2008,7 +2008,7 @@
 	</bean>
 	
 	<bean id="match6" class="domain.Match">
-		<property name="creationMoment" value="2016/04/05 14:00"/>
+		<property name="creationMoment" value="2016/03/05 14:00"/>
 		<property name="legalText" ref="legalText1"/>
 		<property name="creatorBarter" ref="barter11"/>
 		<property name="receiverBarter" ref="barter12"/>

@@ -61,31 +61,6 @@ public class BarterAdministratorController extends AbstractController {
 		return result;
 	}
 	
-	@RequestMapping(value = "/list2", method = RequestMethod.GET)
-	public ModelAndView list2(@RequestParam(required=false, defaultValue="") String keyword, int barterId) {
-		ModelAndView result;
-		Collection<Barter> barters;
-		String keywordToFind;
-
-		barters = barterService.getRelatedBarters(barterId);
-		if (!keyword.equals("")) {
-			String[] keywordComoArray = keyword.split(" ");
-			for (int i = 0; i < keywordComoArray.length; i++) {
-				if (!keywordComoArray[i].equals("")) {
-					keywordToFind = keywordComoArray[i];
-					barters = barterService.findBySingleKeyword(keywordToFind);
-					break;
-				}
-			}
-		}
-		
-		result = new ModelAndView("barter/list");
-		result.addObject("requestURI", "barter/administrator/list.do");
-		result.addObject("barters", barters);
-
-		return result;
-	}
-	
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam int barterId) {
 		ModelAndView result;
