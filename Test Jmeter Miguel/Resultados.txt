@@ -1,0 +1,34 @@
+- Create Legal Text:
+	100-1-100
+	Tiempo 90% line -> 139
+	Cuello de Botella -> No hay, esta todo equilibrado
+
+- Edit Legal Text:
+	200-1-100
+	Tiempo 90% line -> 1500
+	Cuello de botella -> Procesador
+
+- Delete Legal Text:
+	200-1-100
+	Tiempo 90% line -> 140
+	Cuello de Botella -> Procesador
+
+- Display Barter:
+	250-1-100
+	Tiempo 90% line -> 40
+	Cuello de Botella -> Procesador entre 35 y 80
+
+- Display Match:
+	250-1-100
+	Tiempo 90% line -> 500
+	Cuello de Botella -> Tarjeta de red y procesador (sobre todo tarjeta)
+
+- List Barters anda details:
+	200-1-100
+	Tiempo 90% line -> 132
+	Cuello de Botella -> Procesador
+
+- Find by Keyword:
+	200-1-100
+	Tiempo 90% line -> 60
+	Cuello de Botella -> Procesador entre 45 y 85
