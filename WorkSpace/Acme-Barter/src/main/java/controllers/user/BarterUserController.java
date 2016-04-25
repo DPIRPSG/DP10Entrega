@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import controllers.AbstractController;
 
 import services.BarterService;
+import services.UserService;
 import services.form.BarterFormService;
 import domain.Barter;
 import domain.form.BarterForm;
@@ -28,6 +29,9 @@ public class BarterUserController extends AbstractController {
 
 	@Autowired
 	private BarterService barterService;
+	
+	@Autowired
+	private UserService userService;
 	
 	@Autowired
 	private BarterFormService barterFormService;
@@ -62,6 +66,7 @@ public class BarterUserController extends AbstractController {
 		result = new ModelAndView("barter/list");
 		result.addObject("requestURI", "barter/user/list.do");
 		result.addObject("barters", barters);
+		result.addObject("userId", userService.findByPrincipal().getId());
 
 		return result;
 	}

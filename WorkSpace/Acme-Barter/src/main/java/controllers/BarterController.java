@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
 import services.BarterService;
+import services.UserService;
 import domain.Barter;
 
 @Controller
@@ -20,6 +22,12 @@ public class BarterController extends AbstractController {
 
 	@Autowired
 	private BarterService barterService;
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private ActorService actorService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -51,6 +59,9 @@ public class BarterController extends AbstractController {
 		result = new ModelAndView("barter/list");
 		result.addObject("requestURI", "barter/list.do");
 		result.addObject("barters", barters);
+		if(actorService.checkAuthority("USER"))
+			result.addObject("userId", userService.findByPrincipal().getId());
+
 
 		return result;
 	}
@@ -79,6 +90,8 @@ public class BarterController extends AbstractController {
 		result = new ModelAndView("barter/list");
 		result.addObject("requestURI", "barter/administrator/list.do");
 		result.addObject("barters", barters);
+		if(actorService.checkAuthority("USER"))
+			result.addObject("userId", userService.findByPrincipal().getId());
 
 		return result;
 	}
@@ -96,6 +109,8 @@ public class BarterController extends AbstractController {
 		result = new ModelAndView("barter/list");
 		result.addObject("requestURI", "barter/listByUser.do?userId" + userId);
 		result.addObject("barters", barters);
+		if(actorService.checkAuthority("USER"))
+			result.addObject("userId", userService.findByPrincipal().getId());
 
 		return result;
 	}

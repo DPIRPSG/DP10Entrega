@@ -37,7 +37,7 @@
 	<security:authorize access="hasRole('USER')">
 		<spring:message code="barter.cancelled" var="cancelledHeader" />
 		<display:column title="${cancelledHeader}" sortable="true">
-			<jstl:if test="${row_Barter.cancelled == false}">
+			<jstl:if test="${row_Barter.cancelled == false && userId == row_Barter.user.id}">
 				<a href="barter/user/cancel.do?barterId=${row_Barter.id}"> <spring:message
 					code="barter.cancel"/>
 				</a>
