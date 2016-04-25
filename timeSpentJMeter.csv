@@ -1,6 +1,14 @@
 Prueba; Ordenador; Usuario-Tiempo-Iteraciones; 90%Line[Max]; 90%Line[Total]
-Level_C_09.04; Manolo(2); 90-10-20;180;56
+Level_C_09.01; Manolo(2); 90-10-20;22;18
+Level_C_09.04; Manolo(2); 90-10-20;320;134
 Level_C_10.02; Manolo(2); 70-10-20;1906;73
+Level_C_10.02; Manolo(2); 70-10-20;6418;1814
 Level_C_10.02; Manolo(2); 90-10-20;4621;923
-Level_C_10.03; Manolo(2); 90-10-20;229;88
-Level_C_11.02; Manolo(2); 90-10-20;222;74
+Level_C_10.03; Manolo(2); 90-10-20;1015;497
+Level_C_11.02; Manolo(2); 90-10-20;1986;1623
+Level_B_03.01; Manolo(2); 90-10-20;833;238
+Level_B_03.02; Manolo(2); 90-10-20;1783;487
+Level_B_03.03; Manolo(2); 90-10-20;45;29
+Level_A_02.01; Manolo(2); 90-10-20;95;56
+Level_A_02.02; Manolo(2); 90-10-20;96;57
+Level_A_03.01; Manolo(2); 90-10-20;26;20
